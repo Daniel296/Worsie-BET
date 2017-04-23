@@ -1,0 +1,360 @@
+body {
+	background-image: url('../images/background.jpg');
+	background-size: cover;
+	background-attachment: fixed;
+	font-family: Century, sans-serif;
+	color: gray;
+	min-width: 100px;
+	max-width: 100%;
+}
+
+
+/* ############################################################## */
+/* ####################### rightMenu DIV ######################## */
+/* ############################################################## */
+#leftMenu {
+	position: fixed;
+	border: 2px solid #232323;
+    border-radius: 6px;
+    height: 48%;
+    width: 20%;
+    margin: 5% 9% 20% 3%;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+div.menu a {
+	text-decoration: none;
+	color: white;
+}
+
+div.menu a:hover {
+	color: gray;
+}
+div.menu a:active {
+	color: black;
+}
+div.menu {
+	font-size: 105%;
+	color: white;
+	width: 75%;
+	height: 7%;
+	margin: 10% 10% 0% 7%;
+	/*background-color: rgba(255, 255, 255, 0.1);*/
+	/*border: 1px solid white;*/
+	border-radius: 1px;
+}
+
+ul.list {
+	list-style-type: none;
+}
+
+li {
+	padding: 10% 1% 10% 1%;
+	/*border: 1px solid white;*/
+}
+
+div.dateCont {
+	position: relative;
+	top: 50%;
+	width: 90%;
+	height: 10%;
+	font-size: 50%;
+	padding: 20% 5% 8% 5%;
+	font-family: "Tahoma";
+	color: rgb(130, 130, 130);
+	background-color: rgba(10, 10, 10, 0.9);
+	border-radius: 2px;
+	/*border: 1px solid green;*/
+	letter-spacing: 1px;
+}
+
+/* ############################################################## */
+/* ####################### Main DIV ############################# */
+/* ############################################################## */
+#bilete {
+	position: absolute;
+    border: 2px solid #232323;
+    border-radius: 6px;
+    height: 110%;
+    width: 65%;
+    margin: 5% 20% 20% 25%;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+
+/* ####################### LISTA_BILETE ############################# */
+
+/* Tipuri de bilete: pierzator(X) & castigator(O) */
+div.biletX {
+	position: relative;
+	border: 1px solid #dd3535;/*7c7c7c; /* border gri */
+	border-radius: 4px;
+	height: 45px;
+	width: 92%;
+	margin: 2.5% 2% 2% 4%;
+	background-color: rgba(100, 0, 0, 0.1);
+}
+
+div.biletO {
+	position: relative;
+	border: 1px solid #21a52c; /* border gri */
+	border-radius: 4px;
+	height: 45px;
+	width: 92%;
+	margin: 2.5% 4% 2% 4%;
+	background-color: rgba(0, 100, 0, 0.1);	
+}
+
+
+/* Informatii despre bilet: ID, Data, Cota, Tip */
+div.biletID {
+	position: absolute;
+    top: 10%;
+    left: 2%;
+    width: 60%;
+    height: 35%;
+	color: #d6e5ff;
+	font-size: 85%;
+	font-family: "Courier New";
+	/*border: 1px solid blue;*/
+}
+
+div.biletData {
+	position: absolute;
+    top: 60%;
+    left: 2%;
+    width: 13%;
+    height: 30%;
+	color: #949aa3;
+	font-size: 70%;
+	font-family: "Courier New";
+	font-style: italic;	
+	/*border: 1px solid blue;*/
+}
+
+div.biletCota {
+	position: absolute;
+	top: 25%;
+	right: 9%;
+	width: 12%;
+	height: 45%;
+	color: #d6e5ff;
+	font-size: 90%;
+	font-family: "Century";
+	/*border: 1px solid blue;*/
+}
+
+div.biletTipX {
+	position: absolute;
+	top: 14%;
+	right: 5%;
+	width: 3%;
+	height: 45%;
+	color: #dd3535;
+	font-size: 150%;
+	font-family: "Century";
+	/*border: 1px solid blue;*/
+}
+
+div.biletTipO {
+	position: absolute;
+	top: 14%;
+	right: 5%;
+	width: 3%;
+	height: 45%;
+	color: #21a52c;
+	font-size: 150%;
+	font-family: "Century";
+	/*border: 1px solid blue;*/
+}
+
+/* ####################### account ######################## */
+#account {
+	position: absolute;
+    border: 2px solid #232323;
+    border-radius: 6px;
+    height: 450px;
+    width: 65%;
+    margin: 5% 20% 20% 25%;
+    background-color: rgba(0, 0, 0, 0.8);
+    letter-spacing: 2px;
+    font-size: 105%;
+    font-family: "Century";
+    color: white;
+}
+
+div.accountName {
+	position: absolute;
+	top: 5%;
+	left: 4%;
+	width: 83%;
+	height: 4%;
+	font-size: 150%;
+	padding: 5% 4% 5% 4%;
+	font-weight: bold;
+	text-align: center;
+	background-color: rgba(255, 255, 255, 0.05);
+	/*border: 1px solid gray;*/
+	border-radius: 3px;
+}
+
+div.balance {
+	position: absolute;
+	top: 32%;
+	left: 4%;
+	width: 30%;
+	height: 7%;
+	padding: 2% 10% 1% 4%;
+	text-align: left;
+	background-color: rgba(255, 255, 255, 0.1);
+	border: 1px solid white;
+	border-radius: 2px;
+}
+
+div.winRate {
+	position: absolute;
+	top: 46%;
+	left: 4%;
+	width: 30%;
+	height: 7%;
+	color: white;
+	padding: 2% 10% 1% 4%;
+	font-family: "Century";
+	text-align: left;
+	background-color: rgba(255, 255, 255, 0.1);
+	border: 1px solid white;
+	border-radius: 2px;
+}
+
+div.totalBilete {
+	position: absolute;
+	top: 60%;
+	left: 4%;
+	width: 30%;
+	height: 7%;
+	color: white;
+	padding: 2% 10% 1% 4%;
+	text-align: left;
+	background-color: rgba(255, 255, 255, 0.1);
+	border: 1px solid white;
+	border-radius: 2px;
+}
+
+div.info {
+position: absolute;
+	top: 32%;
+	right: 5%;
+	width: 37%;
+	height: 28%;
+	font-size: 150%;
+	padding: 5% 4% 1.5% 4%;
+	text-align: justify;
+	font-size: 80%;
+	font-family: "Times New Roman";
+	background-color: rgba(255, 255, 255, 0.1);
+	border: 1px solid white;
+	border-radius: 2px;
+}
+
+/* ###################### SETARI ########################### */
+#setari {
+	position: absolute;
+    border: 2px solid #232323;
+    border-radius: 6px;
+    height: 550px;
+    width: 65%;
+    margin: 5% 20% 20% 25%;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+div.changePasswordText {
+	position: absolute;
+	top: 5%;
+	left: 5%;
+	width: 86%;
+	height: 5%;
+	font-size: 120%;
+	color: white;
+	background-color: rgba(255, 255, 255, 0.1);
+	padding: 1% 1% 1% 2%;
+	/*border: 1px solid red;
+	border-radius: 2px;*/
+}
+
+div.changePassword {
+	color:gray;
+	position: absolute;
+	top: 15%;
+	height: 30%;
+	width: 100%;
+	margin-top: 15px;
+	/*border: 1px solid red;
+	border-radius: 2px;*/
+}
+
+div.changeEmailText {
+	position: absolute;
+	top: 55%;
+	left: 5%;
+	width: 86%;
+	height: 5%;
+	font-size: 120%;
+	color: white;
+	background-color: rgba(255, 255, 255, 0.1);
+	padding: 1% 1% 1% 2%;
+	/*border: 1px solid red;
+	border-radius: 2px;*/
+}
+div.changeEmail {
+	color: gray;
+	position: absolute;
+	align-content: center;
+	top: 65%;
+	height: 25%;
+	width: 100%;
+	margin-top: 15px;
+	/*border: 1px solid red;
+	border-radius: 2px;*/
+}
+
+div.centrare {
+	display: block;
+	margin: auto;
+}
+
+label.content {
+	display: inline-block;
+    float: left;
+    clear: left;
+    width: 30%;
+    margin-right: 10px;
+    text-align: right;
+}
+
+
+/* ####################### Butoane si Field'uri ############################ */
+input.field {
+	display: block;
+	width: 40%;
+	height: 25px;
+	border: 0;
+	margin: auto auto 5px 5px;
+	border-radius: 2.5px;
+	background-color: #CCCCCC;
+}
+button.btn {
+	display: block;
+	width: 20%;
+	height: 25px;
+	margin: 25px auto;
+	color: white;
+	background-color: #AC1A27;
+	border: 0;
+	font-family: 'Century';
+	font-size: 90%;
+}
+
+button.btn:hover {
+	background-color: #701119;
+	cursor: pointer;
+}
