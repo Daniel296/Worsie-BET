@@ -3,30 +3,30 @@
 <head>
 	<title>Regulament - WorsieBet</title>
 	<link rel="stylesheet" type="text/css" href="css/regulament-style.css">
+	<link rel="stylesheet" type="text/css" href="css/style-header.css">
+	<link rel="stylesheet" type="text/css" href="css/popup-style.css">
 </head>
 
 
 <body>
+	<?php
+		require('pages/header.php');
+	?>
+	
 	<div id="leftMenu">
 		<div class="menu">
-			<ul class="list">
-				<li class="active"><a href="#dg">Dispozitii generale</a></li>
-				<li></li>
-				<li class="active"><a href="#pp">Primirea pariurilor</a></li>
-				<li></li>
-				<li class="active"><a href="#acp">Acceptarea pariului</a></li>
-				<li></li>
-				<li class="active"><a href="#anp">Anularea pariului</a></li>
-				<li></li>
-				<li class="active"><a href="#pc">Plata castigului</a></li>
-				<li></li>
-				<li class="active"><a href="#df">Dispozitii finale</a></li>
+			<ul>
+				<li><a href="#dg">Dispozitii generale</a></li>
+				<li><a href="#pp">Primirea pariurilor</a></li>
+				<li><a href="#acp">Acceptarea pariului</a></li>
+				<li><a href="#anp">Anularea pariului</a></li>
+				<li><a href="#pc">Plata castigului</a></li>
+				<li><a href="#df">Dispozitii finale</a></li>
 			</ul>
 		</div>
 	</div>
 
 	<div id="regulament">
-		<div class="regulamentBox">
 			<h1 id="dg">Capitolul I - DISPOZITII GENERALE</h1>
 			<h3>Articolul 1</h3>
 			<p>Regulamentul pentru pariuri la distanta (online) si cazinou la distanta, denumit in continuare Regulamentul stabileste conditiile de pregatire si desfasurare ale pariurilor in cota fixa (denumite In continuare Pariuri) si jocurile de tip cazinou (denumite in continuare Sloturi si Jocuri de masa). Dispozitiile incluse in acest document se completeaza cu „Ghidul de Pariere”, cu dispozitiile legale si instructiunile Organizatorului, constituind cadrul contractual si legal pentru incheierea unui Contract intre Organizator si Jucatori.</p>
@@ -173,8 +173,11 @@
 
 			<h3>Articolul 29</h3>
 			<p>Regulamentul intra In vigoare la data adoptarii si se aplica dupa ce va fi aprobat de Oficiul National pentru Jocuri de Noroc.</p>
-		</div>
 	</div>
+	
+	<?php
+		require('pages/footer.php');
+	?>
 </body>
 
 </html>

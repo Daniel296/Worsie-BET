@@ -4,6 +4,7 @@
 	<title>Despre noi - WorsieBet</title>
 	<link rel="stylesheet" type="text/css" href="css/about-style.css">
 	<link rel="stylesheet" type="text/css" href="css/style-header.css">
+	<link rel="stylesheet" type="text/css" href="css/popup-style.css">
 
 </head>
 <body>

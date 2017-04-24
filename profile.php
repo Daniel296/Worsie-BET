@@ -4,10 +4,10 @@
 	<title>Profil - WorsieBet</title>
 	<link rel="stylesheet" type="text/css" href="css/profile-style.css">
 	<link rel="stylesheet" type="text/css" href="css/style-header.css">
+	<link rel="stylesheet" type="text/css" href="css/popup-style.css">
 </head>
 
 <body>
-
 	<?php
 		require('pages/header.php');
 	?>
