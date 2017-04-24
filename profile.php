@@ -2,25 +2,30 @@
 <html>
 <head>
 	<title>Profil - WorsieBet</title>
-	<link rel="stylesheet" type="text/css" href="./css/profile-style.css">
+	<link rel="stylesheet" type="text/css" href="css/profile-style.css">
+	<link rel="stylesheet" type="text/css" href="css/style-header.css">
 </head>
 
 <body>
 
-<div id="leftMenu">
-	<div class="menu"><ul class="list">
-		<li class=\"active\"><a href="./profile.php?page=account">Contul meu</a></li>
-		<li class=\"active\"><a href="./profile.php?page=setari">Setari cont</a></li>
-		<li class=\"active\"><a href="./profile.php?page=bilete">Istoric Bilete</a></li>
-		<!--<li class=\"active\"><a href="./profile.php?page=stat">STATISTICI</a></li>
-		</ul>-->
+	<?php
+		require('pages/header.php');
+	?>
+	
+	<div id="leftMenu">
+		<div class="menu">
+			<ul>
+				<li><a href="profile.php?page=account">Contul meu</a></li>
+				<li class="active"><a href="profile.php?page=setari">Setari cont</a></li>
+				<li><a href="profile.php?page=bilete">Istoric Bilete</a></li>
+			</ul>
+		</div>
+		<div class="dateCont">
+			 Georgescu Mihai <br>
+			 Cont: OD3127836156423154 <br>
+			 Ultima conectare: 27.04.2017 09:57
+		</div>
 	</div>
-	<div class="dateCont">
-		 Georgescu Mihai <br>
-		 Cont: OD3127836156423154 <br>
-		 Ultima conectare: 27.04.2017 09:57
-	</div>
-</div>
 
 <?php
 
@@ -52,6 +57,9 @@ else {
 }
 ?>
 
+	<?php
+		require('pages/footer.php');
+	?>
 </body>
 
 </html>
