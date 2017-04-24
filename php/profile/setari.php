@@ -1,4 +1,3 @@
-<html>
 
 <div id="setari">
 	<!--<div class="accountName">
@@ -51,5 +50,3 @@
 		</form>
 	</div>
 </div>
-
-</html>
