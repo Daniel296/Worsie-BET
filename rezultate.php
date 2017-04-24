@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML>
 <html>
 <head>
 	<title>Rezultate - WorsieBet</title>
@@ -16,10 +16,10 @@
 <div id="main-results">
 
 	<div class="search-bar">
-		<form action="" method="POST">
+		<form  method="POST">
 			<input name="search" placeholder="Search...">
 			<div class="search-img">
-				<img src="images/search.png">
+				<img src="images/search.png" alt="search">
 			</div>
 		</form>
 	</div>

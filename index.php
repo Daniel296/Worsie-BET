@@ -1,5 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE HTML><html>
 <head>
 	<title>Acasa - WorsieBet</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -13,7 +12,7 @@
 
 <div id="main">
 	<div class="thumbnail" onMouseOut="hide('bet-now')" onMouseOver="show('bet-now')" >
-		<img src="images/betting-img.jpg" id="betting-img">
+		<img src="images/betting-img.jpg" id="betting-img" alt="betting">
 		<a href="pariuri.php?date=<?php echo date("Y-m-d", time());?>">
 			<div id="bet-now">
 				<span id="bet-now-text">PARIAZA ACUM</span>
@@ -27,7 +26,7 @@
 	require('pages/footer.php');
 ?>
 
-<script>
+<script type="javascript">
   function show(id) {
     document.getElementById(id).style.visibility = "visible";
 	document.getElementById(id).style.display = "block";
