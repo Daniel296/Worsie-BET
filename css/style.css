@@ -4,9 +4,11 @@ body {
 	background-attachment: fixed;
 	font-family: Century, sans-serif;
 	color: gray;
-	min-width: 400px;
+	min-width: 800px;
 	max-width: 100%;
+	position: relative;
 }
+
 
 #main {
 	display: table;
@@ -28,6 +30,7 @@ body {
 	margin-top: 15px;
 	margin-bottom: 15px;
 	position: relative;
+	z-index: 0;
 }
 
 /*----css pemtru id-urile primei imagini (Pariaza acum)----*/
@@ -127,11 +130,12 @@ body {
 /*---------Style for Pariuri page-----------*/
 #main-pariuri{
 	display: table;
-	float: left;
-	width: 900px;
+	width: 68%;
 	margin-left: 7%;
 	margin-top: 30px;
 	margin-bottom: 30px;
+	min-width: 900px;
+	max-width: 900px;
 	background-color: rgba(0, 0, 0, 0.5);
 }
 
@@ -266,6 +270,10 @@ body {
 	margin-left: 10px;
 }
 
+.collumn2 img {
+	vertical-align: middle;
+}
+
 .collumn2 button {
 	background-color: #333333;
 	padding: 5px 8px 5px 8px;
@@ -339,7 +347,7 @@ body {
 }
 
 .check-ticket button:hover {
-	background-color: #880016;
+	background-color: #670011;
 	cursor: pointer;
 }
 
@@ -348,12 +356,16 @@ body {
 /*----------Bilet-------*/
 
 .fixed-wrapper {
+	display: table;
+	float: right;
 	width: 300px;
-	position: fixed;
 	right: 0px;
-	margin: 30px 25px;
+	margin: 20px 20px;
 }
 
+.fixed-wrapper p {
+	text-align: center;
+}
 .check-ticket {
 	padding: 6px;
 	background-color: rgba(0, 0, 0, 0.6);
@@ -380,9 +392,11 @@ body {
 .race-on-ticket-details {
 	float: left;
 }
+
 .race-on-ticket-cota {
 	float: right;
 }
+
 .cota-ticket {
 	color: #CCCCCC;
 }
@@ -428,11 +442,21 @@ body {
 }
 
 .ticket-form button:hover {
-	background-color: #880016;
+	background-color: #670011;
 	cursor: pointer;
 }
 
 /*---------------Style pentru pagina Rezultate---------------*/
+#main-results {
+	display: table;
+	width: 900px;
+	margin: auto;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	background-color: rgba(0, 0, 0, 0.5);
+	min-width: 800px;
+}
+
 .results-bar {
 	display: table;
 	width: 97.5%;
@@ -524,14 +548,14 @@ body {
 
 /*---------Style for Search Bar---------*/
 .search-bar {
+	width: 60%;
 	display: block;
-	margin: 25px 0;
+	margin: 25px auto;
 }
 
 .search-bar  input {
-	display: block;
-	margin: auto;
-	width: 60%;
+	float: left;
+	width: 87%;
 	height: 30px;
 	padding: 5px 10px;
 	border: 0;
@@ -549,6 +573,21 @@ body {
 	background-color: #910018;
 	border: 0;
 	font: 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+}
+
+.search-img {
+	width: 50px;
+	float: right;
+	margin: 0;
+	background-color: #FFF;
+	cursor: pointer;
+	padding: 7px 0;
+}
+
+.search-img img {
+	display: block;
+	margin: auto;
+	height: 26px;
 }
 
 .win-red {
@@ -580,11 +619,6 @@ body {
 	border-radius: 50px;
 	background-color: orange;
 }
-
-
-/*---------------Style pentru pagina Regulament---------------*/
-
-
 
 
 
