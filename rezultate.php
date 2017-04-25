@@ -46,7 +46,6 @@
 				$day = date("Y-m-d", time());
 				echo "<li class=\"active\"><a href =\"rezultate.php?date=$day\">Azi</a></li>";
 				
-				echo "<li class=\"active\">Maine</li>";
 
 			?>
 		</ul>

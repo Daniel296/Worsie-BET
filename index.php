@@ -26,7 +26,7 @@
 	require('pages/footer.php');
 ?>
 
-<script type="javascript">
+<script>
   function show(id) {
     document.getElementById(id).style.visibility = "visible";
 	document.getElementById(id).style.display = "block";

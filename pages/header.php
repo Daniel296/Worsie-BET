@@ -4,11 +4,11 @@
 		<a href="index.php"><img src="images/logo.png"></a>
 	</div>
 	
-	<!--<div class="log-buttons">
+	<div class="log-buttons">
 		<button onclick="document.getElementById('id01').style.display='block'">Autentificare</button>
 		<button onclick="document.getElementById('id02').style.display='block'">Inregistrare</button>
-	</div>-->
-	<div class="account-box">
+	</div>
+	<!--<div class="account-box">
 		<div class="username-box">
 			<span class="username">daniel269</span>
 			<span class="balance">265.23 Ron</span>
@@ -18,7 +18,7 @@
 			<a href="profile.php?page=bilete">Bilete</a>
 			<img alt="logout" src="images/logout.png">
 		</div>
-	</div>
+	</div>-->
 	
 	<div class="links">
 		<ul>

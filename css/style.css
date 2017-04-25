@@ -358,9 +358,10 @@ body {
 .fixed-wrapper {
 	display: table;
 	float: right;
-	width: 300px;
+	width: 22%;
 	right: 0px;
-	margin: 20px 20px;
+	margin: 20px 1%;
+	max-width: 300px;
 }
 
 .fixed-wrapper p {
@@ -550,7 +551,7 @@ body {
 .search-bar {
 	width: 60%;
 	display: block;
-	margin: 25px auto;
+	margin: 25px auto 100px;
 }
 
 .search-bar  input {
@@ -582,6 +583,7 @@ body {
 	background-color: #FFF;
 	cursor: pointer;
 	padding: 7px 0;
+	box-shadow: 5px 3px 3px 3px rgba(0, 0, 0, 0.99);
 }
 
 .search-img img {

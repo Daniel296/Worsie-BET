@@ -80,9 +80,6 @@
 				$num_day = getdate();
 				$days = array(0 => "Luni", 1 => "Marti", 2 => "Miercuri", 3 => "Joi", 4 => "Vineri", 5 => "Sambata", 6 => "Duminica");
 				
-				$day = date("Y-m-d", time() - 86400);
-				echo "<li><a href =\"Pariuri.php?date=$day\">Ieri</a></li>";
-				
 				$day = date("Y-m-d", time());
 				echo "<li class=\"active\"><a href =\"Pariuri.php?date=$day\">Azi</a></li>";
 				
@@ -94,6 +91,9 @@
 				
 				$day = date("Y-m-d", time() + 3 * 86400);
 				echo "<li><a href =\"Pariuri.php?date=$day\">".$days[($num_day['wday'] + 9) % 7 ]."</a></li>";
+				
+				$day = date("Y-m-d", time() + 4 * 86400);
+				echo "<li><a href =\"Pariuri.php?date=$day\">".$days[($num_day['wday'] + 10) % 7 ]."</a></li>";
 				
 			?>
 		</ul>
