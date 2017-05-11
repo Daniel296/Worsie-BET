@@ -10,6 +10,7 @@
 
 	<?php
 		require('pages/header.php');
+		//require "php/database/connect2DB.php";
 	?>
 
 	<div class="fixed-wrapper">
