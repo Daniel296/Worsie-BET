@@ -19,13 +19,15 @@ class DbConnection {
 
     private static function initConnection(){
         $db = self::getInstance();
-		$db->DbConnection =  mysql_connect (self::$DB_HOST, self::$DB_USER, self::$DB_PASS);		
+		$db->DbConnection =  new mysqli(self::$DB_HOST, self::$DB_USER, self::$DB_PASS);
+		$db->DbConnection->set_charset('utf8');
 		return $db;
     }
 
     public static function getDbConnection() {
         try {
             $db = self::initConnection();
+            //echo "Connected";
             return $db->DbConnection;
         } catch (Exception $ex) {
             echo "I was unable to open a connection to the database. " . $ex->getMessage();
