@@ -1,4 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<?php
+	session_start();
+?>
 <html>
 <head>
 	<title>Regulament - WorsieBet</title>
@@ -12,7 +15,7 @@
 	<?php
 		require('pages/header.php');
 	?>
-	
+
 	<div id="leftMenu">
 		<div class="menu">
 			<ul>
@@ -174,7 +177,7 @@
 			<h3>Articolul 29</h3>
 			<p>Regulamentul intra In vigoare la data adoptarii si se aplica dupa ce va fi aprobat de Oficiul National pentru Jocuri de Noroc.</p>
 	</div>
-	
+
 	<?php
 		require('pages/footer.php');
 	?>

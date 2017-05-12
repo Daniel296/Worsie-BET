@@ -1,4 +1,8 @@
-<!DOCTYPE HTML><html>
+<!DOCTYPE HTML>
+<?php
+	session_start();
+?>
+<html>
 <head>
 	<title>Acasa - WorsieBet</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -8,6 +12,7 @@
 <body>
 <?php
 	require('pages/header.php');
+	require "php/database/connect2DB.php";
 ?>
 
 <div id="main">
@@ -19,7 +24,7 @@
 			</div>
 		</a>
 	</div>
-	
+
 </div>
 
 <?php

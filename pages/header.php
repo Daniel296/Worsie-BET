@@ -3,23 +3,28 @@
 	<div id="logo">
 		<a href="index.php"><img src="images/logo.png"></a>
 	</div>
-	
-	<div class="log-buttons">
-		<button onclick="document.getElementById('id01').style.display='block'">Autentificare</button>
-		<button onclick="document.getElementById('id02').style.display='block'">Inregistrare</button>
-	</div>
-	<!--<div class="account-box">
-		<div class="username-box">
-			<span class="username">daniel269</span>
-			<span class="balance">265.23 Ron</span>
+
+	<?php
+		if(isset($_SESSION['username']) == false) {
+	 ?>
+		<div class="log-buttons">
+			<button onclick="document.getElementById('id01').style.display='block'">Autentificare</button>
+			<button onclick="document.getElementById('id02').style.display='block'">Inregistrare</button>
 		</div>
-		<div class="link-box">
-			<a href="profile.php?page=account">Contul meu</a>
-			<a href="profile.php?page=bilete">Bilete</a>
-			<img alt="logout" src="images/logout.png">
+	<?php } else { ?>
+		<div class="account-box">
+			<div class="username-box">
+				<span class="username">daniel269</span>
+				<span class="balance">265.23 Ron</span>
+			</div>
+			<div class="link-box">
+				<a href="profile.php?page=account">Contul meu</a>
+				<a href="profile.php?page=bilete">Bilete</a>
+				<a href="php/logout.php"><img alt="logout" src="images/logout.png"></a>
+			</div>
 		</div>
-	</div>-->
-	
+	<?php } ?>
+
 	<div class="links">
 		<ul>
 			<li><a class="active" href="index.php">Acasa</a></li>
@@ -32,7 +37,7 @@
 </div>
 
 <div id="id01" class="modal">
-  
+
 	<form class="modal-content animate" method="POST">
 		<div class="imgcontainer">
 		  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
@@ -44,15 +49,15 @@
 				<label><b>Username</b></label>
 				<input type="text" placeholder="Enter Username" name="name" required>
 			</div>
-			
+
 			<div  class="form-login">
 				<label><b>Parola</b></label>
 				<input type="password" placeholder="Enter Password" name="password" required>
 			</div>
-			
+
 			<button type="submit">Login</button>
 		</div>
-		
+
 	</form>
 </div>
 
@@ -70,7 +75,7 @@ window.onclick = function(event) {
 
 
 <div id="id02" class="modal">
-  
+
 	<form class="modal-content animate" method="POST">
 		<div class="imgcontainer">
 		  <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
@@ -82,32 +87,32 @@ window.onclick = function(event) {
 				<label><b>Username</b></label>
 				<input type="text" placeholder="Username" name="name" required>
 			</div>
-			
+
 			<div class="form-login">
 				<label><b>Nume</b></label>
 				<input type="text" placeholder="Nume" name="name" required>
 			</div>
-			
+
 			<div class="form-login">
 				<label><b>Prenume</b></label>
 				<input type="text" placeholder="Prenume" name="name" required>
 			</div>
-			
+
 			<div class="form-login">
 				<label><b>Email</b></label>
 				<input type="text" placeholder="Email" name="email" required>
 			</div>
-			
-			
+
+
 			<div class="form-login">
 				<label><b>Parola</b></label>
 				<input type="password" placeholder="Parola" name="password" required>
 			</div>
-			
-			
+
+
 			<button type="submit">Register</button>
 		</div>
-		
+
 	</form>
 </div>
 

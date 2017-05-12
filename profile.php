@@ -1,4 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<?php
+	session_start();
+?>
 <html>
 <head>
 	<title>Profil - WorsieBet</title>
@@ -11,7 +14,7 @@
 	<?php
 		require('pages/header.php');
 	?>
-	
+
 	<div id="leftMenu">
 		<div class="menu">
 			<ul>
@@ -34,7 +37,7 @@ if(isset($_GET['page'])) {
 		case 'account' :
 			include ('./php/profile/account.php');
 			break;
-		
+
 		case 'setari' :
 			include ('./php/profile/setari.php');
 			break;
@@ -42,7 +45,7 @@ if(isset($_GET['page'])) {
 		case 'bilete' :
 			include ('./php/profile/istoric_bilete.php');
 			break;
-		
+
 		case 'statistici' :
 			include ('./php/profile/statistici.php');
 			break;

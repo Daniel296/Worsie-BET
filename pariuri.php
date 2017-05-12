@@ -1,4 +1,7 @@
 <!DOCTYPE HTML>
+<?php
+	session_start();
+?>
 <html>
 <head>
 	<title>Pariuri - WorsieBet</title>
@@ -10,7 +13,6 @@
 
 	<?php
 		require('pages/header.php');
-		//require "php/database/connect2DB.php";
 	?>
 
 	<div class="fixed-wrapper">
@@ -80,26 +82,26 @@
 			<?php
 				$num_day = getdate();
 				$days = array(0 => "Luni", 1 => "Marti", 2 => "Miercuri", 3 => "Joi", 4 => "Vineri", 5 => "Sambata", 6 => "Duminica");
-				
+
 				$day = date("Y-m-d", time());
 				echo "<li class=\"active\"><a href =\"Pariuri.php?date=$day\">Azi</a></li>";
-				
+
 				$day = date("Y-m-d", time() + 86400);
 				echo "<li><a href =\"Pariuri.php?date=$day\">Maine</a></li>";
-				
+
 				$day = date("Y-m-d", time() + 2 * 86400);
 				echo "<li><a href =\"Pariuri.php?date=$day\">".$days[($num_day['wday'] + 8) % 7 ]."</a></li>";
-				
+
 				$day = date("Y-m-d", time() + 3 * 86400);
 				echo "<li><a href =\"Pariuri.php?date=$day\">".$days[($num_day['wday'] + 9) % 7 ]."</a></li>";
-				
+
 				$day = date("Y-m-d", time() + 4 * 86400);
 				echo "<li><a href =\"Pariuri.php?date=$day\">".$days[($num_day['wday'] + 10) % 7 ]."</a></li>";
-				
+
 			?>
 		</ul>
 	</div>
-	
+
 	<div class="bets">
 		<div class="bet">
 			<a href="">Newmarket</a>
@@ -113,7 +115,7 @@
 				<span>19:20</span>
 			</div>
 		</div>
-		
+
 		<div class="bet">
 			<a href="">Kempton</a>
 			<div class="times">
@@ -126,7 +128,7 @@
 				<span>19:20</span>
 			</div>
 		</div>
-		
+
 		<div class="bet">
 			<a href="" >Fairyhouse</a>
 			<div class="times">
@@ -139,7 +141,7 @@
 				<span>19:20</span>
 			</div>
 		</div>
-		
+
 		<div class="bet">
 			<a href="">Ludlow</a>
 			<div class="times">
@@ -153,11 +155,11 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<div class ="bet-details">
 		<div class="bet-race-bar">
 			Ludlow
-			<span>15:30</span> 
+			<span>15:30</span>
 			<span class="weather">Meteo: 10&#176;C - innorat</span>
 		</div>
 		<div class="bet-details-head">
@@ -210,7 +212,7 @@
 					</form>
 				</div>
 			</div>
-			
+
 			<div class="team">
 				<div class="collumn1">
 					<span class="top">8</span>
@@ -237,7 +239,7 @@
 					</form>
 				</div>
 			</div>
-			
+
 			<div class="team">
 				<div class="collumn1">
 					<span class="top">2</span>
@@ -266,11 +268,11 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<div class ="bet-details">
 		<div class="bet-race-bar">
 			Ludlow
-			<span>16:30</span> 
+			<span>16:30</span>
 			<span class="weather">Meteo: 12&#176;C - innorat</span>
 		</div>
 		<div class="bet-details-head">
@@ -324,7 +326,7 @@
 					</form>
 				</div>
 			</div>
-			
+
 			<div class="team">
 				<div class="collumn1">
 					<span class="top">8</span>
@@ -352,7 +354,7 @@
 					</form>
 				</div>
 			</div>
-			
+
 			<div class="team">
 				<div class="collumn1">
 					<span class="top">2</span>
