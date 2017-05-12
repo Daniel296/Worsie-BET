@@ -60,13 +60,10 @@
 			}
 			else {
 				echo "<p style=\"color: red; margin-top: -15px; margin-bottom: -5px;\">*Acest cont nu exista!</p><br>";
-				wait();
 			}
 
 		}
 	}
-
-
 
  ?>
 <script>
