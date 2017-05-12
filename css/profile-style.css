@@ -254,12 +254,30 @@ div.info2 {
     background-color: rgba(0, 0, 0, 0.6);
 }
 
+div.changeInfoText {
+	width: 97%;
+	font-size: 120%;
+	color: #FFF;
+	background-color: rgba(255, 255, 255, 0.1);
+	padding: 1% 1% 1% 2%;
+	margin-top: 25px;
+}
+
+div.changeInfo {
+	color:gray;
+	width: 100%;
+	margin-top: 15px;
+	/*border: 1px solid red;
+	border-radius: 2px;*/
+}
+
 div.changePasswordText {
 	width: 97%;
 	font-size: 120%;
 	color: #FFF;
 	background-color: rgba(255, 255, 255, 0.1);
 	padding: 1% 1% 1% 2%;
+	margin-top: 70px;
 }
 
 div.changePassword {
@@ -268,6 +286,7 @@ div.changePassword {
 	margin-top: 15px;
 	/*border: 1px solid red;
 	border-radius: 2px;*/
+	margin-top: 15px;
 }
 
 div.changeEmailText {
