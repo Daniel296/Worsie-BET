@@ -31,8 +31,6 @@
 </div>
 
 <?php
-	//require "php/database/connect2DB.php";
-
 	/*Validam datele introduse*/
 	function test_input($data) {
 		$data = trim($data);
@@ -47,10 +45,10 @@
 			$username = test_input($_POST["username"]);
 			$password = test_input($_POST["password"]);
 
-			$sql_statement = $conn->prepare("BEGIN
-												:id_user = login($username,$password);
-											END;";
-			$sql_statement->bindParam(':id_user', $id_user);
+			$sql_statement = $conn->prepare("SELECT :id FROM UTILIZATORI WHERE parola = :parola AND username = :username");
+			//$sql_statement->bindParam(':id', $id_user);
+			$sql_statement->bindParam(':parola', $password);
+			$sql_statement->bindParam(':username', $username);
 			$sql_statement->execute();
 
 			if($id_user != -1) {
@@ -60,6 +58,7 @@
 			}
 			else {
 				echo "<p style=\"color: red; margin-top: -15px; margin-bottom: -5px;\">*Acest cont nu exista!</p><br>";
+				sleep(100000);
 			}
 
 		}

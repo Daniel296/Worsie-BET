@@ -10,9 +10,9 @@
 	<link rel="stylesheet" type="text/css" href="css/popup-style.css">
 </head>
 <body>
+
 <?php
 	require('pages/header.php');
-	require "php/database/connect2DB.php";
 ?>
 
 <div id="main">
@@ -29,6 +29,12 @@
 
 <?php
 	require('pages/footer.php');
+	if(isset($_SESSION['id'])) {
+		echo "<p> " . $_SESSION['id'] . "</p";
+	}
+	else {
+		echo "SESIUNEA nu este setata!";
+	}
 ?>
 
 <script>
