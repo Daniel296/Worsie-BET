@@ -189,6 +189,13 @@ div.biletTipO {
     color: #FFF;
 }
 
+div.showErr {
+	font-size: 96%;
+	font-style: italic;
+	color: rgba(200, 0, 0, 0.8);
+	margin: 15px auto 15px 20%;
+}
+
 div.accountName {
 	width: 92%;
 	height: 4%;

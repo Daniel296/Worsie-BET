@@ -1,10 +1,12 @@
-$
+<?php $ok = 0; ?>
 <div id="setari">
-	<form method="POST" action="./php/setari_exec.php">
+	<form id="cont" method="POST" action="./php/setari_exec.php">
 		<div class="changeInfoText">
 			Date personale
 		</div>
-
+		<?php
+			showError(1);
+		?>
 		<div class="changeInfo">
 			<form action="./php/setari_exec.php" method="POST">
 				<div>
@@ -42,10 +44,13 @@ $
 		</div>
 	</form>
 
-	<form method="POST" action="./php/setari_exec.php">
+	<form id="password" method="POST" action="./php/setari_exec.php">
 		<div class="changePasswordText">
 			Schimbare parola
 		</div>
+		<?php
+			showError(2);
+		?>
 		<div class="changePassword">
 			<form action="" method="POST">
 				<div class="centrare">
@@ -72,10 +77,13 @@ $
 		</div>
 	</form>
 
-	<form method="POST" action="./php/setari_exec.php">
+	<form id="email" method="POST" action="./php/setari_exec.php">
 		<div class="changeEmailText">
 			Schimbare email
 		</div>
+		<?php
+			showError(3);
+		?>
 		<div class="changeEmail">
 			<form action="" method="POST">
 				<div>
@@ -92,3 +100,29 @@ $
 		</div>
 	</form>
 </div>
+
+
+<?php
+
+function showError($x) {
+	if(isset($_GET['err'])) {
+		$message = "";
+
+		if($x == 1) {
+			if($_GET['err'] == '111') {$message .= "* Numele poate contine doar caractere alfabetice.";}
+			else if($_GET['err'] == '121') {$message .= "* Prenume poate contine doar caractere alfabetice.";}
+			else if($_GET['err'] == '131') {$message .= "* Numele poate contine doar caractere alfabetice.";}
+			else if($_GET['err'] == '141') {$message .= "* Numele poate contine doar caractere alfabetice.";}
+			else if($_GET['err'] == '151') {$message .= "* Adresa poate contine doar caractere alfanumerice.";}
+			else if($_GET['err'] == '161') {$message .= "* Numarul de telefon poate contine doar cifre.";}
+		} else if($x == 2) {
+			if($_GET['err'] == '211') {$message .= "* Noua parola nu poate coincide cu vechea parola.";}
+			else if($_GET['err'] == '221') {$message .= "* Parola nu coincide cu confirmarea parolei.";}
+		} else if($x == 3) {
+			if($_GET['err'] == '311') {$message .= "* Adresa de e-mail contine caractere invalide.";}
+			else if($_GET['err'] == '321') {$message .= "* Noua adresa de e-mail nu poate coincide cu vechea adresa.";}
+		}
+		echo '<div class="showErr"> ' . $message . '</div>';
+	}
+}
+?>
