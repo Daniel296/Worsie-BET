@@ -29,12 +29,6 @@
 
 <?php
 	require('pages/footer.php');
-	if(isset($_SESSION['id'])) {
-		echo "<p> " . $_SESSION['id'] . "</p";
-	}
-	else {
-		echo "SESIUNEA nu este setata!";
-	}
 ?>
 
 <script>

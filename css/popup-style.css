@@ -14,7 +14,7 @@
 
 /* Modal Content/Box */
 .modal-content {
-	width: 400px;
+	width: 420px;
 	margin: 2% auto 15% auto;
     background-color: rgba(13, 13, 13, 0.8);
     border-radius: 10px;
@@ -32,7 +32,7 @@
     float: left;
     padding-top: 5px;
     text-align: right;
-    width: 100px;
+    width: 110px;
 	font-family: Century, sans-serif;
 }
 
@@ -46,6 +46,17 @@
 	border-radius: 5px;
     box-sizing: border-box;
 	font-family: Century, sans-serif;
+}
+
+.select-db {
+    display: inline-table;
+    margin: auto 10px 10px 15px;
+}
+
+.select-db select {
+    height: 30px;
+    padding: 0px 6px;
+    border-radius: 5px;
 }
 
 .container button {
@@ -64,7 +75,7 @@
 }
 
 .container button:hover {
-    color: #670011;
+    background-color: #670011;
 }
 
 
@@ -111,11 +122,11 @@ span.psw {
 }
 
 @-webkit-keyframes animatezoom {
-    from {-webkit-transform: scale(0)} 
+    from {-webkit-transform: scale(0)}
     to {-webkit-transform: scale(1)}
 }
-    
+
 @keyframes animatezoom {
-    from {transform: scale(0)} 
+    from {transform: scale(0)}
     to {transform: scale(1)}
 }
