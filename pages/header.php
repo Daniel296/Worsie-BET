@@ -1,7 +1,21 @@
 
 <?php
 	require("php/database/connect2DB.php");
+	session_start();
+	// if(isset($_SESSION['id']))
+	// 	echo "<br>id: " . $_SESSION['id'];
+	// else
+	// 	echo "<br>id: NOPE";
+
+	// if(isset($_POST['username']))
+	// 	echo "<br>username: " . $_POST['username'];
+	// else echo "<br>username: NOPE";
+
+	// if(isset($_POST['password']))
+	// 	echo "<br>password: " . $_POST['password'];
+	// else echo "<br>password: NOPE";
 ?>
+
 
 <div id="header">
 	<div id="logo">
@@ -42,7 +56,7 @@
 
 <div id="id01" class="modal">
 
-	<form class="modal-content animate" method="POST">
+	<form action="." class="modal-content animate" method="POST">
 		<div class="imgcontainer">
 		  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
 		  <img src="images/login-img.png" alt="Avatar" class="avatar">
@@ -61,28 +75,29 @@
 
 			<button type="submit">Login</button>
 		</div>
-
 	</form>
+</div>
 	<?php
 		/*Daca sunt setate datele necesare pentru logare, verificam daca exista contul*/
-		if (isset($_POST['username']) and isset($_POST['password'])) {
+		if (isset($_POST['username']) && isset($_POST['password'])) {
+			
 			/* Scoatem caracterele speciale din username si parola pentru evitarea sql injection*/
-			$username = mysql_real_escape_string($_POST['username']);
-			$password = mysql_real_escape_string($_POST['password']);
+			$username = $_POST['username'];//mysql_real_escape_string($_POST['username']);
+			$password = $_POST['password'];//mysql_real_escape_string($_POST['password']);
 
 			//echo "username: $username <br> password: $password <br>";
 			/* Creeam si executam query-ul pentru a vedea daca exista user-ul in baza de date */
 			$stmt =  $conn->stmt_init();
-			$sql_query = "SELECT id, conectat FROM utilizatori WHERE username = ? AND parola = ?";
+			$sql_query = "SELECT id, conectat FROM UTILIZATORI WHERE username = ? AND parola = ?";
+			
 			if($stmt =  $conn->prepare($sql_query)) {
+				
 				$stmt->bind_param('ss', $username, $password);
 				$stmt->execute();
 				$stmt->bind_result($id_user, $conectat);
 				$stmt->fetch();
-
-				if(isset($id_user) == TRUE and $conectat == 0) {
-				/* Pornim sesiunea si setam parametrii la seiune */
-					session_start();
+				if(isset($id_user) and $conectat == 0) {
+				/* Pornim sesiunea si setam parametrii la sesiune */
 					$_SESSION['id'] = $id_user;
 					$_SESSION['username'] = $username;
 					//echo "ID: " . $id_user . "<br>";
@@ -96,7 +111,7 @@
 						$stmt->execute();
 						if($conn->affected_rows == 0)
 							echo "Update error";
-							//header('Location: index.php');
+						//else header('Location: ./index.php');
 					}
 				}
 				else {
@@ -106,10 +121,9 @@
 						echo "Acest cont nu exista!";
 				}
 			}
-
 		}
 	 ?>
-</div>
+
 
 <script>
 // Get the modal
