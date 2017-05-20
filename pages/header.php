@@ -2,18 +2,6 @@
 <?php
 	require("php/database/connect2DB.php");
 	session_start();
-	// if(isset($_SESSION['id']))
-	// 	echo "<br>id: " . $_SESSION['id'];
-	// else
-	// 	echo "<br>id: NOPE";
-
-	// if(isset($_POST['username']))
-	// 	echo "<br>username: " . $_POST['username'];
-	// else echo "<br>username: NOPE";
-
-	// if(isset($_POST['password']))
-	// 	echo "<br>password: " . $_POST['password'];
-	// else echo "<br>password: NOPE";
 ?>
 
 
@@ -80,7 +68,7 @@
 	<?php
 		/*Daca sunt setate datele necesare pentru logare, verificam daca exista contul*/
 		if (isset($_POST['username']) && isset($_POST['password'])) {
-			
+
 			/* Scoatem caracterele speciale din username si parola pentru evitarea sql injection*/
 			$username = $_POST['username'];//mysql_real_escape_string($_POST['username']);
 			$password = $_POST['password'];//mysql_real_escape_string($_POST['password']);
@@ -89,9 +77,9 @@
 			/* Creeam si executam query-ul pentru a vedea daca exista user-ul in baza de date */
 			$stmt =  $conn->stmt_init();
 			$sql_query = "SELECT id, conectat FROM UTILIZATORI WHERE username = ? AND parola = ?";
-			
+
 			if($stmt =  $conn->prepare($sql_query)) {
-				
+
 				$stmt->bind_param('ss', $username, $password);
 				$stmt->execute();
 				$stmt->bind_result($id_user, $conectat);
@@ -196,20 +184,21 @@ window.onclick = function(event) {
 						$stmt =  $conn->stmt_init();
 						$date = date('d.m.y H:m:s');
 						echo "date: $date";
-						$sql_query = "INSERT INTO utilizatori VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+						$sql_query = "INSERT INTO UTILIZATORI VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 						if($stmt =  $conn->prepare($sql_query)) {
 							$stmt->bind_param('sssdssssssi', $username, $password, $email, 0, $lastname, $firstname, '', '', '', '', 0, $date);
 							$stmt->execute();
-					}
-					else {
-						if(isset($username1) == true and $username1 == $username)
-							print_error("Acest username exista deja");
-						if(isset($email1) == true and $email1 == $email)
-							print_error("Aceasta adresa de email exista deja");
-					}
+						}
+						else {
+							if(isset($username1) == true and $username1 == $username)
+								print_error("Acest username exista deja");
+								if(isset($email1) == true and $email1 == $email)
+								print_error("Aceasta adresa de email exista deja");
+							}
 
+						}
+					}
 				}
-			}
 
 		 ?>
 
