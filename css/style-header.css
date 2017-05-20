@@ -90,7 +90,8 @@
 	height: 30px;
 	width: 30px;
 	float: right;
-	margin-right: 10px;
+	margin-right: -80px;
+	margin-top: -4px;
 	cursor: pointer;
 }
 
@@ -155,13 +156,13 @@
 }
 
 .bottom-menu a:hover {
-	color: #910018; 
+	color: #910018;
 }
 
 .bottom-menu .active {
 	color: #910018;
 	font-weight: bold;
-}	
+}
 
 
 .pay-methods {
@@ -173,7 +174,7 @@
 .pay-methods a {
 	float: left;
 	margin: auto 6px;
-	
+
 }
 
 .pay-methods img{
@@ -186,6 +187,3 @@
 	text-align: center;
 	margin: 30px auto 15px;
 }
-
-
-

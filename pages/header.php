@@ -99,8 +99,8 @@
 						$stmt->execute();
 						if($conn->affected_rows == 0)
 							echo "Update error";
-						//else header('Location: ./index.php');
 					}
+					header("Refresh:0");
 				}
 				else {
 					if($conectat == 1)
