@@ -58,7 +58,7 @@ function updateInfo($x) {
 /* #################### updatePassword(userID) #################### */
 /* #################### ###################### #################### */
 function updatePassword($x) {
-	require "../php/database/connect2DB.php";	
+	require "database/connect2DB.php";//require "../php/database/connect2DB.php";	
 
 	$current_password = $_POST['current_password'];
 	$new_password = $_POST['new_password'];
@@ -90,7 +90,7 @@ function updatePassword($x) {
 /* ###################### updateEmail(userID) ##################### */
 /* #################### ###################### #################### */
 function updateEmail($x) {
-	require "../php/database/connect2DB.php";
+	require "database/connect2DB.php";
 
 	$current_email = $_POST['current_email'];
 	$new_email = $_POST['new_email'];
@@ -113,4 +113,5 @@ function updateEmail($x) {
 		} else header('Location: ../profile.php?page=setari');
 	}
 }
+
 ?>

@@ -1,4 +1,12 @@
-<?php $ok = 0; ?>
+<?php
+	$sql_query = "SELECT nume, prenume, adresa, telefon, oras, judet FROM UTILIZATORI WHERE username = ?";
+	if($stmt =  $conn->prepare($sql_query)) {
+		$stmt->bind_param('s', $_SESSION['username']);
+		$stmt->execute();
+		$stmt->bind_result($email, $nume, $prenume, $adresa, $telefon, $oras, $judet);
+		$stmt->fetch();
+	}
+?>
 <div id="setari">
 	<form id="cont" method="POST" action="./php/setari_exec.php">
 		<div class="changeInfoText">
@@ -7,36 +15,37 @@
 		<?php
 			showError(1);
 		?>
+		<?php //echo getProp('nume'); ?>
 		<div class="changeInfo">
 			<form action="./php/setari_exec.php" method="POST">
 				<div>
 					<label class="content">Nume:</label>
-					<input class="field" type="text" name="nume" value="">
+					<input class="field" type="text" name="nume" value="<?php echo $nume;?>">
 				</div>
 
 				<div>
 					<label class="content">Prenume:</label>
-					<input class="field" type="text" name="prenume" value="">
+					<input class="field" type="text" name="prenume" value="<?php echo $prenume;?>">
 				</div>
 
 				<div>
 					<label class="content">Judet:</label>
-					<input class="field" type="text" name="judet" value="">
+					<input class="field" type="text" name="judet" value="<?php echo $judet;?>">
 				</div>
 
 				<div>
 					<label class="content">Oras:</label>
-					<input class="field" type="text" name="oras" value="">
+					<input class="field" type="text" name="oras" value="<?php echo $oras;?>">
 				</div>
 
 				<div>
 					<label class="content">Adresa:</label>
-					<input class="field" type="text" name="adresa" value="">
+					<input class="field" type="text" name="adresa" value="<?php echo $adresa;?>">
 				</div>
 
 				<div>
 					<label class="content">Telefon:</label>
-					<input class="field" type="text" name="telefon" value="">
+					<input class="field" type="text" name="telefon" value="<?php echo $telefon;?>">
 				</div>
 
 				<button class="btn">Schimba date</button>
@@ -125,4 +134,6 @@ function showError($x) {
 		echo '<div class="showErr"> ' . $message . '</div>';
 	}
 }
+
+
 ?>
