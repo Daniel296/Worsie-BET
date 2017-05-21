@@ -115,7 +115,7 @@
 					}
 				}
 				else {
-					if($conectat === 1)
+					if($conectat == 1)
 						echo "Sunteti deja conectat cu acest username!";
 					else
 						echo "Acest cont nu exista!";
@@ -142,25 +142,72 @@ window.onclick = function(event) {
 
 	<form class="modal-content animate" method="POST">
 		<div class="imgcontainer">
-		  <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
-		  <img src="images/login-img.png" alt="Avatar" class="avatar">
+		  	<span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+		  	<img src="images/login-img.png" alt="Avatar" class="avatar">
 		</div>
 
 		<?php
-			if (isset($_POST['username']) and isset($_POST['password'])) {
-			/* Scoatem caracterele speciale din username si parola pentru evitarea sql injection*/
-				$username = mysql_real_escape_string($_POST['username']);
-				$password = mysql_real_escape_string($_POST['password']);
+			/* Aceasta functie afiseaza mesajele de eroare care apar in urma validarii datelor introduse de utilizator*/
+			function print_error($err) {
+				echo "<p> *$err </p>";
+				$ok = true;
+			}
 
-				//echo "username: $username <br> password: $password <br>";
-				/* Creeam si executam query-ul pentru a vedea daca exista user-ul in baza de date */
+			if (isset($_POST['day']) and isset($_POST['month']) and isset($_POST['year']) and isset($_POST['username']) and isset($_POST['lastname']) and isset($_POST['firstname']) and isset($_POST['email']) and isset($_POST['password']) and isset($_POST['re_password'])) {
+				$ok = false;
+
+				/* Scoatem caracterele speciale din username si parola pentru evitarea sql injection*/
+				$username = mysql_real_escape_string($_POST['username']);
+				$lastname = mysql_real_escape_string($_POST['lastname']);
+				$firstname = mysql_real_escape_string($_POST['firstname']);
+				$email = mysql_real_escape_string($_POST['email']);
+				$day = mysql_real_escape_string($_POST['day']);
+				$month = mysql_real_escape_string($_POST['month']);
+				$year = mysql_real_escape_string($_POST['year']);
+				$password = mysql_real_escape_string($_POST['password']);
+				$re_password = mysql_real_escape_string($_POST['re_password']);
+
+				/* Validam datele introduse de utilizator si afisam mesajele de eroare corespunzatoare */
+				if(strlen($username) < 6 or strlen($username) > 30)
+					print_error("Username-ul trebuie sa aiba intre 6 si 30 de caractere");
+				if(preg_match('/^[A-Za-z][A-Za-z0-9]$/', $username))
+					print_error("Username-ul poate sa contina doar litere si cifre");
+				if(strlen($firstname) > 15)
+					print_error("Lungimea prenumelui este prea mare");
+				if(strlen($lastname) > 15)
+					print_error("Lungimea numelui este prea mare");
+				if(!preg_match('/[A-Za-z]$/', $firstname) or !preg_match('/[A-Za-z]$/', $lastname) )
+					print_error("Numele poate sa contina doar litere");
+				if(strlen($password) > 30)
+					print_error("Parola este prea lunga");
+				if($password != $re_password)
+					print_error("Parolele sunt diferite");
+
+				/* Verificam daca username-ul sau email-ul exista deja in baza de date */
 				$stmt =  $conn->stmt_init();
-				$sql_query = "SELECT id, conectat FROM utilizatori WHERE username = ? AND parola = ?";
+				$sql_query = "SELECT username, email FROM utilizatori WHERE username = ? or email = ?";
 				if($stmt =  $conn->prepare($sql_query)) {
-					$stmt->bind_param('ss', $username, $password);
+					$stmt->bind_param('ss', $username, $email);
 					$stmt->execute();
-					$stmt->bind_result($id_user, $conectat);
+					$stmt->bind_result($username1, $email1);
 					$stmt->fetch();
+					if(isset($username1) == false and isset($email1) == false) {
+						unset($stmt);
+						$stmt =  $conn->stmt_init();
+						$date = date('d.m.y H:m:s');
+						echo "date: $date";
+						$sql_query = "INSERT INTO utilizatori VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+						if($stmt =  $conn->prepare($sql_query)) {
+							$stmt->bind_param('sssdssssssi', $username, $password, $email, 0, $lastname, $firstname, '', '', '', '', 0, $date);
+							$stmt->execute();
+					}
+					else {
+						if(isset($username1) == true and $username1 == $username)
+							print_error("Acest username exista deja");
+						if(isset($email1) == true and $email1 == $email)
+							print_error("Aceasta adresa de email exista deja");
+					}
+
 				}
 			}
 
@@ -169,23 +216,23 @@ window.onclick = function(event) {
 		<div class="container">
 			<div class="form-login">
 				<label><b>Username</b></label>
-				<input type="text" name="name" required>
+				<input type="text" name="username" required>
 			</div>
 
 			<div class="form-login">
 				<label><b>Nume</b></label>
-				<input type="text" name="name" required>
+				<input type="text" name="lastname" required>
 			</div>
 
 			<div class="form-login">
 				<label><b>Prenume</b></label>
-				<input type="text" name="name" required>
+				<input type="text" name="firstname" required>
 			</div>
 
 			<div class="form-login">
 				<label><b>Data nasterii</b></label>
 				<div class="select-db">
-					<select name="Day">
+					<select name="day" required>
 						<option> Day </option>
 						<option value="1">1</option>
 						<option value="2">2</option>
@@ -219,8 +266,8 @@ window.onclick = function(event) {
 						<option value="30">30</option>
 						<option value="31">31</option>
 					</select>
-					
-					<select name="Month">
+
+					<select name="month" required>
 						<option> Month </option>
 						<option value="January">January</option>
 						<option value="Febuary">Febuary</option>
@@ -236,7 +283,7 @@ window.onclick = function(event) {
 						<option value="December">December</option>
 					</select>
 
-					<select name="Year">
+					<select name="year" required>
 						<option> Year </option>
 						<option value="1999">1999</option>
 						<option value="1998">1998</option>
@@ -297,12 +344,17 @@ window.onclick = function(event) {
 
 			<div class="form-login">
 				<label><b>Email</b></label>
-				<input type="text" name="email" required>
+				<input type="email" name="email" required>
 			</div>
 
 			<div class="form-login">
 				<label><b>Parola</b></label>
 				<input type="password" name="password" required>
+			</div>
+
+			<div class="form-login">
+				<label><b>Reintroduceti parola</b></label>
+				<input type="password" name="re_password" required>
 			</div>
 
 			<button type="submit">Register</button>
