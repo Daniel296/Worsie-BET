@@ -36,7 +36,7 @@
 	font-family: Century, sans-serif;
 }
 
-.form-login input[type=text], input[type=password] {
+.form-login input[type=text], input[type=password], input[type=email], input[type=date] {
     width: 240px;
 	height: 30px;
 	padding: 3px;

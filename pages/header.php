@@ -12,11 +12,22 @@
 
 	<?php
 		if(isset($_SESSION['id'])) {
+			/* Daca user-ul este logat atunci selectam username-ul si balanta din baza de date */
+			$stmt =  $conn->stmt_init();
+			$sql_query = "SELECT username, balanta FROM UTILIZATORI WHERE id = ?";
+
+			if($stmt =  $conn->prepare($sql_query)) {
+
+				$stmt->bind_param('d', $_SESSION['id']);
+				$stmt->execute();
+				$stmt->bind_result($username, $balanta);
+				$stmt->fetch();
+			}
 	 ?>
 		 <div class="account-box">
 			 <div class="username-box">
-				 <span class="username">daniel269</span>
-				 <span class="balance">265.23 Ron</span>
+				 <span class="username"><?php echo $username ?></span>
+				 <span class="balance"><?php echo $balanta . " Ron" ?></span>
 			 </div>
 			 <div class="link-box">
 				 <a href="profile.php?page=account">Contul meu</a>
@@ -70,10 +81,9 @@
 		if (isset($_POST['username']) && isset($_POST['password'])) {
 
 			/* Scoatem caracterele speciale din username si parola pentru evitarea sql injection*/
-			$username = $_POST['username'];//mysql_real_escape_string($_POST['username']);
-			$password = $_POST['password'];//mysql_real_escape_string($_POST['password']);
+			$username = mysql_real_escape_string($_POST['username']);
+			$password = mysql_real_escape_string($_POST['password']);
 
-			//echo "username: $username <br> password: $password <br>";
 			/* Creeam si executam query-ul pentru a vedea daca exista user-ul in baza de date */
 			$stmt =  $conn->stmt_init();
 			$sql_query = "SELECT id, conectat FROM UTILIZATORI WHERE username = ? AND parola = ?";
@@ -88,7 +98,6 @@
 				/* Pornim sesiunea si setam parametrii la sesiune */
 					$_SESSION['id'] = $id_user;
 					$_SESSION['username'] = $username;
-					//echo "ID: " . $id_user . "<br>";
 
 					/* Facem update la campul "conectat" */
 					unset($stmt);
@@ -141,7 +150,7 @@ window.onclick = function(event) {
 				$ok = true;
 			}
 
-			if (isset($_POST['day']) and isset($_POST['month']) and isset($_POST['year']) and isset($_POST['username']) and isset($_POST['lastname']) and isset($_POST['firstname']) and isset($_POST['email']) and isset($_POST['password']) and isset($_POST['re_password'])) {
+			if (isset($_POST['bday']) and isset($_POST['username']) and isset($_POST['lastname']) and isset($_POST['firstname']) and isset($_POST['email']) and isset($_POST['password']) and isset($_POST['re_password'])) {
 				$ok = false;
 
 				/* Scoatem caracterele speciale din username si parola pentru evitarea sql injection*/
@@ -149,11 +158,13 @@ window.onclick = function(event) {
 				$lastname = mysql_real_escape_string($_POST['lastname']);
 				$firstname = mysql_real_escape_string($_POST['firstname']);
 				$email = mysql_real_escape_string($_POST['email']);
-				$day = mysql_real_escape_string($_POST['day']);
-				$month = mysql_real_escape_string($_POST['month']);
-				$year = mysql_real_escape_string($_POST['year']);
+				// $day = mysql_real_escape_string($_POST['day']);
+				// $month = mysql_real_escape_string($_POST['month']);
+				// $year = mysql_real_escape_string($_POST['year']);
 				$password = mysql_real_escape_string($_POST['password']);
 				$re_password = mysql_real_escape_string($_POST['re_password']);
+				$birth_date = new DateTime($_POST['bday']);
+				//$birth_date =  new DateTime($_POST['day'] . "." . $_POST['month'] . "." . $_POST['year']);
 
 				/* Validam datele introduse de utilizator si afisam mesajele de eroare corespunzatoare */
 				if(strlen($username) < 6 or strlen($username) > 30)
@@ -170,6 +181,7 @@ window.onclick = function(event) {
 					print_error("Parola este prea lunga");
 				if($password != $re_password)
 					print_error("Parolele sunt diferite");
+
 
 				/* Verificam daca username-ul sau email-ul exista deja in baza de date */
 				$stmt =  $conn->stmt_init();
@@ -218,6 +230,11 @@ window.onclick = function(event) {
 				<input type="text" name="firstname" required>
 			</div>
 
+			<div class="form-login">
+				<label><b>Data nasterii</b></label>
+				<input type="date" name="bday" required>
+			</div>
+			<!--
 			<div class="form-login">
 				<label><b>Data nasterii</b></label>
 				<div class="select-db">
@@ -329,7 +346,7 @@ window.onclick = function(event) {
 						<option value="1947">1947</option>
 					</select>
 				</div>
-			</div>
+			</div>-->
 
 			<div class="form-login">
 				<label><b>Email</b></label>
