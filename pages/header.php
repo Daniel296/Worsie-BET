@@ -87,19 +87,19 @@
 
 			/* Creeam si executam query-ul pentru a vedea daca exista user-ul in baza de date */
 			$stmt =  $conn->stmt_init();
-			$sql_query = "SELECT id, conectat, password FROM UTILIZATORI WHERE username = ?";
-
+			$sql_query = "SELECT id, parola, conectat FROM UTILIZATORI WHERE username = ?";
 			if($stmt =  $conn->prepare($sql_query)) {
-
 				$stmt->bind_param('s', $username);
 				$stmt->execute();
-				$stmt->bind_result($id_user, $conectat, $hash_password);
+				$stmt->bind_result($id_user, $hash_password, $conectat);
 				$stmt->fetch();
+				echo "$hash_password $password " . "<br>";
+
 				if(isset($id_user) and $conectat == 0 and password_verify($password, $hash_password) == TRUE) {
-				/* Pornim sesiunea si setam parametrii la sesiune */
+					/* Pornim sesiunea si setam parametrii la sesiune */
 					$_SESSION['id'] = $id_user;
 					$_SESSION['username'] = $username;
-
+					echo "H10";
 					/* Facem update la campul "conectat" */
 					unset($stmt);
 					$stmt =  $conn->stmt_init();
@@ -116,7 +116,7 @@
 					if($conectat == 1)
 						echo "Sunteti deja conectat cu acest username!";
 					else
-						echo "Acest cont nu exista!";
+						echo "Username sau parola gresite";
 				}
 			}
 		}
@@ -183,8 +183,7 @@ window.onclick = function(event) {
 
 
 				/* Criptam parola */
-				$password = password_hash($password, PASSWORD_BCRYPT);
-
+				$password = password_hash($password, PASSWORD_DEFAULT);
 
 				/* Verificam daca username-ul sau email-ul exista deja in baza de date */
 				$stmt =  $conn->stmt_init();
@@ -199,9 +198,10 @@ window.onclick = function(event) {
 						unset($stmt);
 						$stmt =  $conn->stmt_init();
 						echo "H2 ";
-						$sql_query = "INSERT INTO UTILIZATORI VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+						$sql_query = "INSERT INTO UTILIZATORI VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+						$sql_query = "INSERT INTO UTILIZATORI (username, parola) VALUES (?, ?)";
 						if($stmt =  $conn->prepare($sql_query)) {
-							$stmt->bind_param('dsssdsssisssdi', 0, $username, $password, $email, 0, $lastname, $firstname, '', $birth_date, '', '', '', 0, '');
+							$stmt->bind_param('ss', $username, $password);
 							$stmt->execute();
 							echo "H3 ";
 						}
@@ -210,17 +210,15 @@ window.onclick = function(event) {
 								print_error("Acest username exista deja");
 							if(isset($email1) == true and $email1 == $email)
 								print_error("Aceasta adresa de email exista deja");
-							}
+
 							echo "H4 ";
-						}
-						else {
-							echo "Eroare 1";
-						}
-					}
-					else {
-						echo "Eroare 2";
+							}
 					}
 				}
+				else {
+					echo "Eroare 2";
+				}
+			}
 
 		 ?>
 
