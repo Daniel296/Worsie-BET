@@ -100,57 +100,48 @@
 	</div>
 
 	<div class="bets">
-		<div class="bet">
-			<a href="">Newmarket</a>
-			<div class="times">
-				<span>13:20</span>
-				<span>14:20</span>
-				<span>15:20</span>
-				<span>16:20</span>
-				<span>17:10</span>
-				<span>18:20</span>
-				<span>19:20</span>
-			</div>
-		</div>
+		<?php
+			/* Afisam numele curselor si orele la care au loc */
+			if(isset($_GET['date'])) {
+				$date = $_GET['date'];
+				$names_array = [];
+				/* Luam numele de la toate cursele */
+				$stmt =  $conn->stmt_init();
+				$sql_query = "SELECT DISTINCT nume FROM curse WHERE SUBSTR(data, 1, 10) = '$date'";
+				if($stmt =  $conn->prepare($sql_query)) {
+					$stmt->execute();
+					$stmt->bind_result($name);
 
-		<div class="bet">
-			<a href="">Kempton</a>
-			<div class="times">
-				<span>13:20</span>
-				<span>14:20</span>
-				<span>15:20</span>
-				<span>16:20</span>
-				<span>17:10</span>
-				<span>18:20</span>
-				<span>19:20</span>
-			</div>
-		</div>
+					while($stmt->fetch()) {
+						$names_array[] = $name;
+					}
+				}
+				else {
+					die("O eroare nesteptata s-a produs!");
+				}
 
-		<div class="bet">
-			<a href="" >Fairyhouse</a>
-			<div class="times">
-				<span>13:20</span>
-				<span>14:20</span>
-				<span>15:20</span>
-				<span>16:20</span>
-				<span>17:10</span>
-				<span>18:20</span>
-				<span>19:20</span>
-			</div>
-		</div>
-
-		<div class="bet">
-			<a href="">Ludlow</a>
-			<div class="times">
-				<span>13:20</span>
-				<span>14:20</span>
-				<span>15:20</span>
-				<span>16:20</span>
-				<span>17:10</span>
-				<span>18:20</span>
-				<span>19:20</span>
-			</div>
-		</div>
+				/* Selectam orele la care au loc cursele */
+				unset($stmt);
+				for($i = 0; $i < count($names_array); $i++) {
+					echo "<div class=\"bet\">
+							<a href=\"Pariuri.php?date=$date&race=$names_array[$i]\">$names_array[$i]</a>";
+					$stmt =  $conn->stmt_init();
+					$sql_query = "SELECT DISTINCT SUBSTR(data, 12, 5) as ora FROM curse WHERE SUBSTR(data, 1, 10) = '$date' and nume = '$names_array[$i]' ORDER BY ora";
+					if($stmt =  $conn->prepare($sql_query)) {
+						$stmt->execute();
+						$stmt->bind_result($time);
+						echo "<div class=\"times\">";
+						while($stmt->fetch()) {
+							echo "<span>$time</span>";
+						}
+					}
+					else {
+						die("O eroare nesteptata s-a produs!");
+					}
+					echo "</div></div>";
+				}
+			}
+		 ?>
 	</div>
 
 	<div class ="bet-details">
