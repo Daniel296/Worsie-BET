@@ -78,28 +78,23 @@
 </div>
 	<?php
 		/*===========LOGIN===========*/
-		/*Daca sunt setate datele necesare pentru logare, verificam daca exista contul*/
-		if (isset($_POST['username_login']) && isset($_POST['password'])) {
-
-			/* Scoatem caracterele speciale din username si parola pentru evitarea sql injection*/
-			$username = mysql_real_escape_string($_POST['username_login']);
-			$password = mysql_real_escape_string($_POST['password']);
-
+		function login_user($conn, $username, $password) {
 			/* Creeam si executam query-ul pentru a vedea daca exista user-ul in baza de date */
+			unset($stmt);
 			$stmt =  $conn->stmt_init();
-			$sql_query = "SELECT id, parola, conectat FROM UTILIZATORI WHERE username = ?";
+			$sql_query = "SELECT id, trim(parola), conectat FROM UTILIZATORI WHERE username = ? AND parola = ?";
 			if($stmt =  $conn->prepare($sql_query)) {
-				$stmt->bind_param('s', $username);
+				$stmt->bind_param('ss', $username, $password);
 				$stmt->execute();
 				$stmt->bind_result($id_user, $hash_password, $conectat);
 				$stmt->fetch();
-				echo "$hash_password $password " . "<br>";
 
-				if(isset($id_user) and $conectat == 0 and password_verify($password, $hash_password) == TRUE) {
+				//password_verify($password, $hash_password) == TRUE
+				if(isset($id_user) and $conectat == 0 ) {
 					/* Pornim sesiunea si setam parametrii la sesiune */
 					$_SESSION['id'] = $id_user;
 					$_SESSION['username'] = $username;
-					echo "H10";
+
 					/* Facem update la campul "conectat" */
 					unset($stmt);
 					$stmt =  $conn->stmt_init();
@@ -120,6 +115,17 @@
 				}
 			}
 		}
+
+		/*Daca sunt setate datele necesare pentru logare*/
+		if (isset($_POST['username_login']) and isset($_POST['password'])) {
+			/* Scoatem caracterele speciale din username si parola pentru evitarea sql injection*/
+			$username = mysql_real_escape_string($_POST['username_login']);
+			$password = mysql_real_escape_string($_POST['password']);
+
+			/* Apelam functia care face logarea */
+			login_user($conn, $username, $password);
+		}
+
 	 ?>
 
 
@@ -162,8 +168,7 @@ window.onclick = function(event) {
 				$email = mysql_real_escape_string($_POST['email']);
 				$password = mysql_real_escape_string($_POST['password']);
 				$re_password = mysql_real_escape_string($_POST['re_password']);
-				$birth_date = new DateTime($_POST['bday']);
-
+				$birth_date = date("Y-m-d", strtotime($_POST['bday']));
 
 				/* Validam datele introduse de utilizator si afisam mesajele de eroare corespunzatoare */
 				if(strlen($username) < 6 or strlen($username) > 30)
@@ -183,7 +188,8 @@ window.onclick = function(event) {
 
 
 				/* Criptam parola */
-				$password = password_hash($password, PASSWORD_DEFAULT);
+				//$hash_password = password_hash($password, PASSWORD_DEFAULT);
+				$hash_password = $password;
 
 				/* Verificam daca username-ul sau email-ul exista deja in baza de date */
 				$stmt =  $conn->stmt_init();
@@ -195,31 +201,37 @@ window.onclick = function(event) {
 					$stmt->fetch();
 					echo "H1 ";
 					if(isset($username1) == false and isset($email1) == false) {
+						echo "H2 ";
 						unset($stmt);
 						$stmt =  $conn->stmt_init();
-						echo "H2 ";
-						$sql_query = "INSERT INTO UTILIZATORI VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-						$sql_query = "INSERT INTO UTILIZATORI (username, parola) VALUES (?, ?)";
+						$sql_query = "INSERT INTO UTILIZATORI (username, parola, email, nume, prenume, data_nasterii)
+										VALUES (?, ?, ?, ?, ?, DATE_FORMAT(?,'%Y-%m-%d'))";
 						if($stmt =  $conn->prepare($sql_query)) {
-							$stmt->bind_param('ss', $username, $password);
+							$stmt->bind_param('ssssss', $username, $hash_password, $email, $lastname, $firstname, $birth_date);
 							$stmt->execute();
 							echo "H3 ";
+
+							if (!$conn->commit()) {
+							    print("Transaction commit failed\n");
+							    exit();
+							}
+
+							/*Daca am ajuns pana aici inseamna ca inregistrarea a avut loc cu succes, asa ca facem login */
+							login_user($conn, $username, $password);
 						}
 						else {
 							if(isset($username1) == true and $username1 == $username)
 								print_error("Acest username exista deja");
 							if(isset($email1) == true and $email1 == $email)
 								print_error("Aceasta adresa de email exista deja");
-
-							echo "H4 ";
-							}
+							echo "H5";
+						}
+					}
+					else {
+						echo "Username-ul exista deja in baza de date";
 					}
 				}
-				else {
-					echo "Eroare 2";
-				}
 			}
-
 		 ?>
 
 		<div class="container">
@@ -240,7 +252,7 @@ window.onclick = function(event) {
 
 			<div class="form-login">
 				<label><b>Data nasterii</b></label>
-				<input type="date" name="bday" required>
+				<input type="date" name="bday" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" required >
 			</div>
 
 			<div class="form-login">

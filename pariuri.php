@@ -174,6 +174,8 @@
 			</div>
 		</div>
 		<div class="bet-details-body">
+
+
 			<div class="team">
 				<div class="collumn1">
 					<span class="top">1</span>
