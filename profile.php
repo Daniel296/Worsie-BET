@@ -1,4 +1,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<?php
+	if(!isset($_SESSION['id_user']))
+		header('Location: ./index.php');
+?>
 <html>
 <head>
 	<title>Profil - WorsieBet</title>
@@ -21,9 +25,9 @@
 			</ul>
 		</div>
 		<div class="dateCont">
-			 Georgescu Mihai <br>
-			 Cont: OD3127836156423154 <br>
-			 Ultima conectare: 27.04.2017 09:57
+			Georgescu Mihai <br>
+			Cont: OD3127836156423154 <br>
+			Ultima conectare: 27.04.2017 09:57
 		</div>
 	</div>
 

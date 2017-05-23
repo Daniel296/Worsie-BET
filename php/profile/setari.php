@@ -1,11 +1,11 @@
 <?php
-	$sql_query = "SELECT nume, prenume, adresa, telefon, oras, judet FROM UTILIZATORI WHERE username = ?";
-	if($stmt =  $conn->prepare($sql_query)) {
-		$stmt->bind_param('s', $_SESSION['username']);
-		$stmt->execute();
-		$stmt->bind_result($email, $nume, $prenume, $adresa, $telefon, $oras, $judet);
-		$stmt->fetch();
-	}
+		$sql_query = "SELECT nume, prenume, adresa, telefon, oras, judet FROM UTILIZATORI WHERE id = ?";
+		if($stmt =  $conn->prepare($sql_query)) {
+			$stmt->bind_param('i', $_SESSION['id_user']);
+			$stmt->execute();
+			$stmt->bind_result($email, $nume, $prenume, $adresa, $telefon, $oras, $judet);
+			$stmt->fetch();
+		}
 ?>
 <div id="setari">
 	<form id="cont" method="POST" action="./php/setari_exec.php">
@@ -15,7 +15,7 @@
 		<?php
 			showError(1);
 		?>
-		<?php //echo getProp('nume'); ?>
+		
 		<div class="changeInfo">
 			<form action="./php/setari_exec.php" method="POST">
 				<div>

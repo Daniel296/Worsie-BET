@@ -1,25 +1,86 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>-->
 <div id="bilete">
-	<!-- ================================================== -->
-	<div class="biletX">
-		<div class="biletID">ID: 17apr1812009963
-		</div>
+<?php
+	$bileteT = 0; $bileteW = 0; $bileteL = 0; $bileteU = 0;
+	$sql_query = "SELECT bilete, bileteW, bileteL, bileteU FROM UTILIZATORI WHERE id = 1";
+	if($stmt =  $conn->prepare($sql_query)) {
+		//$stmt->bind_param('i', $_SESSION['id_user']);
+		$stmt->execute();
+		$stmt->bind_result($bileteT, $bileteW, $bileteL, $bileteU);
+		$stmt->fetch();
+	}
+	
 
-		<div class="biletData">18.04.2017
-		</div>
+	//echo "Total T: " . $bileteT . "<br>Bilete W: " . $bileteW . "<br>Bilete L: " . $bileteL . "<br>Bilete U: " . $bileteU;
+	unset($stmt);
+	
+	$sql_query = "SELECT status, suma_depusa, suma_castig, cod, pariuri, cota, data_creare FROM bilete WHERE id_user = 1 ORDER BY data_creare DESC";
+	if($stmt =  $conn->prepare($sql_query)) {
+		$stmt->execute();
+		$stmt->bind_result($status, $suma_depusa, $suma_castig, $cod, $pariuri, $cota, $data_creare);
+		while($stmt->fetch()) {
+			if($status == -1) { 
+				echo '
+					<div class="biletL">
+						<div class="biletID">COD: ' . $cod . '
+						</div>
 
-		<div class="biletSuma">Suma: 10 RON
-		</div>
+						<div class="biletData">' . $data_creare . '
+						</div>
 
-		<div class="biletCastig">Castig: 0 RON
-		</div>
+						<div class="biletSuma">Suma: ' . $suma_depusa . ' RON
+						</div>
 
-		<div class="biletCota">Cota: 3.50
-		</div>
+						<div class="biletCastig">Castig: 0 RON
+						</div>
 
-	</div>
+						<div class="biletCota">Cota: ' . $cota . '
+						</div>
+					</div>
+				';
+			} else if($status == 0) {
+				echo '
+					<div class="biletU">
+						<div class="biletID">COD: ' . $cod . '
+						</div>
 
-	<!-- ================================================== -->
+						<div class="biletData">' . $data_creare . '
+						</div>
+
+						<div class="biletSuma">Suma: ' . $suma_depusa . ' RON
+						</div>
+
+						<div class="biletCastig">Castig: ' . $suma_castig . ' RON
+						</div>
+
+						<div class="biletCota">Cota: ' . $cota . '
+						</div>
+					</div>
+				';
+			} else if($status == 1) {
+				echo '
+					<div class="biletW">
+						<div class="biletID">COD: ' . $cod . '
+						</div>
+
+						<div class="biletData">' . $data_creare . '
+						</div>
+
+						<div class="biletSuma">Suma: ' . $suma_depusa . ' RON
+						</div>
+
+						<div class="biletCastig">Castig: ' . $suma_castig . ' RON
+						</div>
+
+						<div class="biletCota">Cota: ' . $cota . '
+						</div>
+					</div>
+				';
+			}
+		}
+	}
+?>
+	<!-- ================================================== - - >
 	<div class="biletO">
 		<div class="biletID">ID: 17apr1712009963
 		</div>
@@ -36,157 +97,6 @@
 		<div class="biletCota">Cota: 1.24
 		</div>
 
-	</div>
+	</div>-->
 
-	<!-- ================================================== -->
-	<div class="biletO">
-		<div class="biletID">ID: 17apr1612009963
-		</div>
-
-		<div class="biletData">16.04.2017
-		</div>
-
-		<div class="biletSuma">Suma: 10 RON
-		</div>
-
-		<div class="biletCastig">Castig: 68.40 RON
-		</div>
-		
-		<div class="biletCota">Cota: 6.84
-		</div>
-
-	</div>
-
-	<!-- ================================================== -->
-	<div class="biletO">
-		<div class="biletID">ID: 17apr1512009963
-		</div>
-
-		<div class="biletData">15.04.2017
-		</div>
-
-		<div class="biletSuma">Suma: 10 RON
-		</div>
-
-		<div class="biletCastig">Castig: 34.00 RON
-		</div>
-		
-		<div class="biletCota">Cota: 3.40
-		</div>
-
-	</div>
-
-	<!-- ================================================== -->
-	<div class="biletX">
-		<div class="biletID">ID: 17apr1412009963
-		</div>
-
-		<div class="biletData">14.04.2017
-		</div>
-
-		<div class="biletSuma">Suma: 10 RON
-		</div>
-
-		<div class="biletCastig">Castig: 0 RON
-		</div>
-		
-		<div class="biletCota">Cota: 2.00
-		</div>
-
-	</div>
-
-	<!-- ================================================== -->
-	<div class="biletX">
-		<div class="biletID">ID: 17apr1312009963
-		</div>
-
-		<div class="biletData">13.04.2017
-		</div>
-
-		<div class="biletSuma">Suma: 10 RON
-		</div>
-
-		<div class="biletCastig">Castig: 0 RON
-		</div>
-		
-		<div class="biletCota">Cota: 2.00
-		</div>
-
-	</div>
-	
-	<!-- ================================================== -->
-	<div class="biletO">
-		<div class="biletID">ID: 17apr1212009963
-		</div>
-
-		<div class="biletData">13.04.2017
-		</div>
-
-		<div class="biletSuma">Suma: 10 RON
-		</div>
-
-		<div class="biletCastig">Castig: 73.50 RON
-		</div>
-		
-		<div class="biletCota">Cota: 7.35
-		</div>
-
-	</div>
-
-	<!-- ================================================== -->
-	<div class="biletX">
-		<div class="biletID">ID: 17apr1212009963
-		</div>
-
-		<div class="biletData">12.04.2017
-		</div>
-
-		<div class="biletSuma">Suma: 10 RON
-		</div>
-
-		<div class="biletCastig">Castig: 0 RON
-		</div>
-		
-		<div class="biletCota">Cota: 2.85
-		</div>
-
-	</div>
-
-	<!-- ================================================== -->
-	<div class="biletO">
-		<div class="biletID">ID: 17apr1812009963
-		</div>
-
-		<div class="biletData">10.04.2017
-		</div>
-
-		<div class="biletSuma">Suma: 10 RON
-		</div>
-
-		<div class="biletCastig">Castig: 21.00 RON
-		</div>
-		
-		<div class="biletCota">Cota: 2.10
-		</div>
-
-	</div>
-
-	<!-- ================================================== -->
-	<div class="biletX">
-		<div class="biletID">ID: 17apr0912009963
-		</div>
-
-		<div class="biletData">09.04.2017
-		</div>
-
-		<div class="biletSuma">Suma: 10 RON
-		</div>
-
-		<div class="biletCastig">Castig: 42.50 RON
-		</div>
-		
-		<div class="biletCota">Cota: 4.25
-		</div>
-
-	</div>
 </div>

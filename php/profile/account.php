@@ -1,7 +1,7 @@
 <?php
-	$sql_query = "SELECT email, nume, prenume, balanta, bilete, bileteW, bileteL FROM UTILIZATORI WHERE username = ?";
+	$sql_query = "SELECT email, nume, prenume, balanta, bilete, bileteW, bileteL FROM UTILIZATORI WHERE id = ?";
 	if($stmt =  $conn->prepare($sql_query)) {
-		$stmt->bind_param('s', $_SESSION['username']);
+		$stmt->bind_param('i', $_SESSION['id_user']);
 		$stmt->execute();
 		$stmt->bind_result($email, $nume, $prenume, $balanta, $bilete, $bileteW, $bileteL);
 		$stmt->fetch();
@@ -18,7 +18,8 @@
 		</div>
 
 		<div class="winRate">
-			<?php echo $bileteW/$bileteL . " rata de castig"; ?>
+			<?php if($bileteL != 0) echo $bileteW/$bileteL . " rata de castig";
+					else echo $bileteW . " rata de castig" ?>
 		</div>
 
 		<div class="totalBilete">
