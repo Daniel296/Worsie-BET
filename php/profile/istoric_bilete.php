@@ -2,9 +2,9 @@
 <div id="bilete">
 <?php
 	$bileteT = 0; $bileteW = 0; $bileteL = 0; $bileteU = 0;
-	$sql_query = "SELECT bilete, bileteW, bileteL, bileteU FROM UTILIZATORI WHERE id = 1";
+	$sql_query = "SELECT bilete, bileteW, bileteL, bileteU FROM UTILIZATORI WHERE id = ?";
 	if($stmt =  $conn->prepare($sql_query)) {
-		//$stmt->bind_param('i', $_SESSION['id_user']);
+		$stmt->bind_param('i', $_SESSION['id']);
 		$stmt->execute();
 		$stmt->bind_result($bileteT, $bileteW, $bileteL, $bileteU);
 		$stmt->fetch();

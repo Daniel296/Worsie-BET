@@ -1,7 +1,7 @@
 <?php
 	$sql_query = "SELECT email, nume, prenume, balanta, bilete, bileteW, bileteL FROM UTILIZATORI WHERE id = ?";
 	if($stmt =  $conn->prepare($sql_query)) {
-		$stmt->bind_param('i', $_SESSION['id_user']);
+		$stmt->bind_param('i', $_SESSION['id']);
 		$stmt->execute();
 		$stmt->bind_result($email, $nume, $prenume, $balanta, $bilete, $bileteW, $bileteL);
 		$stmt->fetch();
@@ -9,7 +9,7 @@
 ?>
 <div id="account">
 	<div class="accountName">
-		<?php if(isset($_SESSION['username'])) echo $_SESSION['username']; else echo "AAA";?>
+		<?php echo $_SESSION['username'];?>
 	</div>
 	
 	<div class="info1">
