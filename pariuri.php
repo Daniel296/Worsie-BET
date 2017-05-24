@@ -12,67 +12,6 @@
 		require('pages/header.php');
 	?>
 
-	<div class="fixed-wrapper">
-		<div class="check-ticket">
-			<p>Verificati bilet</p>
-			<form method="POST">
-				<input type="text" name="PIN" placeholder="Introduceti PIN-ul biletului">
-				<button type="submit">Verificati</button>
-			</form>
-		</div>
-
-		<div class="bet-ticket">
-			<p>Plaseaza bilet</p>
-			<div class="race-on-ticket">
-				<div class="race-on-ticket-details">
-					<span class="top-left">Burtonwood</span>
-					<span class="bottom-left">Ludlow 15:30 / 18.04</span>
-				</div>
-				<div class="race-on-ticket-cota">
-					<span class="cota-ticket">4.75</span>
-					<a href="#" class="close-thik"></a>
-				</div>
-			</div>
-			<div class="race-on-ticket">
-				<div class="race-on-ticket-details">
-					<span class="top-left">Pushkin Museum</span>
-					<span class="bottom-left">Ludlow 15:30 / 18.04</span>
-				</div>
-				<div class="race-on-ticket-cota">
-					<span class="cota-ticket">4.33</span>
-					<a href="#" class="close-thik"></a>
-				</div>
-			</div>
-			<div class="race-on-ticket">
-				<div class="race-on-ticket-details">
-					<span class="top-left">Mr Chuckles</span>
-					<span class="bottom-left">Ludlow 15:30 / 18.04</span>
-				</div>
-				<div class="race-on-ticket-cota">
-					<span class="cota-ticket">8.33</span>
-					<a href="#" class="close-thik"></a>
-				</div>
-			</div>
-			<div class="total">
-					<span style="float: left;">Cota totala: </span>
-					<span style="float: right;">18.45</span><br>
-			</div>
-			<div class="total">
-					<span style="float: left;">Castig potential: </span>
-					<span style="float: right;">200 RON</span><br>
-			</div>
-			<div class="ticket-form">
-				<form method="POST">
-					<span>RON:</span>
-					<input type="text" placeholder="TOTAL">
-
-					<button type="submit">Trimiteti</button>
-				</form>
-			</div>
-		</div>
-	</div>
-
-
 <div id="main-pariuri">
 	<div class="show-bets-day">
 		<ul>
@@ -151,9 +90,9 @@
 			$date = $_GET['date'];
 
 			unset($stmt);
-			$current_time = date('h:i:s', time());
+			$current_time = date('Y-m-d h:i:s', time());
 			$stmt =  $conn->stmt_init();
-			$sql_query = "SELECT id, nume, id_cai, id_jochei, vreme, sanse_castig, substr(data, 12,5), cote  FROM curse WHERE nume = ? AND SUBSTR(data, 1, 10) = ? AND SUBSTR(data, 12,8) > ?";
+			$sql_query = "SELECT id, nume, id_cai, id_jochei, vreme, sanse_castig, substr(data, 12,5), cote  FROM curse WHERE nume = ? AND SUBSTR(data, 1, 10) = ? AND data > ? ORDER BY data ASC";
 			if($stmt =  $conn->prepare($sql_query)) {
 				$stmt->bind_param('sss', $race, $date, $current_time);
 				$stmt->execute();
@@ -173,20 +112,6 @@
 					$races[$i]['odds'] = $odds_str;
 					$i++;
 				}
-				// 
-				// /*  */
-				// for($i = 0; $i < count($races); $i++) {
-				// 	echo "    ";
-				// 	echo $races[$i]['id_race'] . " - ";
-				// 	echo $races[$i]['name'] . " - ";
-				// 	echo $races[$i]['id_horses'] . " - ";
-				// 	echo $races[$i]['id_jockeys'] . " - ";
-				// 	echo $races[$i]['weather'] . " - ";
-				// 	echo $races[$i]['win_rate'] . " - ";
-				// 	echo $races[$i]['time'] . " - ";
-				// 	echo $races[$i]['odds'] . " - ";
-				// 	echo "<br><br>";
-				// }
 			}
 			else {
 				echo "error1";
@@ -263,6 +188,8 @@
 			}
 		}
 
+		$info_ticket = array();
+		$ticket_count = 0;
 		/* Afisam informatiile in pagina */
 		for($i = 0; $i < count($races); $i++) {
 			if(isset($races[$i])) {
@@ -326,9 +253,12 @@
 					<span class="bottom"><?php echo "Varsta - " . $horses_details[$i][$j]['varsta'] ?></span>
 				</div>
 				<div class="collumn2">
-					<form method="POST">
-						<button name="cota" value="" type="button"><span class="cota"><?php echo $odds[$i][$j]; ?></span></button>
-					</form>
+					<?php
+
+						echo "<button name=\"cota\" onlick=" .
+							$info_ticket[$ticket_count]['horse'] = $horses_details[$i][$j]['nume']  " type=\"button\"><span class=\"cota\">" . $odds[$i][$j] . "</span></button>";
+
+					?>
 				</div>
 			</div>
 
@@ -338,6 +268,76 @@
 	</div>
 	<?php } ?>
 </div>
+
+<div class="fixed-wrapper">
+	<div class="check-ticket">
+		<p>Verificati bilet</p>
+		<form method="POST">
+			<input type="text" name="PIN" placeholder="Introduceti PIN-ul biletului">
+			<button type="submit">Verificati</button>
+		</form>
+	</div>
+
+	<div class="bet-ticket">
+		<p>Plaseaza bilet</p>
+		<div class="race-on-ticket">
+			<div class="race-on-ticket-details">
+				<span class="top-left">Burtonwood</span>
+				<span class="bottom-left">Ludlow 15:30 / 18.04</span>
+			</div>
+			<div class="race-on-ticket-cota">
+				<span class="cota-ticket">4.75</span>
+				<a href="#" class="close-thik"></a>
+			</div>
+		</div>
+		<div class="race-on-ticket">
+			<div class="race-on-ticket-details">
+				<span class="top-left">Pushkin Museum</span>
+				<span class="bottom-left">Ludlow 15:30 / 18.04</span>
+			</div>
+			<div class="race-on-ticket-cota">
+				<span class="cota-ticket">4.33</span>
+				<a href="#" class="close-thik"></a>
+			</div>
+		</div>
+		<div class="race-on-ticket">
+			<div class="race-on-ticket-details">
+				<span class="top-left">Mr Chuckles</span>
+				<span class="bottom-left">Ludlow 15:30 / 18.04</span>
+			</div>
+			<div class="race-on-ticket-cota">
+				<span class="cota-ticket">8.33</span>
+				<a href="#" class="close-thik"></a>
+			</div>
+		</div>
+		<div class="total">
+				<span style="float: left;">Cota totala: </span>
+				<span style="float: right;">18.45</span><br>
+		</div>
+		<div class="total">
+				<span style="float: left;">Castig potential: </span>
+				<span style="float: right;">200 RON</span><br>
+		</div>
+		<div class="ticket-form">
+			<form method="POST">
+				<span>RON:</span>
+				<input type="text" placeholder="TOTAL">
+
+				<button type="submit">Trimiteti</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
 <?php
 	require('pages/footer.php');
 ?>
