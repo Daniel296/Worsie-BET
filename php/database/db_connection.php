@@ -3,15 +3,15 @@ class DbConnection {
     private static $instance;
     private $dbConn;
 	
-    private static $DB_HOST = "fenrir.info.uaic.ro";
-	private static $DB_USER = "WorsieBET";
-	private static $DB_PASS = "ykoFsp2TCB";
-	private static $DB_DB = "WorsieBET";
+    //private static $DB_HOST = "fenrir.info.uaic.ro";
+	//private static $DB_USER = "WorsieBET";
+	//private static $DB_PASS = "ykoFsp2TCB";
+	//private static $DB_DB = "WorsieBET";
 
-	//private static $DB_HOST = "localhost";
-    // private static $DB_USER = "root";
-    // private static $DB_PASS = "";
-    // private static $DB_DB = "worsiebet";
+	private static $DB_HOST = "localhost";
+    private static $DB_USER = "root";
+    private static $DB_PASS = "";
+    private static $DB_DB = "worsiebet";
 
     private function __construct() {}
 
