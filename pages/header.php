@@ -142,20 +142,20 @@
 		if(isset($_SESSION['id'])) {
 			/* Daca user-ul este logat atunci selectam username-ul si balanta din baza de date */
 			$stmt =  $conn->stmt_init();
-			$sql_query = "SELECT username, balanta FROM UTILIZATORI WHERE id = ?";
+			$sql_query = "SELECT username, email, nume, prenume, adresa, data_nasterii, telefon, oras, judet, balanta FROM UTILIZATORI WHERE id = ?";
 
 			if($stmt =  $conn->prepare($sql_query)) {
 
 				$stmt->bind_param('d', $_SESSION['id']);
 				$stmt->execute();
-				$stmt->bind_result($username, $balanta);
+				$stmt->bind_result($usr_username, $usr_email, $usr_nume, $usr_prenume, $usr_adresa, $usr_data_nasterii, $usr_telefon, $usr_oras, $usr_judet, $usr_balanta);
 				$stmt->fetch();
 			}
 	 ?>
 		 <div class="account-box">
 			 <div class="username-box">
-				 <span class="username"><?php echo $username ?></span>
-				 <span class="balance"><?php echo $balanta . " Ron" ?></span>
+				 <span class="username"><?php echo $usr_username ?></span>
+				 <span class="balance"><?php echo $usr_balanta . " RON" ?></span>
 			 </div>
 			 <div class="link-box">
 				 <a href="profile.php?page=account">Contul meu</a>
@@ -192,7 +192,7 @@
 		<?php
 			/* Aceasta functie afiseaza mesajele de eroare care apar in urma validarii datelor introduse de utilizator*/
 	 		function print_login_error($err) {
-		 		echo "<p> *$err </p>";
+		 		echo "<p style=\"color: red;\"> *$err </p>";
 		 		$ok = true;
 	 		}
 		 ?>
