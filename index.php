@@ -11,7 +11,7 @@
 <?php
 	require('pages/header.php');
 ?>
-
+<div id="wrap">
 <div id="main">
 	<div class="thumbnail" onMouseOut="hide('bet-now')" onMouseOver="show('bet-now')" >
 		<img src="images/betting-img.jpg" id="betting-img" alt="betting">
@@ -23,9 +23,9 @@
 	</div>
 
 </div>
-
+</div>
 <?php
-	require('pages/footer.php');
+	require('pages/footer1.php');
 ?>
 
 <script>
