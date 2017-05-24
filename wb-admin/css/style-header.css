@@ -1,0 +1,189 @@
+#header {
+	width: 101%;
+	padding: 10px 0px 0px;
+	margin: -10px -10px 10px -10px;
+	background-color: rgba(0, 0, 0, 0.7);
+	display: table;
+	min-width: 700px;
+}
+
+#logo {
+	margin: 50px 20px 0;
+	float: left;
+}
+
+.log-buttons {
+	display: block;
+	width: 400px;
+	height: 200px;
+	float: right;
+	margin-right: 20px;
+}
+
+.log-buttons button {
+	width: 40%;
+	height: 35px;
+	margin: 70px auto;
+	color: #FFF;
+	background-color: #910018;
+	border: 0;
+	font: 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+	border-radius: 2px;
+	box-shadow: -1px 3px 5px 5px rgba(0, 0, 0, 0.3);
+}
+
+.log-buttons button:hover {
+	background-color: #670011;
+	cursor: pointer;
+}
+
+
+.account-box {
+	display: table;
+	width: 350px;
+	height: 80px;
+	float: right;
+	margin: 45px 80px 0px;
+	padding: 10px 0 0;
+	border: 3px solid #000;
+	background-color: rgba(36, 36, 36, 0.9);
+	color: #FFF;
+}
+
+.username-box {
+	height: 40%;
+	border-bottom: 3px solid #000;
+}
+
+.username  {
+	margin-left: 20px;
+	float: left;
+	vertical-align: middle;
+}
+
+.balance  {
+	margin-right: 10px;
+	float: right;
+	vertical-align: middle;
+}
+
+.link-box {
+	width: 99%;
+	display: table;
+	margin-top: 5px;
+}
+
+
+.link-box  a{
+	text-decoration: none;
+	float: left;
+	margin: 5px 20px;
+	font-size: 17px;
+	color: #FFF;
+}
+
+.link-box  a:hover{
+	color: #910018;
+}
+
+.link-box img {
+	height: 30px;
+	width: 30px;
+	float: right;
+	margin-right: -80px;
+	margin-top: -4px;
+	cursor: pointer;
+}
+
+
+/*-----Style pentru meniul orizontal------*/
+.links {
+	min-width: 700px;
+}
+
+.links ul {
+	margin-top:200px;
+	margin-bottom: 0px;
+    list-style-type: none;
+	display: block;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.links li {
+    float: left;
+}
+
+.links li a {
+    display: block;
+    color: white;
+    font-family: "Cambria", Times, serif;
+	font-size: 18px;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.links li a:hover:not(.active) {
+    background-color: #111;
+}
+
+.links .active {
+    background-color: #910018;
+}
+
+
+/*-------Style pentru footer.php------*/
+
+#footer {
+	width: 101%;
+	padding: 10px 0px 0px;
+	margin: 10px -10px -10px -10px;
+	background-color: rgba(0, 0, 0, 0.7);
+	display: table;
+}
+
+.bottom-menu {
+	margin: 20px 0px 30px 0px;
+	font-size: 17px;
+	text-align: center;
+}
+
+.bottom-menu a {
+	text-decoration: none;
+	color: #FFF;
+	font-size: 18px;
+}
+
+.bottom-menu a:hover {
+	color: #910018;
+}
+
+.bottom-menu .active {
+	color: #910018;
+	font-weight: bold;
+}
+
+
+.pay-methods {
+	display: table;
+	color: white;
+	margin: auto;
+}
+
+.pay-methods a {
+	float: left;
+	margin: auto 6px;
+
+}
+
+.pay-methods img{
+	height: 25px;
+}
+
+.copyright {
+	color: 	#808080;
+	font-size: 16px;
+	text-align: center;
+	margin: 30px auto 15px;
+}

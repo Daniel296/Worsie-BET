@@ -1,0 +1,33 @@
+body {
+	background-image: url('../images/background.jpg');
+	background-size: cover;
+	background-attachment: fixed;
+	font-family: Century, sans-serif;
+	color: gray;
+	min-width: 100px;
+	max-width: 100%;
+}
+
+
+/* ############################################################## */
+/* ########################### aboutDIV ######################### */
+/* ############################################################## */
+#about {
+	float: left;
+    height: 50%;
+    width: 59%;
+    margin: 10px 20% 20px 17%;
+    padding: 50px;
+    color: #EEE;
+    background-color: rgba(0, 0, 0, 0.6);
+	/*border: 1px solid white;*/
+}
+
+#about p{
+	display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #333;
+    margin: 1em 0;
+    padding: 10px;
+}
