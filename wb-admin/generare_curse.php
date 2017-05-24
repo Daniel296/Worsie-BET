@@ -36,7 +36,6 @@
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					//data_cursei
 					$date1=$_POST["date1"];
-					
 					//numele_cursei
 					$nume_curse=array("Catterick", "Goodwood", "Warwick", "Tipperary", "Chelmsford City", "Sandown","Bath","Musselburgh", "Pontefract", "Haydock");
 					$index_cursa = array_rand($nume_curse, 1);
@@ -62,7 +61,6 @@
 					while ($row = $res->fetch_assoc()) {
 						$cai = $cai.$row['id'].' ';
 					}
-					echo $cai."<br>";
 					
 					//jochei
 					$res = mysqli_query($connection,"SELECT id FROM jochei ORDER BY rand() LIMIT 5");
@@ -73,7 +71,14 @@
 					while ($row = $res->fetch_assoc()) {
 						$jochei = $jochei.$row['id'].' ';
 					}
-					echo $jochei."<br>";
+					
+					$insert = mysqli_query($connection,"INSERT INTO curse (nume, id_cai, id_jochei, vreme, data, sanse_castig, cote) VALUES ('$cursa','$cai','$jochei','$vreme',CAST('". $date1 ."' AS DATE),'0','$cota')");
+					if($insert === FALSE) { 
+						die(mysql_error()); // TODO: better error handling
+					}
+					else {
+						echo "S-a inserat cu succes in baza de date!";
+					}
 			}
 		}
 		?>
