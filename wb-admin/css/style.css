@@ -31,10 +31,16 @@ body {
 
 /* PAGINA PENTRU GENERARE PARIURI */
 
+.printing {
+	text-align: center;
+	color: #ffffff;
+	font-family: Century, sans-serif;
+	font-size: 18px;
+}
+
 .generare {
 	text-align: center;
 	color: #ffffff;
-
 }
 
 .generare input[type="submit"] {

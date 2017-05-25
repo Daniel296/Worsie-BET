@@ -16,13 +16,15 @@
 
 				<div class="generare">
 					<form action="generare_curse.php" method="post">
-					DATĂ INTRODUCERE CURSE: 
+					DATĂ CURSĂ:
 					 <input type="date" name="date1" min=
 						 <?php
 							 echo date('Y-m-d');
 						 ?>
 					 >
-					 
+					 ORĂ CURSĂ:
+					<input type="time" name="time" />
+			
 					<input type="submit" value="Generează!"> 
 					</form>
 				</div>
@@ -36,6 +38,7 @@
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					//data_cursei
 					$date1=$_POST["date1"];
+					$time1=$_POST["time"];
 					//numele_cursei
 					$nume_curse=array("Catterick", "Goodwood", "Warwick", "Tipperary", "Chelmsford City", "Sandown","Bath","Musselburgh", "Pontefract", "Haydock");
 					$index_cursa = array_rand($nume_curse, 1);
@@ -81,12 +84,12 @@
 						$jochei = $jochei.$row['id'].' ';
 					}
 					
-					$insert = mysqli_query($connection,"INSERT INTO curse (nume, id_cai, id_jochei, vreme, data, sanse_castig, cote) VALUES ('$cursa','$cai','$jochei','$insert_vreme',CAST('". $date1 ."' AS DATE),'$sansa','$cota')");
+					$insert = mysqli_query($connection,"INSERT INTO curse (nume, id_cai, id_jochei, vreme, data, ora, sanse_castig, cote) VALUES ('$cursa','$cai','$jochei','$insert_vreme',CAST('". $date1 ."' AS DATE),CAST('". $time1 ."' AS TIME ),'$sansa','$cota')");
 					if($insert === FALSE) { 
 						die(mysql_error()); // TODO: better error handling
 					}
 					else {
-						echo "S-a inserat cu succes in baza de date!";
+						echo "<div class=\"printing\">S-a inserat cu succes in baza de date!</div>";
 					}
 			}
 		}
