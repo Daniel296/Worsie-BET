@@ -272,7 +272,7 @@
 	<?php } ?>
 </div>
 
-<div class="fixed-wrapper">
+<div id="fixed-wrapper">
 	<div class="check-ticket">
 		<p>Verificati bilet</p>
 		<form method="POST">
@@ -361,29 +361,33 @@ function add_race(id_race, id_horse, id_jockey, horse_name, race_name, date, tim
 	}
 
 	/* Afisam cursele pe bilet */
-	display(array, total_odd, total_win);
+	display_races_ticket(array, total_odd, total_win);
 }
 
 function delete_race(id_race, id_horse) {
 	/* Cautam cursa care trebuie stearsa */
 	for(var i = 0; i < array.length; i++) {
 		if(array[i]['id_race'] === id_race && array[i]['id_horse'] === id_horse) {
-			array.splice(i, 1);					// stergem cursa din array
-
 			total_odd /= array[i]['odd'];		// actualizam cota
 			total_win = document.getElementById("total_bet").value;
 			total_win *= total_odd;				// actualizam castigul total
+
+			array.splice(i, 1);					// stergem cursa din array
 
 			document.getElementById("button-" + id_race + "-" + id_horse).style.backgroundColor = "#333333";	// schimbam background-ul butonului
 			break;
 		}
 	}
 
+	/* In urma impartirii daca nu exista nici o cursa in array, cota totala va fi 1.00 asa ca o actualizam la 0 */
+	if(array.length === 0) {
+		total_odd = 0;
+	}
 	/* Actualizam detaliile de pe bilet */
-	display(array, total_odd, total_win);
+	display_races_ticket(array, total_odd, total_win);
 }
 
-function display(array, total_odd, total_win) {
+function display_races_ticket(array, total_odd, total_win) {
 	text = "";
 	for (var i = 0; i < array.length; i++) {
 		text += "<div class=\"race-on-ticket\">" +

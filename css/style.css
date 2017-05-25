@@ -299,7 +299,8 @@ body {
 	border: 0px;
 	padding: 0px;
 }
-.fixed-wrapper {
+#fixed-wrapper {
+	overflow: auto;
 	display: table;
 	float: right;
 	width: 22%;
@@ -308,7 +309,7 @@ body {
 	max-width: 300px;
 }
 
-.fixed-wrapper p {
+#fixed-wrapper p {
 	text-align: center;
 }
 .check-ticket {
@@ -331,7 +332,6 @@ body {
 	padding: 10px;
 	border-top: 1px solid #3D3D3D;
 	border-bottom: 1px solid #3D3D3D;
-
 }
 
 .race-on-ticket-details {
