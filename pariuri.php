@@ -92,11 +92,11 @@
 			unset($stmt);
 			$current_time = date('Y-m-d h:i:s', time());
 			$stmt =  $conn->stmt_init();
-			$sql_query = "SELECT id, nume, id_cai, id_jochei, vreme, sanse_castig, substr(data, 12,5), cote  FROM curse WHERE nume = ? AND SUBSTR(data, 1, 10) = ? AND data > ? ORDER BY data ASC";
+			$sql_query = "SELECT id, nume, id_cai, id_jochei, vreme, sanse_castig, substr(DATE_FORMAT(data,'%d-%m'), 1, 5), substr(data, 12,5), cote  FROM curse WHERE nume = ? AND SUBSTR(data, 1, 10) = ? AND data > ? ORDER BY data ASC";
 			if($stmt =  $conn->prepare($sql_query)) {
 				$stmt->bind_param('sss', $race, $date, $current_time);
 				$stmt->execute();
-				$stmt->bind_result($id_race, $name, $id_horse_str, $id_jockeys_str, $weather, $win_rate_str, $time, $odds_str);
+				$stmt->bind_result($id_race, $name, $id_horse_str, $id_jockeys_str, $weather, $win_rate_str, $date, $time, $odds_str);
 
 				/* Punem toate informatiile din baza de date intr-un array de array-uri asociative */
 				$i = 0;
@@ -108,6 +108,7 @@
 					$races[$i]['id_jockeys'] = $id_jockeys_str;
 					$races[$i]['weather'] = $weather;
 					$races[$i]['win_rate'] = $win_rate_str;
+					$races[$i]['date'] = $date;
 					$races[$i]['time'] = $time;
 					$races[$i]['odds'] = $odds_str;
 					$i++;
@@ -188,6 +189,7 @@
 			}
 		}
 
+		$ticket_info = array();
 		/* Afisam informatiile in pagina */
 		for($i = 0; $i < count($races); $i++) {
 			if(isset($races[$i])) {
@@ -251,7 +253,16 @@
 					<span class="bottom"><?php echo "Varsta - " . $horses_details[$i][$j]['varsta'] ?></span>
 				</div>
 				<div class="collumn2">
-						<button name="cota" onlick="" type="button"><span class="cota"><?php echo $odds[$i][$j]; ?></span></button>
+					<button name="cota1" onclick="myFunction(
+								<?php
+									echo "'". $ids_horses[$i][$j] ."', '" . $ids_jockeys[$i][$j] ."', '" . $horses_details[$i][$j]['nume'] ."', '" .
+									$races[$i]['name'] ."', '" . $races[$i]['date'] ."', '" . $races[$i]['time'] . "', " .  $odds[$i][$j];
+								?>
+							)">
+							<span class="cota" type="button">
+								<?php echo $odds[$i][$j]; ?>
+							</span>
+					</button>
 				</div>
 			</div>
 
@@ -273,63 +284,77 @@
 
 	<div class="bet-ticket">
 		<p>Plaseaza bilet</p>
-		<div class="race-on-ticket">
-			<div class="race-on-ticket-details">
-				<span class="top-left">Burtonwood</span>
-				<span class="bottom-left">Ludlow 15:30 / 18.04</span>
-			</div>
-			<div class="race-on-ticket-cota">
-				<span class="cota-ticket">4.75</span>
-				<a href="#" class="close-thik"></a>
-			</div>
-		</div>
-		<div class="race-on-ticket">
-			<div class="race-on-ticket-details">
-				<span class="top-left">Pushkin Museum</span>
-				<span class="bottom-left">Ludlow 15:30 / 18.04</span>
-			</div>
-			<div class="race-on-ticket-cota">
-				<span class="cota-ticket">4.33</span>
-				<a href="#" class="close-thik"></a>
-			</div>
-		</div>
-		<div class="race-on-ticket">
-			<div class="race-on-ticket-details">
-				<span class="top-left">Mr Chuckles</span>
-				<span class="bottom-left">Ludlow 15:30 / 18.04</span>
-			</div>
-			<div class="race-on-ticket-cota">
-				<span class="cota-ticket">8.33</span>
-				<a href="#" class="close-thik"></a>
-			</div>
+		<div id="races-on-ticket">
+			<!-- Cod javascript -->
 		</div>
 		<div class="total">
 				<span style="float: left;">Cota totala: </span>
-				<span style="float: right;">18.45</span><br>
+				<span id="total_odd" style="float: right;">0</span><br>
 		</div>
 		<div class="total">
 				<span style="float: left;">Castig potential: </span>
-				<span style="float: right;">200 RON</span><br>
+				<span id="total_win" style="float: right;">0 RON</span><br>
 		</div>
 		<div class="ticket-form">
-			<form method="POST">
 				<span>RON:</span>
-				<input type="text" placeholder="TOTAL">
-
+				<input type="number" id="total_bet" onchange="get_total_win()" onfocus="this.placeholder = ''" onblur="this.placeholder = 'RON'">
 				<button type="submit">Trimiteti</button>
-			</form>
 		</div>
 	</div>
 </div>
 
+<script>
+var array = [];
+var total_odd = 1.0;
+var total_win = 0.0;
 
+total_odd.toPrecision(3);
+total_win.toPrecision(3);
 
+function myFunction(id_horse, id_jockey, horse_name, race_name, date, time, odd) {
+	var count = array.length;
+	array[count] = {};
+	array[count] = {'id_horse': id_horse,
+					'id_jockey': id_jockey,
+					'horse_name': horse_name,
+					'race_name': race_name,
+					'date': date,
+					'time': time,
+					'odd': odd.toPrecision(3)
+				};
+	total_odd *= odd;
+	total_win = document.getElementById("total_bet").value;
+	total_win *= total_odd;
+	display(array, total_odd, total_win);
+}
 
+function display(array, total_odd, total_win) {
+	text = "";
+	for (var i = 0; i < array.length; i++) {
+		text += "<div class=\"race-on-ticket\">" +
+					"<div class=\"race-on-ticket-details\">" +
+							"<span class=\"top-left\">" + array[i]['horse_name'] + "</span>" +
+							"<span class=\"bottom-left\">" + array[i]['race_name'] + " " + array[i]['time'] + " / " + array[i]['date'] + "</span>" +
+					"</div>" +
+					"<div class=\"race-on-ticket-cota\">" +
+						"<span class=\"cota-ticket\">" + array[i]['odd'] + "</span>" +
+						"<a href=\"#\" class=\"close-thik\"></a>" +
+					"</div>" +
+				"</div>\n";
+	}
+	document.getElementById("races-on-ticket").innerHTML = text;
+	document.getElementById("total_odd").innerHTML = total_odd.toFixed(2);
+	document.getElementById("total_win").innerHTML = total_win.toFixed(2) + " RON";
 
+}
 
+function get_total_win() {
+	total_win = document.getElementById("total_bet").value;
+	total_win *= total_odd;
+	document.getElementById("total_win").innerHTML = total_win.toFixed(2) + " RON";
+}
 
-
-
+</script>
 
 <?php
 	require('pages/footer.php');

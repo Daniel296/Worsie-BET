@@ -294,7 +294,11 @@ body {
 
 
 /*----------Bilet-------*/
-
+#races-on-ticket {
+	margin: 0px;
+	border: 0px;
+	padding: 0px;
+}
 .fixed-wrapper {
 	display: table;
 	float: right;
@@ -342,10 +346,14 @@ body {
 	color: #CCCCCC;
 }
 
+a .close-thik {
+	text-decoration: none;
+}
+
 .close-thik:after {
 	text-decoration: none;
 	color: #910018;
-	position: absolute;
+	display: inline-table;
 	content: '✖'; /* UTF-8 symbol */
 	margin-left: 10px;
 }
@@ -363,8 +371,8 @@ body {
 
 .ticket-form  input{
 	float: right;
-	width: 50px;
-	padding: 7px;
+	width: 40px;
+	padding: 7px 10px;
 	margin: 0px;
 	border: 0;
 	border-radius: 2.5px;
