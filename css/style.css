@@ -346,16 +346,12 @@ body {
 	color: #CCCCCC;
 }
 
-a .close-thik {
-	text-decoration: none;
-}
-
-.close-thik:after {
-	text-decoration: none;
-	color: #910018;
-	display: inline-table;
-	content: '✖'; /* UTF-8 symbol */
+.close-thik {
+    color: #670011;
+    font-size: 20px;
+    font-weight: bold;
 	margin-left: 10px;
+	cursor: pointer;
 }
 
 .total {
@@ -400,7 +396,7 @@ a .close-thik {
 	display: table;
 	width: 900px;
 	margin: auto;
-	margin-top: 30px;
+	margin-top: 35px;
 	margin-bottom: 30px;
 	background-color: rgba(0, 0, 0, 0.5);
 	min-width: 800px;
