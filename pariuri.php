@@ -255,8 +255,8 @@
 				<div class="collumn2">
 					<?php
 
-						echo "<button name=\"cota\" onlick=" .
-							$info_ticket[$ticket_count]['horse'] = $horses_details[$i][$j]['nume']  " type=\"button\"><span class=\"cota\">" . $odds[$i][$j] . "</span></button>";
+						//echo "<button name=\"cota\" onlick=" .
+							//$info_ticket[$ticket_count]['horse'] = $horses_details[$i][$j]['nume']  " type=\"button\"><span class=\"cota\">" . $odds[$i][$j] . "</span></button>";
 
 					?>
 				</div>
