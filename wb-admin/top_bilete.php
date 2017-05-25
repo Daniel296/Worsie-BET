@@ -37,11 +37,11 @@
 	require('pages/header.php');
 ?>
 
-	<h2>Top bilete pariate</h2>
+<h2>Top bilete pariate</h2>
 
 <?php
 	$connection = mysqli_connect('localhost', 'root', '', 'worsiebet');
-	$res = mysqli_query($connection,"SELECT suma_depusa, suma_castig, cod, cota, data_creare FROM bilete ORDER BY suma_castig DESC");
+	$res = mysqli_query($connection,"SELECT suma_depusa, suma_castig, cod, cota, data_creare FROM bilete ORDER BY suma_castig DESC LIMIT 10");
 	if($res === FALSE) { 
 		die(mysql_error()); // TODO: better error handling
 	}
