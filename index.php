@@ -25,7 +25,7 @@
 </div>
 </div>
 <?php
-	require('pages/footer1.php');
+	require('pages/footer.php');
 ?>
 
 <script>
