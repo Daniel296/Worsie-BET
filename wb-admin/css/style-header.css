@@ -80,14 +80,10 @@
 
 #footer {
 	padding: 10px 0px 0px;
-	margin: 10px -10px -10px -10px;
+	margin: 500px -10px -10px -10px;
 	background-color: rgba(0, 0, 0, 0.7);
 	display: table;
-   	width:100%;
-   	height:60px;   
- 	position:fixed;
- 	bottom:30px;
- 	left:0;
+   	width:101%;
 }
 
 .copyright {
