@@ -28,9 +28,6 @@
 					<input type="submit" value="Generează!"> 
 					</form>
 				</div>
-			<?php
-				require('pages/footer.php');
-			?>
 		</div>
 		
 		<?php
@@ -63,17 +60,29 @@
 					$vreme=$lista_vreme[$index_vreme];
 					$insert_vreme = $grade . chr(176) . 'C - ' . $vreme;
 					
-					//cai
+					//cai si rezultat
 					$connection = mysqli_connect('localhost', 'root', '', 'worsiebet');
 					$res = mysqli_query($connection,"SELECT id FROM cai ORDER BY rand() LIMIT 5");
 					if($res === FALSE) { 
 						die(mysql_error()); // TODO: better error handling
 					}
 					$cai='';
+					$new_array = array();
+					$i=0;
 					while ($row = $res->fetch_assoc()) {
 						$cai = $cai.$row['id'].' ';
+						//$new_array = $row;
+						//array_push($new_array, $row);
+						$new_array[$i]=$row['id'];
+						$i++;
 					}
-
+					shuffle($new_array); 
+					$length = count($new_array);
+					$rezultat = '';
+					for ($i = 0; $i < $length; $i++) {
+					  $rezultat = $rezultat . $new_array[$i] . ' ';
+					}
+					
 					//jochei
 					$res = mysqli_query($connection,"SELECT id FROM jochei ORDER BY rand() LIMIT 5");
 					if($res === FALSE) { 
@@ -89,10 +98,25 @@
 						die(mysql_error()); // TODO: better error handling
 					}
 					else {
+						$res = mysqli_query($connection,"SELECT id FROM curse ORDER BY id DESC LIMIT 1");
+						if($res === FALSE) { 
+							die(mysql_error()); // TODO: better error handling
+						}
+						while ($row = $res->fetch_assoc()) {
+							$cursa_id = $row['id'];
+						}
+						$insertR = mysqli_query($connection,"INSERT INTO rezultate (id_cursa, rezultat) VALUES ('$cursa_id','$rezultat')");
+						if($insertR === FALSE) { 
+							die(mysql_error()); // TODO: better error handling
+						}
 						echo "<div class=\"printing\">S-a inserat cu succes in baza de date!</div>";
 					}
 			}
 		}
 		?>
+		
+	<?php
+				require('pages/footer.php');
+	?>
 	</body>
 </html>

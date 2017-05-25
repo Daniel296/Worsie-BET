@@ -41,14 +41,14 @@
 
 <?php
 	$connection = mysqli_connect('localhost', 'root', '', 'worsiebet');
-	$res = mysqli_query($connection,"SELECT suma_depusa, suma_castig, cod, cota, data_creare FROM bilete ORDER BY suma_castig");
+	$res = mysqli_query($connection,"SELECT suma_depusa, suma_castig, cod, cota, data_creare FROM bilete ORDER BY suma_castig DESC");
 	if($res === FALSE) { 
 		die(mysql_error()); // TODO: better error handling
 	}
 	echo "<table align=\"center\">";
 	echo "<tr>";
-	echo	"<th>Sumă depusă</th>";
 	echo	"<th>Sumă câștig</th>";
+	echo	"<th>Sumă depusă</th>";
 	echo	"<th>Cod bilet</th>";
 	echo	"<th>Cotă totală</th>";
 	echo	"<th>Dată creare</th>";
@@ -56,10 +56,10 @@
 	while ($row = $res->fetch_assoc()) {
 		echo "<tr>";
         echo "<td>";
-		echo $row['suma_depusa'];
+		echo $row['suma_castig'];
 		echo "</td>";
 		echo "<td>";
-		echo $row['suma_castig'];
+		echo $row['suma_depusa'];
 		echo "</td>";
 		echo "<td>";
 		echo $row['cod'];
