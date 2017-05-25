@@ -1,11 +1,11 @@
 <?php
-		$sql_query = "SELECT nume, prenume, adresa, telefon, oras, judet FROM UTILIZATORI WHERE id = ?";
+		/*$sql_query = "SELECT nume, prenume, adresa, telefon, oras, judet FROM UTILIZATORI WHERE id = ?";
 		if($stmt =  $conn->prepare($sql_query)) {
 			$stmt->bind_param('i', $_SESSION['id_user']);
 			$stmt->execute();
 			$stmt->bind_result($email, $nume, $prenume, $adresa, $telefon, $oras, $judet);
 			$stmt->fetch();
-		}
+		}*/
 ?>
 <div id="setari">
 	<form id="cont" method="POST" action="./php/setari_exec.php">
@@ -20,32 +20,32 @@
 			<form action="./php/setari_exec.php" method="POST">
 				<div>
 					<label class="content">Nume:</label>
-					<input class="field" type="text" name="nume" value="<?php echo $nume;?>">
+					<input class="field" type="text" name="nume" value="<?php echo $usr_nume;?>">
 				</div>
 
 				<div>
 					<label class="content">Prenume:</label>
-					<input class="field" type="text" name="prenume" value="<?php echo $prenume;?>">
+					<input class="field" type="text" name="prenume" value="<?php echo $usr_prenume;?>">
 				</div>
 
 				<div>
 					<label class="content">Judet:</label>
-					<input class="field" type="text" name="judet" value="<?php echo $judet;?>">
+					<input class="field" type="text" name="judet" value="<?php echo $usr_judet;?>">
 				</div>
 
 				<div>
 					<label class="content">Oras:</label>
-					<input class="field" type="text" name="oras" value="<?php echo $oras;?>">
+					<input class="field" type="text" name="oras" value="<?php echo $usr_oras;?>">
 				</div>
 
 				<div>
 					<label class="content">Adresa:</label>
-					<input class="field" type="text" name="adresa" value="<?php echo $adresa;?>">
+					<input class="field" type="text" name="adresa" value="<?php echo $usr_adresa;?>">
 				</div>
 
 				<div>
 					<label class="content">Telefon:</label>
-					<input class="field" type="text" name="telefon" value="<?php echo $telefon;?>">
+					<input class="field" type="text" name="telefon" value="<?php echo $usr_telefon;?>">
 				</div>
 
 				<button class="btn">Schimba date</button>

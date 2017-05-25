@@ -1,25 +1,64 @@
 <!--<!DOCTYPE html>-->
 <div id="bilete">
 <?php
-	$bileteT = 0; $bileteW = 0; $bileteL = 0; $bileteU = 0;
-	$sql_query = "SELECT bilete, bileteW, bileteL, bileteU FROM UTILIZATORI WHERE id = ?";
-	if($stmt =  $conn->prepare($sql_query)) {
-		$stmt->bind_param('i', $_SESSION['id']);
-		$stmt->execute();
-		$stmt->bind_result($bileteT, $bileteW, $bileteL, $bileteU);
-		$stmt->fetch();
-	}
-	
 
-	//echo "Total T: " . $bileteT . "<br>Bilete W: " . $bileteW . "<br>Bilete L: " . $bileteL . "<br>Bilete U: " . $bileteU;
+/* Paginare */
+	if(isset($_GET['p']))
+		$page = $_GET['p'];
+	else $page = 1;
+
+	$limit = 10;
+	$pages = ceil($usr_bilete_total / $limit);
+	if($page > $pages) $page = 1;
+	$offset = ($page - 1) * $limit;
+
+	$start = $offset + 1;
+	$end = min(($offset + $limit), $usr_bilete_total);
+
+	//echo $page . " / " . $pages;
+	echo '<div align="center" class="links">';
+		if($pages < 6) {
+			echo '<a href="?page=bilete&p=1"> 1 </a>';
+			for($i = 2; $i <= $pages; $i++)
+				echo '&#9900 <a href="?page=bilete&p=' . ($i) . '"> ' . ($i) . ' </a>';
+		}
+		else {
+			if($page < 6) {
+				echo '<a href="?page=bilete&p=1"> 1 </a>';
+				for($i = 2; $i <= 6; $i++)
+					echo '&#9900 <a href="?page=bilete&p=' . ($i) . '"> ' . ($i) . ' </a>';
+				echo '... &#9900 <a href="?page=bilete&p=' . $pages . '"> ' . $pages . ' </a>';
+			}
+			else if($page > 5 && $page < $pages - 3) {
+				echo "A";
+				echo '<a href="?page=bilete&p=1"> 1 </a>&#9900 ... ';
+				for($i = -2; $i < 3; $i ++)
+					if($pages != $page + $i)
+						echo '&#9900' . '<a href="?page=bilete&p=' . ($page+$i) . '"> ' . ($page+$i) . ' </a>';
+				echo '... &#9900 <a href="?page=bilete&p=' . $pages . '"> ' . $pages . ' </a>';
+			} else if ($page >= $pages - 3) {
+				echo "B";
+				echo '<a href="?page=bilete&p=1"> 1 </a> &#9900 ... ';
+				for($i = $pages-3; $i <= $pages+1; $i ++)
+					echo '&#9900 <a href="?page=bilete&p=' . ($i-1) . '"> ' . ($i-1) . ' </a>';
+			} else {
+				echo "C";
+				echo '<a href="?page=bilete&p=1"> 1 </a>&#9900 ... ';
+				for($i = $page; $i < $pages; $i ++)
+						echo '&#9900' . '<a href="?page=bilete&p=' . ($i) . '"> ' . ($i) . ' </a>';
+			}			 
+		}
+			
+	echo '</div>';
 	unset($stmt);
-	
-	$sql_query = "SELECT status, suma_depusa, suma_castig, cod, pariuri, cota, data_creare FROM bilete WHERE id_user = 1 ORDER BY data_creare DESC";
+	$sql_query = "SELECT id, status, suma_depusa, suma_castig, cod, pariuri, cota, data_creare FROM bilete WHERE id_user = ? ORDER BY data_creare DESC LIMIT ? OFFSET ?";
 	if($stmt =  $conn->prepare($sql_query)) {
+		$stmt->bind_param('iii', $_SESSION['id'], $limit, $offset);
 		$stmt->execute();
-		$stmt->bind_result($status, $suma_depusa, $suma_castig, $cod, $pariuri, $cota, $data_creare);
+		$stmt->bind_result($id, $status, $suma_depusa, $suma_castig, $cod, $pariuri, $cota, $data_creare);
 		while($stmt->fetch()) {
 			if($status == -1) { 
+				
 				echo '
 					<div class="biletL">
 						<div class="biletID">COD: ' . $cod . '
@@ -35,6 +74,10 @@
 						</div>
 
 						<div class="biletCota">Cota: ' . $cota . '
+						</div>
+
+						<div class="detalii_bilet">
+							<input class="" type="button" value="+" onclick="createDialog(' . $id . ')" />
 						</div>
 					</div>
 				';
@@ -55,6 +98,10 @@
 
 						<div class="biletCota">Cota: ' . $cota . '
 						</div>
+
+						<div class="detalii_bilet">
+							<input class="" type="button" value="+" onclick="createDialog(' . $id . ')" />
+						</div>
 					</div>
 				';
 			} else if($status == 1) {
@@ -74,29 +121,37 @@
 
 						<div class="biletCota">Cota: ' . $cota . '
 						</div>
+
+						<div class="detalii_bilet">
+							<input type="button" value="+" onclick="createDialog(' . $id . ')" />
+						</div>
+
+
 					</div>
 				';
 			}
 		}
 	}
 ?>
-	<!-- ================================================== - - >
-	<div class="biletO">
-		<div class="biletID">ID: 17apr1712009963
-		</div>
-
-		<div class="biletData">17.04.2017
-		</div>
-
-		<div class="biletSuma">Suma: 10 RON
-		</div>
-
-		<div class="biletCastig">Castig: 12.40 RON
-		</div>
-		
-		<div class="biletCota">Cota: 1.24
-		</div>
-
-	</div>-->
-
 </div>
+
+<script>
+function createDialog(id) {
+	var html = "<div class='dialog' title='Bilet ID " + id + "'>" + 
+					"<p>flaskbfkalsfvalk</p>" +
+				"</div>";
+    return $(html)
+    .dialog({
+    	resizable: false,
+        height: 500,
+        width: 300,
+        modal: true,
+        dialogClass: 'dialog_style',
+        buttons: {
+            Cancel: function() {
+                $( this ).dialog( "close" );
+            }
+        }
+    });
+}
+</script>

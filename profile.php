@@ -1,5 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <?php
+	require('pages/header.php');
 	if(!isset($_SESSION['id']))
 		header('Location: ./index.php');
 ?>
@@ -9,13 +10,17 @@
 	<link rel="stylesheet" type="text/css" href="css/profile-style.css">
 	<link rel="stylesheet" type="text/css" href="css/style-header.css">
 	<link rel="stylesheet" type="text/css" href="css/popup-style.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+   
+
+    
 </head>
 
 <body>
-	<?php
-		require('pages/header.php');
-	?>
-
 	<div id="leftMenu">
 		<div class="menu">
 			<ul>
@@ -25,8 +30,7 @@
 			</ul>
 		</div>
 		<div class="dateCont">
-			Georgescu Mihai <br>
-			Cont: OD3127836156423154 <br>
+			<?php echo $usr_nume . " " . $usr_prenume; ?> <br>
 			Ultima conectare: 27.04.2017 09:57
 		</div>
 	</div>
