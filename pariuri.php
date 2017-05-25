@@ -301,7 +301,7 @@
 		</div>
 	</div>
 </div>
-<p id="demo"><p>
+
 <script>
 var array = [];
 var total_odd = 1.0;
@@ -365,13 +365,21 @@ function add_race(id_race, id_horse, id_jockey, horse_name, race_name, date, tim
 }
 
 function delete_race(id_race, id_horse) {
+	/* Cautam cursa care trebuie stearsa */
 	for(var i = 0; i < array.length; i++) {
 		if(array[i]['id_race'] === id_race && array[i]['id_horse'] === id_horse) {
-			array.splice(i, 1);
-			document.getElementById("demo").innerHTML = array.length;
-			document.getElementById("button-" + id_race + "-" + id_horse).style.backgroundColor = "#333333";
+			array.splice(i, 1);					// stergem cursa din array
+
+			total_odd /= array[i]['odd'];		// actualizam cota
+			total_win = document.getElementById("total_bet").value;
+			total_win *= total_odd;				// actualizam castigul total
+
+			document.getElementById("button-" + id_race + "-" + id_horse).style.backgroundColor = "#333333";	// schimbam background-ul butonului
+			break;
 		}
 	}
+
+	/* Actualizam detaliile de pe bilet */
 	display(array, total_odd, total_win);
 }
 
@@ -392,7 +400,6 @@ function display(array, total_odd, total_win) {
 	document.getElementById("races-on-ticket").innerHTML = text;
 	document.getElementById("total_odd").innerHTML = total_odd.toFixed(2);
 	document.getElementById("total_win").innerHTML = total_win.toFixed(2) + " RON";
-
 }
 
 function get_total_win() {
