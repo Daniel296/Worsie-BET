@@ -57,7 +57,7 @@ body {
 }
 
 #bet-now-text{
-	margin:auto; 
+	margin:auto;
 	display:table;
 	color: #910018;
 	font-size: 50px;
@@ -65,74 +65,14 @@ body {
 }
 
 
-/*----css pemtru id-urile celei de a doua imagine (Statistici jockei)----*/
-#statistics-img {
-	display: block;
-	float: left;
-	margin-left: 30px;
-	box-shadow: -1px 3px 20px 10px rgba(0, 0, 0, 0.99);
-	border: 1px solid black;
-	border-radius: 10px;
-	position: relative;
-}
-
-#statistics-jockey  {
-	visibility: hidden;
-	display: none;
-	width: 398px;
-	height: 35px;
-	padding: 2px;
-	background-color: rgba(0, 0, 0, 0.8);
-	position: absolute;
-	top: 125px;
-	left: 31px;
-}
-
-#statistics-jockey-text{
-	margin:auto; 
-	display:table;
-	color: #910018;
-	font-size: 30px;
-	font-weight: bold;
-}
-
-/*----css pemtru id-urile celei de a treia imagini (Statistici cai)----*/
-#statistics-img {
-	display: block;
-	margin-left: 32px;
-	box-shadow: -1px 3px 20px 10px rgba(0, 0, 0, 0.99);
-	border: 1px solid black;
-	border-radius: 10px;
-	position: relative;
-}
-
-#statistics-horse  {
-	visibility: hidden;
-	display: none;
-	width: 398px;
-	height: 35px;
-	padding: 2px;
-	background-color: rgba(0, 0, 0, 0.8);
-	position: absolute;
-	top: 125px;
-	left: 465px;
-}
-
-#statistics-horse-text{
-	margin:auto; 
-	display:table;
-	color: #910018;
-	font-size: 30px;
-	font-weight: bold;
-}
-
 
 /*---------Style for Pariuri page-----------*/
 #main-pariuri{
 	display: table;
+	float: left;
 	width: 68%;
 	margin-left: 7%;
-	margin-top: 30px;
+	margin-top: 20px;
 	margin-bottom: 30px;
 	min-width: 900px;
 	max-width: 900px;
@@ -387,7 +327,7 @@ body {
 	padding: 10px;
 	border-top: 1px solid #3D3D3D;
 	border-bottom: 1px solid #3D3D3D;
-	
+
 }
 
 .race-on-ticket-details {
@@ -621,8 +561,3 @@ body {
 	border-radius: 50px;
 	background-color: orange;
 }
-
-
-
-
-
