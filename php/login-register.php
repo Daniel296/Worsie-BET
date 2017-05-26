@@ -10,7 +10,23 @@
         login_user($conn, $username, $password);
     }
 
+ /* PRINT EROOR IN JAVASCRIPT */
+ /* PRINT EROOR IN JAVASCRIPT */
+ /* PRINT EROOR IN JAVASCRIPT */
+ /* PRINT EROOR IN JAVASCRIPT */
+ /* PRINT EROOR IN JAVASCRIPT */
+ /* PRINT EROOR IN JAVASCRIPT */
+ /* PRINT EROOR IN JAVASCRIPT */
+ /* PRINT EROOR IN JAVASCRIPT */
+ /* PRINT EROOR IN JAVASCRIPT */
+ /* PRINT EROOR IN JAVASCRIPT */
+ /* PRINT EROOR IN JAVASCRIPT */
+ /* PRINT EROOR IN JAVASCRIPT
 
+ function error(*msg) {
+    dosument.getElementById("error").inerHTML = msg
+}
+ */
     /*===========LOGIN===========*/
     function login_user($conn, $username, $password) {
         /* Creeam si executam query-ul pentru a vedea daca exista user-ul in baza de date */

@@ -58,7 +58,6 @@
 		$stmt->bind_result($id, $status, $suma_depusa, $suma_castig, $cod, $pariuri, $cota, $data_creare);
 		while($stmt->fetch()) {
 			if($status == -1) { 
-				
 				echo '
 					<div class="biletL">
 						<div class="biletID">COD: ' . $cod . '
@@ -77,7 +76,7 @@
 						</div>
 
 						<div class="detalii_bilet">
-							<input class="" type="button" value="+" onclick="createDialog(' . $id . ')" />
+							<input type="button" value="+" onclick="dialog(' . $id . ' )"/>
 						</div>
 					</div>
 				';
@@ -100,7 +99,7 @@
 						</div>
 
 						<div class="detalii_bilet">
-							<input class="" type="button" value="+" onclick="createDialog(' . $id . ')" />
+							<input type="button" value="+" onclick="dialog(' . $id . ' )"/>
 						</div>
 					</div>
 				';
@@ -123,22 +122,60 @@
 						</div>
 
 						<div class="detalii_bilet">
-							<input type="button" value="+" onclick="createDialog(' . $id . ')" />
+							<input type="button" value="+" onclick="dialog(' . $id . ' )"/>
 						</div>
-
-
 					</div>
 				';
 			}
 		}
 	}
 ?>
+	<div id="informatii_bilet">
+			<!-- Cod javascript -->
+	</div>
 </div>
 
+<?php
+function dialog($id) {
+	$stmt = $conn->stmt_init();
+	$sql_query = "SELECT id_user, status, suma_depusa, suma_castig, cod, pariuri, cota, data_creare FROM bilete WHERE id = ?";
+
+	if($stmt =  $conn->prepare($sql_query)) {
+		$stmt->bind_param('d', $id);
+		$stmt->execute();
+		$stmt->bind_result($id_user, $status, $suma_depusa, $suma_castig, $cod, $pariuri, $cota, $data_creare);
+			$stmt->fetch();
+	}
+	//$bilet_info = array('id_user'=>$id_user, "status"=>$status);
+	$text += 
+		"<div class=\"modal\">" .
+		  			"<span onclick=\"document.getElementById('id03').style.display='none'\" class=\"close\" title=\"Close Modal\">&times;</span> " .
+		"</div>\n";
+	echo $text;
+}
+?>
 <script>
-function createDialog(id) {
+// Get the modal
+var modal = document.getElementById('id03');
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+
+/*function display(id) { //, id_user) {
+	document.getElementById('id03').style.display='block';
+	text = "";
+	document.getElementById("informatii_bilet").innerHTML = text;
+	
+}*/
+
+/*function createDialog(id, bilet_info) {
+	var text = id_user;
+	var h = ""
 	var html = "<div class='dialog' title='Bilet ID " + id + "'>" + 
-					"<p>flaskbfkalsfvalk</p>" +
+					"<p>" + text + "</p>" +
 				"</div>";
     return $(html)
     .dialog({
@@ -153,5 +190,5 @@ function createDialog(id) {
             }
         }
     });
-}
+}*/
 </script>
