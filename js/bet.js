@@ -79,7 +79,7 @@ function delete_race(id_race, id_horse) {
 	display_races_ticket(array, total_odd, total_win);
 }
 
-function create_ticket() {
+function create_ticket(user_balance) {
     var date = new Date();
     if(array.length === 0) {
         document.getElementById("races-on-ticket").innerHTML = '';
@@ -96,37 +96,47 @@ function create_ticket() {
         }
     }
 
-    if(array.length != 0 && array[0]['id_user'] != '' && total_win != 0) {
-        var total_bet = document.getElementById("total_bet").value;     // suma pariata
+    var total_bet = document.getElementById("total_bet").value;     // suma pariata
+	if((user_balance - total_bet) < 0.0) {
+		document.getElementById("log-err").innerHTML  = "<p>Nu aveti suficienti bani</p>";
+	}
+	else {
+	    if(array.length != 0 && array[0]['id_user'] != '' && total_win != 0) {
+	        /* Formam codul biletului <id_user><luna><milisecunde><ora><suma_depusa + suma_castig><ziua><minute><secunde> */
+	        var ticket_code = array[0]['id_user'] + date.getMonth() + date.getMilliseconds() + date.getHours() + (total_bet + total_win) + date.getDay() + date.getMinutes() + date.getSeconds();
 
-        /* Formam codul biletului <id_user><luna><milisecunde><ora><suma_depusa + suma_castig><ziua><minute><secunde> */
-        var ticket_code = array[0]['id_user'] + date.getMonth() + date.getMilliseconds() + date.getHours() + (total_bet + total_win) + date.getDay() + date.getMinutes() + date.getSeconds();
+	        insert_statement = "INSERT INTO bilete(id_user, status, suma_depusa, suma_castig, cod, pariuri, cota) VALUES " +
+	                    "(" + array[0]['id_user'] + ", 0, " + total_bet + ", " + total_win + ", '" + ticket_code + "', '";
+	         for(var i = 0; i < array.length; i++) {
+	            insert_statement += array[i]['id_race'] + "." + array[i]['id_horse'] + "." + array[i]['id_jockey'] + " ";
+	         }
+	         insert_statement.substring(0, insert_statement.length - 1);    //scoatem ultimul spatiu
+	         insert_statement += "', " + total_odd + ")";
 
-        insert_statement = "INSERT INTO bilete(id_user, status, suma_depusa, suma_castig, cod, pariuri, cota) VALUES " +
-                    "(" + array[0]['id_user'] + ", 0, " + total_bet + ", " + total_win + ", '" + ticket_code + "', '";
-         for(var i = 0; i < array.length; i++) {
-            insert_statement += array[i]['id_race'] + "." + array[i]['id_horse'] + "." + array[i]['id_jockey'] + " ";
-         }
-         insert_statement.substring(0, insert_statement.length - 1);    //scoatem ultimul spatiu
-         insert_statement += "', " + total_odd + ")";
+	         /* Cream un formular */
+	         var form = document.createElement("form");
+	         form.setAttribute("method", "POST");
 
-         /* Cream un formular */
-         var form = document.createElement("form");
-         form.setAttribute("method", "POST");
+	         /* Cream un input pentru formular */
+	         var input_query = document.createElement("input");
+	         input_query.setAttribute("type", "text");
+	         input_query.setAttribute("name", "insert_ticket");
+	         input_query.setAttribute("value", insert_statement);
 
-         /* Cream un input pentru formular */
-         var input = document.createElement("input");
-         input.setAttribute("type", "input");
-         input.setAttribute("name", "insert_ticket");
-         input.setAttribute("value", insert_statement);
+			 var input_bet = document.createElement("input");
+			 input_bet.setAttribute("type", "number");
+			 input_bet.setAttribute("name", "bet-count");
+			 input_bet.setAttribute("value", total_bet);
 
-         /* Adaugam input-ul la formular si formularul la pagina HTML */
-         form.appendChild(input);
-         document.body.appendChild(form);
+	         /* Adaugam input-ul la formular si formularul la pagina HTML */
+	         form.appendChild(input_query);
+			 form.appendChild(input_bet);
+	         document.body.appendChild(form);
 
-         /* Facem submit la formular */
-         form.submit();
-    }
+	         /* Facem submit la formular */
+	         form.submit();
+	    }
+	}
 
 }
 

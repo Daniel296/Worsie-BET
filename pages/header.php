@@ -72,12 +72,12 @@
 		<div class="container">
 			<div class="form-login">
 				<label><b>Username</b></label>
-				<input type="text" placeholder="Enter Username" name="username_login" required>
+				<input type="text" placeholder="Enter Username" name="username_login" required />
 			</div>
 
 			<div  class="form-login">
 				<label><b>Parola</b></label>
-				<input type="password" placeholder="Enter Password" name="password" required>
+				<input type="password" placeholder="Enter Password" name="password" required />
 			</div>
 
 			<button type="submit">Login</button>

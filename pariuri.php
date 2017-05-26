@@ -314,14 +314,17 @@
 		<div class="ticket-form">
 				<span>RON:</span>
 				<input type="number" id="total_bet" onchange="get_total_win()" onfocus="this.placeholder = ''" onblur="this.placeholder = 'RON'">
-				<button type="button" onclick="create_ticket()">Trimiteti</button>
+				<button type="button" onclick="create_ticket(<?php echo $usr_balanta ?>)">Trimiteti</button>
 		</div>
 	</div>
 </div>
 
 <?php
 	/* Inseram biletul in baza de date */
-	if(isset($_POST['insert_ticket'])) {
+	if(isset($_POST['insert_ticket']) and isset($_POST['bet-count'])) {
+		echo isset($_POST['insert_ticket']) . "<br>";
+		echo "bet: " . isset($_POST['bet-count']);
+		
 		unset($stmt);
 		$stmt =  $conn->stmt_init();
 		$sql_query = $_POST['insert_ticket'];
@@ -329,12 +332,17 @@
 			$stmt->execute();
 
 		$id_user = $_SESSION['id'];
+		$bet_count = $_POST['bet-count'];
+
 		unset($stmt);
 		$stmt =  $conn->stmt_init();
-		$sql_query = "UPDATE utilizatori SET bilete_asteptare = bilete_asteptare + 1 WHERE id = ?";
+		$sql_query = "UPDATE utilizatori SET bilete_asteptare = bilete_asteptare + 1, balanta = balanta - ? WHERE id = ?";
 		if($stmt =  $conn->prepare($sql_query)) {
-			$stmt->bind_param('s', $id_user);
+			$stmt->bind_param('ds', $bet_count, $id_user);
 			$stmt->execute();
+		}
+		else {
+			echo "doasjdoaisjdoiasjd";
 		}
 	}
  ?>
