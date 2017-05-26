@@ -12,20 +12,19 @@
 	require('pages/header.php');
 ?>
 <div id="wrap">
-<div id="main">
-	<div class="thumbnail" onMouseOut="hide('bet-now')" onMouseOver="show('bet-now')" >
-		<img src="images/betting-img.jpg" id="betting-img" alt="betting">
-		<a href="pariuri.php?date=<?php echo date("Y-m-d", time());?>">
-			<div id="bet-now">
-				<span id="bet-now-text">PARIAZA ACUM</span>
-			</div>
-		</a>
+	<div id="main">
+		<div class="thumbnail" onMouseOut="hide('bet-now')" onMouseOver="show('bet-now')" >
+			<img src="images/betting-img.jpg" id="betting-img" alt="betting">
+			<a href="pariuri.php?date=<?php echo date("Y-m-d", time());?>">
+				<div id="bet-now">
+					<span id="bet-now-text">PARIAZA ACUM</span>
+				</div>
+			</a>
+		</div>
 	</div>
-
-</div>
 </div>
 <?php
-	require('pages/footer1.php');
+	require('pages/footer.php');
 ?>
 
 <script>

@@ -1,4 +1,3 @@
-
 <div id="footer">
 	<div class="bottom-menu">
 		<a href="index.php" class="active">Acasa</a> |
