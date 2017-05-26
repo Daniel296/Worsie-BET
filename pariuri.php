@@ -5,7 +5,7 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/style-header.css">
 	<link rel="stylesheet" type="text/css" href="css/popup-style.css">
-	<script src="js/bet.js"></script>
+
 </head>
 <body>
 
@@ -265,7 +265,7 @@
 										$races[$i]['name'] ."', '" . $races[$i]['date'] ."', '" . $races[$i]['time'] . "', " .  $odds[$i][$j];
 									}
 									else {
-										echo "'" ."', '" . $races[$i]['id_race'] ."', '" . $ids_horses[$i][$j] ."', '" . $ids_jockeys[$i][$j] ."', '" . $horses_details[$i][$j]['nume'] ."', '" .
+										echo "'', '" . $races[$i]['id_race'] ."', '" . $ids_horses[$i][$j] ."', '" . $ids_jockeys[$i][$j] ."', '" . $horses_details[$i][$j]['nume'] ."', '" .
 										$races[$i]['name'] ."', '" . $races[$i]['date'] ."', '" . $races[$i]['time'] . "', " .  $odds[$i][$j];
 									}
 								?>
@@ -342,5 +342,6 @@
 <?php
 	require('pages/footer.php');
 ?>
+<script src="js/bet.js"></script>
 </body>
 </html>

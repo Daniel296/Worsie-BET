@@ -1,10 +1,3 @@
-var array = [];
-var total_odd = 1.0;
-var total_win = 0.0;
-
-total_odd.toPrecision(3);
-total_win.toPrecision(3);
-
 function add_race(id_user, id_race, id_horse, id_jockey, horse_name, race_name, date, time, odd) {
 	var count = array.length;
 
@@ -76,8 +69,8 @@ function delete_race(id_race, id_horse) {
 			total_win *= total_odd;				// actualizam castigul total
 
 			array.splice(i, 1);					// stergem cursa din array
-
-			document.getElementById("button-" + id_race + "-" + id_horse).style.backgroundColor = "#333333";	// schimbam background-ul butonului
+            if(document.getElementById("button-" + id_race + "-" + id_horse) != null)
+			         document.getElementById("button-" + id_race + "-" + id_horse).style.backgroundColor = "#333333";	// schimbam background-ul butonului
 			break;
 		}
 	}
@@ -156,9 +149,18 @@ function display_races_ticket(array, total_odd, total_win) {
 					"</div>" +
 				"</div>";
 	}
+
 	document.getElementById("races-on-ticket").innerHTML = text;
 	document.getElementById("total_odd").innerHTML = total_odd.toFixed(2);
 	document.getElementById("total_win").innerHTML = total_win.toFixed(2) + " RON";
+}
+
+function get_total_odd(array) {
+    var total_odd = 1.0;
+    for(var i = 0; i < array.length; i++) {
+        total_odd *= array[i]['odd'];
+    }
+    return total_odd;
 }
 
 function get_total_win() {
@@ -166,3 +168,39 @@ function get_total_win() {
 	total_win *= total_odd;
 	document.getElementById("total_win").innerHTML = total_win.toFixed(2) + " RON";
 }
+
+window.onbeforeunload = function() {
+    myJSON = JSON.stringify(array);
+    sessionStorage.setItem("array", myJSON);
+    sessionStorage.setItem("bet", document.getElementById("total_bet").value);
+}
+
+
+/* Citim array-ul din session storage */
+if (sessionStorage.getItem("array") != null){
+    myJSON = sessionStorage.getItem("array");
+    array = JSON.parse(myJSON);
+
+    var total_win = sessionStorage.getItem("bet");
+    document.getElementById("total_bet").value = total_win;
+}
+else {
+    var array = [];
+    var total_win = document.getElementById("total_bet").value;
+
+    myJSON = JSON.stringify(array);
+    sessionStorage.setItem("array", myJSON);
+    sessionStorage.setItem("bet", 0.0)
+}
+
+var total_odd = get_total_odd(array);
+total_win *= total_odd;
+
+/* Afisam cursele pe bilet (daca sunt) */
+if(array.length != 0) {
+     display_races_ticket(array, total_odd, total_win);
+}
+
+/* Setam precizia variabilelor */
+total_odd.toPrecision(3);
+total_win.toPrecision(3);
