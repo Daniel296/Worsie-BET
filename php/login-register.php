@@ -3,28 +3,27 @@
     /*Daca sunt setate datele necesare pentru logare*/
     if (isset($_POST['username_login']) and isset($_POST['password'])) {
         /* Scoatem caracterele speciale din username si parola pentru evitarea sql injection*/
-        $username = mysql_real_escape_string($_POST['username_login']);
-        $password = mysql_real_escape_string($_POST['password']);
+        $username = trim($_POST['username_login']);
+        $password = trim($_POST['password']);
 
         /* Apelam functia care face logarea */
         login_user($conn, $username, $password);
     }
-
 
     /*===========LOGIN===========*/
     function login_user($conn, $username, $password) {
         /* Creeam si executam query-ul pentru a vedea daca exista user-ul in baza de date */
         unset($stmt);
         $stmt =  $conn->stmt_init();
-        $sql_query = "SELECT id, trim(parola), conectat FROM UTILIZATORI WHERE username = ? AND parola = ?";
+        $sql_query = "SELECT id, trim(parola) FROM UTILIZATORI WHERE username = ? AND parola = ?";
         if($stmt =  $conn->prepare($sql_query)) {
         $stmt->bind_param('ss', $username, $password);
         $stmt->execute();
-        $stmt->bind_result($id_user, $hash_password, $conectat);
+        $stmt->bind_result($id_user, $hash_password);
         $stmt->fetch();
 
         //password_verify($password, $hash_password) == TRUE
-        if(isset($id_user) and $conectat == 0 ) {
+        if(isset($id_user)) {
             /* Pornim sesiunea si setam parametrii la sesiune */
             $_SESSION['id'] = $id_user;
             $_SESSION['username'] = $username;
@@ -36,31 +35,26 @@
             if($stmt =  $conn->prepare($sql_query)) {
                 $stmt->bind_param('d', $id_user);
                 $stmt->execute();
-                if($conn->affected_rows == 0)
-                    print_login_error("Update error");
             }
         }
         else {
-            if($conectat == 1)
-                print_login_error("Sunteti deja conectat cu acest username!");
-            else
                 print_login_error("Username sau parola gresite");
             }
         }
     }
 
 
-        /*=============REGISTER===========*/
+    /*=============REGISTER===========*/
     if (isset($_POST['bday']) and isset($_POST['username']) and isset($_POST['lastname']) and isset($_POST['firstname']) and isset($_POST['email']) and isset($_POST['password']) and isset($_POST['re_password'])) {
         $ok = false;
 
         /* Scoatem caracterele speciale din username si parola pentru evitarea sql injection*/
-        $username = mysql_real_escape_string($_POST['username']);
-        $lastname = mysql_real_escape_string($_POST['lastname']);
-        $firstname = mysql_real_escape_string($_POST['firstname']);
-        $email = mysql_real_escape_string($_POST['email']);
-        $password = mysql_real_escape_string($_POST['password']);
-        $re_password = mysql_real_escape_string($_POST['re_password']);
+        $username = trim($_POST['username']);
+        $lastname = trim($_POST['lastname']);
+        $firstname = trim($_POST['firstname']);
+        $email = trim($_POST['email']);
+        $password = trim($_POST['password']);
+        $re_password = trim($_POST['re_password']);
         $birth_date = date("Y-m-d", strtotime($_POST['bday']));
 
         /* Validam datele introduse de utilizator si afisam mesajele de eroare corespunzatoare */

@@ -5,6 +5,7 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/style-header.css">
 	<link rel="stylesheet" type="text/css" href="css/popup-style.css">
+
 </head>
 <body>
 
@@ -40,13 +41,14 @@
 
 	<div class="bets">
 		<?php
+			$current_time = date('H:i:s');
 			/* Afisam numele curselor si orele la care au loc */
 			if(isset($_GET['date'])) {
 				$date = $_GET['date'];
 				$names_array = [];
 				/* Luam numele de la toate cursele */
 				$stmt =  $conn->stmt_init();
-				$sql_query = "SELECT DISTINCT nume FROM curse WHERE SUBSTR(data, 1, 10) = '$date'";
+				$sql_query = "SELECT DISTINCT nume FROM curse WHERE data = '$date' AND ora > '$current_time'";
 				if($stmt =  $conn->prepare($sql_query)) {
 					$stmt->execute();
 					$stmt->bind_result($name);
@@ -65,7 +67,7 @@
 					echo "<div class=\"bet\">
 							<a href=\"Pariuri.php?date=$date&race=$names_array[$i]\">$names_array[$i]</a>";
 					$stmt =  $conn->stmt_init();
-					$sql_query = "SELECT DISTINCT SUBSTR(data, 12, 5) as ora FROM curse WHERE SUBSTR(data, 1, 10) = '$date' and nume = '$names_array[$i]' ORDER BY ora";
+					$sql_query = "SELECT DISTINCT substr(ora, 1, 5) as ora FROM curse WHERE data = '$date' AND ora > '$current_time' AND nume = '$names_array[$i]' ORDER BY ora";
 					if($stmt =  $conn->prepare($sql_query)) {
 						$stmt->execute();
 						$stmt->bind_result($time);
@@ -90,9 +92,10 @@
 			$date = $_GET['date'];
 
 			unset($stmt);
-			$current_time = date('Y-m-d h:i:s', time());
+			$current_time = date('H:i:s');
+
 			$stmt =  $conn->stmt_init();
-			$sql_query = "SELECT id, nume, id_cai, id_jochei, vreme, sanse_castig, substr(DATE_FORMAT(data,'%d-%m'), 1, 5), substr(data, 12,5), cote  FROM curse WHERE nume = ? AND SUBSTR(data, 1, 10) = ? AND data > ? ORDER BY data ASC";
+			$sql_query = "SELECT id, nume, id_cai, id_jochei, vreme, sanse_castig, substr(DATE_FORMAT(data,'%d-%m'), 1, 5), substr(ora, 1,5), cote  FROM curse WHERE nume = ? AND data = ? AND ora > ? ORDER BY data ASC";
 			if($stmt =  $conn->prepare($sql_query)) {
 				$stmt->bind_param('sss', $race, $date, $current_time);
 				$stmt->execute();
@@ -131,18 +134,20 @@
 			$win_rates[$i] = array();
 			$odds[$i] = array();
 
-			$ids_horses[$i] = explode(' ', $races[$i]['id_horses']);
-			$ids_jockeys[$i] = explode(' ', $races[$i]['id_jockeys']);
-			$win_rates[$i] = explode(' ', $races[$i]['win_rate']);
-			$odds[$i] = explode(' ', $races[$i]['odds']);
+			$ids_horses[$i] = split(' ', $races[$i]['id_horses']);
+			$ids_jockeys[$i] = split(' ', $races[$i]['id_jockeys']);
+			$win_rates[$i] = split(' ', $races[$i]['win_rate']);
+			$odds[$i] = split(' ', $races[$i]['odds']);
 		}
 
 		/* Luam din baza de date toate detaliile despre cai */
+
 		$horses_details = array();
 		$jockeys_details = array();
 		for($i = 0; $i < count($races); $i++) {
 			$horses_details[$i] = array();
 			$jockeys_details[$i] = array();
+
 			/* Formam interogarea pentru a obtine detaliile pentru toti caii */
 			$sql_query = "SELECT nume, varsta, greutate FROM cai WHERE ";
 			for($j = 0; $j < count($ids_horses[$i]); $j++) {
@@ -168,6 +173,7 @@
 
 			/* Formam interogarea pentru a obtine detaliile pentru toti jocheii */
 			$sql_query = "SELECT nume, vesta, antrenor FROM jochei WHERE ";
+
 			for($j = 0; $j < count($ids_jockeys[$i]); $j++) {
 				$sql_query .= " id = " . $ids_jockeys[$i][$j] . " or ";
 			}
@@ -189,7 +195,6 @@
 			}
 		}
 
-		$ticket_info = array();
 		/* Afisam informatiile in pagina */
 		for($i = 0; $i < count($races); $i++) {
 			if(isset($races[$i])) {
@@ -255,8 +260,14 @@
 				<div class="collumn2">
 					<button  id="<?php echo "button-" . $races[$i]['id_race']. "-" . $ids_horses[$i][$j]; ?>" onclick="add_race(
 								<?php
-									echo "'". $races[$i]['id_race'] ."', '" . $ids_horses[$i][$j] ."', '" . $ids_jockeys[$i][$j] ."', '" . $horses_details[$i][$j]['nume'] ."', '" .
-									$races[$i]['name'] ."', '" . $races[$i]['date'] ."', '" . $races[$i]['time'] . "', " .  $odds[$i][$j];
+									if(isset($_SESSION['id'])) {
+										echo "'". $_SESSION['id'] ."', '" . $races[$i]['id_race'] ."', '" . $ids_horses[$i][$j] ."', '" . $ids_jockeys[$i][$j] ."', '" . $horses_details[$i][$j]['nume'] ."', '" .
+										$races[$i]['name'] ."', '" . $races[$i]['date'] ."', '" . $races[$i]['time'] . "', " .  $odds[$i][$j];
+									}
+									else {
+										echo "'', '" . $races[$i]['id_race'] ."', '" . $ids_horses[$i][$j] ."', '" . $ids_jockeys[$i][$j] ."', '" . $horses_details[$i][$j]['nume'] ."', '" .
+										$races[$i]['name'] ."', '" . $races[$i]['date'] ."', '" . $races[$i]['time'] . "', " .  $odds[$i][$j];
+									}
 								?>
 							)">
 							<span class="cota" type="button">
@@ -285,10 +296,16 @@
 		<p>Plaseaza bilet</p>
 		<div id="races-on-ticket">
 			<!-- Cod javascript -->
+			<div>
+				<p>Nu ati selectat nici o cursa</p>
+			</div>
+		</div>
+		<div id="log-err">
+			<!--Cod javascript-->
 		</div>
 		<div class="total">
 				<span style="float: left;">Cota totala: </span>
-				<span id="total_odd" style="float: right;">0</span><br>
+				<span id="total_odd" style="float: right;">1.00</span><br>
 		</div>
 		<div class="total">
 				<span style="float: left;">Castig potential: </span>
@@ -297,125 +314,34 @@
 		<div class="ticket-form">
 				<span>RON:</span>
 				<input type="number" id="total_bet" onchange="get_total_win()" onfocus="this.placeholder = ''" onblur="this.placeholder = 'RON'">
-				<button type="submit">Trimiteti</button>
+				<button type="button" onclick="create_ticket()">Trimiteti</button>
 		</div>
 	</div>
 </div>
 
-<script>
-var array = [];
-var total_odd = 1.0;
-var total_win = 0.0;
+<?php
+	/* Inseram biletul in baza de date */
+	if(isset($_POST['insert_ticket'])) {
+		unset($stmt);
+		$stmt =  $conn->stmt_init();
+		$sql_query = $_POST['insert_ticket'];
+		if($stmt =  $conn->prepare($sql_query))
+			$stmt->execute();
 
-total_odd.toPrecision(3);
-total_win.toPrecision(3);
-
-function add_race(id_race, id_horse, id_jockey, horse_name, race_name, date, time, odd) {
-	var count = array.length;
-
-	/* Verificam daca s-a pus deja */
-	for(var i = 0; i < count; i++) {
-		/* Daca a pus deja pariu pe aceasta cursa atunci inlocuim informatiile anterioare cu informatiile curente */
-		if(array[i]['id_race'] === id_race) {
-			total_odd /= array[i]['odd'];
-
-			/* Setam background diferentiat daca calul nu se afla pe bilet */
-			if(array[i]['id_horse'] != id_horse)
-				document.getElementById("button-" + array[i]['id_race'] + "-" + array[i]['id_horse']).style.backgroundColor = "#333333";
-			document.getElementById("button-" + id_race + "-" + id_horse).style.backgroundColor = "#670011";
-
-			array[i] = {'id_race': id_race,
-						'id_horse': id_horse,
-						'id_jockey': id_jockey,
-						'horse_name': horse_name,
-						'race_name': race_name,
-						'date': date,
-						'time': time,
-						'odd': odd.toPrecision(3)
-						};
-			total_odd *= odd;
-			total_win = document.getElementById("total_bet").value;
-			total_win *= total_odd;
-			break;
+		$id_user = $_SESSION['id'];
+		unset($stmt);
+		$stmt =  $conn->stmt_init();
+		$sql_query = "UPDATE utilizatori SET bilete_asteptare = bilete_asteptare + 1 WHERE id = ?";
+		if($stmt =  $conn->prepare($sql_query)) {
+			$stmt->bind_param('s', $id_user);
+			$stmt->execute();
 		}
 	}
-
-	/* Daca nu s-a mai pus pariu pe cursa curenta atunci adaugam in array informatiile */
-	if(i == count) {
-		array[count] = {};
-		array[count] = {'id_race': id_race,
-						'id_horse': id_horse,
-						'id_jockey': id_jockey,
-						'horse_name': horse_name,
-						'race_name': race_name,
-						'date': date,
-						'time': time,
-						'odd': odd.toPrecision(3)
-					};
-		total_odd *= odd;
-		total_win = document.getElementById("total_bet").value;
-		total_win *= total_odd;
-
-		/* Setam background diferentiat daca calul nu se afla pe bilet */
-		document.getElementById("button-" + id_race + "-" + id_horse).style.backgroundColor = "#670011";
-	}
-
-	/* Afisam cursele pe bilet */
-	display_races_ticket(array, total_odd, total_win);
-}
-
-function delete_race(id_race, id_horse) {
-	/* Cautam cursa care trebuie stearsa */
-	for(var i = 0; i < array.length; i++) {
-		if(array[i]['id_race'] === id_race && array[i]['id_horse'] === id_horse) {
-			total_odd /= array[i]['odd'];		// actualizam cota
-			total_win = document.getElementById("total_bet").value;
-			total_win *= total_odd;				// actualizam castigul total
-
-			array.splice(i, 1);					// stergem cursa din array
-
-			document.getElementById("button-" + id_race + "-" + id_horse).style.backgroundColor = "#333333";	// schimbam background-ul butonului
-			break;
-		}
-	}
-
-	/* In urma impartirii daca nu exista nici o cursa in array, cota totala va fi 1.00 asa ca o actualizam la 0 */
-	if(array.length === 0) {
-		total_odd = 0;
-	}
-	/* Actualizam detaliile de pe bilet */
-	display_races_ticket(array, total_odd, total_win);
-}
-
-function display_races_ticket(array, total_odd, total_win) {
-	text = "";
-	for (var i = 0; i < array.length; i++) {
-		text += "<div class=\"race-on-ticket\">" +
-					"<div class=\"race-on-ticket-details\">" +
-							"<span class=\"top-left\">" + array[i]['horse_name'] + "</span>" +
-							"<span class=\"bottom-left\">" + array[i]['race_name'] + " " + array[i]['time'] + " / " + array[i]['date'] + "</span>" +
-					"</div>" +
-					"<div class=\"race-on-ticket-cota\">" +
-						"<span class=\"cota-ticket\">" + array[i]['odd'] + "</span>" +
-						"<span onclick=\"delete_race('" + array[i]['id_race'] + "', '" + array[i]['id_horse'] + "')\" class=\"close-thik\" title=\"Close Modal\">&times;</span>" +
-					"</div>" +
-				"</div>";
-	}
-	document.getElementById("races-on-ticket").innerHTML = text;
-	document.getElementById("total_odd").innerHTML = total_odd.toFixed(2);
-	document.getElementById("total_win").innerHTML = total_win.toFixed(2) + " RON";
-}
-
-function get_total_win() {
-	total_win = document.getElementById("total_bet").value;
-	total_win *= total_odd;
-	document.getElementById("total_win").innerHTML = total_win.toFixed(2) + " RON";
-}
-
-</script>
+ ?>
 
 <?php
 	require('pages/footer.php');
 ?>
+<script src="js/bet.js"></script>
 </body>
 </html>

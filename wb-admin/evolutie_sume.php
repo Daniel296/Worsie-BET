@@ -11,7 +11,9 @@
 	require('pages/header.php');
 ?>
 
+<?php
 
+?> 
 
 <?php
 	require('pages/footer.php');

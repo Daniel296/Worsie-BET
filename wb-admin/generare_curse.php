@@ -60,28 +60,23 @@
 					$vreme=$lista_vreme[$index_vreme];
 					$insert_vreme = $grade . chr(176) . 'C - ' . $vreme;
 					
-					//cai si rezultat
+					//cai
 					$connection = mysqli_connect('localhost', 'root', '', 'worsiebet');
 					$res = mysqli_query($connection,"SELECT id FROM cai ORDER BY rand() LIMIT 5");
 					if($res === FALSE) { 
 						die(mysql_error()); // TODO: better error handling
 					}
 					$cai='';
-					$new_array = array();
+					$new_cai = array();
 					$i=0;
 					while ($row = $res->fetch_assoc()) {
-						$cai = $cai.$row['id'].' ';
-						//$new_array = $row;
-						//array_push($new_array, $row);
-						$new_array[$i]=$row['id'];
+						$cai = $cai.$row['id'] . ' ';
+						$new_cai[$i]=$row['id'];
 						$i++;
 					}
-					shuffle($new_array); 
-					$length = count($new_array);
-					$rezultat = '';
-					for ($i = 0; $i < $length; $i++) {
-					  $rezultat = $rezultat . $new_array[$i] . ' ';
-					}
+					$cai=rtrim($cai);
+					shuffle($new_cai); 
+					$length = count($new_cai);
 					
 					//jochei
 					$res = mysqli_query($connection,"SELECT id FROM jochei ORDER BY rand() LIMIT 5");
@@ -89,10 +84,28 @@
 						die(mysql_error()); // TODO: better error handling
 					}
 					$jochei='';
+					$new_jochei = array();
+					$i=0;
 					while ($row = $res->fetch_assoc()) {
-						$jochei = $jochei.$row['id'].' ';
+						$jochei = $jochei.$row['id'] . ' ';
+						$new_jochei[$i]=$row['id'];
+						$i++;
+					}
+					$jochei=rtrim($jochei);
+					shuffle($new_jochei);
+					
+					//rezultat
+					$rezultat = '';
+					for ($i = 0; $i < $length; $i++) {
+						if($res === $length) {
+							$rezultat = $rezultat . $new_cai[$i] . '.' . $new_jochei[$i];
+						}
+						else {
+							$rezultat = $rezultat . $new_cai[$i] . '.' . $new_jochei[$i] . ' ';
+						}
 					}
 					
+					//insert...
 					$insert = mysqli_query($connection,"INSERT INTO curse (nume, id_cai, id_jochei, vreme, data, ora, sanse_castig, cote) VALUES ('$cursa','$cai','$jochei','$insert_vreme',CAST('". $date1 ."' AS DATE),CAST('". $time1 ."' AS TIME ),'$sansa','$cota')");
 					if($insert === FALSE) { 
 						die(mysql_error()); // TODO: better error handling
