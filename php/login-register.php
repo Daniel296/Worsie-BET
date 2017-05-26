@@ -3,30 +3,13 @@
     /*Daca sunt setate datele necesare pentru logare*/
     if (isset($_POST['username_login']) and isset($_POST['password'])) {
         /* Scoatem caracterele speciale din username si parola pentru evitarea sql injection*/
-        $username = mysql_real_escape_string($_POST['username_login']);
-        $password = mysql_real_escape_string($_POST['password']);
+        $username = trim($_POST['username_login']);
+        $password = trim($_POST['password']);
 
         /* Apelam functia care face logarea */
         login_user($conn, $username, $password);
     }
 
- /* PRINT EROOR IN JAVASCRIPT */
- /* PRINT EROOR IN JAVASCRIPT */
- /* PRINT EROOR IN JAVASCRIPT */
- /* PRINT EROOR IN JAVASCRIPT */
- /* PRINT EROOR IN JAVASCRIPT */
- /* PRINT EROOR IN JAVASCRIPT */
- /* PRINT EROOR IN JAVASCRIPT */
- /* PRINT EROOR IN JAVASCRIPT */
- /* PRINT EROOR IN JAVASCRIPT */
- /* PRINT EROOR IN JAVASCRIPT */
- /* PRINT EROOR IN JAVASCRIPT */
- /* PRINT EROOR IN JAVASCRIPT
-
- function error(*msg) {
-    dosument.getElementById("error").inerHTML = msg
-}
- */
     /*===========LOGIN===========*/
     function login_user($conn, $username, $password) {
         /* Creeam si executam query-ul pentru a vedea daca exista user-ul in baza de date */
@@ -61,17 +44,17 @@
     }
 
 
-        /*=============REGISTER===========*/
+    /*=============REGISTER===========*/
     if (isset($_POST['bday']) and isset($_POST['username']) and isset($_POST['lastname']) and isset($_POST['firstname']) and isset($_POST['email']) and isset($_POST['password']) and isset($_POST['re_password'])) {
         $ok = false;
 
         /* Scoatem caracterele speciale din username si parola pentru evitarea sql injection*/
-        $username = mysql_real_escape_string($_POST['username']);
-        $lastname = mysql_real_escape_string($_POST['lastname']);
-        $firstname = mysql_real_escape_string($_POST['firstname']);
-        $email = mysql_real_escape_string($_POST['email']);
-        $password = mysql_real_escape_string($_POST['password']);
-        $re_password = mysql_real_escape_string($_POST['re_password']);
+        $username = trim($_POST['username']);
+        $lastname = trim($_POST['lastname']);
+        $firstname = trim($_POST['firstname']);
+        $email = trim($_POST['email']);
+        $password = trim($_POST['password']);
+        $re_password = trim($_POST['re_password']);
         $birth_date = date("Y-m-d", strtotime($_POST['bday']));
 
         /* Validam datele introduse de utilizator si afisam mesajele de eroare corespunzatoare */
