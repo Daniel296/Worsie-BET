@@ -41,7 +41,7 @@
 
 	<div class="bets">
 		<?php
-			$current_time = date('h:i:s', time());
+			$current_time = date('H:i:s');
 			/* Afisam numele curselor si orele la care au loc */
 			if(isset($_GET['date'])) {
 				$date = $_GET['date'];
@@ -92,7 +92,7 @@
 			$date = $_GET['date'];
 
 			unset($stmt);
-			$current_time = date('h:i:s', time());
+			$current_time = date('H:i:s');
 
 			$stmt =  $conn->stmt_init();
 			$sql_query = "SELECT id, nume, id_cai, id_jochei, vreme, sanse_castig, substr(DATE_FORMAT(data,'%d-%m'), 1, 5), substr(ora, 1,5), cote  FROM curse WHERE nume = ? AND data = ? AND ora > ? ORDER BY data ASC";
@@ -147,6 +147,7 @@
 		for($i = 0; $i < count($races); $i++) {
 			$horses_details[$i] = array();
 			$jockeys_details[$i] = array();
+
 			/* Formam interogarea pentru a obtine detaliile pentru toti caii */
 			$sql_query = "SELECT nume, varsta, greutate FROM cai WHERE ";
 			for($j = 0; $j < count($ids_horses[$i]); $j++) {
@@ -326,6 +327,15 @@
 		$sql_query = $_POST['insert_ticket'];
 		if($stmt =  $conn->prepare($sql_query))
 			$stmt->execute();
+
+		$id_user = $_SESSION['id'];
+		unset($stmt);
+		$stmt =  $conn->stmt_init();
+		$sql_query = "UPDATE utilizatori SET bilete_asteptare = bilete_asteptare + 1 WHERE id = ?";
+		if($stmt =  $conn->prepare($sql_query)) {
+			$stmt->bind_param('s', $id_user);
+			$stmt->execute();
+		}
 	}
  ?>
 

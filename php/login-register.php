@@ -32,15 +32,15 @@
         /* Creeam si executam query-ul pentru a vedea daca exista user-ul in baza de date */
         unset($stmt);
         $stmt =  $conn->stmt_init();
-        $sql_query = "SELECT id, trim(parola), conectat FROM UTILIZATORI WHERE username = ? AND parola = ?";
+        $sql_query = "SELECT id, trim(parola) FROM UTILIZATORI WHERE username = ? AND parola = ?";
         if($stmt =  $conn->prepare($sql_query)) {
         $stmt->bind_param('ss', $username, $password);
         $stmt->execute();
-        $stmt->bind_result($id_user, $hash_password, $conectat);
+        $stmt->bind_result($id_user, $hash_password);
         $stmt->fetch();
 
         //password_verify($password, $hash_password) == TRUE
-        if(isset($id_user) and $conectat == 0 ) {
+        if(isset($id_user)) {
             /* Pornim sesiunea si setam parametrii la sesiune */
             $_SESSION['id'] = $id_user;
             $_SESSION['username'] = $username;
@@ -52,14 +52,9 @@
             if($stmt =  $conn->prepare($sql_query)) {
                 $stmt->bind_param('d', $id_user);
                 $stmt->execute();
-                if($conn->affected_rows == 0)
-                    print_login_error("Update error");
             }
         }
         else {
-            if($conectat == 1)
-                print_login_error("Sunteti deja conectat cu acest username!");
-            else
                 print_login_error("Username sau parola gresite");
             }
         }
