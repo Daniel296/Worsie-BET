@@ -260,14 +260,8 @@
 				<div class="collumn2">
 					<button  id="<?php echo "button-" . $races[$i]['id_race']. "-" . $ids_horses[$i][$j]; ?>" onclick="add_race(
 								<?php
-									if(isset($_SESSION['id'])) {
-										echo "'". $_SESSION['id'] ."', '" . $races[$i]['id_race'] ."', '" . $ids_horses[$i][$j] ."', '" . $ids_jockeys[$i][$j] ."', '" . $horses_details[$i][$j]['nume'] ."', '" .
+									echo "'" . $races[$i]['id_race'] ."', '" . $ids_horses[$i][$j] ."', '" . $ids_jockeys[$i][$j] ."', '" . $horses_details[$i][$j]['nume'] ."', '" .
 										$races[$i]['name'] ."', '" . $races[$i]['date'] ."', '" . $races[$i]['time'] . "', " .  $odds[$i][$j];
-									}
-									else {
-										echo "'', '" . $races[$i]['id_race'] ."', '" . $ids_horses[$i][$j] ."', '" . $ids_jockeys[$i][$j] ."', '" . $horses_details[$i][$j]['nume'] ."', '" .
-										$races[$i]['name'] ."', '" . $races[$i]['date'] ."', '" . $races[$i]['time'] . "', " .  $odds[$i][$j];
-									}
 								?>
 							)">
 							<span class="cota" type="button">
@@ -314,7 +308,14 @@
 		<div class="ticket-form">
 				<span>RON:</span>
 				<input type="number" id="total_bet" onchange="get_total_win()" onfocus="this.placeholder = ''" onblur="this.placeholder = 'RON'">
-				<button type="button" onclick="create_ticket(<?php echo $usr_balanta ?>)">Trimiteti</button>
+				<button type="button" onclick="create_ticket(<?php
+				 	if(isset($usr_balanta) and isset($_SESSION['id'])) {
+						echo $usr_balanta .", " . $_SESSION['id'];
+					}
+					else {
+						echo "'',''";
+					}
+				?>)">Trimiteti</button>
 		</div>
 	</div>
 </div>
@@ -322,9 +323,7 @@
 <?php
 	/* Inseram biletul in baza de date */
 	if(isset($_POST['insert_ticket']) and isset($_POST['bet-count'])) {
-		echo isset($_POST['insert_ticket']) . "<br>";
-		echo "bet: " . isset($_POST['bet-count']);
-		
+
 		unset($stmt);
 		$stmt =  $conn->stmt_init();
 		$sql_query = $_POST['insert_ticket'];
@@ -340,9 +339,6 @@
 		if($stmt =  $conn->prepare($sql_query)) {
 			$stmt->bind_param('ds', $bet_count, $id_user);
 			$stmt->execute();
-		}
-		else {
-			echo "doasjdoaisjdoiasjd";
 		}
 	}
  ?>
