@@ -41,7 +41,7 @@
 
 <?php
 	$connection = mysqli_connect('localhost', 'root', '', 'worsiebet');
-	$res = mysqli_query($connection,"SELECT username, email, nume, prenume, bilete_total, bilete_castigate FROM utilizatori ORDER BY bilete_castigate DESC");
+	$res = mysqli_query($connection,"SELECT username, email, nume, prenume, bilete_total, bilete_castigate FROM utilizatori WHERE bilete_castigate<>0 ORDER BY bilete_total/bilete_castigate");
 	if($res === FALSE) { 
 		die(mysql_error()); // TODO: better error handling
 	}

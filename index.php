@@ -21,8 +21,40 @@
 				</div>
 			</a>
 		</div>
+
+		<div class="statistics">
+			<h2>TOP PARIORI</h2>
+			<?php
+				$connection = mysqli_connect('localhost', 'root', '', 'worsiebet');
+				$res = mysqli_query($connection,"SELECT username, bilete_total, bilete_castigate FROM utilizatori WHERE bilete_castigate<>0 ORDER BY bilete_total/bilete_castigate");
+				if($res === FALSE) {
+					die(mysql_error()); // TODO: better error handling
+				}
+				echo "<table align=\"center\">";
+				echo "<tr>";
+				echo	"<th>Username</th>";
+				echo	"<th>Bilete total</th>";
+				echo	"<th>Bilete câștigate</th>";
+			    echo	"</tr>";
+				while ($row = $res->fetch_assoc()) {
+					echo "<tr>";
+			        echo "<td>";
+					echo $row['username'];
+					echo "</td>";
+					echo "<td>";
+					echo $row['bilete_total'];
+					echo "</td>";
+					echo "<td>";
+					echo $row['bilete_castigate'];
+					echo "</td>";
+			        echo "</tr>";
+				}
+				echo "</table>";
+			?>
+		</div>
 	</div>
 </div>
+
 <?php
 	require('pages/footer.php');
 ?>

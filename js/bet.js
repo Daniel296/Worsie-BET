@@ -1,4 +1,4 @@
-function add_race(id_user, id_race, id_horse, id_jockey, horse_name, race_name, date, time, odd) {
+function add_race(id_race, id_horse, id_jockey, horse_name, race_name, date, time, odd) {
 	var count = array.length;
 
     /* Daca a fost eroarea de must login afisata atunci o stergem */
@@ -15,8 +15,7 @@ function add_race(id_user, id_race, id_horse, id_jockey, horse_name, race_name, 
 				document.getElementById("button-" + array[i]['id_race'] + "-" + array[i]['id_horse']).style.backgroundColor = "#333333";
 			document.getElementById("button-" + id_race + "-" + id_horse).style.backgroundColor = "#670011";
 
-			array[i] = {'id_user': id_user,
-                        'id_race': id_race,
+			array[i] = {'id_race': id_race,
 						'id_horse': id_horse,
 						'id_jockey': id_jockey,
 						'horse_name': horse_name,
@@ -35,8 +34,7 @@ function add_race(id_user, id_race, id_horse, id_jockey, horse_name, race_name, 
 	/* Daca nu s-a mai pus pariu pe cursa curenta atunci adaugam in array informatiile */
 	if(i == count) {
 		array[count] = {};
-		array[count] = {'id_user': id_user,
-                        'id_race': id_race,
+		array[count] = {'id_race': id_race,
 						'id_horse': id_horse,
 						'id_jockey': id_jockey,
 						'horse_name': horse_name,
@@ -79,14 +77,14 @@ function delete_race(id_race, id_horse) {
 	display_races_ticket(array, total_odd, total_win);
 }
 
-function create_ticket() {
+function create_ticket(user_balance, id_user) {
     var date = new Date();
     if(array.length === 0) {
         document.getElementById("races-on-ticket").innerHTML = '';
         document.getElementById("log-err").innerHTML  = "<p>Selectati cel putin o cursa</p>";
     }
     else {
-        if(array[0]['id_user'] === '') {
+        if(id_user === '') {
             document.getElementById("log-err").innerHTML  = "<p>Trebuie sa fiti logat pentru a putea plasa bilete</p>";
         }
         else {
@@ -96,37 +94,47 @@ function create_ticket() {
         }
     }
 
-    if(array.length != 0 && array[0]['id_user'] != '' && total_win != 0) {
-        var total_bet = document.getElementById("total_bet").value;     // suma pariata
+    var total_bet = document.getElementById("total_bet").value;     // suma pariata
+	if(user_balance != '' && (user_balance - total_bet) < 0.0) {
+		document.getElementById("log-err").innerHTML  = "<p>Nu aveti suficienti bani</p>";
+	}
+	else {
+	    if(array.length != 0 && id_user != '' && total_win != 0) {
+	        /* Formam codul biletului <id_user><luna><milisecunde><ora><suma_depusa + suma_castig><ziua><minute><secunde> */
+	        var ticket_code = id_user + date.getMonth() + date.getMilliseconds() + date.getHours() + (total_bet + total_win) + date.getDay() + date.getMinutes() + date.getSeconds();
 
-        /* Formam codul biletului <id_user><luna><milisecunde><ora><suma_depusa + suma_castig><ziua><minute><secunde> */
-        var ticket_code = array[0]['id_user'] + date.getMonth() + date.getMilliseconds() + date.getHours() + (total_bet + total_win) + date.getDay() + date.getMinutes() + date.getSeconds();
+	        insert_statement = "INSERT INTO bilete(id_user, status, suma_depusa, suma_castig, cod, pariuri, cota) VALUES " +
+	                    "(" + id_user + ", 0, " + total_bet + ", " + total_win + ", '" + ticket_code + "', '";
+	         for(var i = 0; i < array.length; i++) {
+	            insert_statement += array[i]['id_race'] + "." + array[i]['id_horse'] + "." + array[i]['id_jockey'] + " ";
+	         }
+	         insert_statement.substring(0, insert_statement.length - 1);    //scoatem ultimul spatiu
+	         insert_statement += "', " + total_odd + ")";
 
-        insert_statement = "INSERT INTO bilete(id_user, status, suma_depusa, suma_castig, cod, pariuri, cota) VALUES " +
-                    "(" + array[0]['id_user'] + ", 0, " + total_bet + ", " + total_win + ", '" + ticket_code + "', '";
-         for(var i = 0; i < array.length; i++) {
-            insert_statement += array[i]['id_race'] + "." + array[i]['id_horse'] + "." + array[i]['id_jockey'] + " ";
-         }
-         insert_statement.substring(0, insert_statement.length - 1);    //scoatem ultimul spatiu
-         insert_statement += "', " + total_odd + ")";
+			 /*Resetam background-ul la butoane, pentru ca vor fi sterse toate cursele */
+			 set_background(array, 0);
 
-         /* Cream un formular */
-         var form = document.createElement("form");
-         form.setAttribute("method", "POST");
+			 /*Stergem continutul array-ului */
+			 array = [];
+			 myJSON = JSON.stringify(array);
+		     sessionStorage.setItem("array", myJSON);
 
-         /* Cream un input pentru formular */
-         var input = document.createElement("input");
-         input.setAttribute("type", "input");
-         input.setAttribute("name", "insert_ticket");
-         input.setAttribute("value", insert_statement);
+			 /* Resetam suma pariata si afisam informatiile*/
+			 document.getElementById("total_bet").value = 0;
+			 display_races_ticket(array, 1.0, 0.0);
 
-         /* Adaugam input-ul la formular si formularul la pagina HTML */
-         form.appendChild(input);
-         document.body.appendChild(form);
-
-         /* Facem submit la formular */
-         form.submit();
-    }
+			 /* Trimitem datele la server folosind XMLHttpRequest */
+			 var xmlhttp = new XMLHttpRequest();
+	         xmlhttp.onreadystatechange = function() {
+	            if (this.readyState == 4 && this.status == 200) {
+	                document.getElementById("log-err").innerHTML = "<center>Biletul a fost plasat cu succes</center>";
+	            }
+	         };
+	         xmlhttp.open("POST", "php/insert-ticket.php", true);
+			 xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	         xmlhttp.send("insert_ticket=" + insert_statement + "&bet_count=" + total_bet + "&id=" + id_user);
+	    }
+	}
 
 }
 
@@ -169,6 +177,17 @@ function get_total_win() {
 	document.getElementById("total_win").innerHTML = total_win.toFixed(2) + " RON";
 }
 
+function set_background(array, flag) {
+	for(var i = 0; i < array.length; i++) {
+		if(	document.getElementById("button-" + array[i]['id_race'] + "-" + array[i]['id_horse']) != null) {
+			if(flag == 1)
+				document.getElementById("button-" + array[i]['id_race'] + "-" + array[i]['id_horse']).style.backgroundColor = "#670011";
+			else
+				document.getElementById("button-" + array[i]['id_race'] + "-" + array[i]['id_horse']).style.backgroundColor = "#333333";
+		}
+	}
+}
+
 window.onbeforeunload = function() {
     myJSON = JSON.stringify(array);
     sessionStorage.setItem("array", myJSON);
@@ -204,3 +223,6 @@ if(array.length != 0) {
 /* Setam precizia variabilelor */
 total_odd.toPrecision(3);
 total_win.toPrecision(3);
+
+/* Coloram butoanele cotelor */
+set_background(array, 1);
