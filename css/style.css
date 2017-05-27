@@ -33,6 +33,37 @@ body {
 	z-index: 0;
 }
 
+.statistics {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.statistics h2 {
+	text-align:center;
+	color:white;
+	padding: 8px;
+}
+
+.statistics table {
+	border-collapse: collapse;
+	width: 65%;
+}
+
+.statistics th, td {
+	text-align: center;
+	padding: 8px;
+	color: #fff;
+}
+
+.statistics tr:nth-child(even){
+	background-color: #670011;
+}
+
+.statistics th {
+	background-color: #4CAF50;
+	color: white;
+}
+
 /*----css pemtru id-urile primei imagini (Pariaza acum)----*/
 #betting-img {
 	display: block;

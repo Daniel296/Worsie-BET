@@ -1,33 +1,6 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<style>
-	h2 {
-		text-align:center;
-		color:white;
-		padding: 8px;
-	}
-
-	table {
-		border-collapse: collapse;
-		width: 65%;
-	}
-
-	th, td {
-		text-align: center;
-		padding: 8px;
-		color: #fff;
-	}
-
-	tr:nth-child(even){
-		background-color: #670011;
-	}
-
-	th {
-		background-color: #4CAF50;
-		color: white;
-	}
-</style>
 	<title>Acasa - WorsieBet</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/style-header.css">
@@ -48,37 +21,39 @@
 				</div>
 			</a>
 		</div>
+
+		<div class="statistics">
+			<h2>TOP PARIORI</h2>
+			<?php
+				$connection = mysqli_connect('localhost', 'root', '', 'worsiebet');
+				$res = mysqli_query($connection,"SELECT username, bilete_total, bilete_castigate FROM utilizatori WHERE bilete_castigate<>0 ORDER BY bilete_total/bilete_castigate");
+				if($res === FALSE) {
+					die(mysql_error()); // TODO: better error handling
+				}
+				echo "<table align=\"center\">";
+				echo "<tr>";
+				echo	"<th>Username</th>";
+				echo	"<th>Bilete total</th>";
+				echo	"<th>Bilete câștigate</th>";
+			    echo	"</tr>";
+				while ($row = $res->fetch_assoc()) {
+					echo "<tr>";
+			        echo "<td>";
+					echo $row['username'];
+					echo "</td>";
+					echo "<td>";
+					echo $row['bilete_total'];
+					echo "</td>";
+					echo "<td>";
+					echo $row['bilete_castigate'];
+					echo "</td>";
+			        echo "</tr>";
+				}
+				echo "</table>";
+			?>
+		</div>
 	</div>
 </div>
-
-<h2>TOP PARIORI</h2>
-<?php
-	$connection = mysqli_connect('localhost', 'root', '', 'worsiebet');
-	$res = mysqli_query($connection,"SELECT username, bilete_total, bilete_castigate FROM utilizatori WHERE bilete_castigate<>0 ORDER BY bilete_total/bilete_castigate");
-	if($res === FALSE) { 
-		die(mysql_error()); // TODO: better error handling
-	}
-	echo "<table align=\"center\">";
-	echo "<tr>";
-	echo	"<th>Username</th>";
-	echo	"<th>Bilete total</th>";
-	echo	"<th>Bilete câștigate</th>";
-    echo	"</tr>";
-	while ($row = $res->fetch_assoc()) {
-		echo "<tr>";
-        echo "<td>";
-		echo $row['username'];
-		echo "</td>";
-		echo "<td>";
-		echo $row['bilete_total'];
-		echo "</td>";
-		echo "<td>";
-		echo $row['bilete_castigate'];
-		echo "</td>";
-        echo "</tr>";
-	}
-	echo "</table>";
-?>
 
 <?php
 	require('pages/footer.php');
