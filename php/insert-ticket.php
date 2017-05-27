@@ -14,7 +14,7 @@
     /* Facem update la balanta si biletele in asteptare */
 	unset($stmt);
 	$stmt =  $conn->stmt_init();
-	$sql_query = "UPDATE utilizatori SET bilete_asteptare = bilete_asteptare + 1, balanta = balanta - ? WHERE id = ?";
+	$sql_query = "UPDATE utilizatori SET bilete_asteptare = bilete_asteptare + 1, bilete_total = bilete_total + 1, balanta = balanta - ? WHERE id = ?";
 	if($stmt =  $conn->prepare($sql_query)) {
 		$stmt->bind_param('ds', $bet_count, $id_user);
 		$stmt->execute();

@@ -100,15 +100,17 @@ function create_ticket(user_balance, id_user) {
 	}
 	else {
 	    if(array.length != 0 && id_user != '' && total_win != 0) {
-	        /* Formam codul biletului <id_user><luna><milisecunde><ora><suma_depusa + suma_castig><ziua><minute><secunde> */
-	        var ticket_code = id_user + date.getMonth() + date.getMilliseconds() + date.getHours() + (total_bet + total_win) + date.getDay() + date.getMinutes() + date.getSeconds();
+	         /* Formam codul biletului <id_user><luna><milisecunde><ora><suma_depusa + suma_castig><ziua><minute><secunde> */
+	         var ticket_code = id_user + date.getMonth() + date.getMilliseconds() + date.getHours() + (total_bet + total_win) + date.getDay() + date.getMinutes() + date.getSeconds();
 
-	        insert_statement = "INSERT INTO bilete(id_user, status, suma_depusa, suma_castig, cod, pariuri, cota) VALUES " +
+	         insert_statement = "INSERT INTO bilete(id_user, status, suma_depusa, suma_castig, cod, pariuri, cota) VALUES " +
 	                    "(" + id_user + ", 0, " + total_bet + ", " + total_win + ", '" + ticket_code + "', '";
-	         for(var i = 0; i < array.length; i++) {
+
+			 for(var i = 0; i < array.length; i++) {
 	            insert_statement += array[i]['id_race'] + "." + array[i]['id_horse'] + "." + array[i]['id_jockey'] + " ";
 	         }
-	         insert_statement.substring(0, insert_statement.length - 1);    //scoatem ultimul spatiu
+	         //insert_statement.substring(0, insert_statement.length - 3);    //scoatem ultimul spatiu
+			 insert_statement = insert_statement.slice(0, -1);
 	         insert_statement += "', " + total_odd + ")";
 
 			 /*Resetam background-ul la butoane, pentru ca vor fi sterse toate cursele */

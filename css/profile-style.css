@@ -98,7 +98,7 @@ div.biletW {
 	height: 45px;
 	width: 92%;
 	margin: 2.5% 4% 2% 4%;
-	background-color: rgba(0, 100, 0, 0.1);	
+	background-color: rgba(0, 100, 0, 0.1);
 }
 
 div.biletU {
@@ -108,7 +108,7 @@ div.biletU {
 	height: 45px;
 	width: 92%;
 	margin: 2.5% 4% 2% 4%;
-	background-color: rgba(200, 200, 200, 0.1);	
+	background-color: rgba(200, 200, 200, 0.1);
 }
 
 /* Informatii despre bilet: ID, Data, Cota, Tip */
@@ -133,15 +133,15 @@ div.biletData {
 	color: #949aa3;
 	font-size: 70%;
 	font-family: "Courier New";
-	font-style: italic;	
+	font-style: italic;
 	/*border: 1px solid blue;*/
 }
 
 div.biletCota {
 	position: absolute;
 	top: 30%;
-	right: 5%;
-	width: 10%;
+	right: 15%;
+	width: 15%;
 	color: #d6e5ff;
 	font-size: 90%;
 	font-family: "Century";
@@ -151,7 +151,7 @@ div.biletCota {
 div.biletSuma {
 	position: absolute;
 	top: 30%;
-	left: 45%;
+	left: 30%;
 	color: white;
 	font-size: 85%;
 	font-family: "Century";
@@ -161,7 +161,7 @@ div.biletSuma {
 div.biletCastig {
 	position: absolute;
 	top: 30%;
-	left: 60%;
+	left: 50%;
 	color: white;
 	font-size: 85%;
 	font-family: "Century";
@@ -190,6 +190,48 @@ div.biletTipO {
 	font-size: 150%;
 	font-family: "Century";
 	/*border: 1px solid blue;*/
+}
+
+
+.race-on-ticket {
+	color: #FFF;
+	display: table;
+	width: 94%;
+	padding: 5px 10px;
+	border-top: 1px solid #3D3D3D;
+	border-bottom: 1px solid #3D3D3D;
+}
+
+.detail {
+	display: block;
+}
+
+.top-left {
+	margin: 2px 0px 0px;
+	display: inline-table;
+	text-align: left;
+	font-size: 17px;
+}
+
+.top-right {
+	display: inline-table;
+	margin: 2px 0px 0px;
+	float: right;
+	font-size: 17px;
+}
+
+.bottom-left {
+	margin: 5px 0px 5px;
+	display: inline-table;
+	float: left;
+	font-size: 14px;
+}
+
+.bottom-right {
+	margin: 5px 0px 5px;
+	display: inline-table;
+	float: right;
+	font-size: 14px;
 }
 
 /* ####################### account ######################## */
@@ -373,15 +415,30 @@ button.btn:hover {
 
 div.detalii_bilet {
 	position: absolute;
-	right: 0.5%;
-	top: 25%;
+	right: 5%;
+	top: 22%;
 	padding-top: 2px;
 	width: 40px;
 	height: 30px;
-  	/*border: 1px solid #fff; */
  	text-align: center;
- 	font-size: 180%;
 }
+
+.detalii_bilet button {
+	display: block;
+	width: 140%;
+	height: 25px;
+	margin: 0px auto;
+	color: #FFF;
+	background-color: #910018;
+	border: 0;
+	font: 13px 'lucida sans', 'trebuchet MS', 'Tahoma';
+}
+
+.detalii_bilet button:hover {
+	background-color: #670011;
+	cursor: pointer;
+}
+
 .plus {
  	font-size: 1em;
   	padding: 5px auto;
