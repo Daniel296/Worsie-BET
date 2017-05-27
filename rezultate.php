@@ -33,19 +33,19 @@
 				$days = array(0 => "Luni", 1 => "Marti", 2 => "Miercuri", 3 => "Joi", 4 => "Vineri", 5 => "Sambata", 6 => "Duminica");
 
 				$day = date("Y-m-d", time() - 4 * 86400);
-				echo "<li><a href =\"rezultate2.php?date=$day\">".$days[($num_day['wday'] + 9) % 7 ]."</a></li>";
+				echo "<li><a href =\"rezultate.php?date=$day\">".$days[($num_day['wday'] + 9) % 7 ]."</a></li>";
 
 				$day = date("Y-m-d", time() - 3 * 86400);
-				echo "<li><a href =\"rezultate2.php?date=$day\">".$days[($num_day['wday'] + 10) % 7 ]."</a></li>";
+				echo "<li><a href =\"rezultate.php?date=$day\">".$days[($num_day['wday'] + 10) % 7 ]."</a></li>";
 
 				$day = date("Y-m-d", time() - 2 * 86400);
-				echo "<li><a href =\"rezultate2.php?date=$day\">".$days[($num_day['wday'] + 11) % 7 ]."</a></li>";
+				echo "<li><a href =\"rezultate.php?date=$day\">".$days[($num_day['wday'] + 11) % 7 ]."</a></li>";
 
 				$day = date("Y-m-d", time() - 86400);
-				echo "<li><a href =\"rezultate2.php?date=$day\">Ieri</a></li>";
+				echo "<li><a href =\"rezultate.php?date=$day\">Ieri</a></li>";
 
 				$day = date("Y-m-d", time());
-				echo "<li class=\"active\"><a href =\"rezultate2.php?date=$day\">Azi</a></li>";
+				echo "<li class=\"active\"><a href =\"rezultate.php?date=$day\">Azi</a></li>";
 			?>
 		</ul>
 	</div>
@@ -53,9 +53,11 @@
 	<div class ="bet-details">
 	<?php 
 		if(isset($_GET['date']))
-			afiseazaRezultate($conn, $_GET['date']);
+			$data_cautare = $_GET['date'];
 		else
-			afiseazaRezultate($conn, $day()); ?>
+			$data_cautare = $day;
+	
+		afiseazaRezultate($conn, $data_cautare);?>
 	</div>
 </div>
                       
