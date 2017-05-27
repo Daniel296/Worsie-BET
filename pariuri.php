@@ -95,7 +95,7 @@
 			$current_time = date('H:i:s');
 
 			$stmt =  $conn->stmt_init();
-			$sql_query = "SELECT id, nume, id_cai, id_jochei, vreme, sanse_castig, substr(DATE_FORMAT(data,'%d-%m'), 1, 5), substr(ora, 1,5), cote  FROM curse WHERE nume = ? AND data = ? AND ora > ? ORDER BY data ASC";
+			$sql_query = "SELECT id, nume, id_cai, id_jochei, vreme, sanse_castig, substr(DATE_FORMAT(data,'%d-%m'), 1, 5), substr(ora, 1,5), cote  FROM curse WHERE nume = ? AND data = ? AND ora > ? ORDER BY ora ASC";
 			if($stmt =  $conn->prepare($sql_query)) {
 				$stmt->bind_param('sss', $race, $date, $current_time);
 				$stmt->execute();
@@ -315,7 +315,7 @@
 					else {
 						echo "'',''";
 					}
-				?>)">Trimiteti</button>
+				?>)">Plaseaza bilet</button>
 		</div>
 	</div>
 </div>
