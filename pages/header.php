@@ -15,13 +15,13 @@
 		if(isset($_SESSION['id'])) {
 			/* Daca user-ul este logat atunci selectam username-ul si balanta din baza de date */
 			$stmt =  $conn->stmt_init();
-			$sql_query = "SELECT username, email, nume, prenume, adresa, data_nasterii, telefon, oras, judet, balanta FROM UTILIZATORI WHERE id = ?";
+			$sql_query = "SELECT username, email, nume, prenume, adresa, data_nasterii, telefon, oras, judet, balanta, bilete_total, bilete_castigate, bilete_pierdute, bilete_asteptare FROM UTILIZATORI WHERE id = ?";
 
 			if($stmt =  $conn->prepare($sql_query)) {
 
 				$stmt->bind_param('d', $_SESSION['id']);
 				$stmt->execute();
-				$stmt->bind_result($usr_username, $usr_email, $usr_nume, $usr_prenume, $usr_adresa, $usr_data_nasterii, $usr_telefon, $usr_oras, $usr_judet, $usr_balanta);
+				$stmt->bind_result($usr_username, $usr_email, $usr_nume, $usr_prenume, $usr_adresa, $usr_data_nasterii, $usr_telefon, $usr_oras, $usr_judet, $usr_balanta, $usr_bilete_total, $usr_bilete_castigate, $usr_bilete_pierdute, $usr_bilete_asteptare);
 				$stmt->fetch();
 			}
 	 ?>
