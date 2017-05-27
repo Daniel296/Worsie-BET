@@ -111,6 +111,9 @@ function create_ticket(user_balance, id_user) {
 	         insert_statement.substring(0, insert_statement.length - 1);    //scoatem ultimul spatiu
 	         insert_statement += "', " + total_odd + ")";
 
+			 /*Resetam background-ul la butoane, pentru ca vor fi sterse toate cursele */
+			 set_background(array, 0);
+
 			 /*Stergem continutul array-ului */
 			 array = [];
 			 myJSON = JSON.stringify(array);
@@ -120,28 +123,16 @@ function create_ticket(user_balance, id_user) {
 			 document.getElementById("total_bet").value = 0;
 			 display_races_ticket(array, 1.0, 0.0);
 
-	         /* Cream un formular */
-	         var form = document.createElement("form");
-	         form.setAttribute("method", "POST");
-
-	         /* Cream un input pentru formular */
-	         var input_query = document.createElement("input");
-	         input_query.setAttribute("type", "text");
-	         input_query.setAttribute("name", "insert_ticket");
-	         input_query.setAttribute("value", insert_statement);
-
-			 var input_bet = document.createElement("input");
-			 input_bet.setAttribute("type", "number");
-			 input_bet.setAttribute("name", "bet-count");
-			 input_bet.setAttribute("value", total_bet);
-
-	         /* Adaugam input-ul la formular si formularul la pagina HTML */
-	         form.appendChild(input_query);
-			 form.appendChild(input_bet);
-	         document.body.appendChild(form);
-
-	         /* Facem submit la formular */
-	         form.submit();
+			 /* Trimitem datele la server folosind XMLHttpRequest */
+			 var xmlhttp = new XMLHttpRequest();
+	         xmlhttp.onreadystatechange = function() {
+	            if (this.readyState == 4 && this.status == 200) {
+	                document.getElementById("log-err").innerHTML = "<center>Biletul a fost plasat cu succes</center>";
+	            }
+	         };
+	         xmlhttp.open("POST", "php/insert-ticket.php", true);
+			 xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	         xmlhttp.send("insert_ticket=" + insert_statement + "&bet_count=" + total_bet + "&id=" + id_user);
 	    }
 	}
 
@@ -186,10 +177,13 @@ function get_total_win() {
 	document.getElementById("total_win").innerHTML = total_win.toFixed(2) + " RON";
 }
 
-function set_background(array) {
+function set_background(array, flag) {
 	for(var i = 0; i < array.length; i++) {
 		if(	document.getElementById("button-" + array[i]['id_race'] + "-" + array[i]['id_horse']) != null) {
-			document.getElementById("button-" + array[i]['id_race'] + "-" + array[i]['id_horse']).style.backgroundColor = "#670011";
+			if(flag == 1)
+				document.getElementById("button-" + array[i]['id_race'] + "-" + array[i]['id_horse']).style.backgroundColor = "#670011";
+			else
+				document.getElementById("button-" + array[i]['id_race'] + "-" + array[i]['id_horse']).style.backgroundColor = "#333333";
 		}
 	}
 }
@@ -231,4 +225,4 @@ total_odd.toPrecision(3);
 total_win.toPrecision(3);
 
 /* Coloram butoanele cotelor */
-set_background(array);
+set_background(array, 1);

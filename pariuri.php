@@ -320,32 +320,12 @@
 	</div>
 </div>
 
-<?php
-	/* Inseram biletul in baza de date */
-	if(isset($_POST['insert_ticket']) and isset($_POST['bet-count'])) {
 
-		unset($stmt);
-		$stmt =  $conn->stmt_init();
-		$sql_query = $_POST['insert_ticket'];
-		if($stmt =  $conn->prepare($sql_query))
-			$stmt->execute();
-
-		$id_user = $_SESSION['id'];
-		$bet_count = $_POST['bet-count'];
-
-		unset($stmt);
-		$stmt =  $conn->stmt_init();
-		$sql_query = "UPDATE utilizatori SET bilete_asteptare = bilete_asteptare + 1, balanta = balanta - ? WHERE id = ?";
-		if($stmt =  $conn->prepare($sql_query)) {
-			$stmt->bind_param('ds', $bet_count, $id_user);
-			$stmt->execute();
-		}
-	}
- ?>
 
 <?php
 	require('pages/footer.php');
 ?>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="js/bet.js"></script>
 </body>
 </html>
