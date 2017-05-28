@@ -95,8 +95,6 @@ body {
 	font-weight: bold;
 }
 
-
-
 /*---------Style for Pariuri page-----------*/
 #main-pariuri{
 	display: table;
@@ -594,4 +592,111 @@ body {
 	margin: auto;
 	border-radius: 50px;
 	background-color: orange;
+}
+
+/*---------Style for Register Page---------*/
+.box {
+	display: table;
+	margin: auto;
+	padding: 30px 10px;
+	width: 95%;
+	border-top: 1px solid gray;
+}
+
+#main h2{
+	margin-left: 10%;
+	margin-bottom: 30px;
+	font-size: 25px;
+	/*color: #910018;*/
+}
+.info-box-left {
+	display: inline-table;
+	float: left;
+	color: #910018;
+	font-size: 15px;
+	font-weight: bold;
+	width: 17%;
+}
+
+.info-box-right {
+	display: inline-table;
+	float: right;
+	width: 82%;
+}
+
+.info-box-right span {
+	color: #FFF;
+}
+
+.line-input {
+	display: table-row;
+	width: 99%;
+}
+
+.form-register {
+	margin: 10px 10px 10px;
+}
+
+.form-register label {
+	display: block;
+	margin-left: 18px;
+	margin-bottom: 10px;
+}
+
+.form-register input[type=text], input[type=password], input[type=email], input[type=date] {
+	display: block;
+	width: 240px;
+	height: 30px;
+	padding: 3px;
+    margin: auto 10px 10px 15px;
+    display: inline-block;
+    border: 1px solid #ccc;
+	border-radius: 5px;
+    box-sizing: border-box;
+	font-family: Century, sans-serif;
+}
+
+.left-form {
+	display: inline-table;
+	float: left;
+	padding-top: 15px;
+	width: 47%;
+	/*border: 1px solid white;*/
+}
+
+.right-form {
+	display: inline-table;
+	float: right;
+	padding-top: 15px;
+	margin-right: 25px;
+	width: 47%;
+	/*border: 1px solid white;*/
+}
+
+.terms-box {
+	margin: 20px 20px 0px;
+}
+
+.terms-box a {
+	text-decoration: none;
+}
+
+.button-register button {
+	display: block;
+	width: 30%;
+	height: 35px;
+	margin:20px auto;
+	color: #FFF;
+	background-color: #910018;
+	border: 0;
+	font: 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+}
+
+.button-register button:hover {
+	background-color: #670011;
+	cursor: pointer;
+}
+
+#reg-err {
+	margin-top: 20px;
 }
