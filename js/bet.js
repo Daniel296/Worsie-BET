@@ -101,7 +101,7 @@ function create_ticket(user_balance, id_user) {
 	else {
 	    if(array.length != 0 && id_user != '' && total_win != 0) {
 	         /* Formam codul biletului <id_user><luna><milisecunde><ora><suma_depusa + suma_castig><ziua><minute><secunde> */
-	         var ticket_code = id_user + date.getMonth() + date.getMilliseconds() + date.getHours() + (total_bet + total_win) + date.getDay() + date.getMinutes() + date.getSeconds();
+	         var ticket_code = id_user + date.getMonth() + date.getMilliseconds() + date.getHours() + (total_bet + total_win).toString().split('.')[0] + date.getDay() + date.getMinutes() + date.getSeconds();
 
 	         insert_statement = "INSERT INTO bilete(id_user, status, suma_depusa, suma_castig, cod, pariuri, cota) VALUES " +
 	                    "(" + id_user + ", 0, " + total_bet + ", " + total_win + ", '" + ticket_code + "', '";
