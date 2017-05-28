@@ -16,9 +16,9 @@
 
 <div id="main-results">
 
-	<div class="search-bar">
+	<div id="search" class="search-bar">
 		<form  method="POST">
-			<input name="search" placeholder="Search...">
+			<input name="search" placeholder="Search ...">
 			<div class="search-img">
 				<img src="images/search.png" alt="search">
 			</div>
@@ -26,7 +26,7 @@
 	</div>
 
 
-	<div class="show-bets-day">
+	<div id="res" class="show-bets-day">
 		<ul>
 			<?php
 				$num_day = getdate();

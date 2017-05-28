@@ -2,24 +2,25 @@
 function afiseazaCurse($curse_azi, $cursa, $data_meci, $ore, $status) {
 		$index = 0;
 		$mesaj = " ";
-		while($status == 0 && $index != count($ore)) { // Cand vde mai multe curse
+
+		while($status == 0 && $index != count($ore)) { // Cand vede mai multe curse
 			if($index > 0){
 				if($ore[$index-1] != $ore[$index])
-					$mesaj .= '<a href="./rezultate.php?race=' . $cursa . '&date=' . $data_meci . '&ora=' . $ore[$index] . '">' . $ore[$index] . '</a>';
+					$mesaj .= '<a href="./rezultate.php?race=' . $cursa . '&date=' . $data_meci . '&ora=' . $ore[$index] . '#res">' . $ore[$index] . '</a>';
 			}
 			else
-				$mesaj .= '<a href="./rezultate.php?race=' . $cursa . '&date=' . $data_meci . '&ora=' . $ore[$index] . '">' . $ore[$index] . '</a>';
+				$mesaj .= '<a href="./rezultate.php?race=' . $cursa . '&date=' . $data_meci . '&ora=' . $ore[$index] . '#res">' . $ore[$index] . '</a>';
 			$index ++;
 		}
 
 		if($status == 2) // Cand vede doar o cursa, afisam doar ora ei.
-			$mesaj = '<a href="./rezultate.php?race=' . $cursa . '&date=' . $data_meci . '&ora=' . $ore[$curse_azi] . '">' . $ore[$curse_azi] . '</a>';
-		
+			$mesaj = '<a href="./rezultate.php#race=' . $cursa . '&date=' . $data_meci . '&ora=' . $ore[$curse_azi] . '#res">' . $ore[$curse_azi] . '</a>';
+
 		echo
-			'<div class="results-bar">
+			'<div class="bet">
 				<span>' . ($curse_azi + 1) . '. ' . $cursa . '</span>
-				<div class="results-times">' . 
-					$mesaj . '
+				<div class="times">
+					' . $mesaj . '
 				</div>
 			</div>';
 		if($status > 0)
@@ -43,14 +44,14 @@ function afiseazaCurse($curse_azi, $cursa, $data_meci, $ore, $status) {
 				<div class="dim100">
 					<span>WR Jocheu</span>
 				</div>
-			</div><br>';
+			</div>';
 	unset($mesaj);
 }
 
 function afiseazaCursa($numar, $id, $nume, $ora, $data_cursa) {
-	$mesaj = '<a href="./rezultate.php?race=' . $nume . '&date=' . $data_cursa . '&ora=' . $ora . '">' . $ora . '</a>';
+	$mesaj = ' ';//<a href="./rezultate.php?race=' . $nume . '&date=' . $data_cursa . '&ora=' . $ora . '">' . $ora . '</a>';
 	echo '<br><div class="results-bar">
-				<span>' . ($numar + 1) . '. ' . $nume . ' #' . $id . '</span>
+				<span>' . ($numar + 1) . '. ' . $nume . '</span>
 				<div class="results-times">' . 
 					$mesaj . '
 				</div>
@@ -156,6 +157,7 @@ function afiseazaRezultate($conn, $data_meci)
 	$info_curse = array();
 	$info_curse = formeazaNumeCurse($conn, $data_meci, $status); // Am creat un vector cu numele curselor din ziua respectiva
 	
+	// Afisam locatiile si orele la care sunt curse
 	$index = 0;
 	while($index != count($info_curse)) {
 		$info_curse[$index]['ore'] = array();
@@ -165,6 +167,20 @@ function afiseazaRezultate($conn, $data_meci)
 		$index ++;
 	}
 
+	$index = 0;
+	$count = 0;
+	while($index < count($info_curse)) { // Pentru fiecare nume de cursa
+		afiseazaCurse($count, $info_curse[$index]['nume'], $data_meci, $info_curse[$index]['ore'], 0);
+		if(isset($_GET['race'])) {
+			$index += count($info_curse[$index]['ore']);
+			$count ++;
+		}
+		else{
+			$index = $index + 1;
+			$count ++;
+		}
+	}
+	
 	// Daca se da click pe ora unei curse, vor aparea doar cursele cu numele respectiv, de la ora respectiva.
 	if(isset($_GET['race'])) {
 		$index = 0;
@@ -173,28 +189,17 @@ function afiseazaRezultate($conn, $data_meci)
 			if($info_curse[$index]['nume'] == $_GET['race']) {	
 				if(isset($_GET['ora'])) {
 					if($info_curse[$index]['ore'][$count] == $_GET['ora']) {
-						//echo $info_curse[$index]['ids'][$count] . " ";
 						afiseazaCursa($count, $info_curse[$index]['ids'][$count], $_GET['race'], $_GET['ora'], $_GET['date']);
 						$concurenti = array();
 						$concurenti = formeazaInformatiiConcurent($conn, $info_curse[$index]['ids'][$count]);
 						afiseazaConcurent($concurenti);
-						
 					}
 					$count ++;
 				}
 			}
 			$index += 1;
 		}
-	} else {
-		$index = 0;
-		while($index != count($info_curse)) { // Pentru fiecare nume de cursa
-			afiseazaCurse($index, $info_curse[$index]['nume'], $data_meci, $info_curse[$index]['ore'], $status);
-			echo "<br>";
-			$index += 1;
-		}
 	}
-	//unset($concurenti);
-	//unset($info_curse);
 }
 
 
@@ -206,14 +211,13 @@ function afiseazaConcurent($participant)
 		if($participant[$index]['cal_meciuri_pierdute'] == 0)
 			$cal_win_rate = $participant[$index]['cal_meciuri_castigate'];
 		else
-			$cal_win_rate = $participant[$index]['cal_meciuri_castigate'] / $participant[$index]['cal_meciuri_pierdute'];
+			$cal_win_rate =  number_format((float)floatval($participant[$index]['cal_meciuri_castigate'] / $participant[$index]['cal_meciuri_pierdute']), 2, '.', '');;
 
 		$jocheu_win_rate = 0;
-		if($participant[$index]['cal_meciuri_pierdute'] == 0)
+		if($participant[$index]['jocheu_meciuri_pierdute'] == 0)
 			$jocheu_win_rate = $participant[$index]['jocheu_meciuri_castigate'];
 		else
-			$jocheu_win_rate = $participant[$index]['jocheu_meciuri_castigate'] / $participant[$index]['jocheu_meciuri_pierdute'];
-
+			$jocheu_win_rate = number_format((float)floatval($participant[$index]['jocheu_meciuri_castigate'] / $participant[$index]['jocheu_meciuri_pierdute']), 2, '.', '');
 
 		echo '
 			<div class="results-body">
