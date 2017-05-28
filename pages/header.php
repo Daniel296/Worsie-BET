@@ -2,8 +2,6 @@
 <?php
 	require("php/database/connect2DB.php");
 	session_start();
-
-	require("php/login-register.php");
 ?>
 
 <div id="header">
@@ -61,14 +59,6 @@
 		  <img src="images/login-img.png" alt="Avatar" class="avatar">
 		</div>
 
-		<?php
-			/* Aceasta functie afiseaza mesajele de eroare care apar in urma validarii datelor introduse de utilizator*/
-	 		function print_login_error($err) {
-		 		echo "<p style=\"color: red;\"> *$err </p>";
-		 		$ok = true;
-	 		}
-		 ?>
-
 		<div class="container">
 			<div class="form-login">
 				<label><b>Username</b></label>
@@ -98,71 +88,8 @@ window.onclick = function(event) {
 </script>
 
 
-<div id="id02" class="modal">
-
-	<form class="modal-content animate" method="POST">
-		<div class="imgcontainer">
-		  	<span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
-		  	<img src="images/login-img.png" alt="Avatar" class="avatar">
-		</div>
-
-		<?php
-			/* Aceasta functie afiseaza mesajele de eroare care apar in urma validarii datelor introduse de utilizator*/
-	 		function print_register_error($err) {
-		 		echo "<p> *$err </p>";
-		 		$ok = true;
-	 		}
-		 ?>
+<div class="modal">
 		<div class="container">
-			<div class="form-login">
-				<label><b>Username</b></label>
-				<input type="text" name="username" required>
-			</div>
-
-			<div class="form-login">
-				<label><b>Nume</b></label>
-				<input type="text" name="lastname" required>
-			</div>
-
-			<div class="form-login">
-				<label><b>Prenume</b></label>
-				<input type="text" name="firstname" required>
-			</div>
-
-			<div class="form-login">
-				<label><b>Data nasterii</b></label>
-				<input type="date" name="bday" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" required >
-			</div>
-
-			<div class="form-login">
-				<label><b>Email</b></label>
-				<input type="email" name="email" required>
-			</div>
-
-			<div class="form-login">
-				<label><b>Parola</b></label>
-				<input type="password" name="password" required>
-			</div>
-
-			<div class="form-login">
-				<label><b>Reintroduceti parola</b></label>
-				<input type="password" name="re_password" required>
-			</div>
-
-			<button type="submit">Register</button>
+			<a href="register.php"><button type="button">Register</button></a>
 		</div>
-
-	</form>
 </div>
-
-<script>
-// Get the modal
-var modal = document.getElementById('id02');
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-</script>

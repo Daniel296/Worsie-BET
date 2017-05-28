@@ -94,13 +94,13 @@
                 <div class="line-input">
                     <div class="form-register">
                         <div class="left-form">
-                            <label><b>Oras</b></label>
-        				    <input type="text" id="Adresa" onchange="validate_register_data(10)" required/>
+                            <label><b>Adresa</b></label>
+        				    <input type="text" id="address" onchange="validate_register_data(10)" required/>
 
                         </div>
                         <div class="right-form">
                             <label><b>Tara</b></label>
-        				    <input type="text" id="county" onchange="validate_register_data(11)" value="Romania" required/>
+        				    <input type="text" id="country" onchange="validate_register_data(11)" required/>
                         </div>
         			</div>
                 </div>
@@ -109,27 +109,28 @@
                     <div class="form-register">
                         <div class="left-form">
                             <label><b>Data nasterii</b></label>
-            				<input type="date" id="bday" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" required >
+            				<input type="date" id="bday" onchange="validate_register_data(13)" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" required >
             			</div>
                         <div class="right-form">
         				    <label><b>Telefon</b></label>
-        				    <input type="text" id="phone" required/>
+        				    <input type="text" id="phone" onchange="validate_register_data(12)" required/>
                         </div>
         			</div>
                 </div>
                 <div class="terms-box">
-                    <input type="checkbox" id="terms" value="Bike"> Accept <a href="regulament.php">Termeni si Conditii </a> asa cum sunt publicate pe acest site. <br>
+                    <input type="checkbox" id="terms"> Accept <a href="regulament.php">Termeni si Conditii </a> asa cum sunt publicate pe acest site. <br>
                 </div>
             </div>
         </div>
         <div class="button-register">
-            <button type="button">Inregistreaza-te </button>
+            <button type="button" onclick="register_user()">Inregistreaza-te </button>
         </div>
 	</div>
 
 </div>
 
 <script src="js/account.js"></script>
+
 <?php
 	require('pages/footer.php');
 ?>
