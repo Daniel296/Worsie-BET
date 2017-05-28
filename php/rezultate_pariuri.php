@@ -3,7 +3,12 @@ function afiseazaCurse($curse_azi, $cursa, $data_meci, $ore, $status) {
 		$index = 0;
 		$mesaj = " ";
 		while($status == 0 && $index != count($ore)) { // Cand vde mai multe curse
-			$mesaj .= '<a href="./rezultate.php?race=' . $cursa . '&date=' . $data_meci . '&ora=' . $ore[$index] . '">' . $ore[$index] . '</a>';
+			if($index > 0){
+				if($ore[$index-1] != $ore[$index])
+					$mesaj .= '<a href="./rezultate.php?race=' . $cursa . '&date=' . $data_meci . '&ora=' . $ore[$index] . '">' . $ore[$index] . '</a>';
+			}
+			else
+				$mesaj .= '<a href="./rezultate.php?race=' . $cursa . '&date=' . $data_meci . '&ora=' . $ore[$index] . '">' . $ore[$index] . '</a>';
 			$index ++;
 		}
 
@@ -121,9 +126,12 @@ function formeazaNumeCurse($conn, $data_meci, $status)
 	$nume = "";
 	$stmt =  $conn->stmt_init();
 	if($status == 0)
+		//$sql_query = "SELECT distinct nume FROM curse WHERE date_format(data, '%Y-%m-%d') like ?"; 
 		$sql_query = "SELECT distinct nume FROM curse WHERE id = any(SELECT id_cursa FROM rezultate WHERE date_format(data, '%Y-%m-%d') like ?)";
 	else
+		//$sql_query = "SELECT nume FROM curse WHERE date_format(data, '%Y-%m-%d') like ?";
 		$sql_query = "SELECT nume FROM curse WHERE id = any(SELECT id_cursa FROM rezultate WHERE date_format(data, '%Y-%m-%d') like ?)";
+
 	if($stmt->prepare($sql_query)) { // or die(mysql_error());
 		$stmt->bind_param('s', $data_meci);
 		$stmt->execute();
@@ -161,16 +169,16 @@ function afiseazaRezultate($conn, $data_meci)
 	if(isset($_GET['race'])) {
 		$index = 0;
 		$count = 0;
-
 		while($index < count($info_curse)) { // Pentru fiecare nume de cursa
-			if($info_curse[$index]['nume'] == $_GET['race']) {
-				
+			if($info_curse[$index]['nume'] == $_GET['race']) {	
 				if(isset($_GET['ora'])) {
 					if($info_curse[$index]['ore'][$count] == $_GET['ora']) {
+						//echo $info_curse[$index]['ids'][$count] . " ";
 						afiseazaCursa($count, $info_curse[$index]['ids'][$count], $_GET['race'], $_GET['ora'], $_GET['date']);
 						$concurenti = array();
 						$concurenti = formeazaInformatiiConcurent($conn, $info_curse[$index]['ids'][$count]);
 						afiseazaConcurent($concurenti);
+						
 					}
 					$count ++;
 				}
@@ -185,6 +193,8 @@ function afiseazaRezultate($conn, $data_meci)
 			$index += 1;
 		}
 	}
+	//unset($concurenti);
+	//unset($info_curse);
 }
 
 
