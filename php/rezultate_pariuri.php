@@ -44,7 +44,7 @@ function afiseazaCurse($curse_azi, $cursa, $data_meci, $ore, $status) {
 
 function afiseazaCursa($numar, $id, $nume, $ora, $data_cursa) {
 	$mesaj = '<a href="./rezultate.php?race=' . $nume . '&date=' . $data_cursa . '&ora=' . $ora . '">' . $ora . '</a>';
-	echo '<div class="results-bar">
+	echo '<br><div class="results-bar">
 				<span>' . ($numar + 1) . '. ' . $nume . ' #' . $id . '</span>
 				<div class="results-times">' . 
 					$mesaj . '
@@ -70,7 +70,7 @@ function afiseazaCursa($numar, $id, $nume, $ora, $data_cursa) {
 				<div class="dim100">
 					<span>WR Jocheu</span>
 				</div>
-			</div><br>';
+			</div>';
 }
 
 function formeazaOreCurse($conn, $dataa, $name)
@@ -121,9 +121,9 @@ function formeazaNumeCurse($conn, $data_meci, $status)
 	$nume = "";
 	$stmt =  $conn->stmt_init();
 	if($status == 0)
-		$sql_query = "SELECT distinct nume FROM curse WHERE date_format(data, '%Y-%m-%d') like ?";
+		$sql_query = "SELECT distinct nume FROM curse WHERE id = any(SELECT id_cursa FROM rezultate WHERE date_format(data, '%Y-%m-%d') like ?)";
 	else
-		$sql_query = "SELECT nume FROM curse WHERE date_format(data, '%Y-%m-%d') like ?";
+		$sql_query = "SELECT nume FROM curse WHERE id = any(SELECT id_cursa FROM rezultate WHERE date_format(data, '%Y-%m-%d') like ?)";
 	if($stmt->prepare($sql_query)) { // or die(mysql_error());
 		$stmt->bind_param('s', $data_meci);
 		$stmt->execute();
@@ -167,7 +167,10 @@ function afiseazaRezultate($conn, $data_meci)
 				
 				if(isset($_GET['ora'])) {
 					if($info_curse[$index]['ore'][$count] == $_GET['ora']) {
-						afiseazaCursa($count, $info_curse[$index]['ids'][$count], $_GET['race'], $_GET['ora'], $_GET['date']);	
+						afiseazaCursa($count, $info_curse[$index]['ids'][$count], $_GET['race'], $_GET['ora'], $_GET['date']);
+						$concurenti = array();
+						$concurenti = formeazaInformatiiConcurent($conn, $info_curse[$index]['ids'][$count]);
+						afiseazaConcurent($concurenti);
 					}
 					$count ++;
 				}
@@ -187,45 +190,103 @@ function afiseazaRezultate($conn, $data_meci)
 
 function afiseazaConcurent($participant)
 {
-	$cal_win_rate = 0;
-	if($participant['cal_meciuri_pierdute'] == 0)
-		$cal_win_rate = $participant['cal_meciuri_castigate'];
-	else
-		$cal_win_rate = $participant['cal_meciuri_castigate'] / $participant['cal_meciuri_pierdute'];
+	$index = 0;
+	while($index != count($participant) - 1) {
+		$cal_win_rate = 0;
+		if($participant[$index]['cal_meciuri_pierdute'] == 0)
+			$cal_win_rate = $participant[$index]['cal_meciuri_castigate'];
+		else
+			$cal_win_rate = $participant[$index]['cal_meciuri_castigate'] / $participant[$index]['cal_meciuri_pierdute'];
 
-	$jocheu_win_rate = 0;
-	if($participant['cal_meciuri_pierdute'] == 0)
-		$jocheu_win_rate = $participant['jocheu_meciuri_castigate'];
-	else
-		$jocheu_win_rate = $participant['jocheu_meciuri_castigate'] / $participant['jocheu_meciuri_pierdute'];
+		$jocheu_win_rate = 0;
+		if($participant[$index]['cal_meciuri_pierdute'] == 0)
+			$jocheu_win_rate = $participant[$index]['jocheu_meciuri_castigate'];
+		else
+			$jocheu_win_rate = $participant[$index]['jocheu_meciuri_castigate'] / $participant[$index]['jocheu_meciuri_pierdute'];
 
 
-	echo '
-		<div class="results-body">
-			<div class="results-team">
-				<div class="dim50">
-					<span>' . $participant["index"] . '</span>
-				</div>
-				<div class="dim200">
-					<span>' . $participant["cal_nume"] . '</span>
-				</div>
-				<div class="dim200">
-					<span>' . $participant["jocheu_nume"] . ' / ' . $participant["antrenor_nume"] . '</span>
-				</div>
-				<div class="dim50">
-					<span>' . $participant["cal_varsta"] . '</span>
-				</div>
-				<div class="dim100">
-					<div class="win-chance">
-						<span>' . $cal_win_rate . ' </span>
+		echo '
+			<div class="results-body">
+				<div class="results-team">
+					<div class="dim50">
+						<span>' . $participant[$index]["index"] . '</span>
+					</div>
+					<div class="dim200">
+						<span>' . $participant[$index]["cal_nume"] . '</span>
+					</div>
+					<div class="dim200">
+						<span>' . $participant[$index]["jocheu_nume"] . ' / ' . $participant[$index]["antrenor_nume"] . '</span>
+					</div>
+					<div class="dim50">
+						<span>' . $participant[$index]["cal_varsta"] . '</span>
+					</div>
+					<div class="dim100">
+						<div class="win-chance">
+							<span>' . $cal_win_rate . ' </span>
+						</div>
+					</div>
+					<div class="dim100">
+						<div class="win-chance">
+							<span>' . $jocheu_win_rate . '</span>
+						</div>
 					</div>
 				</div>
-				<div class="dim100">
-					<div class="win-chance">
-						<span>' . $jocheu_win_rate . '</span>
-					</div>
-				</div>
-			</div>
-		</div>';
+			</div>';
+		$index ++;
+	}
+}
+
+function formeazaInformatiiConcurent($conn, $id) {
+	$participanti = array();
+	unset($stmt);
+	$stmt =  $conn->stmt_init();
+	$sql_query = "SELECT id_cai, id_jochei FROM rezultate WHERE id_cursa = ?";
+	/* Extrage informatii despre cai si jochei */
+	if($stmt->prepare($sql_query)) {
+		$stmt->bind_param('s', $id);
+		$stmt->execute();
+		$stmt->bind_result($lista_cai, $lista_jochei);
+		$stmt->fetch();
+	}
+
+	$cai = explode(' ', $lista_cai);
+	$jochei = explode(' ', $lista_jochei);
+	
+	$index = 0;
+	$i = 0;
+	while($index != count($cai)) {
+		$participanti['p'] = array();
+		$sql_query = "SELECT nume, varsta, meciuri_castigate, meciuri_pierdute, meciuri_abandonate FROM cai WHERE ID = ?";
+		unset($stmt);
+		if($stmt =  $conn->prepare($sql_query)) {
+			$stmt->bind_param('d', $cai[$index]);
+			$stmt->execute();
+			$stmt->bind_result($cal_nume, $cal_varsta, $cal_meciuri_castigate, $cal_meciuri_pierdute, $cal_meciuri_abandonate);
+			$stmt->fetch();
+			$participanti[$i]['index'] = $i + 1;
+			$participanti[$i]['cal_nume'] = $cal_nume;
+			$participanti[$i]['cal_varsta'] = $cal_varsta;
+			$participanti[$i]['cal_meciuri_castigate'] = $cal_meciuri_castigate;
+			$participanti[$i]['cal_meciuri_pierdute'] = $cal_meciuri_pierdute;
+			$participanti[$i]['cal_meciuri_abandonate'] = $cal_meciuri_abandonate;
+		}
+		unset($stmt);
+		$sql_query = "SELECT nume, Antrenor, meciuri_castigate, meciuri_pierdute, meciuri_abandonate FROM jochei WHERE ID = ?";
+		if($stmt =  $conn->prepare($sql_query)) {
+			$stmt->bind_param('d', $jochei[$index]);
+			$stmt->execute();
+	 		$stmt->bind_result($jocheu_nume, $antrenor, $meciuri_castigate, $meciuri_pierdute, $meciuri_abandonate);
+			$stmt->fetch();
+			$participanti[$i]['jocheu_nume'] = $jocheu_nume;
+			$participanti[$i]['antrenor_nume'] = $antrenor;
+			$participanti[$i]['jocheu_meciuri_pierdute'] = $meciuri_pierdute;
+			$participanti[$i]['jocheu_meciuri_castigate'] = $meciuri_castigate;
+			$participanti[$i]['jocheu_meciuri_abandonate'] = $meciuri_abandonate;
+		}
+		$i++;
+		$index ++;
+	}
+
+	return $participanti;
 }
 ?>

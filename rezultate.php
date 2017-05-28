@@ -52,6 +52,7 @@
 
 	<div class ="bet-details">
 	<?php 
+		unset($stmt);
 		if(isset($_GET['date']))
 			$data_cautare = $_GET['date'];
 		else
