@@ -53,28 +53,33 @@
 </div>
 
 <div id="id01" class="modal">
-	<form action="." class="modal-content animate" method="POST">
-		<div class="imgcontainer">
-		  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-		  <img src="images/login-img.png" alt="Avatar" class="avatar">
+	<div class="modal-content animate" >
+	<div class="imgcontainer">
+		 <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+		 <img src="images/login-img.png" alt="Avatar" class="avatar">
+	</div>
+
+	<div class="container">
+		<div id="err-log">
+			<!-- Afisare erori din Javascript -->
 		</div>
 
-		<div class="container">
-			<div class="form-login">
-				<label><b>Username</b></label>
-				<input type="text" placeholder="Enter Username" name="username_login" required />
-			</div>
-
-			<div  class="form-login">
-				<label><b>Parola</b></label>
-				<input type="password" placeholder="Enter Password" name="password" required />
-			</div>
-
-			<button type="submit" onclick="login_user()">Login</button>
+		<div class="form-login">
+			<label><b>Username</b></label>
+			<input type="text" placeholder="Enter Username" id="username_login" required />
 		</div>
-	</form>
+
+		<div  class="form-login">
+			<label><b>Parola</b></label>
+			<input type="password" placeholder="Enter Password" id="password" required />
+		</div>
+
+		<button type="submit" onclick="login_user()">Login</button>
+	</div>
+	</div>
 </div>
 
+<script src="js/account.js"></script>
 <script>
 // Get the modal
 var modal = document.getElementById('id01');
@@ -85,4 +90,5 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
+
 </script>

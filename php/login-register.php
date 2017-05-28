@@ -21,7 +21,7 @@
         if($stmt =  $conn->prepare($sql_query)) {
         $stmt->bind_param('ss', $username, $password);
         $stmt->execute();
-        $stmt->bind_result($id_user, $hash_password);
+        $stmt->bind_result($id_user, $username1, $hash_password);
         $stmt->fetch();
 
         //password_verify($password, $hash_password) == TRUE
@@ -29,6 +29,8 @@
             /* Pornim sesiunea si setam parametrii la sesiune */
             $_SESSION['id'] = $id_user;
             $_SESSION['username'] = $username;
+
+            echo "1"; //trimitem raspunsul ca s-a reusit conectarea
 
             /* Facem update la campul "conectat" */
             unset($stmt);
@@ -40,12 +42,10 @@
             }
         }
         else {
-                echo "Username sau parola gresite";
+                echo "0";
             }
         }
     }
-
-
 
 
     /*=============REGISTER===========*/
