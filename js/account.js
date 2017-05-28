@@ -1,20 +1,21 @@
-function validate_register_data(flag) {
+var error = false;
+
+function validate_register_data(flag, error) {
     /* flag este un numar de la 1 la 13 indentificant inputul pe care il primeste*/
     document.getElementById("reg-err").innerHTML = "";
-    error = false;
 
     switch (flag) {
         case 1:
             var input = document.getElementById("username").value.toString();
             if(input.length < 6 || input.length > 30) {
                 print_error("Username-ul trebuie sa aiba intre 6 si 30 de caractere!");
-                error = true;
+                error = 1;
             }
             else {
                 var regex = /^\w+$/;
                 if(!regex.test(input)) {
                     print_error("Username-ul trebuie sa contina doar litere, cifre si caracterul _ ");
-                    error = true;
+                    error = 1;
                 }
                 else { /*Verificam daca username-ul exista deja in baza de date */
                     var xmlhttp = new XMLHttpRequest();
@@ -22,7 +23,7 @@ function validate_register_data(flag) {
                         if (this.readyState == 4 && this.status == 200) {
                             if(this.response === "1") {
                                 print_error("Acest username exista deja!");
-                                error = true;
+                                error = 1;
                             }
                         }
                     };
@@ -38,7 +39,7 @@ function validate_register_data(flag) {
                 var input = document.getElementById("email").value.toString();
                 if(!regex.test(input)) {
                     print_error("Email-ul nu este valid!");
-                    error = true;
+                    error = 1;
                 }
                 else {
                         var xmlhttp = new XMLHttpRequest();
@@ -46,7 +47,7 @@ function validate_register_data(flag) {
                         if (this.readyState == 4 && this.status == 200) {
                             if(this.response === "1") {
                                 print_error("Acest email exista deja!");
-                                error = true;
+                                error = 1;
                             }
                         }
                     };
@@ -61,7 +62,7 @@ function validate_register_data(flag) {
                 var re_email = document.getElementById("re_email").value;
                 if(email != re_email) {
                     print_error("Email-urile nu se potrivesc!");
-                    error = true;
+                    error = 1;
                 }
                 break;
 
@@ -70,14 +71,14 @@ function validate_register_data(flag) {
 
                 if(input.length < 8 ) {
                     print_error("Parola trebuie sa aiba cel putin 8 caractere!");
-                    error = true;
+                    error = 1;
                     break;
                 }
 
                 var regex = /[0-9]/;
                 if(!regex.test(input)) {
                     print_error("Parola trebuie sa contina cel putin o cifra (0-9)!");
-                    error = true;
+                    error = 1;
                     break;
                 }
                 else password = input.toString();
@@ -85,7 +86,7 @@ function validate_register_data(flag) {
                 regex = /[a-z]/;
                 if(!regex.test(input)) {
                     print_error("Parola trebuie sa contina cel putin o litera mica (a-z)!");
-                    error = true;
+                    error = 1;
                     break;
                 }
                 else password = input;
@@ -93,7 +94,7 @@ function validate_register_data(flag) {
                 regex = /[A-Z]/;
                 if(!regex.test(input)) {
                     print_error("Parola trebuie sa contina cel putin o litera mare (A-Z)!");
-                    error = true;
+                    error = 1;
                     break;
                 }
                 break;
@@ -103,7 +104,7 @@ function validate_register_data(flag) {
                 var re_password = document.getElementById("re_password").value;
                 if(password != re_password) {
                     print_error("Parolele nu se potrivesc");
-                    error = true;
+                    error = 1;
                 }
                 break;
 
@@ -113,7 +114,7 @@ function validate_register_data(flag) {
                 var regex1 = /^[A-Z][a-z]*$/;
                 if(!regex.test(input) && !regex1.test(input)) {
                     print_error("Numele ar trebui sa contina doar litere si sa inceapa cu litera mare!");
-                    error = true;
+                    error = 1;
                 }
                 break;
 
@@ -123,7 +124,7 @@ function validate_register_data(flag) {
                 var regex1 = /^[A-Z][a-z]*$/;
                 if(!regex.test(input) && !regex1.test(input)) {
                     print_error("Prenumele ar trebui sa contina doar litere si sa inceapa cu litera mare!");
-                    error = true;
+                    error = 1;
                 }
                 break;
 
@@ -133,7 +134,7 @@ function validate_register_data(flag) {
                 var regex1 = /^[A-Z][a-z]*$/;
                 if(!regex.test(input) && !regex1.test(input)) {
                     print_error("Ati introdus un judet invalid!");
-                    error = true;
+                    error = 1;
                 }
                 break;
 
@@ -143,7 +144,7 @@ function validate_register_data(flag) {
                 var regex1 = /^[A-Z][a-z]*$/;
                 if(!regex.test(input) && !regex1.test(input)) {
                     print_error("Ati introdus un oras invalid!");
-                    error = true;
+                    error = 1;
                 }
                 break;
 
@@ -152,7 +153,7 @@ function validate_register_data(flag) {
                 var regex = /^[A-Za-z0-9\s,\.-]*$/;
                 if(!regex.test(input)) {
                     print_error("Ati introdus o adresa invalida!");
-                    error = true;
+                    error = 1;
                 }
                 break;
 
@@ -162,7 +163,7 @@ function validate_register_data(flag) {
                 var regex1 = /^[A-Z][a-z]*$/;
                 if(!regex.test(input) && !regex1.test(input)) {
                     print_error("Ati introdus un nume de tara invalid!");
-                    error = true;
+                    error = 1;
                 }
                 break;
 
@@ -171,7 +172,7 @@ function validate_register_data(flag) {
                 var regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
                 if(!regex.test(input)) {
                     print_error("Ati introdus un numar de telefon invalid!");
-                    error = true;
+                    error = 1;
                 }
                 break;
 
@@ -179,18 +180,21 @@ function validate_register_data(flag) {
                 birthday = document.getElementById("bday").value;
                 break;
     }
+    return error;
 }
 
-function print_error(error) {
-    document.getElementById("reg-err").innerHTML = "*" + error;
-    error = true;
+function print_error(error_msg) {
+    document.getElementById("reg-err").innerHTML = "*" + error_msg;
 }
 
 
 function register_user() {
-    for(var i = 0; i < 14; i++)
-        validate_register_data(i);
+    var error = 0;
+    for(var i = 0; i <= 13; i++) {
+        error = validate_register_data(i, error);
+    }
 
+    document.getElementById("reg-err").innerHTML = error;
     /* Luam toate datele necesare pentru inregistrare*/
     username = document.getElementById("username").value;
     email = document.getElementById("email").value;
@@ -207,51 +211,31 @@ function register_user() {
 
     /* verificam ca toate field-urile sa fie completate*/
      if(document.getElementById('terms').checked) {
-         if(username != "" && email != "" && password != "" && firstname != "" && lastname != "" &&
-             city != "" && county != "" && country != "" && address != "" && phone != "" && birthday != "") {
+         if(error === 0) {
+             if(username != "" && email != "" && password != "" && firstname != "" && lastname != "" &&
+                 city != "" && county != "" && country != "" && address != "" && phone != "" && birthday != "") {
 
-            /* Trimitem datele la server folosind XMLHttpRequest */
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById("reg-err").innerHTML = this.response;
-                }
-            };
-            xmlhttp.open("POST", "php/login-register.php", true);
-            xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            xmlhttp.send("username=" + username + "&email=" + email + "&password=" + password + "&firstname=" + firstname +
-                "&lastname=" + lastname + "&city=" + city + "&county=" + county + "&address=" + address + "&phone=" + phone + "&birthday=" + birthday);
+                /* Trimitem datele la server folosind XMLHttpRequest */
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("reg-err").innerHTML = this.response;
+                    }
+                };
+                xmlhttp.open("POST", "php/login-register.php", true);
+                xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xmlhttp.send("username=" + username + "&email=" + email + "&password=" + password + "&firstname=" + firstname +
+                    "&lastname=" + lastname + "&city=" + city + "&county=" + county + "&address=" + address + "&phone=" + phone + "&birthday=" + birthday);
+            }
+            else {
+                print_error("Toate campurile trebuie sa fie completate!");
+            }
         }
         else {
-            print_error("Toate campurile trebuie sa fie completate");
+            print_error("Toate campurile trebuie sa fie completate corect!");
         }
     }
     else {
         print_error("Trebuie sa acceptati Termenii si Conditiile de utilizare ai serviciului!");
     }
 }
-
-var error = false;
-/* Luam toate datele necesare pentru*/
-// var username = ""
-// var email = "";
-// var password = "";
-// var firstname = "";
-// var lastname = "";
-// var city = "";
-// var county = "";
-// var country = "";
-// var address = "";
-// var phone = "";
-// var birthday = "";
-
-// var username = document.getElementById("username").value;
-// var email = document.getElementById("email").value;
-// var password = document.getElementById("password").value;
-// var firstname = document.getElementById("firstname").value;
-// var lastname = document.getElementById("lastname").value;
-// var city = document.getElementById("city").value;
-// var county = document.getElementById("county").value;
-// var address = document.getElementById("address").value;
-// var phone = document.getElementById("phone").value;
-// var birthday = document.getElementById("birthday").value;

@@ -40,7 +40,7 @@
             }
         }
         else {
-                print_login_error("Username sau parola gresite");
+                echo "Username sau parola gresite";
             }
         }
     }
@@ -78,7 +78,6 @@
 
             /*Daca am ajuns pana aici inseamna ca inregistrarea a avut loc cu succes, asa ca facem login */
             login_user($conn, $username, $password);
+            echo "Inregistrarea s-a realizat cu succes!";
         }
     }
-
-    echo "Inregistrarea s-a realizat cu succes!";

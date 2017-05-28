@@ -4,7 +4,7 @@
     /* Verificam daca acest username exista deja in baza de date */
     if(isset($_POST['username'])) {
         $username = $_POST['username'];
-        
+
         unset($stmt);
         $stmt =  $conn->stmt_init();
         $sql_query = "SELECT username FROM utilizatori WHERE username = ?";

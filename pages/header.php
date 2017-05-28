@@ -1,6 +1,6 @@
 
 <?php
-	require("php/database/connect2DB.php");
+	require("php/login-register.php");
 	session_start();
 ?>
 
@@ -37,7 +37,7 @@
 	<?php } else { ?>
 		<div class="log-buttons">
 			<button onclick="document.getElementById('id01').style.display='block'">Autentificare</button>
-			<button onclick="document.getElementById('id02').style.display='block'">Inregistrare</button>
+			<a href="register.php"><button type="button">Inregistrare</button></a>
 		</div>
 	<?php } ?>
 
@@ -70,7 +70,7 @@
 				<input type="password" placeholder="Enter Password" name="password" required />
 			</div>
 
-			<button type="submit">Login</button>
+			<button type="submit" onclick="login_user()">Login</button>
 		</div>
 	</form>
 </div>
@@ -86,10 +86,3 @@ window.onclick = function(event) {
     }
 }
 </script>
-
-
-<div class="modal">
-		<div class="container">
-			<a href="register.php"><button type="button">Register</button></a>
-		</div>
-</div>
