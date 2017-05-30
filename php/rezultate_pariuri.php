@@ -18,7 +18,7 @@ function afiseazaCurse($curse_azi, $cursa, $data_meci, $ore, $status) {
 
 		echo
 			'<div class="bet">
-				<span>' . ($curse_azi + 1) . '. ' . $cursa . '</span>
+				<span> ' . $cursa . '</span>
 				<div class="times">
 					' . $mesaj . '
 				</div>
@@ -86,7 +86,7 @@ function formeazaOreCurse($conn, $dataa, $name)
 	$index = 0;
 
 	unset($stmt);
-	$sql_query = "SELECT ora FROM curse WHERE nume like ? AND date_format(data, '%Y-%m-%d') like ?";
+	$sql_query = "SELECT substr(ora, 1, 5) FROM curse WHERE nume like ? AND date_format(data, '%Y-%m-%d') like ?";
 	if($stmt =  $conn->prepare($sql_query)) {
 		$stmt->bind_param('ss', $name, $dataa);
 		$stmt->execute();
