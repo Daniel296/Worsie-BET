@@ -134,10 +134,10 @@
 			$win_rates[$i] = array();
 			$odds[$i] = array();
 
-			$ids_horses[$i] = split(' ', $races[$i]['id_horses']);
-			$ids_jockeys[$i] = split(' ', $races[$i]['id_jockeys']);
-			$win_rates[$i] = split(' ', $races[$i]['win_rate']);
-			$odds[$i] = split(' ', $races[$i]['odds']);
+			$ids_horses[$i] = explode(' ', $races[$i]['id_horses']);
+			$ids_jockeys[$i] = explode(' ', $races[$i]['id_jockeys']);
+			$win_rates[$i] = explode(' ', $races[$i]['win_rate']);
+			$odds[$i] = explode(' ', $races[$i]['odds']);
 		}
 
 		/* Luam din baza de date toate detaliile despre cai */

@@ -27,7 +27,7 @@ function validate_register_data(flag, error) {
                             }
                         }
                     };
-                    xmlhttp.open("POST", "php/validate-register.php", true);
+                    xmlhttp.open("POST", "php/validate-data.php", true);
                     xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
                     xmlhttp.send("username=" + input);
                 }
@@ -51,7 +51,7 @@ function validate_register_data(flag, error) {
                             }
                         }
                     };
-                    xmlhttp.open("POST", "php/validate-register.php", true);
+                    xmlhttp.open("POST", "php/validate-data.php", true);
                     xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
                     xmlhttp.send("email=" + input);
                 }

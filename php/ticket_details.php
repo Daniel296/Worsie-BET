@@ -16,7 +16,7 @@
         $ticket_details = array();
         $ids = array();
 
-        $ids = split(' ', $pariuri);
+        $ids = explode(' ', $pariuri);
         for($i = 0; $i < count($ids); $i++) {
             $ticket_details[$i] = array();
             $ids1 = explode('.', $ids[$i]);
