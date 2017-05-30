@@ -13,39 +13,39 @@
 			Date personale
 		</div>
 		<?php
-			showError(1);
+		//	showError(1);
 		?>
 		
 		<div class="changeInfo">
 			<form action="./php/setari_exec.php" method="POST">
 				<div>
 					<label class="content">Nume:</label>
-					<input class="field" type="text" name="nume" value="<?php echo $usr_nume;?>">
+					<input class="field" type="text" name="lastname" value="<?php echo $usr_nume;?>" onchange="validate_register_data(6)">
 				</div>
 
 				<div>
 					<label class="content">Prenume:</label>
-					<input class="field" type="text" name="prenume" value="<?php echo $usr_prenume;?>">
+					<input class="field" type="text" name="firstname" value="<?php echo $usr_prenume;?>" onchange="validate_register_data(7)">
 				</div>
 
 				<div>
 					<label class="content">Judet:</label>
-					<input class="field" type="text" name="judet" value="<?php echo $usr_judet;?>">
+					<input class="field" type="text" name="county" value="<?php echo $usr_judet;?>" onchange="validate_register_data(8)">
 				</div>
 
 				<div>
 					<label class="content">Oras:</label>
-					<input class="field" type="text" name="oras" value="<?php echo $usr_oras;?>">
+					<input class="field" type="text" name="city" value="<?php echo $usr_oras;?>" onchange="validate_register_data(9)">
 				</div>
 
 				<div>
 					<label class="content">Adresa:</label>
-					<input class="field" type="text" name="adresa" value="<?php echo $usr_adresa;?>">
+					<input class="field" type="text" name="address" value="<?php echo $usr_adresa;?>"  onchange="validate_register_data(10)">
 				</div>
 
 				<div>
 					<label class="content">Telefon:</label>
-					<input class="field" type="text" name="telefon" value="<?php echo $usr_telefon;?>">
+					<input class="field" type="text" name="phone" value="<?php echo $usr_telefon;?>"  onchange="validate_register_data(12)">
 				</div>
 
 				<button class="btn">Schimba date</button>
@@ -58,24 +58,24 @@
 			Schimbare parola
 		</div>
 		<?php
-			showError(2);
+		//	showError(2);
 		?>
 		<div class="changePassword">
 			<form action="" method="POST">
 				<div class="centrare">
 					<div>
 						<label class="content">Parola actuala:</label>
-						<input class="field" type="text" name="current_password" value="">
+						<input class="field" type="text" name="password" value="" onchange="validate_register_data(4)">
 					</div>
 
 					<div>
 						<label class="content">Parola noua:</label>
-						<input class="field" type="text" name="new_password" value="">
+						<input class="field" type="text" name="password" value="" onchange="validate_register_data(4)">
 					</div>
 
 					<div>
 						<label class="content">Confirmare parola:</label>
-						<input class="field" type="text" name="confirm_password" value="">
+						<input class="field" type="text" name="re_password" value="" onchange="validate_register_data(5)">
 					</div>
 
 					<div>
@@ -91,18 +91,18 @@
 			Schimbare email
 		</div>
 		<?php
-			showError(3);
+		//	showError(3);
 		?>
 		<div class="changeEmail">
 			<form action="" method="POST">
 				<div>
 					<label class="content">E-mail actual:</label>
-					<input class="field" type="text" name="current_email" value="">
+					<input class="field" type="text" name="email" value="" onchange="validate_register_data(2)">
 				</div>
 
 				<div>
 					<label class="content">E-mail nou:</label>
-					<input class="field" type="text" name="new_email" value="">
+					<input class="field" type="text" name="re_email" value="" onchange="validate_register_data(2)">
 				</div>
 				<button class="btn">Schimba email</button>
 			</form>
