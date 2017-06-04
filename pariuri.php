@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title>Pariuri - WorsieBet</title>
+	<title>pariuri - WorsieBet</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/style-header.css">
 	<link rel="stylesheet" type="text/css" href="css/popup-style.css">
@@ -21,20 +21,34 @@
 				$days = array(0 => "Luni", 1 => "Marti", 2 => "Miercuri", 3 => "Joi", 4 => "Vineri", 5 => "Sambata", 6 => "Duminica");
 
 				$day = date("Y-m-d", time());
-				echo "<li class=\"active\"><a href =\"Pariuri.php?date=$day\">Azi</a></li>";
+				if($_GET['date'] == $day)
+					echo "<li class=\"active\"><a href =\"pariuri.php?date=$day\">Azi</a></li>";
+				else
+					echo "<li><a href =\"pariuri.php?date=$day\">Azi</a></li>";
 
 				$day = date("Y-m-d", time() + 86400);
-				echo "<li><a href =\"Pariuri.php?date=$day\">Maine</a></li>";
+				if($_GET['date'] == $day)
+					echo "<li class=\"active\"><a href =\"pariuri.php?date=$day\">Maine</a></li>";
+				else
+					echo "<li><a href =\"pariuri.php?date=$day\">Maine</a></li>";
 
 				$day = date("Y-m-d", time() + 2 * 86400);
-				echo "<li><a href =\"Pariuri.php?date=$day\">".$days[($num_day['wday'] + 8) % 7 ]."</a></li>";
+				if($_GET['date'] == $day)
+					echo "<li class=\"active\"><a href =\"pariuri.php?date=$day\">".$days[($num_day['wday'] + 8) % 7 ]."</a></li>";
+				else
+					echo "<li><a href =\"pariuri.php?date=$day\">".$days[($num_day['wday'] + 8) % 7 ]."</a></li>";
 
 				$day = date("Y-m-d", time() + 3 * 86400);
-				echo "<li><a href =\"Pariuri.php?date=$day\">".$days[($num_day['wday'] + 9) % 7 ]."</a></li>";
+				if($_GET['date'] == $day)
+					echo "<li class=\"active\"><a href =\"pariuri.php?date=$day\">".$days[($num_day['wday'] + 9) % 7 ]."</a></li>";
+				else
+					echo "<li><a href =\"pariuri.php?date=$day\">".$days[($num_day['wday'] + 9) % 7 ]."</a></li>";
 
 				$day = date("Y-m-d", time() + 4 * 86400);
-				echo "<li><a href =\"Pariuri.php?date=$day\">".$days[($num_day['wday'] + 10) % 7 ]."</a></li>";
-
+				if($_GET['date'] == $day)
+					echo "<li class=\"active\"><a href =\"pariuri.php?date=$day\">".$days[($num_day['wday'] + 10) % 7 ]."</a></li>";
+				else
+					echo "<li><a href =\"pariuri.php?date=$day\">".$days[($num_day['wday'] + 10) % 7 ]."</a></li>";
 			?>
 		</ul>
 	</div>
@@ -65,7 +79,7 @@
 				unset($stmt);
 				for($i = 0; $i < count($names_array); $i++) {
 					echo "<div class=\"bet\">
-							<a href=\"Pariuri.php?date=$date&race=$names_array[$i]\">$names_array[$i]</a>";
+							<a href=\"pariuri.php?date=$date&race=$names_array[$i]\">$names_array[$i]</a>";
 					$stmt =  $conn->stmt_init();
 					$sql_query = "SELECT DISTINCT substr(ora, 1, 5) as ora FROM curse WHERE data = '$date' AND ora > '$current_time' AND nume = '$names_array[$i]' ORDER BY ora";
 					if($stmt =  $conn->prepare($sql_query)) {
