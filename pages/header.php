@@ -51,7 +51,7 @@
 		</ul>
 	</div>
 </div>
-<?php echo explode('/', $_SERVER['PHP_SELF'])[2]; ?>
+
 <div id="id01" class="modal">
 	<div class="modal-content animate" >
 	<div class="imgcontainer">
