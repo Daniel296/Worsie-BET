@@ -1,4 +1,3 @@
-
 <?php
     require("database/connect2DB.php");
 
@@ -17,16 +16,17 @@
         /* Creeam si executam query-ul pentru a vedea daca exista user-ul in baza de date */
         unset($stmt);
         $stmt =  $conn->stmt_init();
-        $sql_query = "SELECT id, trim(parola) FROM UTILIZATORI WHERE username = ? AND parola = ?";
+        $sql_query = "SELECT id FROM UTILIZATORI WHERE username = ? AND parola = ?";
         if($stmt =  $conn->prepare($sql_query)) {
         $stmt->bind_param('ss', $username, $password);
         $stmt->execute();
-        $stmt->bind_result($id_user, $username1, $hash_password);
+        $stmt->bind_result($id_user);
         $stmt->fetch();
 
         //password_verify($password, $hash_password) == TRUE
         if(isset($id_user)) {
             /* Pornim sesiunea si setam parametrii la sesiune */
+            session_start();
             $_SESSION['id'] = $id_user;
             $_SESSION['username'] = $username;
 

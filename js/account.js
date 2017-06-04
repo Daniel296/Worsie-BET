@@ -266,8 +266,7 @@ function login_user() {
             if(this.response == "0")
                 print_login_error("Username sau parola invalid(a)!");
             else {
-                print_login_error("Conectat cu succes");
-                window.location="index.php";
+                window.location = window.location.pathname + window.location.search;
             }
         }
     };

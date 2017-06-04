@@ -14,5 +14,5 @@
 		echo "Logout update error!<br>";
 	}
 	unset($_SESSION['id']);
-	header('Location: ../index.php');
+	header('Location: ' . $_GET['redirect']);
 ?>
