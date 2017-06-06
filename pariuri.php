@@ -341,5 +341,17 @@
 ?>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="js/bet.js"></script>
+
+<script>
+var elementPosition = $('#fixed-wrapper').offset();
+
+$(window).scroll(function(){
+        if($(window).scrollTop() > elementPosition.top){
+              $('#fixed-wrapper').css('position','fixed').css('top','0').css('margin','20px 1%s');
+        } else {
+            $('#fixed-wrapper').css('position','static');
+		}});
+
+</script>
 </body>
 </html>
