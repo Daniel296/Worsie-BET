@@ -96,11 +96,17 @@
 					
 					//rezultat
 					$rezultat = '';
+					$top_cai = '';
+					$top_jochei ='';
 					for ($i = 0; $i < $length; $i++) {
 						if($res === $length) {
+							$top_cai = $top_cai . $new_cai[$i];
+							$top_jochei = $top_jochei . $new_jochei[$i];
 							$rezultat = $rezultat . $new_cai[$i] . '.' . $new_jochei[$i];
 						}
 						else {
+							$top_cai = $top_cai . $new_cai[$i] . ' ';
+							$top_jochei = $top_jochei . $new_jochei[$i] . ' ';
 							$rezultat = $rezultat . $new_cai[$i] . '.' . $new_jochei[$i] . ' ';
 						}
 					}
@@ -118,7 +124,7 @@
 						while ($row = $res->fetch_assoc()) {
 							$cursa_id = $row['id'];
 						}
-						$insertR = mysqli_query($connection,"INSERT INTO rezultate (id_cursa, rezultat) VALUES ('$cursa_id','$rezultat')");
+						$insertR = mysqli_query($connection,"INSERT INTO rezultate (id_cursa, id_cai, id_jochei, rezultat, data, ora) VALUES ('$cursa_id','$top_cai','$top_jochei','$rezultat',CAST('". $date1 ."' AS DATE),CAST('". $time1 ."' AS TIME ))");
 						if($insertR === FALSE) { 
 							die(mysql_error()); // TODO: better error handling
 						}

@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title>EVOLUTIE PARIURI - WorsieBET</title>
+	<title>EVOLU&#354IE PARIURI - WorsieBET</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/style-header.css">
 </head>

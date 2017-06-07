@@ -4,7 +4,7 @@
 		<a href="generare_curse.php">Generare curse</a> |
 		<a href="top_bilete.php">Top bilete</a> |
 		<a href="top_pariori.php">Top pariori</a> |
-		<a href="evolutie_sume.php">Evolutia sumelor pariate</a>
+		<a href="evolutie_sume.php">Evolu&#355ia sumelor pariate</a>
 	</div>
 	
 	<div class="copyright">
