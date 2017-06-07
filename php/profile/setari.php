@@ -8,7 +8,7 @@
 		}*/
 ?>
 <div id="setari">
-	<form id="cont" method="POST" action="./php/setari_exec.php">
+	<form id="cont">
 		<div class="changeInfoText">
 			Date personale
 		</div>
@@ -17,100 +17,110 @@
 		?>
 		
 		<div class="changeInfo">
-			<form action="./php/setari_exec.php" method="POST">
+			<div id="err1">
+                <!-- Mesaje de eroare din JAVASCRIPT -->
+            </div>
+			<!--<form action="." method="POST">-->
 				<div>
 					<label class="content">Nume:</label>
-					<input class="field" type="text" name="lastname" value="<?php echo $usr_nume;?>" onchange="validate_register_data(6)">
+					<input class="field" type="text" id="lastname" value="<?php echo $usr_nume;?>" onchange="validare_input(6, 0)">
 				</div>
 
 				<div>
 					<label class="content">Prenume:</label>
-					<input class="field" type="text" name="firstname" value="<?php echo $usr_prenume;?>" onchange="validate_register_data(7)">
+					<input class="field" type="text" id="firstname" value="<?php echo $usr_prenume;?>" onchange="validare_input(7, 0)">
 				</div>
 
 				<div>
 					<label class="content">Judet:</label>
-					<input class="field" type="text" name="county" value="<?php echo $usr_judet;?>" onchange="validate_register_data(8)">
+					<input class="field" type="text" id="county" value="<?php echo $usr_judet;?>" onchange="validare_input(8, 0)">
 				</div>
 
 				<div>
 					<label class="content">Oras:</label>
-					<input class="field" type="text" name="city" value="<?php echo $usr_oras;?>" onchange="validate_register_data(9)">
+					<input class="field" type="text" id="city" value="<?php echo $usr_oras;?>" onchange="validare_input(9, 0)">
 				</div>
 
 				<div>
 					<label class="content">Adresa:</label>
-					<input class="field" type="text" name="address" value="<?php echo $usr_adresa;?>"  onchange="validate_register_data(10)">
+					<input class="field" type="text" id="address" value="<?php echo $usr_adresa;?>"  onchange="validare_input(10, 0)">
 				</div>
 
 				<div>
 					<label class="content">Telefon:</label>
-					<input class="field" type="text" name="phone" value="<?php echo $usr_telefon;?>"  onchange="validate_register_data(12)">
+					<input class="field" type="text" id="phone" value="<?php echo $usr_telefon;?>"  onchange="validare_input(12, 0)">
 				</div>
 
-				<button class="btn">Schimba date</button>
-			</form>
+				<button type="button" class="btn" onclick="schimba_date()">Schimba date</button>
+			<!--</form>-->
 		</div>
 	</form>
 
-	<form id="password" method="POST" action="./php/setari_exec.php">
+
+	<!--<form id="password">-->
 		<div class="changePasswordText">
 			Schimbare parola
 		</div>
-		<?php
-		//	showError(2);
-		?>
+
+		<div id="err2">
+			<!-- Mesaj de eroare din JAVASCRIPT -->
+		</div>
+		
 		<div class="changePassword">
-			<form action="" method="POST">
+			
 				<div class="centrare">
 					<div>
 						<label class="content">Parola actuala:</label>
-						<input class="field" type="text" name="password" value="" onchange="validate_register_data(4)">
+						<input class="field" type="text" id="old_password" onchange="validare_input(13, 0)">
 					</div>
 
 					<div>
 						<label class="content">Parola noua:</label>
-						<input class="field" type="text" name="password" value="" onchange="validate_register_data(4)">
+						<input class="field" type="text" id="password" onchange="validare_input(4, 0)">
 					</div>
 
 					<div>
 						<label class="content">Confirmare parola:</label>
-						<input class="field" type="text" name="re_password" value="" onchange="validate_register_data(5)">
+						<input class="field" type="text" id="re_password" onchange="validare_input(5, 0)">
 					</div>
 
 					<div>
-						<button class="btn">Schimba parola</button>
+						<button type="button" class="btn" onclick="schimba_parola()">Schimba parola</button>
 					</div>
 				</div>
-			</form>
+			
 		</div>
-	</form>
+	<!--</form>-->
 
-	<form id="email" method="POST" action="./php/setari_exec.php">
+
+	<!--<form id="email">-->
 		<div class="changeEmailText">
 			Schimbare email
 		</div>
-		<?php
-		//	showError(3);
-		?>
+
+		<div id="err3">
+			<!-- Mesaj de eroare din JAVASCRIPT -->
+		</div>
+
 		<div class="changeEmail">
-			<form action="" method="POST">
 				<div>
 					<label class="content">E-mail actual:</label>
-					<input class="field" type="text" name="email" value="" onchange="validate_register_data(2)">
+					<input class="field" type="text" id="email" value="" onchange="validare_input(2, 0)">
 				</div>
 
 				<div>
 					<label class="content">E-mail nou:</label>
-					<input class="field" type="text" name="re_email" value="" onchange="validate_register_data(2)">
+					<input class="field" type="text" id="re_email" value="" onchange="validare_input(2, 0)">
 				</div>
-				<button class="btn">Schimba email</button>
-			</form>
+				<button type="button" class="btn" onclick="schimba_email()">Schimba email</button>
+			
 		</div>
-	</form>
+	<!--</form>-->
 </div>
 
 
+
+<script src="js/validari.js"></script>
 <?php
 
 function showError($x) {

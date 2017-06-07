@@ -1,7 +1,7 @@
 <?php
 
 $option = 0;
-if(isset($_POST['nume']) && isset($_POST['prenume']) && isset($_POST['judet']) && isset($_POST['oras']) && isset($_POST['adresa']) && isset($_POST['telefon'])) {
+if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['county']) && isset($_POST['city']) && isset($_POST['address']) && isset($_POST['phone'])) {
 	//echo $_POST['nume'] . "<br>" . $_POST['prenume'] . "<br>" . $_POST['judet'] . "<br>" . $_POST['oras'] . "<br>" . $_POST['adresa'] . "<br>" . $_POST['telefon'];
 	updateInfo(1);//$_SESSION['user_ID']);
 	$option = 1;
@@ -24,14 +24,14 @@ else if(isset($_POST['current_email']) && isset($_POST['new_email'])) {
 function updateInfo($x) {
 	require "database/connect2DB.php";
 
-    $nume = $_POST["nume"];
-    $prenume = $_POST["prenume"];
-    $judet = $_POST["judet"];
-    $oras = $_POST["oras"];
-    $adresa = $_POST["adresa"];
-    $telefon = $_POST["telefon"];
+    $nume = $_POST["firstname"];
+    $prenume = $_POST["lastname"];
+    $judet = $_POST["county"];
+    $oras = $_POST["city"];
+    $adresa = $_POST["address"];
+    $telefon = $_POST["phone"];
 
-
+/*
     if(!ctype_alnum($nume))
     	header('Location: ../profile.php?page=setari&err=111#cont');
     if(!ctype_alnum($prenume))
@@ -44,7 +44,7 @@ function updateInfo($x) {
     	header('Location: ../profile.php?page=setari&err=151#cont');
     if(!ctype_alnum($telefon))
     	header('Location: ../profile.php?page=setari&err=161#cont');
-
+*/
     $sql = "UPDATE `UTILIZATORI` SET `nume`=?, `prenume`=?, `judet`=?, `oras`=?, `adresa`=?, `telefon`=? WHERE `ID`=?";
 	    
 	if($stmt =  $conn->prepare($sql)) {
