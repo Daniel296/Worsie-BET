@@ -64,13 +64,13 @@
 							<div class="biletData">' . $data_creare . '
 							</div>
 
-							<div class="biletSuma">Suma: ' . $suma_depusa . ' RON
+							<div class="biletSuma">Sumă: ' . $suma_depusa . ' RON
 							</div>
 
-							<div class="biletCastig">Castig: 0 RON
+							<div class="biletCastig">Câ&#351tig: 0 RON
 							</div>
 
-							<div class="biletCota">Cota: ' . $cota . '
+							<div class="biletCota">Cotă: ' . $cota . '
 							</div>
 
 							<div class="detalii_bilet">
@@ -87,13 +87,13 @@
 							<div class="biletData">' . $data_creare . '
 							</div>
 
-							<div class="biletSuma">Suma: ' . $suma_depusa . ' RON
+							<div class="biletSuma">Sumă: ' . $suma_depusa . ' RON
 							</div>
 
-							<div class="biletCastig">Castig: ' . $suma_castig . ' RON
+							<div class="biletCastig">Câ&#351tig: ' . $suma_castig . ' RON
 							</div>
 
-							<div class="biletCota">Cota: ' . $cota . '
+							<div class="biletCota">Cotă: ' . $cota . '
 							</div>
 
 							<div class="detalii_bilet">
@@ -110,13 +110,13 @@
 							<div class="biletData">' . $data_creare . '
 							</div>
 
-							<div class="biletSuma">Suma: ' . $suma_depusa . ' RON
+							<div class="biletSuma">Sumă: ' . $suma_depusa . ' RON
 							</div>
 
-							<div class="biletCastig">Castig: ' . $suma_castig . ' RON
+							<div class="biletCastig">Câ&#351tig: ' . $suma_castig . ' RON
 							</div>
 
-							<div class="biletCota">Cota: ' . $cota . '
+							<div class="biletCota">Cotă: ' . $cota . '
 							</div>
 
 							<div class="detalii_bilet">

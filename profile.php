@@ -17,8 +17,8 @@
 		<div class="menu">
 			<ul>
 				<li><a href="profile.php?page=account">Contul meu</a></li>
-				<li class="active"><a href="profile.php?page=setari">Setari cont</a></li>
-				<li><a href="profile.php?page=bilete">Istoric Bilete</a></li>
+				<li class="active"><a href="profile.php?page=setari">Setări cont</a></li>
+				<li><a href="profile.php?page=bilete">Istoric bilete</a></li>
 			</ul>
 		</div>
 		<div class="dateCont">

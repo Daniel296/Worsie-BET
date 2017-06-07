@@ -18,7 +18,7 @@
 
 	<div id="search" class="search-bar">
 		<form  method="POST">
-			<input name="search" placeholder="Search ...">
+			<input name="search" placeholder="Căutare...">
 			<div class="search-img">
 				<img src="images/search.png" alt="search">
 			</div>
@@ -30,7 +30,7 @@
 		<ul>
 			<?php
 				$num_day = getdate();
-				$days = array(0 => "Luni", 1 => "Marti", 2 => "Miercuri", 3 => "Joi", 4 => "Vineri", 5 => "Sambata", 6 => "Duminica");
+				$days = array(0 => "Luni", 1 => "Mar&#355i", 2 => "Miercuri", 3 => "Joi", 4 => "Vineri", 5 => "Sâmbătă", 6 => "Duminică");
 
 				$day = date("Y-m-d", time() - 4 * 86400);
 				if($_GET['date'] == $day)

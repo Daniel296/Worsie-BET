@@ -78,6 +78,6 @@
 
             /*Daca am ajuns pana aici inseamna ca inregistrarea a avut loc cu succes, asa ca facem login */
             login_user($conn, $username, $password);
-            echo "Inregistrarea s-a realizat cu succes!";
+            echo "Înregistrarea s-a realizat cu succes!";
         }
     }

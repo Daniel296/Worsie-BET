@@ -69,7 +69,7 @@
         $html .= "</div>";
     }
     else {
-        echo "Biletul nu exista in baza de date";
+        echo "Biletul nu există în baza de date";
     }
     echo $html;
 

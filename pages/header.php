@@ -36,13 +36,13 @@
 	<?php } else { ?>
 		<div class="log-buttons">
 			<button onclick="document.getElementById('id01').style.display='block'">Autentificare</button>
-			<a href="register.php"><button type="button">Inregistrare</button></a>
+			<a href="register.php"><button type="button">Înregistrare</button></a>
 		</div>
 	<?php } ?>
 
 	<div class="links">
 		<ul>
-			<li><a <?php if(explode('/', $_SERVER['PHP_SELF'])[2] == 'index.php') echo "class=\"active\""; ?> href="index.php">Acasa</a></li>
+			<li><a <?php if(explode('/', $_SERVER['PHP_SELF'])[2] == 'index.php') echo "class=\"active\""; ?> href="index.php">Acasă</a></li>
 			<li><a <?php if(explode('/', $_SERVER['PHP_SELF'])[2] == 'pariuri.php') echo "class=\"active\""; ?> href="pariuri.php?date=<?php echo date("Y-m-d", time());?>">Pariuri</a></li>
 			<li><a <?php if(explode('/', $_SERVER['PHP_SELF'])[2] == 'rezultate.php') echo "class=\"active\""; ?> href="rezultate.php?date=<?php echo date("Y-m-d", time());?>">Rezultate</a></li>
 			<li><a <?php if(explode('/', $_SERVER['PHP_SELF'])[2] == 'regulament.php') echo "class=\"active\""; ?> href="regulament.php">Regulament</a></li>
@@ -65,15 +65,15 @@
 
 		<div class="form-login">
 			<label><b>Username</b></label>
-			<input type="text" placeholder="Enter Username" id="username_login" required />
+			<input type="text" placeholder="Introduce&#355i numele de utilizator" id="username_login" required />
 		</div>
 
 		<div  class="form-login">
-			<label><b>Parola</b></label>
-			<input type="password" placeholder="Enter Password" id="password" required />
+			<label><b>Parolă</b></label>
+			<input type="password" placeholder="Introduce&#355i parola" id="password" required />
 		</div>
 
-		<button type="submit" onclick="login_user()">Login</button>
+		<button type="submit" onclick="login_user()">Logare</button>
 	</div>
 	</div>
 </div>

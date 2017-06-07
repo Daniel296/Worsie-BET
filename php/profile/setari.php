@@ -32,17 +32,17 @@
 				</div>
 
 				<div>
-					<label class="content">Judet:</label>
+					<label class="content">Jude&#355:</label>
 					<input class="field" type="text" id="county" value="<?php echo $usr_judet;?>" onchange="validare_input(8, 0)">
 				</div>
 
 				<div>
-					<label class="content">Oras:</label>
+					<label class="content">Ora&#351:</label>
 					<input class="field" type="text" id="city" value="<?php echo $usr_oras;?>" onchange="validare_input(9, 0)">
 				</div>
 
 				<div>
-					<label class="content">Adresa:</label>
+					<label class="content">Adresă:</label>
 					<input class="field" type="text" id="address" value="<?php echo $usr_adresa;?>"  onchange="validare_input(10, 0)">
 				</div>
 
@@ -51,7 +51,7 @@
 					<input class="field" type="text" id="phone" value="<?php echo $usr_telefon;?>"  onchange="validare_input(12, 0)">
 				</div>
 
-				<button type="button" class="btn" onclick="schimba_date()">Schimba date</button>
+				<button type="button" class="btn" onclick="schimba_date()">Schimbă date</button>
 			<!--</form>-->
 		</div>
 	</form>
@@ -59,7 +59,7 @@
 
 	<!--<form id="password">-->
 		<div class="changePasswordText">
-			Schimbare parola
+			Schimbare parolă
 		</div>
 
 		<div id="err2">
@@ -70,22 +70,22 @@
 			
 				<div class="centrare">
 					<div>
-						<label class="content">Parola actuala:</label>
+						<label class="content">Parolă actuală:</label>
 						<input class="field" type="text" id="old_password" onchange="validare_input(13, 0)">
 					</div>
 
 					<div>
-						<label class="content">Parola noua:</label>
+						<label class="content">Parolă nouă:</label>
 						<input class="field" type="text" id="password" onchange="validare_input(4, 0)">
 					</div>
 
 					<div>
-						<label class="content">Confirmare parola:</label>
+						<label class="content">Confirmare parolă:</label>
 						<input class="field" type="text" id="re_password" onchange="validare_input(5, 0)">
 					</div>
 
 					<div>
-						<button type="button" class="btn" onclick="schimba_parola()">Schimba parola</button>
+						<button type="button" class="btn" onclick="schimba_parola()">Schimbă parolă</button>
 					</div>
 				</div>
 			
@@ -112,7 +112,7 @@
 					<label class="content">E-mail nou:</label>
 					<input class="field" type="text" id="re_email" value="" onchange="validare_input(2, 0)">
 				</div>
-				<button type="button" class="btn" onclick="schimba_email()">Schimba email</button>
+				<button type="button" class="btn" onclick="schimba_email()">Schimbă email</button>
 			
 		</div>
 	<!--</form>-->
@@ -128,18 +128,18 @@ function showError($x) {
 		$message = "";
 
 		if($x == 1) {
-			if($_GET['err'] == '111') {$message .= "* Numele poate contine doar caractere alfabetice.";}
-			else if($_GET['err'] == '121') {$message .= "* Prenume poate contine doar caractere alfabetice.";}
-			else if($_GET['err'] == '131') {$message .= "* Numele poate contine doar caractere alfabetice.";}
-			else if($_GET['err'] == '141') {$message .= "* Numele poate contine doar caractere alfabetice.";}
-			else if($_GET['err'] == '151') {$message .= "* Adresa poate contine doar caractere alfanumerice.";}
-			else if($_GET['err'] == '161') {$message .= "* Numarul de telefon poate contine doar cifre.";}
+			if($_GET['err'] == '111') {$message .= "* Numele poate con&#355ine doar caractere alfabetice.";}
+			else if($_GET['err'] == '121') {$message .= "* Prenume poate con&#355ine doar caractere alfabetice.";}
+			else if($_GET['err'] == '131') {$message .= "* Numele poate con&#355ine doar caractere alfabetice.";}
+			else if($_GET['err'] == '141') {$message .= "* Numele poate con&#355ine doar caractere alfabetice.";}
+			else if($_GET['err'] == '151') {$message .= "* Adresa poate con&#355ine doar caractere alfanumerice.";}
+			else if($_GET['err'] == '161') {$message .= "* Numarul de telefon poate con&#355ine doar cifre.";}
 		} else if($x == 2) {
-			if($_GET['err'] == '211') {$message .= "* Noua parola nu poate coincide cu vechea parola.";}
-			else if($_GET['err'] == '221') {$message .= "* Parola nu coincide cu confirmarea parolei.";}
+			if($_GET['err'] == '211') {$message .= "* Noua parolă nu poate coincide cu vechea parolă.";}
+			else if($_GET['err'] == '221') {$message .= "* Parolele nu coincid.";}
 		} else if($x == 3) {
-			if($_GET['err'] == '311') {$message .= "* Adresa de e-mail contine caractere invalide.";}
-			else if($_GET['err'] == '321') {$message .= "* Noua adresa de e-mail nu poate coincide cu vechea adresa.";}
+			if($_GET['err'] == '311') {$message .= "* Adresa de e-mail con&#355ine caractere invalide.";}
+			else if($_GET['err'] == '321') {$message .= "* E-mail-urile nu pot coincide.";}
 		}
 		echo '<div class="showErr"> ' . $message . '</div>';
 	}

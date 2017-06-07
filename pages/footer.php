@@ -1,6 +1,6 @@
 <div id="footer">
 	<div class="bottom-menu">
-		<a href="index.php" <?php if(explode('/', $_SERVER['PHP_SELF'])[2] == 'index.php') echo "class=\"active\""; ?>>Acasa</a> |
+		<a href="index.php" <?php if(explode('/', $_SERVER['PHP_SELF'])[2] == 'index.php') echo "class=\"active\""; ?>>Acasă</a> |
 		<a href="pariuri.php?date=<?php echo date("Y-m-d", time());?>" <?php if(explode('/', $_SERVER['PHP_SELF'])[2] == 'pariuri.php') echo "class=\"active\""; ?>>Pariuri</a> |
 		<a href="rezultate.php?date=<?php echo date("Y-m-d", time());?>" <?php if(explode('/', $_SERVER['PHP_SELF'])[2] == 'rezultate.php') echo "class=\"active\""; ?>>Rezultate</a> |
 		<a href="regulament.php" <?php if(explode('/', $_SERVER['PHP_SELF'])[2] == 'regulament.php') echo "class=\"active\""; ?>>Regulament</a> |

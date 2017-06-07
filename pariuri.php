@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title>pariuri - WorsieBet</title>
+	<title>Pariuri - WorsieBet</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/style-header.css">
 	<link rel="stylesheet" type="text/css" href="css/popup-style.css">
@@ -18,7 +18,7 @@
 		<ul>
 			<?php
 				$num_day = getdate();
-				$days = array(0 => "Luni", 1 => "Marti", 2 => "Miercuri", 3 => "Joi", 4 => "Vineri", 5 => "Sambata", 6 => "Duminica");
+				$days = array(0 => "Luni", 1 => "Mar&#355i", 2 => "Miercuri", 3 => "Joi", 4 => "Vineri", 5 => "Sâmbătă", 6 => "Duminică");
 
 				$day = date("Y-m-d", time());
 				if($_GET['date'] == $day)
@@ -28,9 +28,9 @@
 
 				$day = date("Y-m-d", time() + 86400);
 				if($_GET['date'] == $day)
-					echo "<li class=\"active\"><a href =\"pariuri.php?date=$day\">Maine</a></li>";
+					echo "<li class=\"active\"><a href =\"pariuri.php?date=$day\">Mâine</a></li>";
 				else
-					echo "<li><a href =\"pariuri.php?date=$day\">Maine</a></li>";
+					echo "<li><a href =\"pariuri.php?date=$day\">Mâine</a></li>";
 
 				$day = date("Y-m-d", time() + 2 * 86400);
 				if($_GET['date'] == $day)
@@ -72,7 +72,7 @@
 					}
 				}
 				else {
-					die("O eroare nesteptata s-a produs!");
+					die("O eroare nea&#351teptată s-a produs!");
 				}
 
 				/* Selectam orele la care au loc cursele */
@@ -91,7 +91,7 @@
 						}
 					}
 					else {
-						die("O eroare nesteptata s-a produs!");
+						die("O eroare nea&#351teptată s-a produs!");
 					}
 					echo "</div></div>";
 				}
@@ -228,21 +228,21 @@
 				<span class="bottom">(Staul)</span>
 			</div>
 			<div class="collumn2">
-				<span class="top">Vesta Jocheu</span>
+				<span class="top">Vestă jocheu</span>
 			</div>
 			<div class="collumn3">
 				<span class="top-left">Cal</span>
 				<span class="bottom-left">Antrenor/Jocheu</span>
 			</div>
 			<div class="collumn2">
-				<span class="top">Sanse de castig</span>
+				<span class="top">&#350anse de câ&#351tig</span>
 			</div>
 			<div class="collumn1">
 				<span class="top">Greutate</span>
-				<span class="bottom">Varsta</span>
+				<span class="bottom">Vârstă</span>
 			</div>
 			<div class="collumn2">
-				<span class="top">Cota</span>
+				<span class="top">Cotă</span>
 			</div>
 		</div>
 		<div class="bet-details-body">
@@ -293,30 +293,30 @@
 
 <div id="fixed-wrapper">
 	<div class="check-ticket">
-		<p>Verificati bilet</p>
+		<p>Verifica&#355i bilet</p>
 		<form method="POST">
-			<input type="text" name="PIN" placeholder="Introduceti PIN-ul biletului">
-			<button type="submit">Verificati</button>
+			<input type="text" name="PIN" placeholder="Introduce&#355i PIN-ul biletului">
+			<button type="submit">Verifica&#355i</button>
 		</form>
 	</div>
 
 	<div class="bet-ticket">
-		<p>Plaseaza bilet</p>
+		<p>Plasează bilet</p>
 		<div id="races-on-ticket">
 			<!-- Cod javascript -->
 			<div>
-				<p>Nu ati selectat nici o cursa</p>
+				<p>Nu a&#355i selectat nicio cursă</p>
 			</div>
 		</div>
 		<div id="log-err">
 			<!--Cod javascript-->
 		</div>
 		<div class="total">
-				<span style="float: left;">Cota totala: </span>
+				<span style="float: left;">Cotă totală: </span>
 				<span id="total_odd" style="float: right;">1.00</span><br>
 		</div>
 		<div class="total">
-				<span style="float: left;">Castig potential: </span>
+				<span style="float: left;">Câ&#351tig poten&#355ial: </span>
 				<span id="total_win" style="float: right;">0 RON</span><br>
 		</div>
 		<div class="ticket-form">
@@ -329,7 +329,7 @@
 					else {
 						echo "'',''";
 					}
-				?>)">Plaseaza bilet</button>
+				?>)">Plasează bilet</button>
 		</div>
 	</div>
 </div>

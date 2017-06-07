@@ -14,12 +14,12 @@
 	
 	<div class="info1">
 		<div class="balance1">
-			<?php echo $usr_balanta . " lei in cont"; ?>
+			<?php echo $usr_balanta . " lei în cont"; ?>
 		</div>
 
 		<div class="winRate">
-			<?php if($usr_bilete_pierdute != 0) echo $usr_bilete_castigate/$usr_bilete_pierdute . " rata de castig";
-					else echo $usr_bilete_castigate . " rata de castig" ?>
+			<?php if($usr_bilete_pierdute != 0) echo $usr_bilete_castigate/$usr_bilete_pierdute . " rata de câ&#351tig";
+					else echo $usr_bilete_castigate . " rata de câ&#351tig" ?>
 		</div>
 
 		<div class="totalBilete">

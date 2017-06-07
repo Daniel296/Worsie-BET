@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title>Acasa - WorsieBet</title>
+	<title>Acasă - WorsieBet</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/style-header.css">
 	<link rel="stylesheet" type="text/css" href="css/popup-style.css">
@@ -17,7 +17,7 @@
 			<img src="images/betting-img.jpg" id="betting-img" alt="betting">
 			<a href="pariuri.php?date=<?php echo date("Y-m-d", time());?>">
 				<div id="bet-now">
-					<span id="bet-now-text">PARIAZA ACUM</span>
+					<span id="bet-now-text">PARIAZĂ ACUM</span>
 				</div>
 			</a>
 		</div>
