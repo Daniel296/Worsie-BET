@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title>Inregistrare - WorsieBet</title>
+	<title>Înregistrare - WorsieBet</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/style-header.css">
 	<link rel="stylesheet" type="text/css" href="css/popup-style.css">
@@ -13,13 +13,13 @@
 ?>
 <div id="wrap">
 	<div id="main">
-        <h2> Inregistrare </h2>
+        <h2> Înregistrare </h2>
         <div class="box">
             <div class="info-box-left">
-                1. Detaliile dumneavoastra
+                1. Detaliile dumneavoastră
             </div>
             <div class="info-box-right">
-                <span>Va rugam completati mai jos detaliile dumneavostra pentru a deschide un cont de pariere. Toate informatiile dumneavoastra sunt pastrate în siguranta, securizate si confidentiale.</span>
+                <span>Vă rugăm completați mai jos detaliile dumneavoastră pentru a deschide un cont de pariere. Toate informațiile dumneavoastră sunt păstrate în siguranță, securizate și confidențiale.</span>
                 <div id="reg-err">
                     <!-- Mesaje de eroare din JAVASCRIPT -->
                 </div>
@@ -35,11 +35,11 @@
                 <div class="line-input">
                     <div class="form-register">
                         <div class="left-form">
-        				    <label><b>Adresa de email</b></label>
+        				    <label><b>E-mail</b></label>
         				    <input type="email" id="email" onchange="validate_register_data(2)" required/>
                         </div>
                         <div class="right-form">
-        				    <label><b>Comfirmati adresa de email</b></label>
+        				    <label><b>Confirmă E-mail</b></label>
         				    <input type="email" id="re_email" onchange="validate_register_data(3)" required/>
                         </div>
         			</div>
@@ -47,11 +47,11 @@
                 <div class="line-input">
                     <div class="form-register">
                         <div class="left-form">
-        				    <label><b>Parola</b></label>
+        				    <label><b>Parolă</b></label>
         				    <input type="password" id="password" onchange="validate_register_data(4)" required/>
                         </div>
                         <div class="right-form">
-        				    <label><b>Comfirmati parola</b></label>
+        				    <label><b>Confirmă parolă</b></label>
         				    <input type="password" id="re_password" onchange="validate_register_data(5)" required/>
                         </div>
         			</div>
@@ -60,10 +60,10 @@
         </div>
         <div class="box">
             <div class="info-box-left">
-                1. Verificare date
+                2. Verificare date
             </div>
             <div class="info-box-right">
-                <span> &nbsp; &nbsp; &nbsp; &nbsp; Va rugam completati datele asa cum apar in actul dumneavoastra de identitate </span>
+                <span> &nbsp; &nbsp; &nbsp; &nbsp; Vă rugăm completați datele așa cum apar în actul dumneavoastră de identitate. </span>
 
                 <div class="line-input">
                     <div class="form-register">
@@ -81,11 +81,11 @@
                 <div class="line-input">
                     <div class="form-register">
                         <div class="left-form">
-        				    <label><b>Judet</b></label>
+        				    <label><b>Județ</b></label>
         				    <input type="text" id="county" onchange="validate_register_data(8)" required/>
                         </div>
                         <div class="right-form">
-        				    <label><b>Oras</b></label>
+        				    <label><b>Oraș</b></label>
         				    <input type="text" id="city" onchange="validate_register_data(9)" required/>
                         </div>
         			</div>
@@ -94,12 +94,12 @@
                 <div class="line-input">
                     <div class="form-register">
                         <div class="left-form">
-                            <label><b>Adresa</b></label>
+                            <label><b>Adresă</b></label>
         				    <input type="text" id="address" onchange="validate_register_data(10)" required/>
 
                         </div>
                         <div class="right-form">
-                            <label><b>Tara</b></label>
+                            <label><b>Țară</b></label>
         				    <input type="text" id="country" onchange="validate_register_data(11)" required/>
                         </div>
         			</div>
@@ -108,7 +108,7 @@
                 <div class="line-input">
                     <div class="form-register">
                         <div class="left-form">
-                            <label><b>Data nasterii</b></label>
+                            <label><b>Data nașterii</b></label>
             				<input type="date" id="bday" onchange="validate_register_data(13)" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" required >
             			</div>
                         <div class="right-form">
@@ -118,12 +118,12 @@
         			</div>
                 </div>
                 <div class="terms-box">
-                    <input type="checkbox" id="terms"> Accept <a href="regulament.php">Termeni si Conditii </a> asa cum sunt publicate pe acest site. <br>
+                    <input type="checkbox" id="terms"> Accept <a href="regulament.php">Termenii și Condițiile </a> așa cum sunt publicate pe acest site. <br>
                 </div>
             </div>
         </div>
         <div class="button-register">
-            <button type="button" onclick="register_user()">Inregistreaza-te </button>
+            <button type="button" onclick="register_user()">Înregistrează-te </button>
         </div>
 	</div>
 
