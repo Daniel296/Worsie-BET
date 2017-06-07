@@ -19,7 +19,7 @@
                 1. Detaliile dumneavoastră
             </div>
             <div class="info-box-right">
-                <span>Vă rugăm completați mai jos detaliile dumneavoastră pentru a deschide un cont de pariere. Toate informațiile dumneavoastră sunt păstrate în siguranță, securizate și confidențiale.</span>
+                <span>Vă rugăm completa&#355i mai jos detaliile dumneavoastră pentru a deschide un cont de pariere. Toate informa&#355iile dumneavoastră sunt păstrate în siguran&#355ă, securizate &#351i confiden&#355iale.</span>
                 <div id="reg-err">
                     <!-- Mesaje de eroare din JAVASCRIPT -->
                 </div>
@@ -63,7 +63,7 @@
                 2. Verificare date
             </div>
             <div class="info-box-right">
-                <span> &nbsp; &nbsp; &nbsp; &nbsp; Vă rugăm completați datele așa cum apar în actul dumneavoastră de identitate. </span>
+                <span> &nbsp; &nbsp; &nbsp; &nbsp; Vă rugăm completa&#355i datele a&#351a cum apar în actul dumneavoastră de identitate. </span>
 
                 <div class="line-input">
                     <div class="form-register">
@@ -81,11 +81,11 @@
                 <div class="line-input">
                     <div class="form-register">
                         <div class="left-form">
-        				    <label><b>Județ</b></label>
+        				    <label><b>Jude&#355</b></label>
         				    <input type="text" id="county" onchange="validate_register_data(8)" required/>
                         </div>
                         <div class="right-form">
-        				    <label><b>Oraș</b></label>
+        				    <label><b>Ora&#351</b></label>
         				    <input type="text" id="city" onchange="validate_register_data(9)" required/>
                         </div>
         			</div>
@@ -99,7 +99,7 @@
 
                         </div>
                         <div class="right-form">
-                            <label><b>Țară</b></label>
+                            <label><b>&#355ară</b></label>
         				    <input type="text" id="country" onchange="validate_register_data(11)" required/>
                         </div>
         			</div>
@@ -108,7 +108,7 @@
                 <div class="line-input">
                     <div class="form-register">
                         <div class="left-form">
-                            <label><b>Data nașterii</b></label>
+                            <label><b>Data na&#351terii</b></label>
             				<input type="date" id="bday" onchange="validate_register_data(13)" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" required >
             			</div>
                         <div class="right-form">
@@ -118,7 +118,7 @@
         			</div>
                 </div>
                 <div class="terms-box">
-                    <input type="checkbox" id="terms"> Accept <a href="regulament.php">Termenii și Condițiile </a> așa cum sunt publicate pe acest site. <br>
+                    <input type="checkbox" id="terms"> Accept <a href="regulament.php">Termenii &#351i Condi&#355iile </a> a&#351a cum sunt publicate pe acest site. <br>
                 </div>
             </div>
         </div>

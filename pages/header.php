@@ -1,4 +1,3 @@
-
 <?php
 	require("php/login-register.php");
 	session_start();
