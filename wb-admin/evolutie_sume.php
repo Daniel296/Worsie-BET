@@ -12,7 +12,7 @@
 	require('pages/header.php');
 ?>
 
-<h2>Evolu&#355ie sume</h2>
+<h2>Evolu&#355ie sume pariate</h2>
 
 <script language="JavaScript">
 <!--
