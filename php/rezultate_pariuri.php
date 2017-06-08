@@ -80,7 +80,7 @@ function printCurse($nume, $data_meci, $ore) {
 	$mesaj = "";
 
 	while($index != count($ore)) { // Cand vede mai multe curse
-		$mesaj .= '<a href="./rezultate.php?race=' . $nume . '&data=' . $data_meci . '&ora=' . $ore[$index] . '#res">' . $ore[$index] . '</a>';
+		$mesaj .= '<a href="./rezultate.php?race=' . $nume . '&date=' . $data_meci . '&ora=' . $ore[$index] . '#res">' . $ore[$index] . '</a>';
 		$index ++;
 	}
 
