@@ -111,7 +111,17 @@
 						}
 					}
 					
-					//insert...
+					//update meciuri_pierdute, meciuri_castigate
+					$update = mysqli_query($connection,"UPDATE cai SET meciuri_castigate = meciuri_castigate+1 WHERE id = '$new_cai[0]'");
+					if($update === FALSE) { 
+						die(mysql_error()); // TODO: better error handling
+					}
+					$update = mysqli_query($connection,"UPDATE cai SET meciuri_pierdute = meciuri_pierdute+1 WHERE id = '$new_cai[1]' OR id = '$new_cai[2]' OR id = '$new_cai[3]' OR id = '$new_cai[4]'");
+					if($update === FALSE) { 
+						die(mysql_error()); // TODO: better error handling
+					}
+					
+					//insert rezultat
 					$insert = mysqli_query($connection,"INSERT INTO curse (nume, id_cai, id_jochei, vreme, data, ora, sanse_castig, cote) VALUES ('$cursa','$cai','$jochei','$insert_vreme',CAST('". $date1 ."' AS DATE),CAST('". $time1 ."' AS TIME ),'$sansa','$cota')");
 					if($insert === FALSE) { 
 						die(mysql_error()); // TODO: better error handling
@@ -128,7 +138,7 @@
 						if($insertR === FALSE) { 
 							die(mysql_error()); // TODO: better error handling
 						}
-						echo "<div class=\"printing\">S-a inserat cu succes in baza de date!</div>";
+						echo "<div class=\"printing\">S-au adăugat cu succes în baza de date!</div>";
 					}
 			}
 		}
