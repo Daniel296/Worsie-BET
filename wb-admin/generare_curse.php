@@ -56,9 +56,26 @@
 					$cota = $cota1_rand . ' ' . $cota2_rand . ' ' . $cota3_rand . ' ' . $cota4_rand . ' ' . $cota5_rand;
 					
 					//sanse castig
-					$sanse=array('40','50','60','30','70','50');
-					$index_sanse = array_rand($sanse,5);
-					$sansa =$sanse[$index_sanse[0]] . ' ' . $sanse[$index_sanse[1]] . ' ' . $sanse[$index_sanse[2]] . ' ' . $sanse[$index_sanse[3]] . ' ' . $sanse[$index_sanse[4]];
+					$sum_cote = 0;
+					$sum_cote = $cota1_rand + $cota2_rand + $cota3_rand + $cota4_rand + $cota5_rand;
+					$procent_cota_1 = $cota1_rand / $sum_cote;
+					$procent_cota_2 = $cota2_rand / $sum_cote;
+					$procent_cota_3 = $cota3_rand / $sum_cote;
+					$procent_cota_4 = $cota4_rand / $sum_cote;
+					$procent_cota_5 = $cota5_rand / $sum_cote;
+					$sansa1 = $procent_cota_1*100;
+					$sansa2 = $procent_cota_2*100;
+					$sansa3 = $procent_cota_3*100;
+					$sansa4 = $procent_cota_4*100;
+					$sansa5 = $procent_cota_5*100;
+					$sansa1 = number_format($sansa1,2);
+					$sansa2 = number_format($sansa2,2);
+					$sansa3 = number_format($sansa3,2);
+					$sansa4 = number_format($sansa4,2);
+					$sansa5 = number_format($sansa5,2);
+					//$sanse=array('40','50','60','30','70','50');
+					//$index_sanse = array_rand($sanse,5);
+					$sansa = $sansa5 . ' ' . $sansa4 . ' ' . $sansa3 . ' ' . $sansa2 . ' ' . $sansa1;
 					
 					//vremea
 					$lista_grade=array("10 ", "14", "19", "17", "21");
