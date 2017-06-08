@@ -105,7 +105,6 @@ function formeazaIDsCurse($conn, $dataa, $name)
 	$i = 0;
 	$ids = array();
 	$index = 0;
-
 	unset($stmt);
 	$sql_query = "SELECT id FROM curse WHERE nume like ? AND date_format(data, '%Y-%m-%d') like ?";
 	if($stmt =  $conn->prepare($sql_query)) {
@@ -126,15 +125,16 @@ function formeazaNumeCurse($conn, $data_meci, $status)
 	$nume_curse = array();
 	$nume = "";
 	$stmt =  $conn->stmt_init();
+	$time = date('H:i', time() + 3600);
 	if($status == 0)
 		//$sql_query = "SELECT distinct nume FROM curse WHERE date_format(data, '%Y-%m-%d') like ?"; 
-		$sql_query = "SELECT distinct nume FROM curse WHERE id = any(SELECT id_cursa FROM rezultate WHERE date_format(data, '%Y-%m-%d') like ?)";
+		$sql_query = "SELECT distinct nume FROM curse WHERE id = any(SELECT id_cursa FROM rezultate WHERE substr(ora, 1, 5) < ? AND date_format(data, '%Y-%m-%d') like ?)";
 	else
 		//$sql_query = "SELECT nume FROM curse WHERE date_format(data, '%Y-%m-%d') like ?";
-		$sql_query = "SELECT nume FROM curse WHERE id = any(SELECT id_cursa FROM rezultate WHERE date_format(data, '%Y-%m-%d') like ?)";
+		$sql_query = "SELECT nume FROM curse WHERE id = any(SELECT id_cursa FROM rezultate WHERE substr(ora, 1, 5) < ? AND date_format(data, '%Y-%m-%d') like ?)";
 
 	if($stmt->prepare($sql_query)) { // or die(mysql_error());
-		$stmt->bind_param('s', $data_meci);
+		$stmt->bind_param('ss', $time, $data_meci);
 		$stmt->execute();
 		$stmt->bind_result($nume);
 		$i = 0;
