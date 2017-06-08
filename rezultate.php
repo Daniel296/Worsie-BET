@@ -33,34 +33,34 @@
 				$days = array(0 => "Luni", 1 => "Mar&#355i", 2 => "Miercuri", 3 => "Joi", 4 => "Vineri", 5 => "Sâmbătă", 6 => "Duminică");
 
 				$day = date("Y-m-d", time() - 4 * 86400);
-				if($_GET['date'] == $day)
-					echo "<li class=\"active\"><a href =\"rezultate.php?date=$day\">".$days[($num_day['wday'] + 9) % 7 ]."</a></li>";
+				if($_GET['data'] == $day)
+					echo "<li class=\"active\"><a href =\"rezultate.php?data=$day\">".$days[($num_day['wday'] + 9) % 7 ]."</a></li>";
 				else
-					echo "<li><a href =\"rezultate.php?date=$day\">".$days[($num_day['wday'] + 9) % 7 ]."</a></li>";
+					echo "<li><a href =\"rezultate.php?data=$day\">".$days[($num_day['wday'] + 9) % 7 ]."</a></li>";
 
 				$day = date("Y-m-d", time() - 3 * 86400);
-				if($_GET['date'] == $day)
-					echo "<li class=\"active\"><a href =\"rezultate.php?date=$day\">".$days[($num_day['wday'] + 10) % 7 ]."</a></li>";
+				if($_GET['data'] == $day)
+					echo "<li class=\"active\"><a href =\"rezultate.php?data=$day\">".$days[($num_day['wday'] + 10) % 7 ]."</a></li>";
 				else
-					echo "<li><a href =\"rezultate.php?date=$day\">".$days[($num_day['wday'] + 10) % 7 ]."</a></li>";
+					echo "<li><a href =\"rezultate.php?data=$day\">".$days[($num_day['wday'] + 10) % 7 ]."</a></li>";
 
 				$day = date("Y-m-d", time() - 2 * 86400);
-				if($_GET['date'] == $day)
-					echo "<li class=\"active\"><a href =\"rezultate.php?date=$day\">".$days[($num_day['wday'] + 11) % 7 ]."</a></li>";
+				if($_GET['data'] == $day)
+					echo "<li class=\"active\"><a href =\"rezultate.php?data=$day\">".$days[($num_day['wday'] + 11) % 7 ]."</a></li>";
 				else
-					echo "<li><a href =\"rezultate.php?date=$day\">".$days[($num_day['wday'] + 11) % 7 ]."</a></li>";
+					echo "<li><a href =\"rezultate.php?data=$day\">".$days[($num_day['wday'] + 11) % 7 ]."</a></li>";
 
 				$day = date("Y-m-d", time() - 86400);
-				if($_GET['date'] == $day)
-					echo "<li class=\"active\"><a href =\"rezultate.php?date=$day\">Ieri</a></li>";
+				if($_GET['data'] == $day)
+					echo "<li class=\"active\"><a href =\"rezultate.php?data=$day\">Ieri</a></li>";
 				else
-					echo "<li><a href =\"rezultate.php?date=$day\">Ieri</a></li>";
+					echo "<li><a href =\"rezultate.php?data=$day\">Ieri</a></li>";
 
 				$day = date("Y-m-d", time());
-				if($_GET['date'] == $day)
-					echo "<li class=\"active\"><a href =\"rezultate.php?date=$day\">Azi</a></li>";
+				if($_GET['data'] == $day)
+					echo "<li class=\"active\"><a href =\"rezultate.php?data=$day\">Azi</a></li>";
 				else
-					echo "<li><a href =\"rezultate.php?date=$day\">Azi</a></li>";
+					echo "<li><a href =\"rezultate.php?data=$day\">Azi</a></li>";
 
 			?>
 		</ul>
@@ -69,8 +69,8 @@
 	<div class ="bet-details">
 	<?php
 		unset($stmt);
-		if(isset($_GET['date']))
-			$data_cautare = $_GET['date'];
+		if(isset($_GET['data']))
+			$data_cautare = $_GET['data'];
 		else
 			$data_cautare = $day;
 
