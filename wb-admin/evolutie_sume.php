@@ -20,15 +20,59 @@ var myDays=
 ["Duminică","Luni","Mar&#355i","Miercuri","Joi","Vineri","Sâmbătă","Duminică"]
 today=new Date() 
 todayDate=today.getDay()
-daysAgo5=myDays[(todayDate+2)%7]
-daysAgo4=myDays[(todayDate+3)%7]
-daysAgo3=myDays[(todayDate+4)%7]
-daysAgo2=myDays[(todayDate+5)%7]
-daysAgo1=myDays[(todayDate+6)%7]
+fiveDaysAgo=myDays[(todayDate+2)%7]
+fourDaysAgo=myDays[(todayDate+3)%7]
+threeDaysAgo=myDays[(todayDate+4)%7]
+twoDaysAgo=myDays[(todayDate+5)%7]
+onedayAgo=myDays[(todayDate+6)%7]
 
 //-->
 </script>
 
+<?php
+	$connection = mysqli_connect('localhost', 'root', '', 'worsiebet');
+	$res = mysqli_query($connection,"SELECT sum(suma_depusa) FROM bilete WHERE DATE(data_creare) = DATE(subdate(CURRENT_DATE,12)) ");
+	if($res === FALSE) { 
+		die(mysql_error()); // TODO: better error handling
+	}
+	while ($row = $res->fetch_assoc()) {
+		$oneDayAgoBets = $row['sum(suma_depusa)'];
+	}
+
+	$res = mysqli_query($connection,"SELECT sum(suma_depusa) FROM bilete WHERE DATE(data_creare) = DATE(subdate(CURRENT_DATE,2)) ");
+	if($res === FALSE) { 
+		die(mysql_error()); // TODO: better error handling
+	}
+	while ($row = $res->fetch_assoc()) {
+		$twoDaysAgoBets = $row['sum(suma_depusa)'];
+	}
+
+	$res = mysqli_query($connection,"SELECT sum(suma_depusa) FROM bilete WHERE DATE(data_creare) = DATE(subdate(CURRENT_DATE,3)) ");
+	if($res === FALSE) { 
+		die(mysql_error()); // TODO: better error handling
+	}
+	while ($row = $res->fetch_assoc()) {
+		$threeDaysAgoBets = $row['sum(suma_depusa)'];
+	}
+
+	$res = mysqli_query($connection,"SELECT sum(suma_depusa) FROM bilete WHERE DATE(data_creare) = DATE(subdate(CURRENT_DATE,4)) ");
+	if($res === FALSE) { 
+		die(mysql_error()); // TODO: better error handling
+	}
+	while ($row = $res->fetch_assoc()) {
+		$fourDaysAgoBets = $row['sum(suma_depusa)'];
+	}
+
+	$res = mysqli_query($connection,"SELECT sum(suma_depusa) FROM bilete WHERE DATE(data_creare) = DATE(subdate(CURRENT_DATE,5)) ");
+	if($res === FALSE) { 
+		die(mysql_error()); // TODO: better error handling
+	}
+	while ($row = $res->fetch_assoc()) {
+		$fiveDaysAgoBets = $row['sum(suma_depusa)'];
+	}	
+	//5 si 370 vor fi limitele, in functie de asta, vom plasa in grafic, punctele de referinta, conform js
+	//
+?>
 
 <svg version="1.2" class="graph" role="img">
 
@@ -39,11 +83,11 @@ daysAgo1=myDays[(todayDate+6)%7]
   <line x1="90" x2="705" y1="370" y2="370"></line>
 </g>
   <g class="labels x-labels">
-  <text x="100" y="400"><script language="JavaScript">document.write(daysAgo5);</script></text>
-  <text x="246" y="400"><script language="JavaScript">document.write(daysAgo4);</script></text>
-  <text x="392" y="400"><script language="JavaScript">document.write(daysAgo3);</script></text>
-  <text x="538" y="400"><script language="JavaScript">document.write(daysAgo2);</script></text>
-  <text x="684" y="400"><script language="JavaScript">document.write(daysAgo1);</script></text>
+  <text x="100" y="400"><script language="JavaScript">document.write(onedayAgo);</script></text>
+  <text x="246" y="400"><script language="JavaScript">document.write(twoDaysAgo);</script></text>
+  <text x="392" y="400"><script language="JavaScript">document.write(threeDaysAgo);</script></text>
+  <text x="538" y="400"><script language="JavaScript">document.write(fourDaysAgo);</script></text>
+  <text x="684" y="400"><script language="JavaScript">document.write(fiveDaysAgo);</script></text>
   <text x="400" y="440" class="label-title">Ziua</text>
 </g>
 <g class="labels y-labels">
@@ -54,11 +98,11 @@ daysAgo1=myDays[(todayDate+6)%7]
   <text x="50" y="200" class="label-title">Suma</text>
 </g>
 <g class="data" data-setname="Our first data set">
-  <circle cx="90" cy="192" data-value="7.2" r="4"></circle>
-  <circle cx="240" cy="141" data-value="8.1" r="4"></circle>
-  <circle cx="388" cy="179" data-value="7.7" r="4"></circle>
-  <circle cx="531" cy="200" data-value="6.8" r="4"></circle>
-  <circle cx="677" cy="104" data-value="6.7" r="4"></circle>
+  <circle cx="90" cy="192" data-value=<?php echo $fiveDaysAgoBets ?> r="5"></circle>
+  <circle cx="240" cy="141" data-value=<?php echo $fourDaysAgoBets ?> r="5"></circle>
+  <circle cx="388" cy="179" data-value=<?php echo $threeDaysAgoBets ?> r="5"></circle>
+  <circle cx="531" cy="200" data-value=<?php echo $twoDaysAgoBets ?> r="5"></circle>
+  <circle cx="677" cy="104" data-value=<?php echo $oneDayAgoBets ?> r="5"></circle>
 </g>
 </svg>
 
