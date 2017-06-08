@@ -81,22 +81,22 @@ function create_ticket(user_balance, id_user) {
     var date = new Date();
     if(array.length === 0) {
         document.getElementById("races-on-ticket").innerHTML = '';
-        document.getElementById("log-err").innerHTML  = "<p>Selectati cel putin o cursa</p>";
+        document.getElementById("log-err").innerHTML  = "<p>Selecta&#355i cel pu&#355in o cursă!</p>";
     }
     else {
         if(id_user === '') {
-            document.getElementById("log-err").innerHTML  = "<p>Trebuie sa fiti logat pentru a putea plasa bilete</p>";
+            document.getElementById("log-err").innerHTML  = "<p>Trebuie să fi&#355i logat pentru a putea plasa bilete!</p>";
         }
         else {
             if(total_win === 0) {
-                document.getElementById("log-err").innerHTML  = "<p>Adaugati suma pe care o pariati</p>";
+                document.getElementById("log-err").innerHTML  = "<p>Adăuga&#355i suma pe care o paria&#355i!</p>";
             }
         }
     }
 
     var total_bet = document.getElementById("total_bet").value;     // suma pariata
 	if(user_balance != '' && (user_balance - total_bet) < 0.0) {
-		document.getElementById("log-err").innerHTML  = "<p>Nu aveti suficienti bani</p>";
+		document.getElementById("log-err").innerHTML  = "<p>Nu ave&#355i suficien&#355i bani!</p>";
 	}
 	else {
 	    if(array.length != 0 && id_user != '' && total_win != 0) {
@@ -129,7 +129,7 @@ function create_ticket(user_balance, id_user) {
 			 var xmlhttp = new XMLHttpRequest();
 	         xmlhttp.onreadystatechange = function() {
 	            if (this.readyState == 4 && this.status == 200) {
-	                document.getElementById("log-err").innerHTML = "<center>Biletul a fost plasat cu succes</center>";
+	                document.getElementById("log-err").innerHTML = "<center>Biletul a fost plasat cu succes!</center>";
 	            }
 	         };
 	         xmlhttp.open("POST", "php/insert-ticket.php", true);
@@ -144,7 +144,7 @@ function display_races_ticket(array, total_odd, total_win) {
 	text = "";
 
     if(array.length == 0) {
-        document.getElementById("log-err").innerHTML = "<p>Nu ati selectat nici o cursa</p>";
+        document.getElementById("log-err").innerHTML = "<p>Nu a&#355i selectat nicio cursă!</p>";
     }
 
 	for (var i = 0; i < array.length; i++) {
