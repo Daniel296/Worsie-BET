@@ -47,11 +47,11 @@ daysAgo1=myDays[(todayDate+6)%7]
   <text x="400" y="440" class="label-title">Ziua</text>
 </g>
 <g class="labels y-labels">
-  <text x="80" y="15">15</text>
-  <text x="80" y="131">10</text>
-  <text x="80" y="248">5</text>
-  <text x="80" y="373">0</text>
-  <text x="50" y="200" class="label-title">Suma pariată</text>
+  <text x="80" y="15">50.000 lei</text>
+  <text x="80" y="131">5000 lei</text>
+  <text x="80" y="248">500 lei</text>
+  <text x="80" y="373">0 lei</text>
+  <text x="50" y="200" class="label-title">Suma</text>
 </g>
 <g class="data" data-setname="Our first data set">
   <circle cx="90" cy="192" data-value="7.2" r="4"></circle>

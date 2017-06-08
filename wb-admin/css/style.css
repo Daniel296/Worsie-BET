@@ -5,7 +5,7 @@ body {
 	background-size: cover;
 	background-attachment: fixed;
 	font-family: 'Open Sans', sans-serif;
-	color: gray;
+	color: white;
 	min-width: 800px;
 	max-width: 100%;
 	position: relative;
@@ -13,6 +13,7 @@ body {
 	margin:0;
 	padding:0;
 	height:100%;
+	text-align:center;
 }
 
 #body {
