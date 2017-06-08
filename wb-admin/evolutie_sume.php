@@ -24,7 +24,7 @@ fiveDaysAgo=myDays[(todayDate+2)%7]
 fourDaysAgo=myDays[(todayDate+3)%7]
 threeDaysAgo=myDays[(todayDate+4)%7]
 twoDaysAgo=myDays[(todayDate+5)%7]
-onedayAgo=myDays[(todayDate+6)%7]
+oneDayAgo=myDays[(todayDate+6)%7]
 
 //-->
 </script>
@@ -131,11 +131,11 @@ onedayAgo=myDays[(todayDate+6)%7]
   <line x1="90" x2="705" y1="370" y2="370"></line>
 </g>
   <g class="labels x-labels">
-  <text x="100" y="400"><script language="JavaScript">document.write(onedayAgo);</script></text>
-  <text x="246" y="400"><script language="JavaScript">document.write(twoDaysAgo);</script></text>
+  <text x="100" y="400"><script language="JavaScript">document.write(fiveDaysAgo);</script></text>
+  <text x="246" y="400"><script language="JavaScript">document.write(fourDaysAgo);</script></text>
   <text x="392" y="400"><script language="JavaScript">document.write(threeDaysAgo);</script></text>
-  <text x="538" y="400"><script language="JavaScript">document.write(fourDaysAgo);</script></text>
-  <text x="684" y="400"><script language="JavaScript">document.write(fiveDaysAgo);</script></text>
+  <text x="538" y="400"><script language="JavaScript">document.write(twoDaysAgo);</script></text>
+  <text x="684" y="400"><script language="JavaScript">document.write(oneDayAgo);</script></text>
   <text x="400" y="440" class="label-title">Ziua</text>
 </g>
 <g class="labels y-labels">
@@ -152,10 +152,10 @@ onedayAgo=myDays[(todayDate+6)%7]
   <circle cx="531" cy="<?php echo $position2?>" data-value=<?php echo $twoDaysAgoBets ?> r="5"></circle>
   <circle cx="677" cy="<?php echo $position1?>" data-value=<?php echo $oneDayAgoBets ?> r="5"></circle>
 </g>
-	<line x1="90" y1="<?php echo $position5?>" x2="240" y2="<?php echo $position4?>" stroke-width="5" stroke="red"/>
-	<line x1="240" y1="<?php echo $position4?>" x2="388" y2="<?php echo $position3?>" stroke-width="5" stroke="red"/>
-	<line x1="388" y1="<?php echo $position3?>" x2="531" y2="<?php echo $position2?>" stroke-width="5" stroke="red"/>
-	<line x1="531" y1="<?php echo $position2?>" x2="677" y2="<?php echo $position1?>" stroke-width="5" stroke="red"/>
+	<line x1="90" y1="<?php echo $position5?>" x2="240" y2="<?php echo $position4?>" stroke-width="3" stroke="red"/>
+	<line x1="240" y1="<?php echo $position4?>" x2="388" y2="<?php echo $position3?>" stroke-width="3" stroke="red"/>
+	<line x1="388" y1="<?php echo $position3?>" x2="531" y2="<?php echo $position2?>" stroke-width="3" stroke="red"/>
+	<line x1="531" y1="<?php echo $position2?>" x2="677" y2="<?php echo $position1?>" stroke-width="3" stroke="red"/>
 </svg>
 
 <?php

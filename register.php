@@ -99,7 +99,7 @@
 
                         </div>
                         <div class="right-form">
-                            <label><b>&#355ară</b></label>
+                            <label><b>&#354ară</b></label>
         				    <input type="text" id="country" onchange="validate_register_data(11)" required/>
                         </div>
         			</div>
