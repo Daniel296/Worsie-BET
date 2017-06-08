@@ -72,12 +72,17 @@
 					//cai
 					$connection = mysqli_connect('localhost', 'root', '', 'worsiebet');
 					
-					$res = mysqli_query($connection,"SELECT id FROM cai ORDER BY rand() LIMIT 5");
+					$res = mysqli_query($connection,"SELECT id,id_jocheu FROM cai ORDER BY rand() LIMIT 5");
 					if($res === FALSE) { 
 						die(mysql_error()); // TODO: better error handling
 					}
 					$i=0;
+					$jochei='';
+					$cai='';
+					$new_cai = array();
 					while ($row = $res->fetch_assoc()) {
+						$cai = $cai.$row['id'] . ' ';
+						$jochei = $jochei.$row['id_jocheu'] . ' ';
 						$new_cai[$i]=$row['id'];
 						$i++;
 					}
@@ -86,51 +91,51 @@
 					if($res === FALSE) { 
 						die(mysql_error()); // TODO: better error handling
 					}
-					$cai = '';
-					$check=0;
+					$top_cai = '';
+					$top_jochei='';
+					$checkCai=0;
 					while ($row = $res->fetch_assoc()) {
-						if($check==0) {
-							$cai= $cai . $row['id'];
-							$check=$check+1;
+						if($checkCai==0) {
+							$top_cai= $top_cai . $row['id'];
+							$checkCai=$checkCai+1;
+															$joch = mysqli_query($connection,"SELECT id_jocheu FROM cai WHERE id = '$row[id]'");
+															if($joch === FALSE) { 
+																die(mysql_error()); // TODO: better error handling
+															}
+															while ($row = $joch->fetch_assoc()) {
+																$top_jochei = $top_jochei . $row['id_jocheu'];
+															}
 						}
 						else {
-							$cai = $cai . ' ' .$row['id'];
+							$top_cai = $top_cai . ' ' .$row['id'];
+															$joch = mysqli_query($connection,"SELECT id_jocheu FROM cai WHERE id = '$row[id]'");
+															if($joch === FALSE) { 
+																die(mysql_error()); // TODO: better error handling
+															}
+															while ($row = $joch->fetch_assoc()) {
+																$top_jochei = $top_jochei . ' ' . $row['id_jocheu'] ;
+															}
 						}
 					}
-					
-					//jochei
-					$res = mysqli_query($connection,"SELECT id FROM jochei ORDER BY rand() LIMIT 5");
-					if($res === FALSE) { 
-						die(mysql_error()); // TODO: better error handling
-					}
-					$jochei='';
-					$new_jochei = array();
-					$i=0;
-					while ($row = $res->fetch_assoc()) {
-						$jochei = $jochei.$row['id'] . ' ';
-						$new_jochei[$i]=$row['id'];
-						$i++;
-					}
-					$jochei=rtrim($jochei);
-					shuffle($new_jochei);
-					
-					//rezultat
+
+					/*//rezultat
 					$rezultat = '';
-					$top_cai = '';
-					$top_jochei ='';
+					//$top_cai = '';
+					$length = count($new_cai);
+					//$top_jochei ='';
 					for ($i = 0; $i < $length; $i++) {
 						if($res === $length) {
-							$top_cai = $top_cai . $new_cai[$i];
-							$top_jochei = $top_jochei . $new_jochei[$i];
+							//$top_cai = $top_cai . $new_cai[$i];
+							//$top_jochei = $top_jochei . $new_jochei[$i];
 							$rezultat = $rezultat . $new_cai[$i] . '.' . $new_jochei[$i];
 						}
 						else {
-							$top_cai = $top_cai . $new_cai[$i] . ' ';
-							$top_jochei = $top_jochei . $new_jochei[$i] . ' ';
+							//$top_cai = $top_cai . $new_cai[$i] . ' ';
+							//$top_jochei = $top_jochei . $new_jochei[$i] . ' ';
 							$rezultat = $rezultat . $new_cai[$i] . '.' . $new_jochei[$i] . ' ';
 						}
 					}
-					
+					*/
 					//update meciuri_pierdute, meciuri_castigate
 					$update = mysqli_query($connection,"UPDATE cai SET meciuri_castigate = meciuri_castigate+1 WHERE id = '$new_cai[0]'");
 					if($update === FALSE) { 
@@ -144,18 +149,21 @@
 					//insert rezultat
 					$insert = mysqli_query($connection,"INSERT INTO curse (nume, id_cai, id_jochei, vreme, data, ora, sanse_castig, cote, status) VALUES ('$cursa','$cai','$jochei','$insert_vreme',CAST('". $date1 ."' AS DATE),CAST('". $time1 ."' AS TIME ),'$sansa','$cota',0)");
 					if($insert === FALSE) { 
+						echo "<div class=\"printing\">Nu s-a reu&#351it adăugarea în baza de date!</div>";
 						die(mysql_error()); // TODO: better error handling
 					}
 					else {
 						$res = mysqli_query($connection,"SELECT id FROM curse ORDER BY id DESC LIMIT 1");
 						if($res === FALSE) { 
+							echo "<div class=\"printing\">Nu s-a reu&#351it adăugarea în baza de date!</div>";
 							die(mysql_error()); // TODO: better error handling
 						}
 						while ($row = $res->fetch_assoc()) {
 							$cursa_id = $row['id'];
 						}
-						$insertR = mysqli_query($connection,"INSERT INTO rezultate (id_cursa, id_cai, id_jochei, rezultat, data, ora) VALUES ('$cursa_id','$top_cai','$top_jochei','$rezultat',CAST('". $date1 ."' AS DATE),CAST('". $time1 ."' AS TIME ))");
+						$insertR = mysqli_query($connection,"INSERT INTO rezultate (id_cursa, id_cai, id_jochei, data, ora) VALUES ('$cursa_id','$top_cai','$top_jochei',CAST('". $date1 ."' AS DATE),CAST('". $time1 ."' AS TIME ))");
 						if($insertR === FALSE) { 
+							echo "<div class=\"printing\">Nu s-a reu&#351it adăugarea în baza de date!</div>";
 							die(mysql_error()); // TODO: better error handling
 						}
 						echo "<div class=\"printing\">S-au adăugat cu succes în baza de date!</div>";
