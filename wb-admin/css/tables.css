@@ -1,0 +1,24 @@
+	h2 {
+		text-align:center;
+		color:white;
+	}
+
+	table {
+		border-collapse: collapse;
+		width: 65%;
+	}
+
+	th, td {
+		text-align: center;
+		padding: 8px;
+		color: #fff;
+	}
+
+	tr:nth-child(even){
+		background-color: #670011;
+	}
+
+	th {
+		background-color: #4CAF50;
+		color: white;
+	}

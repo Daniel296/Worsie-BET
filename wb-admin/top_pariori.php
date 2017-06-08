@@ -1,35 +1,10 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<style>
-	h2 {
-		text-align:center;
-		color:white;
-	}
-
-	table {
-		border-collapse: collapse;
-		width: 65%;
-	}
-
-	th, td {
-		text-align: center;
-		padding: 8px;
-		color: #fff;
-	}
-
-	tr:nth-child(even){
-		background-color: #670011;
-	}
-
-	th {
-		background-color: #4CAF50;
-		color: white;
-	}
-</style>
 	<title>TOP PARIORI - WorsieBET</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/style-header.css">
+	<link rel="stylesheet" type="text/css" href="css/tables.css">
 </head>
 <body>
 
