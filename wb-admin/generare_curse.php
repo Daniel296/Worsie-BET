@@ -31,6 +31,7 @@
 		</div>
 		
 		<?php
+
 		if(empty($_POST) == false) {
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					//data_cursei
@@ -42,9 +43,17 @@
 					$cursa = $nume_curse[$index_cursa];
 
 					//cote_cai+jochei (5)
-					$cote=array('4.50','6.00','7.00','4.50','5.50','5.00','7.00','8.00','8.50','4.00','7.50','6.50');
-					$index_cota = array_rand($cote,5);
-					$cota =$cote[$index_cota[0]] . ' ' . $cote[$index_cota[1]] . ' ' . $cote[$index_cota[2]] . ' ' . $cote[$index_cota[3]] . ' ' . $cote[$index_cota[4]];
+					$cota1_rand = mt_rand (1.50*10, 2.50*10) / 10;
+					$cota1_rand = number_format($cota1_rand,2);
+					$cota2_rand = mt_rand (2.50*10, 3.50*10) / 10;
+					$cota2_rand = number_format($cota2_rand,2);
+					$cota3_rand = mt_rand (3.50*10, 4.50*10) / 10;
+					$cota3_rand = number_format($cota3_rand,2);
+					$cota4_rand = mt_rand (4.50*10, 5.50*10) / 10;
+					$cota4_rand = number_format($cota4_rand,2);
+					$cota5_rand = mt_rand (5.50*10, 6.50*10) / 10;
+					$cota5_rand = number_format($cota5_rand,2);
+					$cota = $cota1_rand . ' ' . $cota2_rand . ' ' . $cota3_rand . ' ' . $cota4_rand . ' ' . $cota5_rand;
 					
 					//sanse castig
 					$sanse=array('40','50','60','30','70','50');
@@ -62,21 +71,32 @@
 					
 					//cai
 					$connection = mysqli_connect('localhost', 'root', '', 'worsiebet');
+					
 					$res = mysqli_query($connection,"SELECT id FROM cai ORDER BY rand() LIMIT 5");
 					if($res === FALSE) { 
 						die(mysql_error()); // TODO: better error handling
 					}
-					$cai='';
-					$new_cai = array();
 					$i=0;
 					while ($row = $res->fetch_assoc()) {
-						$cai = $cai.$row['id'] . ' ';
 						$new_cai[$i]=$row['id'];
 						$i++;
 					}
-					$cai=rtrim($cai);
-					shuffle($new_cai); 
-					$length = count($new_cai);
+					
+					$res = mysqli_query($connection,"SELECT id FROM cai WHERE id = '$new_cai[0]' OR id = '$new_cai[1]' OR id='$new_cai[2]' OR id='$new_cai[3]' OR id='$new_cai[4]' ORDER BY meciuri_castigate/(meciuri_castigate+meciuri_pierdute) DESC");
+					if($res === FALSE) { 
+						die(mysql_error()); // TODO: better error handling
+					}
+					$cai = '';
+					$check=0;
+					while ($row = $res->fetch_assoc()) {
+						if($check==0) {
+							$cai= $cai . $row['id'];
+							$check=$check+1;
+						}
+						else {
+							$cai = $cai . ' ' .$row['id'];
+						}
+					}
 					
 					//jochei
 					$res = mysqli_query($connection,"SELECT id FROM jochei ORDER BY rand() LIMIT 5");
