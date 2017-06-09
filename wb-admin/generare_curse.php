@@ -98,8 +98,14 @@
 					$cai='';
 					$new_cai = array();
 					while ($row = $res->fetch_assoc()) {
-						$cai = $cai.$row['id'] . ' ';
-						$jochei = $jochei.$row['id_jocheu'] . ' ';
+						if($i==0) {
+							$cai = $cai.$row['id'];
+							$jochei = $jochei.$row['id_jocheu'];
+						}
+						else {
+							$cai = $cai . ' ' . $row['id'];
+							$jochei = $jochei . ' ' . $row['id_jocheu'];
+						}
 						$new_cai[$i]=$row['id'];
 						$i++;
 					}
