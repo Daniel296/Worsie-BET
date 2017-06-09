@@ -4,8 +4,8 @@
 	//	getNumeCursa($conn, $id)							-> numele cursei cu ID'ul $id
 	//	getOraCursa($conn, $id)								-> ora cursei cu ID'ul $id
 	//	getOreCursa_byName($conn, $data, $name, $status)	-> returneaza orele unei curse, dupa nume
-	//	getIDCurse_NameOre($conn, $data, $ora, $nume)		-> returneaza vector cu id'urile curselor de la data, ora si cu numele...
-	//	getIDCurse_Name($conn, $data, $nume)				-> returneaza vector cu id'urile curselor cu numele $nume, de la data $data
+	//	getIDCurse_NumeOre($conn, $data, $ora, $nume)		-> returneaza vector cu id'urile curselor de la data, ora si cu numele...
+	//	getIDCurse_Nume($conn, $data, $nume)				-> returneaza vector cu id'urile curselor cu numele $nume, de la data $data
 	//	printOreCursa_byName($conn, $data, $name, $status)	-> afiseaza orele unei curse, dupa nume
 	//	printHeaderCursa($nume, $ora, $data)				-> afiseaza bara cu numele cursei si orele
 	//	printCurse($nume, $data_meci, $ore)					-> afiseaza toate cursele si orele UNICE din ziua respectiva
@@ -24,12 +24,12 @@ function afiseazaRezultate($conn, $data) {
 
 	if(isset($_GET['race']) && isset($_GET['ora'])) {
 	 	$var = array();
-	 	$var = getIDCurse($conn, $data, $_GET['ora'], $_GET['race']);
+	 	$var = getIDCurse_NumeOra($conn, $data, $_GET['ora'], $_GET['race']);
 
 	 	if(count($var) > 0 && $var[0] != -1) {
 	 		for($i = 0; $i < count($var); $i++) {
 	 			echo "<br>";
-	 			printHeaderCursa_NameOra($_GET['race'], $_GET['ora'], $data);
+	 			printHeaderCursa($_GET['race'], $_GET['ora'], $data);
 		 		$participant = array();
 		 		$participant = getInformatiiCursa($conn, $var[$i]);
 		 		afiseazaConcurent($participant);
