@@ -12,13 +12,24 @@
 <?php
 	require('pages/header.php');
 	require('php/rezultate_pariuri.php');
+
+	if(isset($_GET['date']))
+		$data_cautare = $_GET['date'];
+	else {
+		$data_cautare = date("Y-m-d", time());
+		$location = "Location: ./rezultate.php?date=" . $data_cautare;
+		if(isset($_GET['race']))
+			$location .= ("&race=" . $_GET['race']);
+		header($location);
+		//
+	}
 ?>
 
 <div id="main-results">
 
 	<div id="search" class="search-bar">
-		<form  method="POST">
-			<input name="search" placeholder="Căutare...">
+		<form  method="GET" action="./rezultate.php?date=<?php echo $data_cautare ?>">
+			<input name="race" placeholder="Căutare...">
 			<div class="search-img">
 				<img src="images/search.png" alt="search">
 			</div>
