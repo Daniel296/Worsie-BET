@@ -72,7 +72,7 @@ function validate_register_data(flag, error) {
                 var input = document.getElementById("reg_password").value;
 
                 if(input.length < 8 ) {
-                    print_register_error1("Parola trebuie să aibă cel pu&#355in 8 caractere!  " + input + " " + input.length);
+                    print_register_error1("Parola trebuie să aibă cel pu&#355in 8 caractere!  ");
                     error = 1;
                     break;
                 }
@@ -103,7 +103,7 @@ function validate_register_data(flag, error) {
                 var password = document.getElementById("reg_password").value;
                 var re_password = document.getElementById("re_password").value;
                 if(password != re_password) {
-                    print_register_error1("Parolele nu se potrivesc " + re_password + " " + password);
+                    print_register_error1("Parolele nu se potrivesc!");
                     error = 1;
                 }
                 break;
@@ -113,7 +113,7 @@ function validate_register_data(flag, error) {
                 var regex = /^[A-Z][a-z]*(-|\s)[A-Z][a-z]*$/;
                 var regex1 = /^[A-Z][a-z]*$/;
                 if(!regex.test(input) && !regex1.test(input)) {
-                    print_register_error2("Numele ar trebui să con&#355ină doar litere &#351i să înceapă cu litera mare!");
+                    print_register_error2("Numele ar trebui să con&#355ină doar litere &#351i să înceapă cu literă mare!");
                     error = 1;
                 }
                 break;
@@ -123,7 +123,7 @@ function validate_register_data(flag, error) {
                 var regex = /^[A-Z][a-z]*(-|\s)[A-Z][a-z]*$/;
                 var regex1 = /^[A-Z][a-z]*$/;
                 if(!regex.test(input) && !regex1.test(input)) {
-                    print_register_error2("Prenumele ar trebui să con&#355ină doar litere &#351i să înceapă cu litera mare!");
+                    print_register_error2("Prenumele ar trebui să con&#355ină doar litere &#351i să înceapă cu literă mare!");
                     error = 1;
                 }
                 break;

@@ -80,6 +80,9 @@ oneDayAgo=myDays[(todayDate+6)%7]
 	if($procent==0) {
 		$position1=370;
 	}
+	else if($procent>=99) {
+		$position1=5;
+	}
 	else {
 		$procent=100-$procent;
 		$position1=$procent/100*370;
@@ -88,6 +91,9 @@ oneDayAgo=myDays[(todayDate+6)%7]
 	$procent=$twoDaysAgoBets/50000*100;
 	if($procent==0) {
 		$position2=370;
+	}
+	else if($procent>=99) {
+		$position2=5;
 	}
 	else {
 		$procent=100-$procent;
@@ -98,6 +104,9 @@ oneDayAgo=myDays[(todayDate+6)%7]
 	if($procent==0) {
 		$position3=370;
 	}
+	else if($procent>=99) {
+		$position3=5;
+	}
 	else {
 		$procent=100-$procent;
 		$position3=$procent/100*370;
@@ -107,6 +116,9 @@ oneDayAgo=myDays[(todayDate+6)%7]
 	if($procent==0) {
 		$position4=370;
 	}
+	else if($procent>=99) {
+		$position4=5;
+	}
 	else {
 		$procent=100-$procent;
 		$position4=$procent/100*370;
@@ -115,6 +127,9 @@ oneDayAgo=myDays[(todayDate+6)%7]
 	$procent=$fiveDaysAgoBets/50000*100;
 	if($procent==0) {
 		$position5=370;
+	}
+	else if($procent>=99) {
+		$position5=5;
 	}
 	else {
 		$procent=100-$procent;
