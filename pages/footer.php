@@ -4,7 +4,7 @@
 		<a href="pariuri.php?date=<?php echo date("Y-m-d", time());?>" <?php if(explode('/', $_SERVER['PHP_SELF'])[2] == 'pariuri.php') echo "class=\"active\""; ?>>Pariuri</a> |
 		<a href="rezultate.php?date=<?php echo date("Y-m-d", time());?>" <?php if(explode('/', $_SERVER['PHP_SELF'])[2] == 'rezultate.php') echo "class=\"active\""; ?>>Rezultate</a> |
 		<a href="regulament.php" <?php if(explode('/', $_SERVER['PHP_SELF'])[2] == 'regulament.php') echo "class=\"active\""; ?>>Regulament</a> |
-		<a href="desprenoi.php" <?php if(explode('/', $_SERVER['PHP_SELF'])[2] == 'desprenoi.php') echo "class=\"active\""; ?>>Despre Noi</a>
+		<a href="desprenoi.php" <?php if(explode('/', $_SERVER['PHP_SELF'])[2] == 'desprenoi.php') echo "class=\"active\""; ?>>Despre noi</a>
 	</div>
 
 	<div class="pay-methods">

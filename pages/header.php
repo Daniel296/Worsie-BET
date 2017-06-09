@@ -46,7 +46,7 @@
 			<li><a <?php if(explode('/', $_SERVER['PHP_SELF'])[2] == 'pariuri.php') echo "class=\"active\""; ?> href="pariuri.php?date=<?php echo date("Y-m-d", time());?>">Pariuri</a></li>
 			<li><a <?php if(explode('/', $_SERVER['PHP_SELF'])[2] == 'rezultate.php') echo "class=\"active\""; ?> href="rezultate.php?date=<?php echo date("Y-m-d", time());?>">Rezultate</a></li>
 			<li><a <?php if(explode('/', $_SERVER['PHP_SELF'])[2] == 'regulament.php') echo "class=\"active\""; ?> href="regulament.php">Regulament</a></li>
-			<li><a <?php if(explode('/', $_SERVER['PHP_SELF'])[2] == 'desprenoi.php') echo "class=\"active\""; ?> href="desprenoi.php">Despre Noi</a></li>
+			<li><a <?php if(explode('/', $_SERVER['PHP_SELF'])[2] == 'desprenoi.php') echo "class=\"active\""; ?> href="desprenoi.php">Despre noi</a></li>
 		</ul>
 	</div>
 </div>
