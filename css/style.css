@@ -696,6 +696,19 @@ body {
 	cursor: pointer;
 }
 
-#reg-err {
+#reg-err1 {
 	margin-top: 20px;
+	color: #CE000B;
+}
+
+#reg-err2 {
+	margin-top: 20px;
+	margin-left: 30px;
+	color: #CE000B;
+}
+
+#reg-err-submit {
+	margin-top: 20px;
+	margin-left: 30px;
+	color: #CE000B;
 }
