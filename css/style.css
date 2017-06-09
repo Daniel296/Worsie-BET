@@ -329,11 +329,10 @@ body {
 	padding: 0px;
 }
 #fixed-wrapper {
-	overflow: auto;
 	display: table;
 	float: right;
 	width: 22%;
-	right: 0px;
+	right: 5px;
 	margin: 20px 1%;
 	max-width: 300px;
 }
