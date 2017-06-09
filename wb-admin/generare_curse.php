@@ -68,11 +68,11 @@
 					$sansa3 = $procent_cota_3*100;
 					$sansa4 = $procent_cota_4*100;
 					$sansa5 = $procent_cota_5*100;
-					$sansa1 = number_format($sansa1,2);
-					$sansa2 = number_format($sansa2,2);
-					$sansa3 = number_format($sansa3,2);
-					$sansa4 = number_format($sansa4,2);
-					$sansa5 = number_format($sansa5,2);
+					$sansa1 = intval($sansa1);
+					$sansa2 = intval($sansa2);
+					$sansa3 = intval($sansa3);
+					$sansa4 = intval($sansa4);
+					$sansa5 = intval($sansa5);
 					//$sanse=array('40','50','60','30','70','50');
 					//$index_sanse = array_rand($sanse,5);
 					$sansa = $sansa5 . ' ' . $sansa4 . ' ' . $sansa3 . ' ' . $sansa2 . ' ' . $sansa1;
