@@ -254,7 +254,7 @@ function login_user() {
     var username = "", password = "";
 
     username = document.getElementById("username_login").value;
-    password = document.getElementById("reg_password").value;
+    password = document.getElementById("password").value;
 
     if(username === "" || password === "") {
         print_login_error("Completa&#355i toate câmpurile!");

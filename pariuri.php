@@ -56,13 +56,17 @@
 	<div class="bets">
 		<?php
 			$current_time = date('H:i:s');
+			$today = date('Y-m-d');
 			/* Afisam numele curselor si orele la care au loc */
 			if(isset($_GET['date'])) {
 				$date = $_GET['date'];
 				$names_array = [];
 				/* Luam numele de la toate cursele */
 				$stmt =  $conn->stmt_init();
-				$sql_query = "SELECT DISTINCT nume FROM curse WHERE data = '$date' AND ora > '$current_time'";
+				if($date == $today)
+					$sql_query = "SELECT DISTINCT nume FROM curse WHERE data = '$date' AND ora > '$current_time'";
+				else
+					$sql_query = "SELECT DISTINCT nume FROM curse WHERE data = '$date'";
 				if($stmt =  $conn->prepare($sql_query)) {
 					$stmt->execute();
 					$stmt->bind_result($name);
@@ -81,7 +85,10 @@
 					echo "<div class=\"bet\">
 							<a href=\"pariuri.php?date=$date&race=$names_array[$i]\">$names_array[$i]</a>";
 					$stmt =  $conn->stmt_init();
-					$sql_query = "SELECT DISTINCT substr(ora, 1, 5) as ora FROM curse WHERE data = '$date' AND ora > '$current_time' AND nume = '$names_array[$i]' ORDER BY ora";
+					if($date == $today)
+						$sql_query = "SELECT DISTINCT substr(ora, 1, 5) as ora FROM curse WHERE data = '$date' AND ora > '$current_time' AND nume = '$names_array[$i]' ORDER BY ora";
+					else
+						$sql_query = "SELECT DISTINCT substr(ora, 1, 5) as ora FROM curse WHERE data = '$date' AND nume = '$names_array[$i]' ORDER BY ora";
 					if($stmt =  $conn->prepare($sql_query)) {
 						$stmt->execute();
 						$stmt->bind_result($time);
@@ -109,9 +116,12 @@
 			$current_time = date('H:i:s');
 
 			$stmt =  $conn->stmt_init();
-			$sql_query = "SELECT id, nume, id_cai, id_jochei, vreme, sanse_castig, substr(DATE_FORMAT(data,'%d-%m'), 1, 5), substr(ora, 1,5), cote  FROM curse WHERE nume = ? AND data = ? AND ora > ? ORDER BY ora ASC";
+			if($date == $today)
+				$sql_query = "SELECT id, nume, id_cai, id_jochei, vreme, sanse_castig, substr(DATE_FORMAT(data,'%d-%m'), 1, 5), substr(ora, 1,5), cote  FROM curse WHERE nume = ? AND data = ? AND ora > '$current_time' ORDER BY ora ASC";
+			else
+				$sql_query = "SELECT id, nume, id_cai, id_jochei, vreme, sanse_castig, substr(DATE_FORMAT(data,'%d-%m'), 1, 5), substr(ora, 1,5), cote  FROM curse WHERE nume = ? AND data = ? ORDER BY ora ASC";
 			if($stmt =  $conn->prepare($sql_query)) {
-				$stmt->bind_param('sss', $race, $date, $current_time);
+				$stmt->bind_param('ss', $race, $date);
 				$stmt->execute();
 				$stmt->bind_result($id_race, $name, $id_horse_str, $id_jockeys_str, $weather, $win_rate_str, $date, $time, $odds_str);
 

@@ -52,11 +52,11 @@
                     <div class="form-register">
                         <div class="left-form">
         				    <label><b>Parolă</b></label>
-							<input type="text" id="reg_password" onchange="validate_register_data(4, 0)" required/>
+							<input type="password" id="reg_password" onchange="validate_register_data(4, 0)" required/>
                         </div>
                         <div class="right-form">
         				    <label><b>Confirmă parolă</b></label>
-        				    <input type="text" id="re_password" onchange="validate_register_data(5, 0)" required/>
+        				    <input type="password" id="re_password" onchange="validate_register_data(5, 0)" required/>
                         </div>
         			</div>
                 </div>

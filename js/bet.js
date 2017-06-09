@@ -78,6 +78,10 @@ function delete_race(id_race, id_horse) {
 }
 
 function create_ticket(user_balance, id_user) {
+	if(document.getElementById("balance") != null)
+		user_balance = document.getElementById("balance").value;
+
+
     var date = new Date();
     if(array.length === 0) {
         document.getElementById("races-on-ticket").innerHTML = '';
@@ -130,6 +134,7 @@ function create_ticket(user_balance, id_user) {
 	         xmlhttp.onreadystatechange = function() {
 	            if (this.readyState == 4 && this.status == 200) {
 	                document.getElementById("log-err").innerHTML = "<center>Biletul a fost plasat cu succes!</center>";
+					document.getElementById("balance").value = parseFloat(user_balance - total_bet).toFixed(2) + " RON";
 	            }
 	         };
 	         xmlhttp.open("POST", "php/insert-ticket.php", true);

@@ -25,7 +25,7 @@
 		 <div class="account-box">
 			 <div class="username-box">
 				 <span class="username"><?php echo $usr_username ?></span>
-				 <span class="balance"><?php echo $usr_balanta . " RON" ?></span>
+				 <span id="balance"><?php echo $usr_balanta . " RON" ?></span>
 			 </div>
 			 <div class="link-box">
 				 <a href="profile.php?page=account">Contul meu</a>
