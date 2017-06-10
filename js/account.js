@@ -1,10 +1,10 @@
 ﻿var error = 0;
 
-function validate_register_data(flag, error) {
+function validate_register_data(flag) {
     /* flag este un numar de la 1 la 13 identificat inputul pe care il primeste*/
-    document.getElementById("reg-err1").innerHTML = "";
-    document.getElementById("reg-err2").innerHTML = "";
-    document.getElementById("reg-err-submit").innerHTML = "";
+    //document.getElementById("reg-err1").innerHTML = "";
+    //document.getElementById("reg-err2").innerHTML = "";
+    //document.getElementById("reg-err-submit").innerHTML = "";
 
     switch (flag) {
         case 1:
@@ -130,9 +130,11 @@ function validate_register_data(flag, error) {
 
         case 8:
                 var input = document.getElementById("county").value.toString();
-                var regex = /^[A-Z][a-z]*(-|\s)[A-Z][a-z]*$/;
-                var regex1 = /^[A-Z][a-z]*$/;
-                if(!regex.test(input) && !regex1.test(input)) {
+                var counties = ['alba', 'arad', 'arges', 'bacau', 'bihor', 'bistrita nasaud', 'botosani', 'braila', 'brasov', 'bucuresti', 'buzau', 'calarasi', 'caras', 'severin', 'cluj', 'constanta', 'covasna', 'dambovita',
+                                'dolj', 'galati', 'giurgiu', 'gorj', 'harghita', 'hunedoara', 'ialomita', 'iasi', 'ilfov', 'maramures', 'mehedinti', 'mures', 'neamt', 'olt', 'prahova', 'salaj', 'satu mare', 'sibiu', 'suceava', 'teleorman',
+                                'timis', 'tulcea', 'valcea', 'vaslui', 'vrancea'];
+
+                if(counties.indexOf(input.toLowerCase()) === -1) {
                     print_register_error2("A&#355i introdus un jude&#355 invalid!");
                     error = 1;
                 }
@@ -159,9 +161,8 @@ function validate_register_data(flag, error) {
 
         case 11:
                 var input = document.getElementById("country").value.toString();
-                var regex = /^[A-Z][a-z]*(-|\s)[A-Z][a-z]*$/;
-                var regex1 = /^[A-Z][a-z]*$/;
-                if(!regex.test(input) && !regex1.test(input)) {
+                var country = "Romania";
+                if(country.toLowerCase() != input.toLowerCase()) {
                     print_register_error2("A&#355i introdus un nume de &#355ară invalid!");
                     error = 1;
                 }
@@ -202,7 +203,7 @@ function print_login_error(error_msg) {
 function register_user() {
     var error = 0;
     for(var i = 0; i <= 13; i++) {
-        error = validate_register_data(i, error);
+        error = validate_register_data(i);
     }
 
     /* Luam toate datele necesare pentru inregistrare*/
