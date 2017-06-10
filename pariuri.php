@@ -344,18 +344,6 @@
 	</div>
 </div>
 
-<script>
-var elementPosition = $('#fixed-wrapper').offset();
-
-$(window).scroll(function(){
-        if($(window).scrollTop() > elementPosition.top){
-              $('#fixed-wrapper').css('position','fixed').css('top','0').css('margin','20px 1%');
-        } else {
-            $('#fixed-wrapper').css('position','static');
-		}});
-
-</script>
-
 <?php
 	require('pages/footer.php');
 ?>
