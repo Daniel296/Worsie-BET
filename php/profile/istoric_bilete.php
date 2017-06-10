@@ -90,7 +90,7 @@
 							<div class="biletSuma">Sumă: ' . $suma_depusa . ' RON
 							</div>
 
-							<div class="biletCastig">Câ&#351tig: ' . $suma_castig . ' RON
+							<div class="biletCastig">În a&#351teptare...
 							</div>
 
 							<div class="biletCota">Cotă: ' . $cota . '

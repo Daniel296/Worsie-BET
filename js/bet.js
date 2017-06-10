@@ -106,7 +106,7 @@ function create_ticket(user_balance, id_user) {
 	         var ticket_code = id_user + date.getMonth() + date.getMilliseconds() + date.getHours() + (total_bet + total_win).toString().split('.')[0] + date.getDay() + date.getMinutes() + date.getSeconds();
 
 	         insert_statement = "INSERT INTO bilete(id_user, status, suma_depusa, suma_castig, cod, pariuri, cota) VALUES " +
-	                    "(" + id_user + ", 0, " + total_bet + ", " + total_win + ", '" + ticket_code + "', '";
+	                    "(" + id_user + ", 0, " + total_bet + ", " + 0 + ", '" + ticket_code + "', '";
 
 			 for(var i = 0; i < array.length; i++) {
 	            insert_statement += array[i]['id_race'] + "." + array[i]['id_horse'] + "." + array[i]['id_jockey'] + " ";
