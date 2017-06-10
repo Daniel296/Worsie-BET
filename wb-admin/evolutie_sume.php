@@ -137,6 +137,8 @@ oneDayAgo=myDays[(todayDate+6)%7]
 	}
 ?>
 
+ <p id="demo"></p>
+ 
 <svg version="1.2" class="graph" role="img">
 
 <g class="grid x-grid" id="xGrid">
@@ -161,11 +163,14 @@ oneDayAgo=myDays[(todayDate+6)%7]
   <text x="43" y="200" class="label-title">Suma</text>
 </g>
 <g class="data" data-setname="Our first data set">
-  <circle cx="90" cy="<?php echo $position5?>" data-value=<?php echo $fiveDaysAgoBets ?> r="5"></circle>
-  <circle cx="240" cy="<?php echo $position4?>" data-value=<?php echo $fourDaysAgoBets ?> r="5"></circle>
-  <circle cx="388" cy="<?php echo $position3?>" data-value=<?php echo $threeDaysAgoBets ?> r="5"></circle>
-  <circle cx="531" cy="<?php echo $position2?>" data-value=<?php echo $twoDaysAgoBets ?> r="5"></circle>
-  <circle cx="677" cy="<?php echo $position1?>" data-value=<?php echo $oneDayAgoBets ?> r="5"></circle>
+  <circle cx="90" cy="<?php echo $position5?>" onclick="alert('Acum 5 zile, s-au pariat:\n<?php if($fiveDaysAgoBets!=0) echo $fiveDaysAgoBets; else echo 0; ?> lei')"  data-value="<?php echo $fiveDaysAgoBets ?>" r="5"></circle>
+  <circle cx="240" cy="<?php echo $position4?>" onclick="alert('Acum 4 zile, s-au pariat:\n<?php if($fourDaysAgoBets!=0) echo $fourDaysAgoBets; else echo 0; ?> lei')"  data-value="<?php echo $fourDaysAgoBets ?>" r="5"></circle>
+  <circle cx="388" cy="<?php echo $position3?>" onclick="alert('Acum 3 zile, s-au pariat:\n<?php if($threeDaysAgoBets!=0) echo $threeDaysAgoBets; else echo 0; ?> lei')"  data-value="<?php echo $threeDaysAgoBets ?>" r="5"></circle>
+  <circle cx="531" cy="<?php echo $position2?>" onclick="alert('Acum 2 zile, s-au pariat:\n<?php if($twoDaysAgoBets!=0) echo $twoDaysAgoBets; else echo 0; ?> lei')" data-value="<?php echo $twoDaysAgoBets ?>" r="5"></circle>
+  <circle cx="677" cy="<?php echo $position1?>"  onclick="alert('Acum 1 zi, s-au pariat:\n<?php if($oneDayAgoBets!=0) echo $oneDayAgoBets; else echo 0; ?> lei')" data-value="<?php echo $oneDayAgoBets ?>" r="5"></circle>
+
+
+
 </g>
 	<line x1="90" y1="<?php echo $position5?>" x2="240" y2="<?php echo $position4?>" stroke-width="3" stroke="red"/>
 	<line x1="240" y1="<?php echo $position4?>" x2="388" y2="<?php echo $position3?>" stroke-width="3" stroke="red"/>
@@ -173,7 +178,9 @@ oneDayAgo=myDays[(todayDate+6)%7]
 	<line x1="531" y1="<?php echo $position2?>" x2="677" y2="<?php echo $position1?>" stroke-width="3" stroke="red"/>
 </svg>
 
+  
 <?php
+
 	require('pages/footer.php');
 ?>
 

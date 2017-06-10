@@ -34,3 +34,22 @@
   fill: red;
   stroke-width: 1; 
 }
+
+.messagebox {
+position:fixed;
+background-color:#000000;
+color:#ffffff;
+border:3px solid #ffffff;
+font-family:'Voltaire', sans-serif;
+font-size:24px;
+width:180px;
+border-radius:15px;
+z-index:1;
+padding:10px;
+}
+
+    .box{
+        border: 1px solid #aaa; /*getting border*/
+        border-radius: 4px; /*rounded border*/
+        color: #000; /*text color*/
+    }
