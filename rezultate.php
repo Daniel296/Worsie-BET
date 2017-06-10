@@ -22,7 +22,6 @@
 		$location = "Location: ./rezultate.php?date=" . $data_cautare;
 		if(isset($_GET['race']))
 			$location .= ("&race=" . $_GET['race']);
-		header($location);
 	}
 
 ?>
@@ -31,6 +30,7 @@
 
 	<div id="search" class="search-bar">
 		<form  method="GET">
+			<input type="hidden" name="data" value="<?php echo $data_cautare ?>"/> 
 			<input name="race" placeholder="Căutare...">
 			<div class="search-img">
 				<img src="images/search.png" alt="search"></a>

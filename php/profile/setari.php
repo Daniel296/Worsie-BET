@@ -21,32 +21,32 @@
 			<!--<form action="." method="POST">-->
 				<div>
 					<label class="content">Nume:</label>
-					<input class="field" type="text" id="lastname" value="<?php echo $usr_nume;?>" onchange="validare_input(6, 0)">
+					<input class="field" type="text" id="lastname" value="<?php echo $usr_nume;?>" onchange="validare_input(6)">
 				</div>
 
 				<div>
 					<label class="content">Prenume:</label>
-					<input class="field" type="text" id="firstname" value="<?php echo $usr_prenume;?>" onchange="validare_input(7, 0)">
+					<input class="field" type="text" id="firstname" value="<?php echo $usr_prenume;?>" onchange="validare_input(7)">
 				</div>
 
 				<div>
 					<label class="content">Jude&#355:</label>
-					<input class="field" type="text" id="county" value="<?php echo $usr_judet;?>" onchange="validare_input(8, 0)">
+					<input class="field" type="text" id="county" value="<?php echo $usr_judet;?>" onchange="validare_input(8)">
 				</div>
 
 				<div>
 					<label class="content">Ora&#351:</label>
-					<input class="field" type="text" id="city" value="<?php echo $usr_oras;?>" onchange="validare_input(9, 0)">
+					<input class="field" type="text" id="city" value="<?php echo $usr_oras;?>" onchange="validare_input(9)">
 				</div>
 
 				<div>
 					<label class="content">Adresă:</label>
-					<input class="field" type="text" id="address" value="<?php echo $usr_adresa;?>"  onchange="validare_input(10, 0)">
+					<input class="field" type="text" id="address" value="<?php echo $usr_adresa;?>"  onchange="validare_input(10)">
 				</div>
 
 				<div>
 					<label class="content">Telefon:</label>
-					<input class="field" type="text" id="phone" value="<?php echo $usr_telefon;?>"  onchange="validare_input(12, 0)">
+					<input class="field" type="text" id="phone" value="<?php echo $usr_telefon;?>"  onchange="validare_input(12)">
 				</div>
 
 				<button type="button" class="btn" onclick="schimba_date()">Schimbă date</button>
@@ -69,17 +69,17 @@
 				<div class="centrare">
 					<div>
 						<label class="content">Parolă actuală:</label>
-						<input class="field" type="text" id="old_password" onchange="validare_input(13, 0)">
+						<input class="field" type="text" id="old_password" onchange="validare_input(13)">
 					</div>
 
 					<div>
 						<label class="content">Parolă nouă:</label>
-						<input class="field" type="text" id="password" onchange="validare_input(4, 0)">
+						<input class="field" type="text" id="password" onchange="validare_input(4)">
 					</div>
 
 					<div>
 						<label class="content">Confirmare parolă:</label>
-						<input class="field" type="text" id="re_password" onchange="validare_input(5, 0)">
+						<input class="field" type="text" id="re_password" onchange="validare_input(5)">
 					</div>
 
 					<div>
@@ -96,6 +96,18 @@
 			Schimbare email
 		</div>
 
+		<div id="err4">
+			<!-- Mesaj de eroare din JAVASCRIPT -->
+		</div>
+		<div id="err5">
+			<!-- Mesaj de eroare din JAVASCRIPT -->
+		</div>
+		<div id="err6">
+			<!-- Mesaj de eroare din JAVASCRIPT -->
+		</div>
+		<div id="err7">
+			<!-- Mesaj de eroare din JAVASCRIPT -->
+		</div>
 		<div id="err3">
 			<!-- Mesaj de eroare din JAVASCRIPT -->
 		</div>
@@ -103,12 +115,12 @@
 		<div class="changeEmail">
 				<div>
 					<label class="content">E-mail actual:</label>
-					<input class="field" type="text" id="current_email" value="" onchange="validare_input(2, 0)">
+					<input class="field" type="text" id="current_email" value="" onchange="validare_input(2)">
 				</div>
 
 				<div>
 					<label class="content">E-mail nou:</label>
-					<input class="field" type="text" id="new_email" value="" onchange="validare_input(3, 0)">
+					<input class="field" type="text" id="new_email" value="" onchange="validare_input(3)">
 				</div>
 				<button type="button" class="btn" onclick="schimba_email()">Schimbă email</button>
 			

@@ -16,12 +16,8 @@ if(isset($_POST['flag'])) {
 			updateEmail($_SESSION['id']);
 			break;
 
-		default:
-			break;
 	}
 }
-		
-
 
 
 /* #################### ###################### #################### */
@@ -64,7 +60,6 @@ function updatePassword($uID) {
 		$stmt->bind_param('sd', $new_password, $uID);
 		$stmt->execute();
 	}
-	//header('Location: ../profile.php?page=setari&setat=2');
 }
 
 
@@ -83,8 +78,9 @@ function updateEmail($uID) {
 	if($stmt =  $conn->prepare($sql)) { //
 		$stmt->bind_param('sd', $new_email, $uID);
 		$stmt->execute();
-	}
-	//header('Location: ../profile.php?page=setari&setat=3');
+		echo "Email'ul a fost modificat cu succes.";
+	} else
+		echo "Email'ul nu a putut fi modificat.";
 }
 
 ?>

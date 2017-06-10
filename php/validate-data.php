@@ -59,11 +59,11 @@
             $stmt->bind_result($user_email);
             $stmt->fetch();
             if($email === $user_email)
-                echo "1";
-            else
                 echo "0";
+            else
+                echo "1";
+
+            //echo $email . " -- " . $user_email;
         }
-
     }
-
 ?>

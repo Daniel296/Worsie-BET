@@ -1,11 +1,11 @@
 var error = 0;
 
-function validare_input(flag, error) {
+function validare_input(flag) {
     /* flag este un numar de la 1 la 13 indentificant inputul pe care il primeste*/
     document.getElementById("err1").innerHTML = "";
     document.getElementById("err2").innerHTML = "";
     document.getElementById("err3").innerHTML = "";
-
+    error = 0;
     switch (flag) {
         case 2: // EMAIL
                 var regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -16,18 +16,22 @@ function validare_input(flag, error) {
                 }
                 else {
                         var xmlhttp = new XMLHttpRequest();
-                        xmlhttp.onreadystatechange = function() {
-                        if (this.readyState == 4 && this.status == 200) {
-                            if(this.response === "0") {
-                                print_email_err("Acesta nu este email-ul tau!");
+                        xmlhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            if(this.response === "1") {
+                                print_email_err("Acesta nu este email-ul tau!");
                                 error = 1;
                             }
-                            //print_email_err(this.response);
-                        }
-                    };
-                    xmlhttp.open("POST", "./php/validate-data.php", true);
+                        }
+                        document.getElementById("err4").innerHTML = "Email actual - valid";
+
+                        //document.getElementById("err6").innerHTML = "this.response: " + this.response;
+                        error = parseInt(this.response);
+                        
+                    }
+                    xmlhttp.open("POST", "./php/validate-data.php", true);
                     xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                    xmlhttp.send("current_email=" + input);
+                    xmlhttp.send("current_email=" + input);
                 }
                 break;
 
@@ -37,7 +41,8 @@ function validare_input(flag, error) {
                 if(current_email === new_email) {
                     print_email_err("Email-urile trebuie sa fie diferite!");
                     error = 1;
-                }
+                } else document.getElementById("err5").innerHTML = "Email new - valid";
+
                 break;
         
         case 4: // PASSWORD
@@ -67,7 +72,7 @@ function validare_input(flag, error) {
 
                 regex = /[A-Z]/;
                 if(!regex.test(input)) {
-                    print_pass_err("Parola trebuie să contiăa cel putin o literă mare (A-Z)!");
+                    print_pass_err("Parola trebuie să contiă cel putin o literă mare (A-Z)!");
                     error = 1;
                     break;
                 }
@@ -204,7 +209,7 @@ function schimba_date() {
     var error = 0;
     var date = [6, 7, 8, 9, 10, 12];
     for(var i = 0; i < 6; i++) {
-        error = validare_input(date[i], error);
+        error = validare_input(date[i]);
     }
 
     firstname = document.getElementById("firstname").value;
@@ -246,7 +251,7 @@ function schimba_parola() {
     var error = 0;
     var date = [4, 5, 16];
     for(var i = 0; i < 3; i++) {
-        error = validare_input(date[i], error);
+        error = validare_input(date[i]);
     }
 
     password = document.getElementById("password").value;
@@ -279,12 +284,21 @@ function schimba_email() {
     var error = 0;
     var date = [2, 3];
     for(var i = 0; i < 2; i++) {
-        error = validare_input(date[i], error);
+        error += validare_input(date[i]);
+        // if(i == 0)
+        //     document.getElementById("err4").innerHTML = error;
+        // else
+        //     document.getElementById("err5").innerHTML = error;        
+        //print_email_err(error);
     }
+
+    document.getElementById("err7").innerHTML = "total errs: " + error;
 
     current_email = document.getElementById("current_email").value;
     new_email = document.getElementById("new_email").value;
     
+    print_email_err("");
+
     if(error === 0) {
         if(current_email != "" && new_email != "") {
             /* Trimitem datele la server folosind XMLHttpRequest */
@@ -300,10 +314,12 @@ function schimba_email() {
                             "&current_email=" + current_email +
                             "&new_email=" + new_email
                         );
+            //window.location = window.location.pathname + window.location.search;
         } else {
-            print_email_err("Toate campurile trebuie sa fie completate!", "err1");
+            print_email_err("Toate campurile trebuie sa fie completate!");
         }
     } else {
-            print_email_err("Toate campurile trebuie sa fie completate corect!", "err1");
+            print_email_err("Toate campurile trebuie sa fie completate corect!");
     }
+    //document.getElementById("err7").innerHTML = error;
 }
