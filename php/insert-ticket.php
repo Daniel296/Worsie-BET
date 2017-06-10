@@ -11,7 +11,7 @@
 	while ($row = $res->fetch_assoc()) {
 		$balanta = $row['balanta'];
 	}
-	if($balanta-$bet_count>0) {
+	if($balanta-$bet_count>=0) {
 		/* Inseram biletul in baza de date */
 		unset($stmt);
 		$stmt =  $conn->stmt_init();
