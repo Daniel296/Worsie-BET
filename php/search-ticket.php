@@ -113,7 +113,7 @@
                                 </div>
                                 <div class=\"total\">
                                         <span style=\"float: left;\">Status: </span>
-                                        <span id=\"total_win\" style=\"float: right;\"> În asteptare</span><br>
+                                        <span id=\"total_win\" style=\"float: right;\"> În asteptare...</span><br>
                                 </div>";
                 }
             }
