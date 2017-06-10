@@ -328,9 +328,9 @@ body {
 	border: 0px;
 	padding: 0px;
 	overflow: auto;
-	max-height: 185px;
-	
+	max-height: 181px;	
 }
+
 #fixed-wrapper {
 	display: table;
 	float: right;
