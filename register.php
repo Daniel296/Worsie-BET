@@ -115,7 +115,10 @@
                     <div class="form-register">
                         <div class="left-form">
                             <label><b>Data na&#351terii</b></label>
-            				<input type="date" id="bday" onchange="validate_register_data(13, 0)" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" required >
+            				<input type="date" id="bday" max=
+						 <?php
+							 echo date('Y-m-d',strtotime('-18 years'));
+						 ?> onchange="validate_register_data(13, 0)" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" required >
             			</div>
                         <div class="right-form">
         				    <label><b>Telefon</b></label>
