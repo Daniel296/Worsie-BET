@@ -327,6 +327,9 @@ body {
 	margin: 0px;
 	border: 0px;
 	padding: 0px;
+	overflow: scroll;
+	height: 185px;
+	
 }
 #fixed-wrapper {
 	display: table;
@@ -389,6 +392,7 @@ body {
 
 .ticket-form {
 	margin: 10px 5px 10px 5px;
+
 }
 
 
@@ -400,6 +404,7 @@ body {
 	border: 0;
 	border-radius: 2.5px;
 	background-color: #CCCCCC;
+
 }
 
 .ticket-form button {
