@@ -5,6 +5,7 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/style-header.css">
 	<link rel="stylesheet" type="text/css" href="css/popup-style.css">
+	<link rel="stylesheet" type="text/css" href="css/profile-style.css">
 
 </head>
 <body>
@@ -165,7 +166,6 @@
 		}
 
 		/* Luam din baza de date toate detaliile despre cai */
-
 		$horses_details = array();
 		$jockeys_details = array();
 		for($i = 0; $i < count($races); $i++) {
@@ -304,10 +304,11 @@
 <div id="fixed-wrapper">
 	<div class="check-ticket">
 		<p>Verifica&#355i bilet</p>
-		<form method="POST">
-			<input type="text" name="PIN" placeholder="Introduce&#355i PIN-ul biletului">
-			<button type="submit">Verifica&#355i</button>
-		</form>
+			<input type="text" name="PIN" id="ticket-code" placeholder="Introduce&#355i PIN-ul biletului">
+			<div id="search-err">
+				<!-- Eroare din Javascript -->
+			</div>
+			<button type="submit" onclick="search_ticket()">Verifica&#355i</button>
 	</div>
 
 	<div class="bet-ticket">
@@ -344,15 +345,35 @@
 	</div>
 </div>
 
+<!--Aici afisam rezultatele de la search-ul de la bilete-->
+<div id="id10" class="modal">
+	<div id="ticket_details" class="modal-content animate">
+		<div id="ticket_details">
+			<!--JAVSCRIPT -->
+		</div>
+	</div>
+</div>
+
 <?php
 	require('pages/footer.php');
 ?>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="js/bet.js"></script>
 
+<script src="js\search-ticket.js"></script>
+<script>
+// Get the modal
+var modal = document.getElementById('id10');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
 <script>
 var elementPosition = $('#fixed-wrapper').offset();
-
 $(window).scroll(function(){
         if($(window).scrollTop() > elementPosition.top){
               $('#fixed-wrapper').css('position','fixed').css('top','0').css('margin','20px 1%');

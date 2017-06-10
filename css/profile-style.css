@@ -192,6 +192,21 @@ div.biletTipO {
 	/*border: 1px solid blue;*/
 }
 
+.bet-ticket-lost {
+	padding: 6px;
+	background-color: rgba(0, 0, 0, 0.6);
+	color: #FFF;
+	margin-top: 20px;
+	border: 2px solid #640000;
+}
+
+.bet-ticket-win {
+	padding: 6px;
+	background-color: rgba(0, 0, 0, 0.6);
+	color: #FFF;
+	margin-top: 20px;
+	border: 1px solid #006600;
+}
 
 .race-on-ticket {
 	color: #FFF;
