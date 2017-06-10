@@ -9,7 +9,7 @@ function validare_input(flag, error) {
     switch (flag) {
         case 2: // EMAIL
                 var regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                var input = document.getElementById("email").value.toString();
+                var input = document.getElementById("current_email").value.toString();
                 if(!regex.test(input)) {
                     print_email_err("Email-ul nu este valid!");
                     error = 1;
@@ -18,23 +18,24 @@ function validare_input(flag, error) {
                         var xmlhttp = new XMLHttpRequest();
                         xmlhttp.onreadystatechange = function() {
                         if (this.readyState == 4 && this.status == 200) {
-                            if(this.response === "1") {
-                                print_email_err("Acest email exista deja!");
+                            if(this.response === "0") {
+                                print_email_err("Acesta nu este email-ul tau!");
                                 error = 1;
                             }
+                            //print_email_err(this.response);
                         }
                     };
-                    xmlhttp.open("POST", "php/validate-data.php", true);
+                    xmlhttp.open("POST", "./php/validate-data.php", true);
                     xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                    xmlhttp.send("email=" + input);
+                    xmlhttp.send("current_email=" + input);
                 }
                 break;
 
-        case 3: // RE_EMAIL
-                var email = document.getElementById("email").value;
-                var re_email = document.getElementById("re_email").value;
-                if(email != re_email) {
-                    print_email_err("Email-urile nu se potrivesc!");
+        case 3: // new_EMAIL
+                var current_email = document.getElementById("current_email").value;
+                var new_email = document.getElementById("new_email").value;
+                if(current_email === new_email) {
+                    print_email_err("Email-urile trebuie sa fie diferite!");
                     error = 1;
                 }
                 break;
@@ -43,14 +44,14 @@ function validare_input(flag, error) {
                 var input = document.getElementById("password").value;
 
                 if(input.length < 8 ) {
-                    print_pass_err("Parola trebuie sa aiba cel putin 8 caractere!");
+                    print_pass_err("Parola trebuie să aibă cel putin 8 caractere!");
                     error = 1;
                     break;
                 }
 
                 var regex = /[0-9]/;
                 if(!regex.test(input)) {
-                    print_pass_err("Parola trebuie sa contina cel putin o cifra (0-9)!");
+                    print_pass_err("Parola trebuie să contina cel putin o cifră (0-9)!");
                     error = 1;
                     break;
                 }
@@ -58,7 +59,7 @@ function validare_input(flag, error) {
 
                 regex = /[a-z]/;
                 if(!regex.test(input)) {
-                    print_pass_err("Parola trebuie sa contina cel putin o litera mica (a-z)!");
+                    print_pass_err("Parola trebuie să contină cel putin o literă mică (a-z)!");
                     error = 1;
                     break;
                 }
@@ -66,7 +67,7 @@ function validare_input(flag, error) {
 
                 regex = /[A-Z]/;
                 if(!regex.test(input)) {
-                    print_pass_err("Parola trebuie sa contina cel putin o litera mare (A-Z)!");
+                    print_pass_err("Parola trebuie să contiăa cel putin o literă mare (A-Z)!");
                     error = 1;
                     break;
                 }
@@ -86,7 +87,7 @@ function validare_input(flag, error) {
                 var regex = /^[A-Z][a-z]*(-|\s)[A-Z][a-z]*$/;
                 var regex1 = /^[A-Z][a-z]*$/;
                 if(!regex.test(input) && !regex1.test(input)) {
-                    print_date_err("Numele ar trebui sa contina doar litere si sa inceapa cu litera mare!");
+                    print_date_err("Numele trebui să contină doar litere si să inceapă cu literă mare!");
                     error = 1;
                 }
                 break;
@@ -96,7 +97,7 @@ function validare_input(flag, error) {
                 var regex = /^[A-Z][a-z]*(-|\s)[A-Z][a-z]*$/;
                 var regex1 = /^[A-Z][a-z]*$/;
                 if(!regex.test(input) && !regex1.test(input)) {
-                    print_date_err("Prenumele ar trebui sa contina doar litere si sa inceapa cu litera mare!");
+                    print_date_err("Prenumele ar trebui să contină doar litere si să inceapă cu literă mare!");
                     error = 1;
                 }
                 break;
@@ -106,7 +107,7 @@ function validare_input(flag, error) {
                 var regex = /^[A-Z][a-z]*(-|\s)[A-Z][a-z]*$/;
                 var regex1 = /^[A-Z][a-z]*$/;
                 if(!regex.test(input) && !regex1.test(input)) {
-                    print_date_err("Ati introdus un judet invalid!");
+                    print_date_err("Judet invalid!");
                     error = 1;
                 }
                 break;
@@ -116,7 +117,7 @@ function validare_input(flag, error) {
                 var regex = /^[A-Z][a-z]*(-|\s)[A-Z][a-z]*$/;
                 var regex1 = /^[A-Z][a-z]*$/;
                 if(!regex.test(input) && !regex1.test(input)) {
-                    print_date_err("Ati introdus un oras invalid!");
+                    print_date_err("Oras invalid!");
                     error = 1;
                 }
                 break;
@@ -125,7 +126,7 @@ function validare_input(flag, error) {
                 var input = document.getElementById("address").value.toString();
                 var regex = /^[A-Za-z0-9\s,\.-]*$/;
                 if(!regex.test(input)) {
-                    print_date_err("Ati introdus o adresa invalida!");
+                    print_date_err("Adresă invalidă!");
                     error = 1;
                 }
                 break;
@@ -135,7 +136,7 @@ function validare_input(flag, error) {
                 var regex = /^[A-Z][a-z]*(-|\s)[A-Z][a-z]*$/;
                 var regex1 = /^[A-Z][a-z]*$/;
                 if(!regex.test(input) && !regex1.test(input)) {
-                    print_date_err("Ati introdus un nume de tara invalid!");
+                    print_date_err("Tară invalidă!");
                     error = 1;
                 }
                 break;
@@ -144,7 +145,7 @@ function validare_input(flag, error) {
                 var input = document.getElementById("phone").value.toString();
                 var regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
                 if(!regex.test(input)) {
-                    print_date_err("Ati introdus un numar de telefon invalid!");
+                    print_date_err("Număr de telefon invalid!");
                     error = 1;
                 }
                 break;
@@ -152,14 +153,14 @@ function validare_input(flag, error) {
                 var input = document.getElementById("old_password").value.toString();
 
                 if(input.length >2 ) {
-                    print_pass_err("Parola veche trebuie sa aiba cel putin 8 caractere!");
+                    print_pass_err("Parola veche trebuie să aibă cel putin 8 caractere!");
                     error = 1;
                     break;
                 }
 
                 var regex = /[0-9]/;
                 if(!regex.test(input)) {
-                    print_pass_err("Parola veche trebuie sa contina cel putin o cifra (0-9)!");
+                    print_pass_err("Parola veche trebuie să contină cel putin o cifră (0-9)!");
                     error = 1;
                     break;
                 }
@@ -167,7 +168,7 @@ function validare_input(flag, error) {
 
                 regex = /[a-z]/;
                 if(!regex.test(input)) {
-                    print_pass_err("Parola veche trebuie sa contina cel putin o litera mica (a-z)!");
+                    print_pass_err("Parola veche trebuie să contină cel putin o literă mică (a-z)!");
                     error = 1;
                     break;
                 }
@@ -175,7 +176,7 @@ function validare_input(flag, error) {
 
                 regex = /[A-Z]/;
                 if(!regex.test(input)) {
-                    print_pass_err("Parola veche trebuie sa contina cel putin o litera mare (A-Z)!");
+                    print_pass_err("Parola veche trebuie să contină cel putin o literă mare (A-Z)!");
                     error = 1;
                     break;
                 }
@@ -281,11 +282,11 @@ function schimba_email() {
         error = validare_input(date[i], error);
     }
 
-    email = document.getElementById("email").value;
-    re_email = document.getElementById("re_email").value;
+    current_email = document.getElementById("current_email").value;
+    new_email = document.getElementById("new_email").value;
     
     if(error === 0) {
-        if(email != "" && re_email != "") {
+        if(current_email != "" && new_email != "") {
             /* Trimitem datele la server folosind XMLHttpRequest */
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function() {
@@ -293,11 +294,11 @@ function schimba_email() {
                     document.getElementById("err3").innerHTML = this.response;
                 }
             };
-            xmlhttp.open("POST", "php/setari_exec.php", true);
+            xmlhttp.open("POST", "./php/setari_exec.php", true);
             xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            xmlhttp.send(   "flag=2" +
-                            "&email=" + email +
-                            "&re_email=" + re_email
+            xmlhttp.send(   "flag=3" +
+                            "&current_email=" + current_email +
+                            "&new_email=" + new_email
                         );
         } else {
             print_email_err("Toate campurile trebuie sa fie completate!", "err1");

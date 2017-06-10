@@ -1,27 +1,33 @@
 <?php
+session_start();
 
-$option = 0;
-if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['county']) && isset($_POST['city']) && isset($_POST['address']) && isset($_POST['phone'])) {
-	//echo $_POST['nume'] . "<br>" . $_POST['prenume'] . "<br>" . $_POST['judet'] . "<br>" . $_POST['oras'] . "<br>" . $_POST['adresa'] . "<br>" . $_POST['telefon'];
-	updateInfo(1);//$_SESSION['user_ID']);
-	$option = 1;
+if(isset($_POST['flag'])) {
+	$flag = $_POST['flag'];
+	switch ($flag) {
+		case 1:
+			updateInfo($_SESSION['id']);
+			break;
+		
+		case 2:
+			updatePassword($_SESSION['id']);
+			break;
+
+		case 3:
+			updateEmail($_SESSION['id']);
+			break;
+
+		default:
+			break;
+	}
 }
-else if(isset($_POST['current_password']) && isset($_POST['new_password']) && isset($_POST['confirm_password'])) {
-	//echo $_POST['current_password'] . "<br>" . $_POST['new_password'] . "<br>" . $_POST['confirm_password'];
-	updatePassword(1);//$_SESSION['user_ID']);
-	$option = 2;
-}
-else if(isset($_POST['current_email']) && isset($_POST['new_email'])) {
-	//echo $_POST['current_email'] . "<br>" . $_POST['new_email'];
-	updateEmail(1);//$_SESSION['user_ID']);
-	$option = 3;
-}
+		
+
 
 
 /* #################### ###################### #################### */
 /* ###################### updateInfo(userID) ###################### */
 /* #################### ###################### #################### */
-function updateInfo($x) {
+function updateInfo($uID) {
 	require "database/connect2DB.php";
 
     $nume = $_POST["firstname"];
@@ -31,57 +37,34 @@ function updateInfo($x) {
     $adresa = $_POST["address"];
     $telefon = $_POST["phone"];
 
-/*
-    if(!ctype_alnum($nume))
-    	header('Location: ../profile.php?page=setari&err=111#cont');
-    if(!ctype_alnum($prenume))
-    	header('Location: ../profile.php?page=setari&err=121#cont');
-    if(!ctype_alnum($judet))
-    	header('Location: ../profile.php?page=setari&err=131#cont');
-    if(!ctype_alnum($oras))
-    	header('Location: ../profile.php?page=setari&err=141#cont');
-    if(!ctype_alnum($adresa))
-    	header('Location: ../profile.php?page=setari&err=151#cont');
-    if(!ctype_alnum($telefon))
-    	header('Location: ../profile.php?page=setari&err=161#cont');
-*/
     $sql = "UPDATE `UTILIZATORI` SET `nume`=?, `prenume`=?, `judet`=?, `oras`=?, `adresa`=?, `telefon`=? WHERE `ID`=?";
 	    
 	if($stmt =  $conn->prepare($sql)) {
-		$stmt->bind_param('ssssssd', $nume, $prenume, $judet, $oras, $adresa, $telefon, $x);
+		$stmt->bind_param('ssssssd', $nume, $prenume, $judet, $oras, $adresa, $telefon, $uID);
 		$stmt->execute();
-	} else header('Location: ../profile.php?page=setari');
+	}
+	//header('Location: profile.php?page=setari&setat=1');
 }
+
 
 
 /* #################### ###################### #################### */
 /* #################### updatePassword(userID) #################### */
 /* #################### ###################### #################### */
-function updatePassword($x) {
-	require "database/connect2DB.php";//require "../php/database/connect2DB.php";	
+function updatePassword($uID) {
+	require "database/connect2DB.php";
 
 	$current_password = $_POST['current_password'];
 	$new_password = $_POST['new_password'];
 	$confirm_password = $_POST['confirm_password'];
 
+	$sql = "UPDATE `utilizatori` SET `parola`=? WHERE `ID`=?";
 
-	/* Parola actuala coincide cu noua parola ?*/
-	if($new_password == $current_password) {
-		header('Location: ../profile.php?page=setari&err=211#password');
+	if($stmt =  $conn->prepare($sql)) { //
+		$stmt->bind_param('sd', $new_password, $uID);
+		$stmt->execute();
 	}
-
-
-	/* Parola noua coincide cu parola confirmata? */
-	if($new_password != $confirm_password) {
-		header('Location: ../profile.php?page=setari&err=221#password');
-	} else {
-		$sql = "UPDATE `utilizatori` SET `parola`=? WHERE `ID`=?";
-
-		if($stmt =  $conn->prepare($sql)) { //
-			$stmt->bind_param('sd', $new_password, $x);
-			$stmt->execute();
-		} else header('Location: ../profile.php?page=setari');
-	}
+	//header('Location: ../profile.php?page=setari&setat=2');
 }
 
 
@@ -89,29 +72,19 @@ function updatePassword($x) {
 /* #################### ###################### #################### */
 /* ###################### updateEmail(userID) ##################### */
 /* #################### ###################### #################### */
-function updateEmail($x) {
+function updateEmail($uID) {
 	require "database/connect2DB.php";
 
 	$current_email = $_POST['current_email'];
 	$new_email = $_POST['new_email'];
 
-	if(!ctype_alnum($current_email) || !ctype_alnum($new_email)) {
-    	header('Location: ../profile.php?page=setari&err=311#email');
-    }
-	
-	/* E-mail'ul curent coincide cu e'mail vechi? */
-	if($current_email == $new_email) {
-		header('Location: ../profile.php?page=setari&err=321#email');
-	} else {
+	$sql = "UPDATE `utilizatori` SET `email`=? WHERE `ID`=?";
 
-		$sql = "UPDATE `utilizatori` SET `email`=? WHERE `ID`=?";
-
-		if($stmt =  $conn->prepare($sql)) { //
-			$stmt->bind_param('sd', $new_email, $x);
-			$stmt->execute();
-
-		} else header('Location: ../profile.php?page=setari');
+	if($stmt =  $conn->prepare($sql)) { //
+		$stmt->bind_param('sd', $new_email, $uID);
+		$stmt->execute();
 	}
+	//header('Location: ../profile.php?page=setari&setat=3');
 }
 
 ?>

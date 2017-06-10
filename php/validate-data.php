@@ -1,6 +1,6 @@
 <?php
     require("database/connect2DB.php");
-
+    session_start();
     /* Verificam daca acest username exista deja in baza de date */
     if(isset($_POST['username'])) {
         $username = $_POST['username'];
@@ -43,6 +43,27 @@
                 echo "0";
             }
         }
+    }
+
+    /* Verificam daca email'ul introdus apartine utilizatorului */
+    if(isset($_POST['current_email'])) {
+        $email = $_POST['current_email'];
+
+        unset($stmt);
+        $stmt = $conn->stmt_init();
+        
+        $sql_query = "SELECT email FROM utilizatori WHERE id=?";
+        if($stmt = $conn->prepare($sql_query)) {
+            $stmt->bind_param('d', $_SESSION['id']);
+            $stmt->execute();
+            $stmt->bind_result($user_email);
+            $stmt->fetch();
+            if($email === $user_email)
+                echo "1";
+            else
+                echo "0";
+        }
+
     }
 
 ?>

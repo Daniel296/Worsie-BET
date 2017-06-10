@@ -7,14 +7,12 @@
 			$stmt->fetch();
 		}*/
 ?>
+
 <div id="setari">
 	<form id="cont">
 		<div class="changeInfoText">
 			Date personale
 		</div>
-		<?php
-		//	showError(1);
-		?>
 		
 		<div class="changeInfo">
 			<div id="err1">
@@ -105,12 +103,12 @@
 		<div class="changeEmail">
 				<div>
 					<label class="content">E-mail actual:</label>
-					<input class="field" type="text" id="email" value="" onchange="validare_input(2, 0)">
+					<input class="field" type="text" id="current_email" value="" onchange="validare_input(2, 0)">
 				</div>
 
 				<div>
 					<label class="content">E-mail nou:</label>
-					<input class="field" type="text" id="re_email" value="" onchange="validare_input(2, 0)">
+					<input class="field" type="text" id="new_email" value="" onchange="validare_input(3, 0)">
 				</div>
 				<button type="button" class="btn" onclick="schimba_email()">Schimbă email</button>
 			
