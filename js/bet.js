@@ -78,10 +78,6 @@ function delete_race(id_race, id_horse) {
 }
 
 function create_ticket(user_balance, id_user) {
-	if(document.getElementById("balance") != null)
-		user_balance = document.getElementById("balance").value;
-
-
     var date = new Date();
     if(array.length === 0) {
         document.getElementById("races-on-ticket").innerHTML = '';
@@ -98,8 +94,10 @@ function create_ticket(user_balance, id_user) {
         }
     }
 
+	var user_balance = parseFloat(document.getElementById("balance").innerHTML);
     var total_bet = document.getElementById("total_bet").value;     // suma pariata
-	if(user_balance != '' && (user_balance - total_bet) < 0.0) {
+	var diferenta = user_balance - total_bet;
+	if(diferenta < 0) {
 		document.getElementById("log-err").innerHTML  = "<p>Nu ave&#355i suficien&#355i bani!</p>";
 	}
 	else {
