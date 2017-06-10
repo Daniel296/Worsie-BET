@@ -16,15 +16,15 @@
         /* Creeam si executam query-ul pentru a vedea daca exista user-ul in baza de date */
         unset($stmt);
         $stmt =  $conn->stmt_init();
-        $sql_query = "SELECT id FROM UTILIZATORI WHERE username = ? AND parola = ?";
+        $sql_query = "SELECT id, parola FROM UTILIZATORI WHERE username = ?";
         if($stmt =  $conn->prepare($sql_query)) {
-        $stmt->bind_param('ss', $username, $password);
+        $stmt->bind_param('s', $username);
         $stmt->execute();
-        $stmt->bind_result($id_user);
+        $stmt->bind_result($id_user, $hash_password);
         $stmt->fetch();
 
         //password_verify($password, $hash_password) == TRUE
-        if(isset($id_user)) {
+        if(isset($id_user) AND password_verify($password, $hash_password)) {
             /* Pornim sesiunea si setam parametrii la sesiune */
             session_start();
             $_SESSION['id'] = $id_user;
@@ -65,8 +65,7 @@
         $birth_date = date("Y-m-d", strtotime($_POST['birthday']));
 
         /* Criptam parola */
-        //$hash_password = password_hash($password, PASSWORD_DEFAULT);
-        $hash_password = $password;
+        $hash_password = password_hash(trim($password), PASSWORD_BCRYPT);
 
         unset($stmt);
         $stmt =  $conn->stmt_init();
