@@ -82,26 +82,29 @@ function create_ticket(user_balance, id_user) {
     if(array.length === 0) {
         document.getElementById("races-on-ticket").innerHTML = '';
         document.getElementById("log-err").innerHTML  = "<p>Selecta&#355i cel pu&#355in o cursă!</p>";
+		return;
     }
     else {
         if(id_user === '') {
             document.getElementById("log-err").innerHTML  = "<p>Trebuie să fi&#355i logat pentru a putea plasa bilete!</p>";
+			return;
         }
         else {
             if(total_win === 0) {
                 document.getElementById("log-err").innerHTML  = "<p>Adăuga&#355i suma pe care o paria&#355i!</p>";
+				return;
             }
         }
     }
 
-	var user_balance = parseFloat(document.getElementById("balance").innerHTML);
+	user_balance = parseFloat(document.getElementById("balance").innerHTML);
     var total_bet = document.getElementById("total_bet").value;     // suma pariata
 	var diferenta = user_balance - total_bet;
 	if(diferenta < 0) {
 		document.getElementById("log-err").innerHTML  = "<p>Nu ave&#355i suficien&#355i bani!</p>";
 	}
 	else {
-	    if( id_user != '' && total_win != 0) {
+	    if(array.length != 0 && id_user != '' && total_win != 0) {
 	         /* Formam codul biletului <id_user><luna><milisecunde><ora><suma_depusa + suma_castig><ziua><minute><secunde> */
 	         var ticket_code = id_user + date.getMonth() + date.getMilliseconds() + date.getHours() + (total_bet + total_win).toString().split('.')[0] + date.getDay() + date.getMinutes() + date.getSeconds();
 
@@ -132,7 +135,7 @@ function create_ticket(user_balance, id_user) {
 	         xmlhttp.onreadystatechange = function() {
 	            if (this.readyState == 4 && this.status == 200) {
 	                document.getElementById("log-err").innerHTML = "<center>Biletul a fost plasat cu succes!</center>";
-					document.getElementById("balance").value = parseFloat(user_balance - total_bet).toFixed(2) + " RON";
+					document.getElementById("balance").innerHTML = parseFloat(user_balance - total_bet).toFixed(2) + " RON";
 	            }
 	         };
 	         xmlhttp.open("POST", "php/insert-ticket.php", true);
