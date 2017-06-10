@@ -20,7 +20,7 @@
 		$location = "Location: ./rezultate.php?date=" . $data_cautare;
 		if(isset($_GET['race']))
 			$location .= ("&race=" . $_GET['race']);
-		header($location);
+		//header($location);
 		//
 	}
 ?>
@@ -40,35 +40,41 @@
 	<div id="res" class="show-bets-day">
 		<ul>
 			<?php
+				$get_date = "";
+				if(isset($_GET['date']))
+					$get_date = $_GET['date'];
+				else
+					$get_date = date("Y-m-d", time());
+
 				$num_day = getdate();
 				$days = array(0 => "Luni", 1 => "Mar&#355i", 2 => "Miercuri", 3 => "Joi", 4 => "Vineri", 5 => "Sâmbătă", 6 => "Duminică");
 
 				$day = date("Y-m-d", time() - 4 * 86400);
-				if($_GET['date'] == $day)
+				if($get_date == $day)
 					echo "<li class=\"active\"><a href =\"rezultate.php?date=$day\">".$days[($num_day['wday'] + 9) % 7 ]."</a></li>";
 				else
 					echo "<li><a href =\"rezultate.php?date=$day\">".$days[($num_day['wday'] + 9) % 7 ]."</a></li>";
 
 				$day = date("Y-m-d", time() - 3 * 86400);
-				if($_GET['date'] == $day)
+				if($get_date == $day)
 					echo "<li class=\"active\"><a href =\"rezultate.php?date=$day\">".$days[($num_day['wday'] + 10) % 7 ]."</a></li>";
 				else
 					echo "<li><a href =\"rezultate.php?date=$day\">".$days[($num_day['wday'] + 10) % 7 ]."</a></li>";
 
 				$day = date("Y-m-d", time() - 2 * 86400);
-				if($_GET['date'] == $day)
+				if($get_date == $day)
 					echo "<li class=\"active\"><a href =\"rezultate.php?date=$day\">".$days[($num_day['wday'] + 11) % 7 ]."</a></li>";
 				else
 					echo "<li><a href =\"rezultate.php?date=$day\">".$days[($num_day['wday'] + 11) % 7 ]."</a></li>";
 
 				$day = date("Y-m-d", time() - 86400);
-				if($_GET['date'] == $day)
+				if($get_date == $day)
 					echo "<li class=\"active\"><a href =\"rezultate.php?date=$day\">Ieri</a></li>";
 				else
 					echo "<li><a href =\"rezultate.php?date=$day\">Ieri</a></li>";
 
 				$day = date("Y-m-d", time());
-				if($_GET['date'] == $day)
+				if($get_date == $day)
 					echo "<li class=\"active\"><a href =\"rezultate.php?date=$day\">Azi</a></li>";
 				else
 					echo "<li><a href =\"rezultate.php?date=$day\">Azi</a></li>";
