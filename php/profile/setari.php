@@ -108,6 +108,9 @@
 		<div id="err7">
 			<!-- Mesaj de eroare din JAVASCRIPT -->
 		</div>
+		<div id="err8">
+			<!-- Mesaj de eroare din JAVASCRIPT -->
+		</div>
 		<div id="err3">
 			<!-- Mesaj de eroare din JAVASCRIPT -->
 		</div>
@@ -115,12 +118,12 @@
 		<div class="changeEmail">
 				<div>
 					<label class="content">E-mail actual:</label>
-					<input class="field" type="text" id="current_email" value="" onchange="validare_input(2)">
+					<input class="field" type="text" id="current_email" onchange="validare_input(2, 0)">
 				</div>
 
 				<div>
 					<label class="content">E-mail nou:</label>
-					<input class="field" type="text" id="new_email" value="" onchange="validare_input(3)">
+					<input class="field" type="text" id="new_email" onchange="validare_input(3, 0)">
 				</div>
 				<button type="button" class="btn" onclick="schimba_email()">Schimbă email</button>
 			

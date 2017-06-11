@@ -73,14 +73,28 @@ function updateEmail($uID) {
 	$current_email = $_POST['current_email'];
 	$new_email = $_POST['new_email'];
 
-	$sql = "UPDATE `utilizatori` SET `email`=? WHERE `ID`=?";
+	$sql = "UPDATE `utilizatori` SET `email`=? WHERE `email`=?";
 
 	if($stmt =  $conn->prepare($sql)) { //
-		$stmt->bind_param('sd', $new_email, $uID);
+		$stmt->bind_param('ss', $new_email, $current_email);
 		$stmt->execute();
-		echo "Email'ul a fost modificat cu succes.";
+		echo "0";
 	} else
-		echo "Email'ul nu a putut fi modificat.";
+		echo "1";
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ?>

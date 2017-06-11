@@ -36,7 +36,7 @@
             $stmt->bind_result($email1);
             $stmt->fetch();
 
-            if($email == $email1) {
+            if($email === $email1) {
                 echo "1";
             }
             else {
@@ -62,8 +62,6 @@
                 echo "0";
             else
                 echo "1";
-
-            //echo $email . " -- " . $user_email;
         }
     }
 ?>
