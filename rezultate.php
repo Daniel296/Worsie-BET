@@ -25,7 +25,14 @@
 	}
 
 	if($data_cautare > date("Y-m-d", time()))
-		header('Location: ./rezultate.php');
+		header('Location: ./rezultate.php?date=' . date("Y-m-d", time()));
+	
+	if($data_cautare <= date('Y-m-d', time() - (3600 * 24 * 5)))
+		header('Location: ./rezultate.php?date=' . date("Y-m-d", time()));
+	echo $data_cautare . "<br>";
+	echo date('Y-m-d', time() - (3600 * 24 * 5));
+	// if($data_cautare < );
+	// 	header('Location: ./rezultate.php');
 
 ?>
 
