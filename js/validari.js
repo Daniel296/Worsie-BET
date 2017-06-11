@@ -81,45 +81,62 @@ function validare_input(flag, error) {
                 }
                 break;
         
-        case 4: // PASSWORD
-                var input = document.getElementById("password").value;
-
-                if(input.length < 8 ) {
-                    print_pass_err(mesajEroare("Parola trebuie să aibă cel putin 8 caractere!"));
+        case 4: // CURRENT_PASSWORD
+                var input = document.getElementById("current_password").value;
+                if(input.length < 8) {
+                    print_pass_err(mesajEroare("Parola este prea scurta. (minim 8 caractere)"));
                     error = 4;
-                    break;
-                }
-
-                var regex = /[0-9]/;
-                if(!regex.test(input)) {
-                    print_pass_err(mesajEroare("Parola trebuie să contina cel putin o cifră (0-9)!"));
-                    error = 4;
-                    break;
-                }
-                else password = input.toString();
-
-                regex = /[a-z]/;
-                if(!regex.test(input)) {
-                    print_pass_err(mesajEroare("Parola trebuie să contină cel putin o literă mică (a-z)!"));
-                    error = 4;
-                    break;
-                }
-                else password = input;
-
-                regex = /[A-Z]/;
-                if(!regex.test(input)) {
-                    print_pass_err(mesajEroare("Parola trebuie să contiă cel putin o literă mare (A-Z)!"));
-                    error = 4;
-                    break;
+                } else {
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            if(this.response === "1") {
+                                print_pass_err(mesajEroare("Acesta nu este parola ta actuală."));
+                                error = 3;
+                            }
+                        }
+                    }
+                    xmlhttp.open("POST", "./php/validate-data.php", true);
+                    xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                    xmlhttp.send("current_password=" + input);
                 }
                 break;
 
-        case 5: // RE_PASSWORD
-                var password = document.getElementById("password").value;
-                var re_password = document.getElementById("re_password").value;
-                if(password != re_password) {
-                    print_pass_err(mesajEroare("Parolele nu se potrivesc"));
+        case 5: // NEW_PASSWORD
+                var current_password = document.getElementById("current_password").value;
+                var new_password = document.getElementById("new_password").value;
+                if(password === new_password) {
+                    print_pass_err(mesajEroare("Alege o parolă diferită."));
                     error = 5;
+                    break;
+                }
+                else {
+                    if(new_password.length < 8 ) {
+                        print_register_error1("Noua parolă trebuie să aibă cel pu&#355in 8 caractere!  ");
+                        error = 5;
+                        break;
+                    }
+
+                    var regex = /[0-9]/;
+                    if(!regex.test(new_password)) {
+                        print_register_error1("Noua parolă trebuie să con&#355ina cel pu&#355in o cifră (0-9)!");
+                        error = 5;
+                        break;
+                    }
+
+                    regex = /[a-z]/;
+                    if(!regex.test(new_password)) {
+                        print_register_error1("Noua parolă trebuie să con&#355ină cel pu&#355in o literă mică (a-z)!");
+                        error = 5;
+                        break;
+                    }
+
+                    regex = /[A-Z]/;
+                    if(!regex.test(new_password)) {
+                        print_register_error1("Noua parolă trebuie să con&#355ină cel pu&#355in o literă mare (A-Z)!");
+                        error = 5;
+                        break;
+                    }
                 }
                 break;
 
@@ -192,37 +209,10 @@ function validare_input(flag, error) {
                     error = 12;
                 }
                 break;
-        case 13: // OLD_PASSWORD
-                var input = document.getElementById("old_password").value.toString();
+        case 13: // CONFIRM_PASSWORD
+                var input = document.getElementById("new_password").value.toString();
 
-                if(input.length > 2) {
-                    print_pass_err(mesajEroare("Parola veche trebuie să aibă cel putin 8 caractere!"));
-                    error = 13;
-                    break;
-                }
-
-                var regex = /[0-9]/;
-                if(!regex.test(input)) {
-                    print_pass_err(mesajEroare("Parola veche trebuie să contină cel putin o cifră (0-9)!"));
-                    error = 14;
-                    break;
-                }
-                else password = input.toString();
-
-                regex = /[a-z]/;
-                if(!regex.test(input)) {
-                    print_pass_err(mesajEroare("Parola veche trebuie să contină cel putin o literă mică (a-z)!"));
-                    error = 15;
-                    break;
-                }
-                //else //password = input;
-
-                regex = /[A-Z]/;
-                if(!regex.test(input)) {
-                    print_pass_err(mesajEroare("Parola veche trebuie să contină cel putin o literă mare (A-Z)!"));
-                    error = 1;
-                    break;
-                }
+                
                 break;
     }
     return error;
@@ -267,7 +257,7 @@ function schimba_date() {
                         window.location = "./profile.php?page=account";
                     }
                     else
-                        document.getElementById("settings-err3").innerHTML = "Datele nu au putut fi schimbate din cauza unor erori.";
+                        document.getElementById("settings_err1").innerHTML = "Datele nu au putut fi schimbate din cauza unor erori.";
                 }
             };
             xmlhttp.open("POST", "php/setari_exec.php", true);
@@ -292,32 +282,36 @@ function schimba_parola() {
     var error = 0;
     var date = [4, 5, 16];
     for(var i = 0; i < 3; i++) {
-        error += validare_input(date[i]);
+        error == validare_input(date[i]);
     }
 
-    password = document.getElementById("password").value;
-    re_password = document.getElementById("re_password").value;
+    current_password = document.getElementById("current_password").value;
+    new_password = document.getElementById("new_password").value;
+    confirm_password = document.getElementById("confirm_password").value;
     
     if(error === 0) {
-        if(password != "" && re_password != "") {
+        if(current_password != "" && new_password != "" && confirm_password != "") {
             /* Trimitem datele la server folosind XMLHttpRequest */
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById("settings-err2").innerHTML = this.response;
+                    if(this.response === "0")
+                        window.location = "./profile.php?page=account";
+                    else
+                        document.getElementById("settings_err2").innerHTML = "Parola nu a putut fi modificată din cauza unor erori.";
                 }
             };
             xmlhttp.open("POST", "php/setari_exec.php", true);
             xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
             xmlhttp.send(   "flag=2" +
-                            "&password=" + firstname +
-                            "&re_password=" + lastname
+                            "&current_password=" + current_password +
+                            "&new_password=" + new_password
                         );
         } else {
-            print_date_err(mesajEroare("campuri necompletate"));
+            print_pass_err(mesajEroare("campuri necompletate"));
         }
     } else {
-            print_date_err(mesajEroare("campuri completate incorect"));
+            print_pass_err(mesajEroare("campuri completate incorect"));
     }
 }
 
@@ -341,7 +335,7 @@ function schimba_email() {
                         window.location = "./profile.php?page=account";
                     }
                     else
-                        document.getElementById("settings-err3").innerHTML = "Email-ul nu a putut fi schimbat din cauza unor erori.";
+                        document.getElementById("settings_err3").innerHTML = "Email-ul nu a putut fi schimbat din cauza unor erori.";
                 }
             };
             xmlhttp.open("POST", "./php/setari_exec.php", true);
@@ -351,9 +345,9 @@ function schimba_email() {
                             "&new_email=" + new_email
                         );
         } else {
-            print_date_err(mesajEroare("campuri necompletate"));
+            print_email_err(mesajEroare("campuri necompletate"));
         }
     } else {
-            print_date_err(mesajEroare("campuri completate incorect"));
+            print_email_err(mesajEroare("campuri completate incorect"));
     }
 }

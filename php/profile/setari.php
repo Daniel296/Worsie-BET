@@ -68,17 +68,17 @@
 				<div class="centrare">
 					<div>
 						<label class="content">Parolă actuală:</label>
-						<input class="field" type="text" id="old_password" onchange="validare_input(13, 0)">
+						<input class="field" type="password" id="current_password" onchange="validare_input(4, 0)">
 					</div>
 
 					<div>
 						<label class="content">Parolă nouă:</label>
-						<input class="field" type="text" id="password" onchange="validare_input(4, 0)">
+						<input class="field" type="password" id="new_password" onchange="validare_input(5, 0)">
 					</div>
 
 					<div>
 						<label class="content">Confirmare parolă:</label>
-						<input class="field" type="text" id="re_password" onchange="validare_input(5, 0)">
+						<input class="field" type="password" id="confirm_password" onchange="validare_input(13, 0)">
 					</div>
 
 					<div>

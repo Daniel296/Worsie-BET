@@ -52,14 +52,16 @@ function updatePassword($uID) {
 
 	$current_password = $_POST['current_password'];
 	$new_password = $_POST['new_password'];
-	$confirm_password = $_POST['confirm_password'];
+	//$confirm_password = $_POST['confirm_password'];
+	$hash_password = password_hash(trim($new_password), PASSWORD_BCRYPT);
 
 	$sql = "UPDATE `utilizatori` SET `parola`=? WHERE `ID`=?";
 
-	if($stmt =  $conn->prepare($sql)) { //
-		$stmt->bind_param('sd', $new_password, $uID);
+	if($stmt =  $conn->prepare($sql)) {
+		$stmt->bind_param('sd', $hash_password, $uID);
 		$stmt->execute();
-	}
+		echo "0";
+	} else echo "1";
 }
 
 
