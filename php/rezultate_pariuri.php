@@ -17,6 +17,7 @@ function afiseazaRezultate($conn, $data) {
 	$curse = array();
 	$curse = getNumeCurse($conn, $data);
 
+	// Afiseaza mereu toate cursele din ziua respectiva
 	for($i = 0; $i < count($curse); $i++) {
 		printCurse($curse[$i], $data, getOreCursa_byName($conn, $data, $curse[$i], 1));
 	}
@@ -136,7 +137,13 @@ function getNumeCurse($conn, $data) {
 // Returneaza Orele unei curse, si le returneaza
 function getOreCursa_byName($conn, $data, $name, $status) {
 	$ore = array();
-	$time = date('H:i', time() + 3600); // ora si minutul curent
+
+	// Daca e "AZI", atunci selectam ora curenta. Daca nu e "AZI", setam ora 24:00, pentru a afisa toate cursele
+	if($data === date("Y-m-d", time()))
+		$time = date('H:i', time() + 3600);
+	else
+		$time = "24:00";
+	
 	if($status == 1) // ore distincte
 		$sql_query = "SELECT distinct r.ora FROM rezultate r, curse c WHERE r.ora < ? AND date_format(r.data, '%Y-%m-%d') like ? AND c.nume like ? AND r.id_cursa=c.id";
 	else
@@ -168,8 +175,11 @@ function getIDs_AND_OreCurse($conn, $data) {
 	$ids = array();
 	$i = 0;
 	unset($stmt);
-	$time = date('H:i', time() + 3600); // ora si minutul curent
-	$sql_query = "SELECT id_cursa, substr(ora, 1, 5) FROM rezultate WHERE date_format(data, '%Y-%m-%d') like ? AND ora < ?";
+	if($data === date("Y-m-d", time()))
+		$time = date('H:i', time() + 3600);
+	else
+		$time = "24:00";
+	$sql_query = "SELECT id_cursa, substr(ora, 1, 5) FROM rezultate WHERE date_format(data, '%Y-%m-%d') like ? AND ora < ? order by ora";
 	if($stmt = $conn->prepare($sql_query)) {
 		$stmt->bind_param('ss', $data, $time);
 		$stmt->execute();
@@ -219,7 +229,10 @@ function getIDCurse_NumeOra($conn, $data, $ora, $nume) {
 	$ids = array();
 	$ids[0] = -1;
 	
-	$time = date('H:i', time() + 3600); // ora si minutul curent
+	if($data === date("Y-m-d", time()))
+		$time = date('H:i', time() + 3600);
+	else
+		$time = "24:00";
 	$sql_query = "SELECT count(*) FROM curse WHERE date_format(data, '%Y-%m-%d') like ? AND substr(ora, 1, 5) like ? AND nume like ? order by data, nume, ora";
 	if($stmt = $conn->prepare($sql_query)) {
 		$stmt->bind_param('sss', $data, $ora, $nume);
@@ -232,9 +245,12 @@ function getIDCurse_NumeOra($conn, $data, $ora, $nume) {
 		return $ids;
 	}
 	else {
-		$id = -2; $i = 0;
+		$id = -1; $i = 0;
 		unset($stmt);
-		$time = date('H:i', time() + 3600); // ora si minutul curent
+		if($data === date("Y-m-d", time()))
+			$time = date('H:i', time() + 3600);
+		else
+			$time = "24:00";
 		$sql_query = "SELECT id FROM curse WHERE date_format(data, '%Y-%m-%d') like ? AND substr(ora, 1, 5) like ? AND nume like ? order by data, nume, ora";
 		if($stmt = $conn->prepare($sql_query)) {
 			$stmt->bind_param('sss', $data, $ora, $nume);
@@ -257,8 +273,11 @@ function getIDCurse_Nume($conn, $data, $nume) {
 	$ids = array();
 	$ids[0] = -1;
 	$name = '%' . strtolower($nume) . '%';
-	$time = date('H:i', time() + 3600);
-	$sql_query = "SELECT count(*) FROM curse WHERE date_format(data, '%Y-%m-%d') like ? AND lower(nume) like ? AND ora < ? order by nume, ora";
+	if($data === date("Y-m-d", time()))
+		$time = date('H:i', time() + 3600);
+	else
+		$time = "24:00";
+	$sql_query = "SELECT count(*) FROM curse WHERE date_format(data, '%Y-%m-%d') like ? AND lower(nume) like ? AND ora < ? order by ora, nume";
 	if($stmt = $conn->prepare($sql_query)) {
 		$stmt->bind_param('sss', $data, $name, $time);
 		$stmt->execute();
@@ -270,9 +289,9 @@ function getIDCurse_Nume($conn, $data, $nume) {
 		return $ids;
 	}
 	else {
-		$id = -2; $i = 0;
+		$id = -1; $i = 0;
 		unset($stmt);
-		$sql_query = "SELECT id FROM curse WHERE date_format(data, '%Y-%m-%d') like ? AND lower(nume) like ? AND ora < ? order by nume, ora";
+		$sql_query = "SELECT id FROM curse WHERE date_format(data, '%Y-%m-%d') like ? AND lower(nume) like ? AND ora < ? order by ora, nume";
 		if($stmt = $conn->prepare($sql_query)) {
 			$stmt->bind_param('sss', $data, $name, $time);
 			$stmt->execute();
@@ -291,7 +310,7 @@ function getIDCurse_Nume($conn, $data, $nume) {
 /* Afiseaza detaliile despre concurentul $participant */
 function afiseazaConcurent($participant) {
 	$index = 0;
-	while($index != count($participant) - 1) {
+	while($index != count($participant)) {
 		$cal_win_rate = 0;
 		if($participant[$index]['cal_meciuri_pierdute'] == 0)
 			$cal_win_rate = $participant[$index]['cal_meciuri_castigate'];

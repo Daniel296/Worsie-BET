@@ -24,12 +24,15 @@
 			$location .= ("&race=" . $_GET['race']);
 	}
 
+	if($data_cautare > date("Y-m-d", time()))
+		header('Location: ./rezultate.php');
+
 ?>
 
 <div id="main-results">
 
 	<div id="search" class="search-bar">
-		<form  method="GET">
+		<form  method="GET" action="#res">
 			<input type="hidden" name="date" value="<?php echo $data_cautare ?>"/>
 			<input name="race" placeholder="Cautare...">
 			<div class="search-img">
@@ -39,7 +42,7 @@
 	</div>
 
 
-	<div id="res" class="show-bets-day">
+	<div class="show-bets-day">
 		<ul>
 			<?php
 				$get_date = "";
@@ -85,7 +88,7 @@
 		</ul>
 	</div>
 
-	<div class ="bet-details">
+	<div id="res" class ="bet-details">
 	<?php
 		unset($stmt);
 		if(isset($_GET['date']))
