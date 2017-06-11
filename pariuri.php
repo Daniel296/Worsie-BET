@@ -342,8 +342,12 @@
 					}
 				?>)">Plasează bilet</button>
 		</div>
+		<div id="err">
+
+		</div>
 	</div>
 </div>
+
 
 <!--Aici afisam rezultatele de la search-ul de la bilete-->
 <div id="id10" class="modal">
@@ -373,14 +377,47 @@ window.onclick = function(event) {
 }
 </script>
 <script>
-var elementPosition = $('#fixed-wrapper').offset();
-$(window).scroll(function(){
-        if($(window).scrollTop() > elementPosition.top){
-              $('#fixed-wrapper').css('position','fixed').css('top','0').css('margin','20px 1%');
-        } else {
-            $('#fixed-wrapper').css('position','static');
-		}});
+var bet = document.querySelector('#main-pariuri');
+var fixed = document.querySelector('#fixed-wrapper');
+var footer = document.querySelector('#footer');
 
+var fixedOffsetY = fixed.offsetTop;
+var footerOffsetY = footer.offsetTop;
+
+
+
+
+function onScroll(e) {
+	var betHeight = bet.offsetHeight;
+	var fixedHeight = fixed.offsetHeight;
+
+	document.getElementById('err').innerHTML = betHeight + " " + fixedHeight;
+
+	if(betHeight > fixedHeight) {
+	  	if(window.scrollY >= fixedOffsetY) {
+		 	fixed.classList.add('fixed');
+		}
+		else {
+			fixed.classList.remove('fixed');
+		}
+
+		var fixedBottomPosition = window.scrollY + fixedHeight;
+		document.getElementById('err').innerHTML = fixedBottomPosition + " " + footerOffsetY;
+	  	if(fixedBottomPosition + 40 >= footerOffsetY) {
+			fixed.classList.remove('fixed');
+			fixed.classList.add('fixed-bottom');
+		}
+		else {
+			fixed.classList.remove('fixed-bottom');
+		}
+	}
+	else {
+		fixed.classList.remove('fixed');
+	}
+}
+
+document.addEventListener('scroll', onScroll);
 </script>
+
 </body>
 </html>

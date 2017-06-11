@@ -327,8 +327,6 @@ body {
 	margin: 0px;
 	border: 0px;
 	padding: 0px;
-	overflow: auto;
-	max-height: 181px;	
 }
 
 #fixed-wrapper {
@@ -338,6 +336,14 @@ body {
 	right: 5px;
 	margin: 20px 1%;
 	max-width: 300px;
+}
+.fixed {
+    position: fixed;
+    top: 0;
+}
+.fixed-bottom {
+	position: fixed;
+	bottom:185px;
 }
 
 #fixed-wrapper p {

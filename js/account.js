@@ -214,6 +214,7 @@ function register_user() {
     lastname = document.getElementById("lastname").value;
     city = document.getElementById("city").value;
     county = document.getElementById("county").value;
+    county = county.substr(0, 1).toUpperCase() + county.substr(1);  //setam prima litera din judet sa fie UpperCase
     address = document.getElementById("address").value;
     country = document.getElementById("country").defaultValue;
     phone = document.getElementById("phone").value;
