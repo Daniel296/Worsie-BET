@@ -1,6 +1,6 @@
 ﻿var error = 0;
 
-function validate_register_data(flag) {
+function validate_register_data(flag, error) {
     /* flag este un numar de la 1 la 13 identificat inputul pe care il primeste*/
     //document.getElementById("reg-err1").innerHTML = "";
     //document.getElementById("reg-err2").innerHTML = "";
@@ -203,7 +203,7 @@ function print_login_error(error_msg) {
 function register_user() {
     var error = 0;
     for(var i = 0; i <= 13; i++) {
-        error = validate_register_data(i);
+        error = validate_register_data(i, error);
     }
 
     /* Luam toate datele necesare pentru inregistrare*/
@@ -215,7 +215,7 @@ function register_user() {
     city = document.getElementById("city").value;
     county = document.getElementById("county").value;
     address = document.getElementById("address").value;
-    country = document.getElementById("country").value;
+    country = document.getElementById("country").defaultValue;
     phone = document.getElementById("phone").value;
     birthday = document.getElementById("bday").value;
 
