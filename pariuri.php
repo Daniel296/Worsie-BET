@@ -56,11 +56,21 @@
 	<div class="bets">
 		<?php
 			$current_time = date('H:i:s', time() + 3600);
-
 			$today = date('Y-m-d');
+
 			/* Afisam numele curselor si orele la care au loc */
 			if(isset($_GET['date'])) {
 				$date = $_GET['date'];
+
+				/* Daca utilizatorul schimba data din GET atunci redirectam pe pagina cu data de azi */
+				$bad_date = date('Y-m-d', time() + (86400 * 5));
+				if($date >= $bad_date or $date < $today) {
+					$redirect_link = "Location: pariuri.php?date=$today";
+					header($redirect_link);
+				}
+
+					//echo
+
 				$names_array = [];
 				/* Luam numele de la toate cursele */
 				$stmt =  $conn->stmt_init();
