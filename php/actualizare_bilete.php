@@ -58,15 +58,24 @@
 					$stmt->execute();
 					$stmt->bind_result($data,$ora);
 				}
+				if($cal_castigator[$id_cursa_id_cal[0]][0]!=$id_cursa_id_cal[1])
+					$ok=0;
 				while($stmt->fetch()) {
-					
-					echo $data . ' ' . $ora .  ' ';
-					
+					//date_default_timezone_set('Australia/Melbourne');
+					$current_date = strtotime('Now');
+					$data = $data . ' ' . $ora;
+					$data = strtotime($data);
+					//$date1=date('d_m_y');
+					//if(strtotime($date1) < strtotime($data))
+					//   echo '1 is small ='.strtotime($date1).','.$date1;
+					//else
+					//   echo '2 is small ='.strtotime($data).','.$data;
+					if($data>$current_date) {
+						$ok=2;
+					}
 					
 				}
 				
-				if($cal_castigator[$id_cursa_id_cal[0]][0]!=$id_cursa_id_cal[1])
-				$ok=0;
 			}
 			if($ok==0) {
 				$stmt =  $conn->stmt_init();
@@ -81,6 +90,8 @@
 					$stmt->bind_param('i', $_SESSION['id']);
 					$stmt->execute();
 				}
+			}
+			else if($ok==2){
 			}
 			else {
 				$stmt =  $conn->stmt_init();
