@@ -3,7 +3,23 @@
 <div id="bilete">
 	<?php
 
-	
+	/* Trecerea unui bilet din starea de asteptare in starea de pierdut/castigat */
+		
+		$stmt =  $conn->stmt_init();
+		$sql_query = "SELECT id, pariuri FROM bilete WHERE id_user = ? AND status=?";
+		$zero=0;
+		if($stmt =  $conn->prepare($sql_query)) {
+			$stmt->bind_param('ii', $_SESSION['id'],$zero);
+			$stmt->execute();
+			$stmt->bind_result($id, $pariuri);	
+			while($stmt->fetch()) {
+				$words = explode(' ', $pariuri);
+				$lengthWords = count($words);
+				for($i=0; $i<$lengthWords; $i++) {
+					echo $words[$i];
+				}
+			}
+		}
 	
 	/* Paginare */
 		if(isset($_GET['p']))
@@ -92,7 +108,7 @@
 							<div class="biletSuma">Sumă: ' . $suma_depusa . ' RON
 							</div>
 
-							<div class="biletCastig">În a&#351teptare...
+							<div class="biletCastig">Câ&#351tig poten&#355ial: ' . $suma_castig . ' RON
 							</div>
 
 							<div class="biletCota">Cotă: ' . $cota . '
