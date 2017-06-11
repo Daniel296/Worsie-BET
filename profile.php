@@ -16,13 +16,10 @@
 	<div id="leftMenu">
 		<div class="menu">
 			<ul>
-				<li><a href="profile.php?page=account">Contul meu</a></li>
-				<li class="active"><a href="profile.php?page=setari">Setări cont</a></li>
-				<li><a href="profile.php?page=bilete">Istoric bilete</a></li>
+				<li <?php if($_SERVER['QUERY_STRING'] == 'page=account') echo "class=\"active\""; ?>><a href="profile.php?page=account">Contul meu</a></li>
+				<li <?php if($_SERVER['QUERY_STRING'] == 'page=setari') echo "class=\"active\""; ?>><a href="profile.php?page=setari">Setări cont</a></li>
+				<li <?php if($_SERVER['QUERY_STRING'] == 'page=bilete') echo "class=\"active\""; ?>><a href="profile.php?page=bilete">Istoric bilete</a></li>
 			</ul>
-		</div>
-		<div class="dateCont">
-			<?php echo $usr_nume . " " . $usr_prenume; ?> <br>
 		</div>
 	</div>
 
@@ -40,10 +37,6 @@ if(isset($_GET['page'])) {
 
 		case 'bilete' :
 			include ('./php/profile/istoric_bilete.php');
-			break;
-
-		case 'statistici' :
-			include ('./php/profile/statistici.php');
 			break;
 
 		default:

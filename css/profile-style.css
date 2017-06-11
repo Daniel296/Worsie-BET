@@ -471,3 +471,7 @@ div.detalii_bilet {
 	margin-left: 30px;
 	color: #CE000B;
 }
+
+.menu .active a {
+	color: #910018;
+}
