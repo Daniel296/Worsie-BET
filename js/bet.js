@@ -100,6 +100,12 @@ function create_ticket(user_balance, id_user) {
 	user_balance = parseFloat(document.getElementById("balance").innerHTML);
     var total_bet = document.getElementById("total_bet").value;     // suma pariata
 	var diferenta = user_balance - total_bet;
+
+	if(total_bet < 2.00) {
+		document.getElementById("log-err").innerHTML  = "<p>Suma minima este 2 RON</p>";
+		return;
+	}
+
 	if(diferenta < 0) {
 		document.getElementById("log-err").innerHTML  = "<p>Nu ave&#355i suficien&#355i bani!</p>";
 	}
@@ -114,7 +120,6 @@ function create_ticket(user_balance, id_user) {
 			 for(var i = 0; i < array.length; i++) {
 	            insert_statement += array[i]['id_race'] + "." + array[i]['id_horse'] + "." + array[i]['id_jockey'] + " ";
 	         }
-	         //insert_statement.substring(0, insert_statement.length - 3);    //scoatem ultimul spatiu
 			 insert_statement = insert_statement.slice(0, -1);
 	         insert_statement += "', " + total_odd + ")";
 
@@ -128,7 +133,7 @@ function create_ticket(user_balance, id_user) {
 
 			 /* Resetam suma pariata si afisam informatiile*/
 			 document.getElementById("total_bet").value = 0;
-			 display_races_ticket(array, 1.0, 0.0);
+			 display_races_ticket(array, 1.0, 0.0, 1);
 
 			 /* Trimitem datele la server folosind XMLHttpRequest */
 			 var xmlhttp = new XMLHttpRequest();
@@ -146,10 +151,10 @@ function create_ticket(user_balance, id_user) {
 
 }
 
-function display_races_ticket(array, total_odd, total_win) {
+function display_races_ticket(array, total_odd, total_win, flag = 0) {
 	text = "";
 
-    if(array.length == 0) {
+    if(array.length == 0 && flag != 1) {
         document.getElementById("log-err").innerHTML = "<p>Nu a&#355i selectat nicio cursă!</p>";
     }
 

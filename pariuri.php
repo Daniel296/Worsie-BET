@@ -69,8 +69,6 @@
 					header($redirect_link);
 				}
 
-					//echo
-
 				$names_array = [];
 				/* Luam numele de la toate cursele */
 				$stmt =  $conn->stmt_init();
@@ -373,10 +371,11 @@
 <?php
 	require('pages/footer.php');
 ?>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="js/bet.js"></script>
 
+
+<script src="js/bet.js"></script>
 <script src="js\search-ticket.js"></script>
+
 <script>
 // Get the modal
 var modal = document.getElementById('id10');
