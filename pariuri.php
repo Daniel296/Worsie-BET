@@ -390,8 +390,7 @@ var footerOffsetY = footer.offsetTop;
 function onScroll(e) {
 	var betHeight = bet.offsetHeight;
 	var fixedHeight = fixed.offsetHeight;
-
-	document.getElementById('err').innerHTML = betHeight + " " + fixedHeight;
+	var screenHeight = screen.height;
 
 	if(betHeight > fixedHeight) {
 	  	if(window.scrollY >= fixedOffsetY) {
@@ -402,7 +401,7 @@ function onScroll(e) {
 		}
 
 		var fixedBottomPosition = window.scrollY + fixedHeight;
-		document.getElementById('err').innerHTML = fixedBottomPosition + " " + footerOffsetY;
+		//document.getElementById('err').innerHTML = fixedBottomPosition + " " + footerOffsetY;
 	  	if(fixedBottomPosition + 40 >= footerOffsetY) {
 			fixed.classList.remove('fixed');
 			fixed.classList.add('fixed-bottom');
@@ -413,6 +412,7 @@ function onScroll(e) {
 	}
 	else {
 		fixed.classList.remove('fixed');
+		fixed.classList.remove('fixed-bottom')
 	}
 }
 
