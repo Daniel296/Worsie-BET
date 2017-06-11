@@ -1,25 +1,9 @@
 <!--<!DOCTYPE html>-->
 
-<div id="bilete">
-	<?php
 
-	/* Trecerea unui bilet din starea de asteptare in starea de pierdut/castigat */
-		
-		$stmt =  $conn->stmt_init();
-		$sql_query = "SELECT id, pariuri FROM bilete WHERE id_user = ? AND status=?";
-		$zero=0;
-		if($stmt =  $conn->prepare($sql_query)) {
-			$stmt->bind_param('ii', $_SESSION['id'],$zero);
-			$stmt->execute();
-			$stmt->bind_result($id, $pariuri);	
-			while($stmt->fetch()) {
-				$words = explode(' ', $pariuri);
-				$lengthWords = count($words);
-				for($i=0; $i<$lengthWords; $i++) {
-					echo $words[$i];
-				}
-			}
-		}
+<div id="bilete">
+	
+	<?php
 	
 	/* Paginare */
 		if(isset($_GET['p']))

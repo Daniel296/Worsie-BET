@@ -1,3 +1,5 @@
+
+
 <?php
     require("database/connect2DB.php");
 
@@ -45,6 +47,7 @@
                 echo "0";
             }
         }
+
     }
 
 

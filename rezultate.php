@@ -34,7 +34,7 @@
 	<div id="search" class="search-bar">
 		<form  method="GET" action="#res">
 			<input type="hidden" name="date" value="<?php echo $data_cautare ?>"/>
-			<input name="race" placeholder="Cautare...">
+			<input name="race" placeholder="Căutare...">
 			<div class="search-img">
 				<button type="submit"><img src="images/search.png" alt="search"></button>
 			</div>

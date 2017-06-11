@@ -102,7 +102,7 @@ function create_ticket(user_balance, id_user) {
 	var diferenta = user_balance - total_bet;
 
 	if(total_bet < 2.00) {
-		document.getElementById("log-err").innerHTML  = "<p>Suma minima este 2 RON</p>";
+		document.getElementById("log-err").innerHTML  = "<p>Suma minimă este 2 RON</p>";
 		return;
 	}
 

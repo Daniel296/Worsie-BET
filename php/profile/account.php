@@ -1,12 +1,8 @@
+
 <?php
-	// $sql_query = "SELECT email, nume, prenume, balanta, bilete, bileteW, bileteL FROM UTILIZATORI WHERE id = ?";
-	// if($stmt =  $conn->prepare($sql_query)) {
-	// 	$stmt->bind_param('i', $_SESSION['id']);
-	// 	$stmt->execute();
-	// 	$stmt->bind_result($email, $nume, $prenume, $balanta, $bilete, $bileteW, $bileteL);
-	// 	$stmt->fetch();
-	// }
-?>
+	//require('php/actualizare_bilete.php') or die();
+	//actualizareBilete($conn);
+?> 
 <div id="account">
 	<div class="accountName">
 		<?php echo $_SESSION['username'];?>
@@ -33,3 +29,4 @@
 		E-mail: <?php  echo $usr_email; ?><br>
 	</div>
 </div>
+
