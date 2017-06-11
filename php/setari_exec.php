@@ -26,8 +26,8 @@ if(isset($_POST['flag'])) {
 function updateInfo($uID) {
 	require "database/connect2DB.php";
 
-    $nume = $_POST["firstname"];
-    $prenume = $_POST["lastname"];
+    $nume = $_POST["lastname"];
+    $prenume = $_POST["firstname"];
     $judet = $_POST["county"];
     $oras = $_POST["city"];
     $adresa = $_POST["address"];
@@ -38,8 +38,8 @@ function updateInfo($uID) {
 	if($stmt =  $conn->prepare($sql)) {
 		$stmt->bind_param('ssssssd', $nume, $prenume, $judet, $oras, $adresa, $telefon, $uID);
 		$stmt->execute();
-	}
-	//header('Location: profile.php?page=setari&setat=1');
+		echo "0";
+	} else echo "1";
 }
 
 
@@ -52,14 +52,16 @@ function updatePassword($uID) {
 
 	$current_password = $_POST['current_password'];
 	$new_password = $_POST['new_password'];
-	$confirm_password = $_POST['confirm_password'];
+	//$confirm_password = $_POST['confirm_password'];
+	$hash_password = password_hash(trim($new_password), PASSWORD_BCRYPT);
 
 	$sql = "UPDATE `utilizatori` SET `parola`=? WHERE `ID`=?";
 
-	if($stmt =  $conn->prepare($sql)) { //
-		$stmt->bind_param('sd', $new_password, $uID);
+	if($stmt =  $conn->prepare($sql)) {
+		$stmt->bind_param('sd', $hash_password, $uID);
 		$stmt->execute();
-	}
+		echo "0";
+	} else echo "1";
 }
 
 
@@ -82,19 +84,5 @@ function updateEmail($uID) {
 	} else
 		echo "1";
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ?>

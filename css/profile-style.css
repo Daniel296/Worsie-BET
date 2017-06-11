@@ -454,29 +454,20 @@ div.detalii_bilet {
 	cursor: pointer;
 }
 
-.plus {
- 	font-size: 1em;
-  	padding: 5px auto;
-  	color: rgba(0, 0, 0, 0.7);
-  	text-decoration: none;
-  	transition: all 0.2s ease-out;
-}
-.plus:hover {
-  background: rgba(200, 200, 200, 0.3);
+
+#settings_err1 {
+	margin-top: 20px;
+	color: #CE000B;
 }
 
-.ui-dialog.dialog_style .ui-widget-header{
-	background: #FFFFFF;
-    color: #000;
-    font-weight: normal;
+#settings_err2 {
+	margin-top: 20px;
+	margin-left: 30px;
+	color: #CE000B;
 }
 
-.ui-dialog.dialog_style .ui-widget-content {
-    background: #FFFFFF;
-    color: #000;
-}
-
-.ui-dialog.dialog_style .ui-widget-buttonpane {
-	background: #333333;
-    color: #000000;
+#settings_err3 {
+	margin-top: 20px;
+	margin-left: 30px;
+	color: #CE000B;
 }

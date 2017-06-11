@@ -63,5 +63,27 @@
             else
                 echo "1";
         }
+        else echo "1";
+    }
+
+    // Verificam daca parola introdusa apartine utilizatorului
+    if(isset($_POST['current_password'])) {
+        $current_password = $_POST['current_password'];
+
+        unset($stmt);
+        $stmt = $conn->stmt_init();
+        $sql_query = "SELECT parola FROM utilizatori WHERE ID=?";
+        if($stmt = $conn->prepare($sql_query)) {
+            $stmt->bind_param('d', $_SESSION['id']);
+            $stmt->execute();
+            $stmt->bind_result($user_password);
+            $stmt->fetch();
+            if(password_verify($current_password, $user_password))
+                echo "0";
+            else
+                echo "1";
+        }
+        else echo "1";
+
     }
 ?>
