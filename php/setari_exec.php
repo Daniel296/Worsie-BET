@@ -83,18 +83,4 @@ function updateEmail($uID) {
 		echo "1";
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>

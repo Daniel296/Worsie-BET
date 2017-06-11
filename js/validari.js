@@ -25,11 +25,6 @@ function mesajEroare(id) {
 }
 
 function validare_input(flag, error) {
-    /* flag este un numar de la 1 la 13 indentificant inputul pe care il primeste*/
-    // document.getElementById("err1").innerHTML = "";
-    // document.getElementById("err2").innerHTML = "";
-    // document.getElementById("err3").innerHTML = "";
-
     switch (flag) {
         case 2: // EMAIL
                 var regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -235,17 +230,17 @@ function validare_input(flag, error) {
 
 
 function print_date_err(error_msg) {
-    document.getElementById("err1").innerHTML = "* " + error_msg + "<br><br>";
+    document.getElementById("settings_err1").innerHTML = "* " + error_msg + "<br><br>";
 }
 
 
 function print_pass_err(error_msg) {
-    document.getElementById("err2").innerHTML = "* " + error_msg + "<br><br>";
+    document.getElementById("settings_err2").innerHTML = "* " + error_msg + "<br><br>";
 }
 
 
 function print_email_err(error_msg) {
-    document.getElementById("err3").innerHTML = "* " + error_msg + "<br><br>";
+    document.getElementById("settings_err3").innerHTML = "* " + error_msg + "<br><br>";
 }
 
 function schimba_date() {
@@ -269,7 +264,7 @@ function schimba_date() {
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById("err1").innerHTML = this.response;
+                    document.getElementById("settings_err1").innerHTML = this.response;
                 }
             };
             xmlhttp.open("POST", "php/setari_exec.php", true);
@@ -306,7 +301,7 @@ function schimba_parola() {
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById("err2").innerHTML = this.response;
+                    document.getElementById("settings-err2").innerHTML = this.response;
                 }
             };
             xmlhttp.open("POST", "php/setari_exec.php", true);
@@ -326,14 +321,13 @@ function schimba_parola() {
 function schimba_email() {
     var error = 0;
     var x = 100;
-    document.getElementById("err6").innerHTML = error;
     for(var i = 2; i < 4; i++) {
         error = validare_input(i, error);
     }
 
     current_email = document.getElementById("current_email").value;
     new_email = document.getElementById("new_email").value;
-    document.getElementById("err7").innerHTML = error;
+    
     if(error === 0) {
         if(current_email != "" && new_email != "") {
             /* Trimitem datele la server folosind XMLHttpRequest */
@@ -344,7 +338,7 @@ function schimba_email() {
                         window.location = "./profile.php?page=account";
                     }
                     else
-                        document.getElementById("err3").innerHTML = "Email-ul nu a putut fi schimbat din cauza unor erori.";
+                        document.getElementById("settings-err3").innerHTML = "Email-ul nu a putut fi schimbat din cauza unor erori.";
                 }
             };
             xmlhttp.open("POST", "./php/setari_exec.php", true);

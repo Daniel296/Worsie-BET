@@ -9,39 +9,38 @@
 ?>
 
 <div id="setari">
-	<form id="cont">
+	<!--<form id="cont">-->
 		<div class="changeInfoText">
 			Date personale
 		</div>
-		
-		<div class="changeInfo">
-			<div id="err1">
-                <!-- Mesaje de eroare din JAVASCRIPT -->
-            </div>
-			<!--<form action="." method="POST">-->
+			<div id="settings_err1">
+				<!-- Mesaj de eroare din JAVASCRIPT -->
+			</div>
+			
+			<div class="changeInfo">
 				<div>
 					<label class="content">Nume:</label>
-					<input class="field" type="text" id="lastname" value="<?php echo $usr_nume;?>" onchange="validare_input(6)">
+					<input class="field" type="text" id="lastname" value="<?php echo $usr_nume;?>" onchange="validare_input(6, 0)">
 				</div>
 
 				<div>
 					<label class="content">Prenume:</label>
-					<input class="field" type="text" id="firstname" value="<?php echo $usr_prenume;?>" onchange="validare_input(7)">
+					<input class="field" type="text" id="firstname" value="<?php echo $usr_prenume;?>" onchange="validare_input(7, 0)">
 				</div>
 
 				<div>
 					<label class="content">Jude&#355:</label>
-					<input class="field" type="text" id="county" value="<?php echo $usr_judet;?>" onchange="validare_input(8)">
+					<input class="field" type="text" id="county" value="<?php echo $usr_judet;?>" onchange="validare_input(8, 0)">
 				</div>
 
 				<div>
 					<label class="content">Ora&#351:</label>
-					<input class="field" type="text" id="city" value="<?php echo $usr_oras;?>" onchange="validare_input(9)">
+					<input class="field" type="text" id="city" value="<?php echo $usr_oras;?>" onchange="validare_input(9, 0)">
 				</div>
 
 				<div>
 					<label class="content">Adresă:</label>
-					<input class="field" type="text" id="address" value="<?php echo $usr_adresa;?>"  onchange="validare_input(10)">
+					<input class="field" type="text" id="address" value="<?php echo $usr_adresa;?>"  onchange="validare_input(10, 0)">
 				</div>
 
 				<div>
@@ -52,70 +51,51 @@
 				<button type="button" class="btn" onclick="schimba_date()">Schimbă date</button>
 			<!--</form>-->
 		</div>
-	</form>
+	<!--</form>-->
 
 
-	<!--<form id="password">-->
-		<div class="changePasswordText">
-			Schimbare parolă
-		</div>
-
-		<div id="err2">
-			<!-- Mesaj de eroare din JAVASCRIPT -->
-		</div>
-		
-		<div class="changePassword">
+	
+	<div class="changePasswordText">
+		Schimbare parolă
+	</div>
+			<div id="settings_err2">
+				<!-- Mesaj de eroare din JAVASCRIPT -->
+			</div>
 			
+			<div class="changePassword">			
 				<div class="centrare">
 					<div>
 						<label class="content">Parolă actuală:</label>
-						<input class="field" type="text" id="old_password" onchange="validare_input(13)">
+						<input class="field" type="text" id="old_password" onchange="validare_input(13, 0)">
 					</div>
 
 					<div>
 						<label class="content">Parolă nouă:</label>
-						<input class="field" type="text" id="password" onchange="validare_input(4)">
+						<input class="field" type="text" id="password" onchange="validare_input(4, 0)">
 					</div>
 
 					<div>
 						<label class="content">Confirmare parolă:</label>
-						<input class="field" type="text" id="re_password" onchange="validare_input(5)">
+						<input class="field" type="text" id="re_password" onchange="validare_input(5, 0)">
 					</div>
 
 					<div>
 						<button type="button" class="btn" onclick="schimba_parola()">Schimbă parolă</button>
 					</div>
 				</div>
-			
-		</div>
-	<!--</form>-->
-
-
-	<!--<form id="email">-->
-		<div class="changeEmailText">
-			Schimbare email
 		</div>
 
-		<div id="err4">
-			<!-- Mesaj de eroare din JAVASCRIPT -->
-		</div>
-		<div id="err5">
-			<!-- Mesaj de eroare din JAVASCRIPT -->
-		</div>
-		<div id="err6">
-			<!-- Mesaj de eroare din JAVASCRIPT -->
-		</div>
-		<div id="err7">
-			<!-- Mesaj de eroare din JAVASCRIPT -->
-		</div>
-		<div id="err8">
-			<!-- Mesaj de eroare din JAVASCRIPT -->
-		</div>
-		<div id="err3">
-			<!-- Mesaj de eroare din JAVASCRIPT -->
-		</div>
 
-		<div class="changeEmail">
+
+	<div class="changeEmailText">
+		Schimbare email
+	</div>
+
+			<div id="settings_err3">
+				<!-- Mesaj de eroare din JAVASCRIPT -->
+			</div>
+
+			<div class="changeEmail">
 				<div>
 					<label class="content">E-mail actual:</label>
 					<input class="field" type="text" id="current_email" onchange="validare_input(2, 0)">
@@ -127,8 +107,7 @@
 				</div>
 				<button type="button" class="btn" onclick="schimba_email()">Schimbă email</button>
 			
-		</div>
-	<!--</form>-->
+			</div>
 </div>
 
 
