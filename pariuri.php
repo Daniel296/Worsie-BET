@@ -55,7 +55,8 @@
 
 	<div class="bets">
 		<?php
-			$current_time = date('H:i:s');
+			$current_time = date('H:i:s', time() + 3600);
+
 			$today = date('Y-m-d');
 			/* Afisam numele curselor si orele la care au loc */
 			if(isset($_GET['date'])) {
@@ -113,7 +114,7 @@
 			$date = $_GET['date'];
 
 			unset($stmt);
-			$current_time = date('H:i:s');
+			$current_time = date('H:i:s', time() + 3600);;
 
 			$stmt =  $conn->stmt_init();
 			if($date == $today)
