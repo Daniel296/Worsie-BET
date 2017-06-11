@@ -26,8 +26,8 @@ if(isset($_POST['flag'])) {
 function updateInfo($uID) {
 	require "database/connect2DB.php";
 
-    $nume = $_POST["firstname"];
-    $prenume = $_POST["lastname"];
+    $nume = $_POST["lastname"];
+    $prenume = $_POST["firstname"];
     $judet = $_POST["county"];
     $oras = $_POST["city"];
     $adresa = $_POST["address"];
@@ -38,8 +38,8 @@ function updateInfo($uID) {
 	if($stmt =  $conn->prepare($sql)) {
 		$stmt->bind_param('ssssssd', $nume, $prenume, $judet, $oras, $adresa, $telefon, $uID);
 		$stmt->execute();
-	}
-	//header('Location: profile.php?page=setari&setat=1');
+		echo "0";
+	} else echo "1";
 }
 
 

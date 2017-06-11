@@ -230,24 +230,24 @@ function validare_input(flag, error) {
 
 
 function print_date_err(error_msg) {
-    document.getElementById("settings_err1").innerHTML = "* " + error_msg + "<br><br>";
+    document.getElementById("settings_err1").innerHTML = "* " + error_msg + "<br>";
 }
 
 
 function print_pass_err(error_msg) {
-    document.getElementById("settings_err2").innerHTML = "* " + error_msg + "<br><br>";
+    document.getElementById("settings_err2").innerHTML = "* " + error_msg + "<br>";
 }
 
 
 function print_email_err(error_msg) {
-    document.getElementById("settings_err3").innerHTML = "* " + error_msg + "<br><br>";
+    document.getElementById("settings_err3").innerHTML = "* " + error_msg + "<br>";
 }
 
 function schimba_date() {
     var error = 0;
     var date = [6, 7, 8, 9, 10, 12];
     for(var i = 0; i < 6; i++) {
-        error = validare_input(date[i]);
+        error = validare_input(date[i], error);
     }
 
     firstname = document.getElementById("firstname").value;
@@ -256,15 +256,18 @@ function schimba_date() {
     county = document.getElementById("county").value;
     address = document.getElementById("address").value;
     phone = document.getElementById("phone").value;
-    
 
     if(error === 0) {
         if(firstname != "" && lastname != "" && city != "" && county != "" && address != "" && phone != "") {
-            /* Trimitem datele la server folosind XMLHttpRequest */
+            // Trimitem datele la server folosind XMLHttpRequest
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById("settings_err1").innerHTML = this.response;
+                    if(this.response === "0") {
+                        window.location = "./profile.php?page=account";
+                    }
+                    else
+                        document.getElementById("settings-err3").innerHTML = "Datele nu au putut fi schimbate din cauza unor erori.";
                 }
             };
             xmlhttp.open("POST", "php/setari_exec.php", true);

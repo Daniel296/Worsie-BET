@@ -9,14 +9,18 @@
 ?>
 
 <div id="setari">
-	<!--<form id="cont">-->
-		<div class="changeInfoText">
-			Date personale
-		</div>
+	<div class="changeInfoText">
+		Date personale
+	</div>
+
 			<div id="settings_err1">
 				<!-- Mesaj de eroare din JAVASCRIPT -->
 			</div>
 			
+			<div id="abcd">
+				<!-- Mesaj de eroare din JAVASCRIPT -->
+			</div>
+
 			<div class="changeInfo">
 				<div>
 					<label class="content">Nume:</label>
@@ -49,9 +53,7 @@
 				</div>
 
 				<button type="button" class="btn" onclick="schimba_date()">Schimbă date</button>
-			<!--</form>-->
 		</div>
-	<!--</form>-->
 
 
 	
