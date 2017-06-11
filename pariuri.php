@@ -391,6 +391,7 @@ function onScroll(e) {
 	var betHeight = bet.offsetHeight;
 	var fixedHeight = fixed.offsetHeight;
 	var screenHeight = screen.height;
+	//document.getElementById('err').innerHTML = betHeight + " " + fixedHeight + " " + screenHeight;
 
 	if(betHeight > fixedHeight) {
 	  	if(window.scrollY >= fixedOffsetY) {
@@ -409,6 +410,12 @@ function onScroll(e) {
 		else {
 			fixed.classList.remove('fixed-bottom');
 		}
+		//
+		// if(screenHeight > (fixedHeight + 40)) {
+		// 	fixed.classList.remove('fixed');
+		// 	fixed.classList.remove('fixed-bottom');
+		//
+		// }
 	}
 	else {
 		fixed.classList.remove('fixed');
