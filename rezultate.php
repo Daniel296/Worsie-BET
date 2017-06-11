@@ -30,10 +30,10 @@
 
 	<div id="search" class="search-bar">
 		<form  method="GET">
-			<input type="hidden" name="data" value="<?php echo $data_cautare ?>"/> 
-			<input name="race" placeholder="Căutare...">
+			<input type="hidden" name="date" value="<?php echo $data_cautare ?>"/>
+			<input name="race" placeholder="Cautare...">
 			<div class="search-img">
-				<img src="images/search.png" alt="search"></a>
+				<button type="submit"><img src="images/search.png" alt="search"></button>
 			</div>
 		</form>
 	</div>

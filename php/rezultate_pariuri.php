@@ -220,7 +220,7 @@ function getIDCurse_NumeOra($conn, $data, $ora, $nume) {
 	$ids[0] = -1;
 	
 	$time = date('H:i', time() + 3600); // ora si minutul curent
-	$sql_query = "SELECT count(*) FROM curse WHERE date_format(data, '%Y-%m-%d') like ? AND substr(ora, 1, 5) like ? AND nume like ? order by data, ora";
+	$sql_query = "SELECT count(*) FROM curse WHERE date_format(data, '%Y-%m-%d') like ? AND substr(ora, 1, 5) like ? AND nume like ? order by data, nume, ora";
 	if($stmt = $conn->prepare($sql_query)) {
 		$stmt->bind_param('sss', $data, $ora, $nume);
 		$stmt->execute();
@@ -235,7 +235,7 @@ function getIDCurse_NumeOra($conn, $data, $ora, $nume) {
 		$id = -2; $i = 0;
 		unset($stmt);
 		$time = date('H:i', time() + 3600); // ora si minutul curent
-		$sql_query = "SELECT id FROM curse WHERE date_format(data, '%Y-%m-%d') like ? AND substr(ora, 1, 5) like ? AND nume like ? order by data, ora";
+		$sql_query = "SELECT id FROM curse WHERE date_format(data, '%Y-%m-%d') like ? AND substr(ora, 1, 5) like ? AND nume like ? order by data, nume, ora";
 		if($stmt = $conn->prepare($sql_query)) {
 			$stmt->bind_param('sss', $data, $ora, $nume);
 			$stmt->execute();
@@ -258,7 +258,7 @@ function getIDCurse_Nume($conn, $data, $nume) {
 	$ids[0] = -1;
 	$name = '%' . strtolower($nume) . '%';
 	$time = date('H:i', time() + 3600);
-	$sql_query = "SELECT count(*) FROM curse WHERE date_format(data, '%Y-%m-%d') like ? AND lower(nume) like ? AND ora < ? order by data";
+	$sql_query = "SELECT count(*) FROM curse WHERE date_format(data, '%Y-%m-%d') like ? AND lower(nume) like ? AND ora < ? order by nume, ora";
 	if($stmt = $conn->prepare($sql_query)) {
 		$stmt->bind_param('sss', $data, $name, $time);
 		$stmt->execute();
@@ -272,7 +272,7 @@ function getIDCurse_Nume($conn, $data, $nume) {
 	else {
 		$id = -2; $i = 0;
 		unset($stmt);
-		$sql_query = "SELECT id FROM curse WHERE date_format(data, '%Y-%m-%d') like ? AND lower(nume) like ? AND ora < ? order by ora";
+		$sql_query = "SELECT id FROM curse WHERE date_format(data, '%Y-%m-%d') like ? AND lower(nume) like ? AND ora < ? order by nume, ora";
 		if($stmt = $conn->prepare($sql_query)) {
 			$stmt->bind_param('sss', $data, $name, $time);
 			$stmt->execute();

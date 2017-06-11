@@ -530,7 +530,7 @@ body {
 	margin: 25px auto 100px;
 }
 
-.search-bar  input {
+.search-bar input {
 	float: left;
 	width: 87%;
 	height: 30px;
@@ -542,27 +542,27 @@ body {
 }
 
 .search-bar button {
-	display: inline;
-	width: 50px;
-	height: 35px;
-	margin: auto;
-	color: #FFF;
-	background-color: #910018;
-	border: 0;
+	background-color: rgba(0,0,0,0.1);
+	margin-top: 3px;
+	margin-bottom: -2px;
 	font: 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
 }
 
 .search-img {
 	width: 50px;
 	float: right;
-	margin: 0;
 	background-color: #FFF;
 	cursor: pointer;
-	padding: 7px 0;
 	box-shadow: 5px 3px 3px 3px rgba(0, 0, 0, 0.99);
 }
 
 .search-img img {
+	display: block;
+	margin: auto;
+	height: 26px;
+}
+
+.search-img button img {
 	display: block;
 	margin: auto;
 	height: 26px;
