@@ -257,13 +257,15 @@
 		</div>
 		<div class="bet-details-body">
 			<?php
+				$staul = [1,2,3,4,5];
+				shuffle($staul);
 				for($j = 0; $j < count($ids_horses[$i]); $j++) {
 			?>
 
 			<div class="team">
 				<div class="collumn1">
-					<span class="top">1</span>
-					<span class="bottom">(6)</span>
+					<span class="top"><?php echo $j + 1; ?></span>
+					<span class="bottom">(<?php echo $staul[$j]; ?>)</span>
 				</div>
 				<div class="collumn2">
 					<img alt="vesta-jocheu" src="<?php echo $jockeys_details[$i][$j]['vesta']; ?>">
