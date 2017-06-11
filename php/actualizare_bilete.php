@@ -1,5 +1,4 @@
 <?php
-function actualizareBilete($conn) {
 /* Trecerea unui bilet din starea de asteptare in starea pierdut/castigat */
 		$i=0;
 		$zero=0;
@@ -52,8 +51,22 @@ function actualizareBilete($conn) {
 			$ok=1;
 			for($k=0; $k<$lengthWords[$j] ;$k++) {
 				$id_cursa_id_cal = explode('.',$arrayBets[$j][$k]);
+				$stmt =  $conn->stmt_init();
+				$sql_query = "SELECT data,ora FROM curse WHERE id = ?";
+				if($stmt =  $conn->prepare($sql_query)) {
+					$stmt->bind_param('i', $id_cursa_id_cal[0]);
+					$stmt->execute();
+					$stmt->bind_result($data,$ora);
+				}
+				while($stmt->fetch()) {
+					
+					echo $data . ' ' . $ora .  ' ';
+					
+					
+				}
+				
 				if($cal_castigator[$id_cursa_id_cal[0]][0]!=$id_cursa_id_cal[1])
-					$ok=0;
+				$ok=0;
 			}
 			if($ok==0) {
 				$stmt =  $conn->stmt_init();
@@ -84,5 +97,4 @@ function actualizareBilete($conn) {
 				}
 			}
 		}
-	}
 ?>

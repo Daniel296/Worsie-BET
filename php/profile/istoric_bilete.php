@@ -1,6 +1,5 @@
 <!--<!DOCTYPE html>-->
 
-
 <div id="bilete">
 	
 	<?php

@@ -1,8 +1,4 @@
 
-<?php
-	//require('php/actualizare_bilete.php') or die();
-	//actualizareBilete($conn);
-?> 
 <div id="account">
 	<div class="accountName">
 		<?php echo $_SESSION['username'];?>

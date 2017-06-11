@@ -47,6 +47,7 @@
                 echo "0";
             }
         }
+		require('php/actualizare_bilete.php');
 
     }
 

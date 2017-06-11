@@ -112,13 +112,11 @@ function actualizareBilete($conn) {
 	</div>
 
 <?php
-
+require('php/actualizare_bilete.php');
 if(isset($_GET['page'])) {
 	switch ($_GET['page']) {
 		case 'account' :
 			include ('./php/profile/account.php');
-			//require('php/actualizare_bilete.php') or die();
-			actualizareBilete($conn);
 			break;
 
 		case 'setari' :
