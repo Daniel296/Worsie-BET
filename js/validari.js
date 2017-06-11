@@ -83,23 +83,18 @@ function validare_input(flag, error) {
         
         case 4: // CURRENT_PASSWORD
                 var input = document.getElementById("current_password").value;
-                if(input.length < 8) {
-                    print_pass_err(mesajEroare("Parola este prea scurta. (minim 8 caractere)"));
-                    error = 4;
-                } else {
-                    var xmlhttp = new XMLHttpRequest();
-                    xmlhttp.onreadystatechange = function() {
-                        if (this.readyState == 4 && this.status == 200) {
-                            if(this.response === "1") {
-                                print_pass_err(mesajEroare("Acesta nu este parola ta actuală."));
-                                error = 3;
-                            }
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        if(this.response === "1") {
+                            print_pass_err(mesajEroare("Acesta nu este parola ta actuală."));
+                            error = 3;
                         }
                     }
-                    xmlhttp.open("POST", "./php/validate-data.php", true);
-                    xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                    xmlhttp.send("current_password=" + input);
                 }
+                xmlhttp.open("POST", "./php/validate-data.php", true);
+                xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xmlhttp.send("current_password=" + input);
                 break;
 
         case 5: // NEW_PASSWORD
@@ -167,8 +162,8 @@ function validare_input(flag, error) {
                                 'timis', 'tulcea', 'valcea', 'vaslui', 'vrancea'];
 
                 if(counties.indexOf(input.toLowerCase()) === -1) {
-                    print_register_error2("A&#355i introdus un jude&#355 invalid!");
-                    error = 1;
+                    print_date_err(mesajEroare("A&#355i introdus un jude&#355 invalid!"));
+                    error = 8;
                 }
                 break;
 

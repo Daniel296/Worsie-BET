@@ -23,7 +23,6 @@
 		</div>
 		<div class="dateCont">
 			<?php echo $usr_nume . " " . $usr_prenume; ?> <br>
-			Ultima conectare: 27.04.2017 09:57
 		</div>
 	</div>
 
