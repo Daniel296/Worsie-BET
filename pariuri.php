@@ -376,23 +376,24 @@ window.onclick = function(event) {
     }
 }
 </script>
+
+<!-- In acest script facem ca box-ul biletului de pe pagina sa se miste dupa scroll-->
 <script>
+/* Luam toate elementele de care avem nevoie */
 var bet = document.querySelector('#main-pariuri');
 var fixed = document.querySelector('#fixed-wrapper');
 var footer = document.querySelector('#footer');
 
+/* Vom avea nevoie de pozitia de sus a elementelor */
 var fixedOffsetY = fixed.offsetTop;
 var footerOffsetY = footer.offsetTop;
-
-
-
 
 function onScroll(e) {
 	var betHeight = bet.offsetHeight;
 	var fixedHeight = fixed.offsetHeight;
+	var fixedBottomPosition = window.scrollY + fixedHeight;
 
-	document.getElementById('err').innerHTML = betHeight + " " + fixedHeight;
-
+	/* In cazul in care inaltima main-ului este mai mare decat div-ul unde avem biletul, atunci facem acest div fixed */
 	if(betHeight > fixedHeight) {
 	  	if(window.scrollY >= fixedOffsetY) {
 		 	fixed.classList.add('fixed');
@@ -401,8 +402,7 @@ function onScroll(e) {
 			fixed.classList.remove('fixed');
 		}
 
-		var fixedBottomPosition = window.scrollY + fixedHeight;
-		document.getElementById('err').innerHTML = fixedBottomPosition + " " + footerOffsetY;
+		/* Facem urmatoarele modificari pentru a nu suprapune div-ul biletului peste footer */
 	  	if(fixedBottomPosition + 40 >= footerOffsetY) {
 			fixed.classList.remove('fixed');
 			fixed.classList.add('fixed-bottom');
