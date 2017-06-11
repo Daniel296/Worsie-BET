@@ -6,7 +6,6 @@
 	<link rel="stylesheet" type="text/css" href="css/style-header.css">
 	<link rel="stylesheet" type="text/css" href="css/popup-style.css">
 	<link rel="stylesheet" type="text/css" href="css/profile-style.css">
-
 </head>
 <body>
 
@@ -390,8 +389,8 @@ var footerOffsetY = footer.offsetTop;
 function onScroll(e) {
 	var betHeight = bet.offsetHeight;
 	var fixedHeight = fixed.offsetHeight;
-	var screenHeight = screen.height;
-	//document.getElementById('err').innerHTML = betHeight + " " + fixedHeight + " " + screenHeight;
+
+	document.getElementById('err').innerHTML = betHeight + " " + fixedHeight;
 
 	if(betHeight > fixedHeight) {
 	  	if(window.scrollY >= fixedOffsetY) {
@@ -402,7 +401,7 @@ function onScroll(e) {
 		}
 
 		var fixedBottomPosition = window.scrollY + fixedHeight;
-		//document.getElementById('err').innerHTML = fixedBottomPosition + " " + footerOffsetY;
+		document.getElementById('err').innerHTML = fixedBottomPosition + " " + footerOffsetY;
 	  	if(fixedBottomPosition + 40 >= footerOffsetY) {
 			fixed.classList.remove('fixed');
 			fixed.classList.add('fixed-bottom');
@@ -410,16 +409,9 @@ function onScroll(e) {
 		else {
 			fixed.classList.remove('fixed-bottom');
 		}
-		//
-		// if(screenHeight > (fixedHeight + 40)) {
-		// 	fixed.classList.remove('fixed');
-		// 	fixed.classList.remove('fixed-bottom');
-		//
-		// }
 	}
 	else {
 		fixed.classList.remove('fixed');
-		fixed.classList.remove('fixed-bottom')
 	}
 }
 

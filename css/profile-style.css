@@ -208,7 +208,7 @@ div.biletTipO {
 	border: 1px solid #006600;
 }
 
-.race-on-ticket {
+.race-on-ticket1 {
 	color: #FFF;
 	display: table;
 	width: 94%;
@@ -221,28 +221,28 @@ div.biletTipO {
 	display: block;
 }
 
-.top-left {
+.top-left1 {
 	margin: 2px 0px 0px;
 	display: inline-table;
 	text-align: left;
 	font-size: 17px;
 }
 
-.top-right {
+.top-right1 {
 	display: inline-table;
 	margin: 2px 0px 0px;
 	float: right;
 	font-size: 17px;
 }
 
-.bottom-left {
+.bottom-left1 {
 	margin: 5px 0px 5px;
 	display: inline-table;
 	float: left;
 	font-size: 14px;
 }
 
-.bottom-right {
+.bottom-right1 {
 	margin: 5px 0px 5px;
 	display: inline-table;
 	float: right;

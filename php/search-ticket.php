@@ -69,11 +69,11 @@
                     $html = "<div class=\"bet-ticket-win\">";
 
             for($i = 0; $i < count($ticket_details); $i++) {
-                $html .= "<div class=\"race-on-ticket\">" .
-                                "<div class=\"detail\"><div class=\"top-left\">" . $ticket_details[$i]['horse_name'] . "</div>" .
-                                "<div class=\"top-right\">" . $ticket_details[$i]['jockey_name'] . "</div></div>" .
-                                "<div class=\"detail\"><div class=\"bottom-left\">" . $ticket_details[$i]['race_name'] . "</div>".
-                                "<div class=\"bottom-right\">" . substr($ticket_details[$i]['race_time'],0,5) . " / " . $ticket_details[$i]['race_date'] . "</div></div>" .
+                $html .= "<div class=\"race-on-ticket1\">" .
+                                "<div class=\"detail\"><div class=\"top-left1\">" . $ticket_details[$i]['horse_name'] . "</div>" .
+                                "<div class=\"top-right1\">" . $ticket_details[$i]['jockey_name'] . "</div></div>" .
+                                "<div class=\"detail\"><div class=\"bottom-left1\">" . $ticket_details[$i]['race_name'] . "</div>".
+                                "<div class=\"bottom-right1\">" . substr($ticket_details[$i]['race_time'],0,5) . " / " . $ticket_details[$i]['race_date'] . "</div></div>" .
         				"</div>";
             }
 

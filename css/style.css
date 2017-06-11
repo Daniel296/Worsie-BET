@@ -346,11 +346,6 @@ body {
 	bottom:185px;
 }
 
-.fixed-bottom2 {
-	position: fixed;
-	bottom: 20px;
-}
-
 #fixed-wrapper p {
 	text-align: center;
 }
