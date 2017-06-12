@@ -56,7 +56,7 @@
 			?>
 			
 			<div class="rss-feed">
-				<a href="php/rss.xml" target="blank">
+				<a href="php/rss.xml"  target="blank" download>
 					<img src="./images/RSS.png">
 				</a>
 			</div>

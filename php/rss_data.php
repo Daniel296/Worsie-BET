@@ -20,7 +20,7 @@ $writer->startElement("channel");
 //$writer->writeElement('ttl', '0'); 
 $writer->writeElement('title', 'FAVORIȚII ZILEI'); 
 $writer->writeElement('description', 'Descoperă care sunt favoriții curselor de astăzi!'); 
-$writer->writeElement('link', 'php/rss.xml'); 
+$writer->writeElement('link', 'http://localhost:8181/Worsie-BET/index.php'); 
 $writer->writeElement('pubDate', date("D, d M Y H:i:s e")); 
 //---------------------------------------------------- 
 
@@ -28,13 +28,15 @@ $writer->writeElement('pubDate', date("D, d M Y H:i:s e"));
 //Selectam numele cursei si id-urile cailor + id-urile jocheilor pentru a afisa cel mai bun in FEED
 $today = date('Y-m-d');
 $stmt =  $conn->stmt_init();
-$sql_query = "SELECT nume, id_cai, id_jochei FROM curse WHERE data=?";
+$sql_query = "SELECT nume, id_cai, id_jochei, data, ora FROM curse WHERE data=?";
 if($stmt =  $conn->prepare($sql_query)) {
 	$stmt->bind_param('s', $today);
 	$stmt->execute();
-	$stmt->bind_result($nume,$id_cai,$id_jochei);
+	$stmt->bind_result($nume,$id_cai,$id_jochei,$data,$ora);
 	$i=0;
 	while($stmt->fetch()) {
+		$data_curse[$i]=$data;
+		$ora_curse[$i]=$ora;
 		$nume_curse[$i]=$nume;
 		$cai[$i]=$id_cai;
 		$jochei[$i]=$id_jochei;
@@ -79,8 +81,8 @@ for($j=0; $j<$i; $j++) {
 for($j=0; $j<$i; $j++) {
 	$writer->startElement("item"); 
 		$writer->writeElement('title', $nume_curse[$j]); 
-		$writer->writeElement('link', 'http://localhost:8181/worsie-BEt/pariuri.php?date=' . $today); 
-		$writer->writeElement('description', '[NUME CAL]: '. $nume_cai[$j] .  ' [NUME JOCHEU]: ' . $nume_jochei[$j] . ' [NUME ANTRENOR]: ' . $antrenori_jochei[$j] . ' [MECIURI CÂȘTIGATE]: ' . $meciuri_castigate_cai[$j]); 
+		$writer->writeElement('link', 'http://localhost:8181/Worsie-BET/pariuri.php?date=' . $today); 
+		$writer->writeElement('description', '[NUME CAL]: '. $nume_cai[$j] .  ' [NUME JOCHEU]: ' . $nume_jochei[$j] . ' [NUME ANTRENOR]: ' . $antrenori_jochei[$j] . ' [MECIURI CÂȘTIGATE]: ' . $meciuri_castigate_cai[$j] . ' [DATĂ CURSĂ]: ' . $data_curse[$j] . ' [ORĂ CURSĂ]: ' . $ora_curse[$j]); 
 		$writer->writeElement('pubDate', date("D, d M Y H:i:s e")); 
 	$writer->endElement(); 
 }
