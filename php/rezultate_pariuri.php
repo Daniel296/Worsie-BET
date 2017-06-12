@@ -140,7 +140,7 @@ function getOreCursa_byName($conn, $data, $name, $status) {
 
 	// Daca e "AZI", atunci selectam ora curenta. Daca nu e "AZI", setam ora 24:00, pentru a afisa toate cursele
 	if($data === date("Y-m-d", time()))
-		$time = date('H:i', time() + 3600);
+		$time = date('H:i', time());
 	else
 		$time = "24:00";
 	
@@ -176,7 +176,7 @@ function getIDs_AND_OreCurse($conn, $data) {
 	$i = 0;
 	unset($stmt);
 	if($data === date("Y-m-d", time()))
-		$time = date('H:i', time() + 3600);
+		$time = date('H:i', time());
 	else
 		$time = "24:00";
 	$sql_query = "SELECT id_cursa, substr(ora, 1, 5) FROM rezultate WHERE date_format(data, '%Y-%m-%d') like ? AND ora < ? order by ora";
@@ -230,7 +230,7 @@ function getIDCurse_NumeOra($conn, $data, $ora, $nume) {
 	$ids[0] = -1;
 	
 	if($data === date("Y-m-d", time()))
-		$time = date('H:i', time() + 3600);
+		$time = date('H:i', time());
 	else
 		$time = "24:00";
 	$sql_query = "SELECT count(*) FROM curse WHERE date_format(data, '%Y-%m-%d') like ? AND substr(ora, 1, 5) like ? AND nume like ? order by data, nume, ora";
@@ -248,7 +248,7 @@ function getIDCurse_NumeOra($conn, $data, $ora, $nume) {
 		$id = -1; $i = 0;
 		unset($stmt);
 		if($data === date("Y-m-d", time()))
-			$time = date('H:i', time() + 3600);
+			$time = date('H:i', time());
 		else
 			$time = "24:00";
 		$sql_query = "SELECT id FROM curse WHERE date_format(data, '%Y-%m-%d') like ? AND substr(ora, 1, 5) like ? AND nume like ? order by data, nume, ora";
@@ -274,7 +274,7 @@ function getIDCurse_Nume($conn, $data, $nume) {
 	$ids[0] = -1;
 	$name = '%' . strtolower($nume) . '%';
 	if($data === date("Y-m-d", time()))
-		$time = date('H:i', time() + 3600);
+		$time = date('H:i', time());
 	else
 		$time = "24:00";
 	$sql_query = "SELECT count(*) FROM curse WHERE date_format(data, '%Y-%m-%d') like ? AND lower(nume) like ? AND ora < ? order by ora, nume";
