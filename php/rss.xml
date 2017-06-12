@@ -3,67 +3,67 @@
  <channel>
   <title>FAVORIȚII ZILEI</title>
   <description>Descoperă care sunt favoriții curselor de astăzi!</description>
-  <link>C:\xampp\htdocs\Worsie-BET\php\rss.xml</link>
-  <pubDate>Tue, 13 Jun 2017 01:52:13 Europe/Bucharest</pubDate>
+  <link>php/rss.xml</link>
+  <pubDate>Tue, 13 Jun 2017 02:06:01 Europe/Bucharest</pubDate>
   <item>
    <title>Sandown</title>
    <link>http://localhost:8181/worsie-BEt/pariuri.php?date=2017-06-13</link>
-   <description>Nume cal: Entertaining Ben Nume jocheu: R Charlton  Nume antrenor: Kieran Shoemark Meciuri castigate: 6</description>
-   <pubDate>Tue, 13 Jun 2017 01:52:13 Europe/Bucharest</pubDate>
+   <description>[NUME CAL]: Entertaining Ben [NUME JOCHEU]: R Charlton  [NUME ANTRENOR]: Kieran Shoemark [MECIURI CÂȘTIGATE]: 6</description>
+   <pubDate>Tue, 13 Jun 2017 02:06:01 Europe/Bucharest</pubDate>
   </item>
   <item>
    <title>Tipperary</title>
    <link>http://localhost:8181/worsie-BEt/pariuri.php?date=2017-06-13</link>
-   <description>Nume cal: Altiepix Nume jocheu: J R Fanshawe Nume antrenor: S De Sousa Meciuri castigate: 6</description>
-   <pubDate>Tue, 13 Jun 2017 01:52:13 Europe/Bucharest</pubDate>
+   <description>[NUME CAL]: Altiepix [NUME JOCHEU]: J R Fanshawe [NUME ANTRENOR]: S De Sousa [MECIURI CÂȘTIGATE]: 6</description>
+   <pubDate>Tue, 13 Jun 2017 02:06:01 Europe/Bucharest</pubDate>
   </item>
   <item>
    <title>Chelmsford City</title>
    <link>http://localhost:8181/worsie-BEt/pariuri.php?date=2017-06-13</link>
-   <description>Nume cal: Pearl Noir Nume jocheu: A King Nume antrenor: M Harley Meciuri castigate: 4</description>
-   <pubDate>Tue, 13 Jun 2017 01:52:13 Europe/Bucharest</pubDate>
+   <description>[NUME CAL]: Pearl Noir [NUME JOCHEU]: A King [NUME ANTRENOR]: M Harley [MECIURI CÂȘTIGATE]: 4</description>
+   <pubDate>Tue, 13 Jun 2017 02:06:01 Europe/Bucharest</pubDate>
   </item>
   <item>
    <title>Catterick</title>
    <link>http://localhost:8181/worsie-BEt/pariuri.php?date=2017-06-13</link>
-   <description>Nume cal: Sarabi Nume jocheu: L M Cumani  Nume antrenor: A Kirby Meciuri castigate: 5</description>
-   <pubDate>Tue, 13 Jun 2017 01:52:13 Europe/Bucharest</pubDate>
+   <description>[NUME CAL]: Sarabi [NUME JOCHEU]: L M Cumani  [NUME ANTRENOR]: A Kirby [MECIURI CÂȘTIGATE]: 5</description>
+   <pubDate>Tue, 13 Jun 2017 02:06:01 Europe/Bucharest</pubDate>
   </item>
   <item>
    <title>Tipperary</title>
    <link>http://localhost:8181/worsie-BEt/pariuri.php?date=2017-06-13</link>
-   <description>Nume cal: The Yank Nume jocheu: A Stronge Nume antrenor: J F Egan Meciuri castigate: 5</description>
-   <pubDate>Tue, 13 Jun 2017 01:52:13 Europe/Bucharest</pubDate>
+   <description>[NUME CAL]: The Yank [NUME JOCHEU]: A Stronge [NUME ANTRENOR]: J F Egan [MECIURI CÂȘTIGATE]: 5</description>
+   <pubDate>Tue, 13 Jun 2017 02:06:01 Europe/Bucharest</pubDate>
   </item>
   <item>
    <title>Pontefract</title>
    <link>http://localhost:8181/worsie-BEt/pariuri.php?date=2017-06-13</link>
-   <description>Nume cal: Roys Legacy Nume jocheu: E De Giles Nume antrenor: Callum Shepherd Meciuri castigate: 14</description>
-   <pubDate>Tue, 13 Jun 2017 01:52:13 Europe/Bucharest</pubDate>
+   <description>[NUME CAL]: Roys Legacy [NUME JOCHEU]: E De Giles [NUME ANTRENOR]: Callum Shepherd [MECIURI CÂȘTIGATE]: 14</description>
+   <pubDate>Tue, 13 Jun 2017 02:06:01 Europe/Bucharest</pubDate>
   </item>
   <item>
    <title>Musselburgh</title>
    <link>http://localhost:8181/worsie-BEt/pariuri.php?date=2017-06-13</link>
-   <description>Nume cal: Roys Legacy Nume jocheu: E De Giles Nume antrenor: Callum Shepherd Meciuri castigate: 14</description>
-   <pubDate>Tue, 13 Jun 2017 01:52:13 Europe/Bucharest</pubDate>
+   <description>[NUME CAL]: Roys Legacy [NUME JOCHEU]: E De Giles [NUME ANTRENOR]: Callum Shepherd [MECIURI CÂȘTIGATE]: 14</description>
+   <pubDate>Tue, 13 Jun 2017 02:06:01 Europe/Bucharest</pubDate>
   </item>
   <item>
    <title>Pontefract</title>
    <link>http://localhost:8181/worsie-BEt/pariuri.php?date=2017-06-13</link>
-   <description>Nume cal: Roys Legacy Nume jocheu: E De Giles Nume antrenor: Callum Shepherd Meciuri castigate: 14</description>
-   <pubDate>Tue, 13 Jun 2017 01:52:13 Europe/Bucharest</pubDate>
+   <description>[NUME CAL]: Roys Legacy [NUME JOCHEU]: E De Giles [NUME ANTRENOR]: Callum Shepherd [MECIURI CÂȘTIGATE]: 14</description>
+   <pubDate>Tue, 13 Jun 2017 02:06:01 Europe/Bucharest</pubDate>
   </item>
   <item>
    <title>Pontefract</title>
    <link>http://localhost:8181/worsie-BEt/pariuri.php?date=2017-06-13</link>
-   <description>Nume cal: Roys Legacy Nume jocheu: E De Giles Nume antrenor: Callum Shepherd Meciuri castigate: 14</description>
-   <pubDate>Tue, 13 Jun 2017 01:52:13 Europe/Bucharest</pubDate>
+   <description>[NUME CAL]: Roys Legacy [NUME JOCHEU]: E De Giles [NUME ANTRENOR]: Callum Shepherd [MECIURI CÂȘTIGATE]: 14</description>
+   <pubDate>Tue, 13 Jun 2017 02:06:01 Europe/Bucharest</pubDate>
   </item>
   <item>
    <title>Sandown</title>
    <link>http://localhost:8181/worsie-BEt/pariuri.php?date=2017-06-13</link>
-   <description>Nume cal: Sir Domino Nume jocheu: Richard Spencer  Nume antrenor: S Donohoe Meciuri castigate: 5</description>
-   <pubDate>Tue, 13 Jun 2017 01:52:13 Europe/Bucharest</pubDate>
+   <description>[NUME CAL]: Sir Domino [NUME JOCHEU]: Richard Spencer  [NUME ANTRENOR]: S Donohoe [MECIURI CÂȘTIGATE]: 5</description>
+   <pubDate>Tue, 13 Jun 2017 02:06:01 Europe/Bucharest</pubDate>
   </item>
  </channel>
 </rss>

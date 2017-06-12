@@ -20,7 +20,7 @@ $writer->startElement("channel");
 //$writer->writeElement('ttl', '0'); 
 $writer->writeElement('title', 'FAVORIȚII ZILEI'); 
 $writer->writeElement('description', 'Descoperă care sunt favoriții curselor de astăzi!'); 
-$writer->writeElement('link', 'C:\xampp\htdocs\Worsie-BET\php\rss.xml'); 
+$writer->writeElement('link', 'php/rss.xml'); 
 $writer->writeElement('pubDate', date("D, d M Y H:i:s e")); 
 //---------------------------------------------------- 
 
@@ -80,7 +80,7 @@ for($j=0; $j<$i; $j++) {
 	$writer->startElement("item"); 
 		$writer->writeElement('title', $nume_curse[$j]); 
 		$writer->writeElement('link', 'http://localhost:8181/worsie-BEt/pariuri.php?date=' . $today); 
-		$writer->writeElement('description', 'Nume cal: '. $nume_cai[$j] .  ' Nume jocheu: ' . $nume_jochei[$j] . ' Nume antrenor: ' . $antrenori_jochei[$j] . ' Meciuri castigate: ' . $meciuri_castigate_cai[$j]); 
+		$writer->writeElement('description', '[NUME CAL]: '. $nume_cai[$j] .  ' [NUME JOCHEU]: ' . $nume_jochei[$j] . ' [NUME ANTRENOR]: ' . $antrenori_jochei[$j] . ' [MECIURI CÂȘTIGATE]: ' . $meciuri_castigate_cai[$j]); 
 		$writer->writeElement('pubDate', date("D, d M Y H:i:s e")); 
 	$writer->endElement(); 
 }

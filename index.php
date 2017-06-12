@@ -37,7 +37,7 @@
 				echo "<tr>";
 				echo	"<th>Username</th>";
 				echo	"<th>Bilete total</th>";
-				echo	"<th>Bilete câștigate</th>";
+				echo	"<th>Bilete câ&#351tigate</th>";
 			    echo	"</tr>";
 				while ($row = $res->fetch_assoc()) {
 					echo "<tr>";
@@ -56,7 +56,7 @@
 			?>
 			
 			<div class="rss-feed">
-				<a href="C:\xampp\htdocs\Worsie-BET\php\rss.xml" target="blank">
+				<a href="php/rss.xml" target="blank">
 					<img src="./images/RSS.png">
 				</a>
 			</div>
