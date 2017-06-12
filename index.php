@@ -26,7 +26,7 @@
 		</div>
 
 		<div class="statistics">
-			<h2>TOP PARIORI</h2>
+			<center><span>TOP PARIORI</span></center>
 			<?php
 				$connection = mysqli_connect('localhost', 'root', '', 'worsiebet');
 				$res = mysqli_query($connection,"SELECT username, bilete_total, bilete_castigate FROM utilizatori WHERE bilete_castigate<>0 ORDER BY bilete_total/bilete_castigate");

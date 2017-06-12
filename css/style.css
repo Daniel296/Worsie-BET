@@ -2,7 +2,7 @@ body {
 	background-image: url('../images/background.jpg');
 	background-size: cover;
 	background-attachment: fixed;
-	font-family: Century, sans-serif;
+	font-family: Georgia, serif;
 	color: gray;
 	min-width: 800px;
 	max-width: 100%;
@@ -34,17 +34,18 @@ body {
 }
 
 .statistics {
-	margin-top: 20px;
+	margin-top: 40px;
 	margin-bottom: 20px;
 }
 
-.statistics h2 {
-	text-align:center;
+.statistics span {
 	color:white;
 	padding: 8px;
+	font-size: 25px;
 }
 
 .statistics table {
+	margin-top: 20px;
 	border-collapse: collapse;
 	width: 65%;
 }
