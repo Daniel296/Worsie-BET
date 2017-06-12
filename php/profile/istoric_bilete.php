@@ -1,9 +1,9 @@
 <!--<!DOCTYPE html>-->
 
 <div id="bilete">
-	
+
 	<?php
-	
+
 	/* Paginare */
 		if(isset($_GET['p']))
 			$page = $_GET['p'];

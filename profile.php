@@ -11,7 +11,7 @@ function actualizareBilete($conn) {
 		if($stmt =  $conn->prepare($sql_query)) {
 			$stmt->bind_param('ii', $_SESSION['id'],$zero);
 			$stmt->execute();
-			$stmt->bind_result($id, $pariuri,$suma_castig);	
+			$stmt->bind_result($id, $pariuri,$suma_castig);
 			while($stmt->fetch()) {
 				$castig[$i]=$suma_castig;
 				$ids[$i]=$id;
@@ -26,10 +26,10 @@ function actualizareBilete($conn) {
 			}
 		}
 		//Luam fiecare bilet in parte si selectam id_ul cursei si id_ul calului pe care l-a pariat
-		
+
 		$count2=0;
 		for($j=0; $j<$i; $j++) {
-			for($k=0; $k<$lengthWords[$j]; $k++) {	
+			for($k=0; $k<$lengthWords[$j]; $k++) {
 				$id_cursa_id_cal = explode('.',$arrayBets[$j][$k]);
 				$stmt =  $conn->stmt_init();
 				$sql_query = "SELECT id_cai FROM rezultate WHERE id_cursa = ?";
@@ -41,14 +41,14 @@ function actualizareBilete($conn) {
 						$cal_castigator[$id_cursa_id_cal[0]] = explode(' ',$id_cai); //Avem calul castigator, ramane sa comparam cu ce a pus Vasile
 						//$count2++;
 					}
-					
+
 				}
 			}
 		}
 		//echo $cal_castigator[$i][0]; cursa $i
 
 		//Validam sau invalidam daca este castigator sau nu...
-		
+
 		for($j=0; $j<$i; $j++) {
 			$ok=1;
 			for($k=0; $k<$lengthWords[$j] ;$k++) {
@@ -106,7 +106,7 @@ function actualizareBilete($conn) {
 			<ul>
 				<li <?php if($_SERVER['QUERY_STRING'] == 'page=account') echo "class=\"active\""; ?>><a href="profile.php?page=account">Contul meu</a></li>
 				<li <?php if($_SERVER['QUERY_STRING'] == 'page=setari') echo "class=\"active\""; ?>><a href="profile.php?page=setari">Setări cont</a></li>
-				<li <?php if($_SERVER['QUERY_STRING'] == 'page=bilete') echo "class=\"active\""; ?>><a href="profile.php?page=bilete">Istoric bilete</a></li>
+				<li <?php if($_SERVER['QUERY_STRING'] == 'page=bilete' or substr($_SERVER['QUERY_STRING'],0,strlen($_SERVER['QUERY_STRING'])-1) == 'page=bilete&p=') echo "class=\"active\""; ?>><a href="profile.php?page=bilete">Istoric bilete</a></li>
 			</ul>
 		</div>
 	</div>
@@ -140,7 +140,7 @@ else {
 	<?php
 		require('pages/footer.php');
 	?>
-	
+
 	<?php
 
 ?>

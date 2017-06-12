@@ -9,11 +9,15 @@ body {
 }
 
 #leftMenu {
-	position: fixed;
+	display: table;
+	float: left;
     width: 20%;
-    margin: 30px 9% 20% 2%;
+    margin: 25px 2% auto 2%;
 	padding-bottom: 30px;
 	background-color: rgba(0, 0, 0, 0.6);
+	position: -webkit-sticky;
+  	position: sticky;
+  	top: 25px;
 }
 
 .menu a {

@@ -25,6 +25,11 @@
 	<p>Licen&#355a nr. L1160652W000306, valabilă din data de 01.08.2016 până la 31.07.2026</p>
 	<p>Website-ul ONJN:	onjn.gov.ro</p>
 
+	<div class="rss-feed">
+		<a href="https://www.w3schools.com/xml/myfirstrss.xml" target="blank">
+			<img src="./images/RSS.png">
+		</a>
+	</div>
 </div>
 
 <?php
