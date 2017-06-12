@@ -11,6 +11,9 @@
 <?php
 	require('pages/header.php');
 ?>
+<?php
+	require('php/rss_data.php');
+?>
 <div id="wrap">
 	<div id="main">
 		<div class="thumbnail" onMouseOut="hide('bet-now')" onMouseOver="show('bet-now')" >
@@ -51,6 +54,13 @@
 				}
 				echo "</table>";
 			?>
+			
+			<div class="rss-feed">
+				<a href="C:\xampp\htdocs\Worsie-BET\php\rss.xml" target="blank">
+					<img src="./images/RSS.png">
+				</a>
+			</div>
+			
 		</div>
 	</div>
 </div>

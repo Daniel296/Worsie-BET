@@ -713,6 +713,17 @@ body {
 	cursor: pointer;
 }
 
+.rss-feed {
+	margin-top: 50px;
+	width: 100%;
+}
+
+.rss-feed img {
+	display: block;
+	margin: auto;
+	width: 100px;
+}
+
 #reg-err1 {
 	margin-top: 20px;
 	color: #CE000B;
