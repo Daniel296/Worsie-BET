@@ -63,6 +63,8 @@
 				while($stmt->fetch()) {
 					//date_default_timezone_set('Australia/Melbourne');
 					$current_date = strtotime('Now');
+					$time = date('H:i', $current_date);
+					//echo $time;
 					$data = $data . ' ' . $ora;
 					$data = strtotime($data);
 					//$date1=date('d_m_y');
