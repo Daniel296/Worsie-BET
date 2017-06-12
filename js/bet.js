@@ -151,7 +151,7 @@ function create_ticket(user_balance, id_user) {
 
 }
 
-function display_races_ticket(array, total_odd, total_win, flag = 0) {
+function display_races_ticket(array, total_odd, total_win, flag) {
 	text = "";
 
     if(array.length == 0 && flag != 1) {
