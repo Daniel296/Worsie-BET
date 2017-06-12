@@ -1,36 +1,4 @@
 
-/* Citim array-ul din session storage */
-if (sessionStorage.getItem("array") != null){
-    myJSON = sessionStorage.getItem("array");
-    array = JSON.parse(myJSON);
-
-    var total_win = sessionStorage.getItem("bet");
-    document.getElementById("total_bet").value = total_win;
-}
-else {
-    var array = [];
-    var total_win = document.getElementById("total_bet").value;
-
-    myJSON = JSON.stringify(array);
-    sessionStorage.setItem("array", myJSON);
-    sessionStorage.setItem("bet", 0.0);
-}
-
-var total_odd = get_total_odd(array);
-total_win *= total_odd;
-
-/* Afisam cursele pe bilet (daca sunt) */
-if(array.length != 0) {
-     display_races_ticket(array, total_odd, total_win);
-}
-
-/* Setam precizia variabilelor */
-total_odd.toPrecision(3);
-total_win.toPrecision(3);
-
-/* Coloram butoanele cotelor */
-set_background(array, 1);
-
 /*======FUNCTIONS=====*/
 function add_race(id_race, id_horse, id_jockey, horse_name, race_name, date, time, odd) {
 	var count = array.length;
@@ -240,3 +208,36 @@ window.onbeforeunload = function() {
     sessionStorage.setItem("array", myJSON);
     sessionStorage.setItem("bet", document.getElementById("total_bet").value);
 }
+
+
+/* Citim array-ul din session storage */
+if (sessionStorage.getItem("array") != null){
+    myJSON = sessionStorage.getItem("array");
+    array = JSON.parse(myJSON);
+
+    var total_win = sessionStorage.getItem("bet");
+    document.getElementById("total_bet").value = total_win;
+}
+else {
+    var array = [];
+    var total_win = document.getElementById("total_bet").value;
+
+    myJSON = JSON.stringify(array);
+    sessionStorage.setItem("array", myJSON);
+    sessionStorage.setItem("bet", 0.0);
+}
+
+var total_odd = get_total_odd(array);
+total_win *= total_odd;
+
+/* Afisam cursele pe bilet (daca sunt) */
+if(array.length != 0) {
+     display_races_ticket(array, total_odd, total_win);
+}
+
+/* Setam precizia variabilelor */
+total_odd.toPrecision(3);
+total_win.toPrecision(3);
+
+/* Coloram butoanele cotelor */
+set_background(array, 1);
