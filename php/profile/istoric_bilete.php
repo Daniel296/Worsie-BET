@@ -12,17 +12,18 @@
 
 		$limit = 10;
 		$pages = ceil($usr_bilete_total / $limit);
+
 		if($page > $pages) $page = 1;
 		$offset = ($page - 1) * $limit;
 
 		$start = $offset + 1;
 		$end = min(($offset + $limit), $usr_bilete_total);
 
-		//echo $page . " / " . $pages;
+
 		echo '<div align="center" class="links">';
 			if($pages < 6) {
 				echo '<a href="?page=bilete&p=1"> 1 </a>';
-				for($i = 2; $i <= $pages; $i++)
+				for($i = 2; $i < $pages; $i++)
 					echo '&#9900 <a href="?page=bilete&p=' . ($i) . '"> ' . ($i) . ' </a>';
 			}
 			else {
@@ -132,7 +133,7 @@
 		echo '<div align="center" class="links">';
 			if($pages < 6) {
 				echo '<a href="?page=bilete&p=1"> 1 </a>';
-				for($i = 2; $i <= $pages; $i++)
+				for($i = 2; $i < $pages; $i++)
 					echo '&#9900 <a href="?page=bilete&p=' . ($i) . '"> ' . ($i) . ' </a>';
 			}
 			else {
