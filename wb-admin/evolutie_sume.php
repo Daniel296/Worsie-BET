@@ -178,7 +178,6 @@ oneDayAgo=myDays[(todayDate+6)%7]
 	<line x1="531" y1="<?php echo $position2?>" x2="677" y2="<?php echo $position1?>" stroke-width="3" stroke="red"/>
 </svg>
 
-  
 <?php
 
 	require('pages/footer.php');
