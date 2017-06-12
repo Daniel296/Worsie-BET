@@ -16,7 +16,7 @@
 			<div id="settings_err1">
 				<!-- Mesaj de eroare din JAVASCRIPT -->
 			</div>
-			
+
 			<div id="abcd">
 				<!-- Mesaj de eroare din JAVASCRIPT -->
 			</div>
@@ -56,16 +56,15 @@
 		</div>
 
 
-	
+
 	<div class="changePasswordText">
 		Schimbare parolă
 	</div>
 			<div id="settings_err2">
 				<!-- Mesaj de eroare din JAVASCRIPT -->
 			</div>
-			
-			<div class="changePassword">			
-				<div class="centrare">
+
+			<div class="changePassword">
 					<div>
 						<label class="content">Parolă actuală:</label>
 						<input class="field" type="text" id="current_password" onchange="validare_input(4, 0)">
@@ -84,8 +83,7 @@
 					<div>
 						<button type="button" class="btn" onclick="schimba_parola()">Schimbă parolă</button>
 					</div>
-				</div>
-		</div>
+			</div>
 
 
 
@@ -108,7 +106,7 @@
 					<input class="field" type="text" id="new_email" onchange="validare_input(3, 0)">
 				</div>
 				<button type="button" class="btn" onclick="schimba_email()">Schimbă email</button>
-			
+
 			</div>
 </div>
 

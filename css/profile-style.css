@@ -140,7 +140,7 @@ div.biletData {
 div.biletCota {
 	position: absolute;
 	top: 30%;
-	right: 15%;
+	right: 10%;
 	width: 15%;
 	color: #d6e5ff;
 	font-size: 90%;
@@ -402,7 +402,7 @@ div.centrare {
 
 
 /* ####################### Butoane si Field'uri ############################ */
-input.field {
+.changePassword input[type=password] {
 	display: block;
 	width: 40%;
 	height: 25px;
@@ -411,6 +411,27 @@ input.field {
 	border-radius: 2.5px;
 	background-color: #CCCCCC;
 }
+
+.changeEmail input[type=text] {
+	display: block;
+	width: 40%;
+	height: 25px;
+	border: 0;
+	margin: auto auto 5px 5px;
+	border-radius: 2.5px;
+	background-color: #CCCCCC;
+}
+
+.changeInfo input[type=text] {
+	display: block;
+	width: 40%;
+	height: 25px;
+	border: 0;
+	margin: auto auto 5px 5px;
+	border-radius: 2.5px;
+	background-color: #CCCCCC;
+}
+
 button.btn {
 	display: block;
 	width: 20%;
