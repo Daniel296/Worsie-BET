@@ -14,9 +14,9 @@ body {
 /* ############################################################## */
 #leftMenu {
 	float: left;
-    height: 48%;
+    height: 20%;
     width: 20%;
-    margin: 20px 2% auto 3%;
+    margin: 20px 2% 20px 3%;
     background-color: rgba(0, 0, 0, 0.6);
 	float: left;
 }
@@ -44,8 +44,8 @@ div.menu {
 	font-size: 105%;
 	color: white;
 	width: 75%;
-	height: 7%;
-	margin: 20px 10% 0% 7%;
+	height: 5%;
+	margin: 20px 10% 20px 7%;
 	border-radius: 1px;
 }
 
@@ -496,3 +496,10 @@ div.detalii_bilet {
 .menu .active a {
 	color: #910018;
 }
+
+div.zero_bilete {
+	color: #ad0101;
+	font-size: 150%;
+	margin: 50px auto 150px 40%;
+}
+

@@ -29,7 +29,7 @@
 			 </div>
 			 <div class="link-box">
 				 <a href="profile.php?page=account">Contul meu</a>
-				 <a href="profile.php?page=bilete">Bilete</a>
+				 <a href="profile.php?page=bilete&p=1">Bilete</a>
 				 <a href="php/logout.php?redirect=<?php echo  $_SERVER['PHP_SELF'] . "?" . $_SERVER['QUERY_STRING']; ?>"><img alt="logout" src="images/logout.png"></a>
 			 </div>
 		 </div>

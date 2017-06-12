@@ -1,4 +1,11 @@
 <!--<!DOCTYPE html>-->
+<?php
+	if(isset($_GET['p'])) {
+	} else {
+		$location = "Location: ./profile.php?page=bilete&p=1";
+		header($location);
+	}
+?>
 
 <div id="bilete">
 
@@ -11,9 +18,14 @@
 		else $page = 1;
 
 		$limit = 10;
+
 		$pages = ceil($usr_bilete_total / $limit);
 
-		if($page > $pages) $page = 1;
+		if($page > $pages)
+			$page = $pages;
+
+		//echo $pages . " " . $page;
+
 		$offset = ($page - 1) * $limit;
 
 		$start = $offset + 1;
@@ -21,32 +33,34 @@
 
 
 		echo '<div align="center" class="links">';
-			if($pages < 6) {
-				echo '<a href="?page=bilete&p=1"> 1 </a>';
-				for($i = 2; $i < $pages; $i++)
-					echo '&#9900 <a href="?page=bilete&p=' . ($i) . '"> ' . ($i) . ' </a>';
+			if($pages == 1)
+				echo '<a id="paging_link_top_1" href="?page=bilete&p=1"> 1 </a>';
+			else if($pages < 6) {
+				echo '<a id="paging_link_top_1" href="?page=bilete&p=1"> 1 </a>';
+				for($i = 2; $i <= $pages; $i++)
+					echo '&#9900 <a id="paging_link_top_' . $i . '" href="?page=bilete&p=' . ($i) . '"> ' . ($i) . ' </a>';
 			}
 			else {
-				if($page < 6) {
-					echo '<a href="?page=bilete&p=1"> 1 </a>';
-					for($i = 2; $i <= 6; $i++)
-						echo '&#9900 <a href="?page=bilete&p=' . ($i) . '"> ' . ($i) . ' </a>';
-					echo '... &#9900 <a href="?page=bilete&p=' . $pages . '"> ' . $pages . ' </a>';
+				if($page < 5) {
+					echo '<a id="paging_link_top_1" href="?page=bilete&p=1"> 1 </a>';
+					for($i = 2; $i < 6; $i++)
+						echo '&#9900 <a id="paging_link_top_' . $i . '" href="?page=bilete&p=' . ($i) . '"> ' . ($i) . ' </a>';
+					echo '&#9900 ... &#9900 <a id="paging_link_top_' . $pages . '" href="?page=bilete&p=' . $pages . '"> ' . $pages . ' </a>';
 				}
 				else if($page > 5 && $page < $pages - 3) {
-					echo '<a href="?page=bilete&p=1"> 1 </a>&#9900 ... ';
+					echo '<a id="paging_link_top_1" href="?page=bilete&p=1"> 1 </a>&#9900 ... ';
 					for($i = -2; $i < 3; $i ++)
 						if($pages != $page + $i)
-							echo '&#9900' . '<a href="?page=bilete&p=' . ($page+$i) . '"> ' . ($page+$i) . ' </a>';
-					echo '... &#9900 <a href="?page=bilete&p=' . $pages . '"> ' . $pages . ' </a>';
+							echo '&#9900' . '<a id="paging_link_top_' . ($page+$i) . '" href="?page=bilete&p=' . ($page+$i) . '"> ' . ($page+$i) . ' </a>';
+					echo '... &#9900 <a id="paging_link_top_' . $pages . '" href="?page=bilete&p=' . $pages . '"> ' . $pages . ' </a>';
 				} else if ($page >= $pages - 3) {
-					echo '<a href="?page=bilete&p=1"> 1 </a> &#9900 ... ';
+					echo '<a id="paging_link_top_1" href="?page=bilete&p=1"> 1 </a> &#9900 ... ';
 					for($i = $pages-3; $i <= $pages+1; $i ++)
-						echo '&#9900 <a href="?page=bilete&p=' . ($i-1) . '"> ' . ($i-1) . ' </a>';
+						echo '&#9900 <a id="paging_link_top_' . ($i-1) . '" href="?page=bilete&p=' . ($i-1) . '"> ' . ($i-1) . ' </a>';
 				} else {
-					echo '<a href="?page=bilete&p=1"> 1 </a>&#9900 ... ';
-					for($i = $page; $i < $pages; $i ++)
-							echo '&#9900' . '<a href="?page=bilete&p=' . ($i) . '"> ' . ($i) . ' </a>';
+					echo '<a id="paging_link_top_' . $i . '" href="?page=bilete&p=1"> 1 </a>&#9900 ... ';
+					for($i = $page-1; $i < $pages; $i ++)
+							echo '&#9900' . '<a id="paging_link_top_' . $i . '" href="?page=bilete&p=' . ($i) . '"> ' . ($i) . ' </a>';
 				}
 			}
 
@@ -131,32 +145,34 @@
 			}
 		}
 		echo '<div align="center" class="links">';
-			if($pages < 6) {
-				echo '<a href="?page=bilete&p=1"> 1 </a>';
-				for($i = 2; $i < $pages; $i++)
-					echo '&#9900 <a href="?page=bilete&p=' . ($i) . '"> ' . ($i) . ' </a>';
+			if($pages == 1)
+				echo '<a id="paging_link_bot_1" href="?page=bilete&p=1"> 1 </a>';
+			else if($pages < 6) {
+				echo '<a id="paging_link_bot_1" href="?page=bilete&p=1"> 1 </a>';
+				for($i = 2; $i <= $pages; $i++)
+					echo '&#9900 <a id="paging_link_bot_' . $i . '" href="?page=bilete&p=' . ($i) . '"> ' . ($i) . ' </a>';
 			}
 			else {
-				if($page < 6) {
-					echo '<a href="?page=bilete&p=1"> 1 </a>';
-					for($i = 2; $i <= 6; $i++)
-						echo '&#9900 <a href="?page=bilete&p=' . ($i) . '"> ' . ($i) . ' </a>';
-					echo '... &#9900 <a href="?page=bilete&p=' . $pages . '"> ' . $pages . ' </a>';
+				if($page < 5) {
+					echo '<a id="paging_link_bot_1" href="?page=bilete&p=1"> 1 </a>';
+					for($i = 2; $i < 6; $i++)
+						echo '&#9900 <a id="paging_link_bot_' . $i . '" href="?page=bilete&p=' . ($i) . '"> ' . ($i) . ' </a>';
+					echo '&#9900 ... &#9900 <a id="paging_link_bot_' . $pages . '" href="?page=bilete&p=' . $pages . '"> ' . $pages . ' </a>';
 				}
 				else if($page > 5 && $page < $pages - 3) {
-					echo '<a href="?page=bilete&p=1"> 1 </a>&#9900 ... ';
+					echo '<a id="paging_link_bot_1" href="?page=bilete&p=1"> 1 </a>&#9900 ... ';
 					for($i = -2; $i < 3; $i ++)
 						if($pages != $page + $i)
-							echo '&#9900' . '<a href="?page=bilete&p=' . ($page+$i) . '"> ' . ($page+$i) . ' </a>';
-					echo '... &#9900 <a href="?page=bilete&p=' . $pages . '"> ' . $pages . ' </a>';
+							echo '&#9900' . '<a id="paging_link_bot_' . ($page+$i) . '" href="?page=bilete&p=' . ($page+$i) . '"> ' . ($page+$i) . ' </a>';
+					echo '... &#9900 <a id="paging_link_bot_' . $pages . '" href="?page=bilete&p=' . $pages . '"> ' . $pages . ' </a>';
 				} else if ($page >= $pages - 3) {
-					echo '<a href="?page=bilete&p=1"> 1 </a> &#9900 ... ';
+					echo '<a id="paging_link_bot_1" href="?page=bilete&p=1"> 1 </a> &#9900 ... ';
 					for($i = $pages-3; $i <= $pages+1; $i ++)
-						echo '&#9900 <a href="?page=bilete&p=' . ($i-1) . '"> ' . ($i-1) . ' </a>';
+						echo '&#9900 <a id="paging_link_bot_' . ($i-1) . '" href="?page=bilete&p=' . ($i-1) . '"> ' . ($i-1) . ' </a>';
 				} else {
-					echo '<a href="?page=bilete&p=1"> 1 </a>&#9900 ... ';
-					for($i = $page; $i < $pages; $i ++)
-							echo '&#9900' . '<a href="?page=bilete&p=' . ($i) . '"> ' . ($i) . ' </a>';
+					echo '<a id="paging_link_bot_' . $i . '" href="?page=bilete&p=1"> 1 </a>&#9900 ... ';
+					for($i = $page-1; $i < $pages; $i ++)
+							echo '&#9900' . '<a id="paging_link_bot_' . $i . '" href="?page=bilete&p=' . ($i) . '"> ' . ($i) . ' </a>';
 				}
 			}
 
@@ -164,7 +180,7 @@
 	} else {
 		?>
 		<div class="zero_bilete">
-			Nu aveti bilete jucate.
+			<p>Nu a&#355i plasat niciun bilet</p>
 		</div> <?php
 	}
 

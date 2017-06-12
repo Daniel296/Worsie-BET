@@ -1,5 +1,11 @@
-<!DOCTYPE html>
 <?php
+
+if(isset($_GET['page'])) {
+	$pagina = $_GET['page'];
+	if($pagina != "account" && $pagina != "setari" && $pagina != "bilete")
+	 	header('Location: ./profile.php?page=account');
+}
+
 function actualizareBilete($conn) {
 /* Trecerea unui bilet din starea de asteptare in starea pierdut/castigat */
 		$i=0;
@@ -106,7 +112,10 @@ function actualizareBilete($conn) {
 			<ul>
 				<li <?php if($_SERVER['QUERY_STRING'] == 'page=account') echo "class=\"active\""; ?>><a href="profile.php?page=account">Contul meu</a></li>
 				<li <?php if($_SERVER['QUERY_STRING'] == 'page=setari') echo "class=\"active\""; ?>><a href="profile.php?page=setari">Setări cont</a></li>
-				<li <?php if($_SERVER['QUERY_STRING'] == 'page=bilete' or substr($_SERVER['QUERY_STRING'],0,strlen($_SERVER['QUERY_STRING'])-1) == 'page=bilete&p=') echo "class=\"active\""; ?>><a href="profile.php?page=bilete">Istoric bilete</a></li>
+				<li <?php  $pagina = 1;
+							if(isset($_GET['page']))
+								$pagina = $_GET['page'];
+							if($_SERVER['QUERY_STRING'] == 'page=bilete&p=' . $pagina) echo "class=\"active\""; ?>><a href="profile.php?page=bilete&p=1">Istoric bilete</a></li>
 			</ul>
 		</div>
 	</div>
@@ -135,15 +144,33 @@ if(isset($_GET['page'])) {
 else {
 	include ('./php/profile/account.php');
 }
-?>
 
+?>
 	<?php
 		require('pages/footer.php');
 	?>
 
 	<?php
-
 ?>
 </body>
 
-</html>
+
+<script>
+	var parts = window.location.search.substr(1).split("&");
+	var $_GET = {};
+	for (var i = 0; i < parts.length; i++) {
+	    var temp = parts[i].split("=");
+	    $_GET[decodeURIComponent(temp[0])] = decodeURIComponent(temp[1]);
+	}
+
+
+
+	var page = $_GET['p'];
+	
+	var paging_top = document.querySelector("#paging_link_top_" + page);
+	var paging_bot = document.querySelector("#paging_link_bot_" + page);
+
+	paging_top.style.color = "#910018";
+	paging_bot.style.color = "#910018";
+
+</script>
