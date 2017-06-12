@@ -4,7 +4,8 @@
 
 	<?php
 
-	/* Paginare */
+	if($usr_bilete_total > 0) {
+		/* Paginare */
 		if(isset($_GET['p']))
 			$page = $_GET['p'];
 		else $page = 1;
@@ -159,8 +160,16 @@
 			}
 
 		echo '</div>';
+	} else {
+		?>
+		<div class="zero_bilete">
+			Nu aveti bilete jucate.
+		</div> <?php
+	}
+
 ?>
 </div>
+
 <div id="id03" class="modal">
 	<div id="ticket_details" class="modal-content animate">
 		<div id="ticket_details">
