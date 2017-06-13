@@ -141,24 +141,6 @@
 						}
 					}
 
-					/*//rezultat
-					$rezultat = '';
-					//$top_cai = '';
-					$length = count($new_cai);
-					//$top_jochei ='';
-					for ($i = 0; $i < $length; $i++) {
-						if($res === $length) {
-							//$top_cai = $top_cai . $new_cai[$i];
-							//$top_jochei = $top_jochei . $new_jochei[$i];
-							$rezultat = $rezultat . $new_cai[$i] . '.' . $new_jochei[$i];
-						}
-						else {
-							//$top_cai = $top_cai . $new_cai[$i] . ' ';
-							//$top_jochei = $top_jochei . $new_jochei[$i] . ' ';
-							$rezultat = $rezultat . $new_cai[$i] . '.' . $new_jochei[$i] . ' ';
-						}
-					}
-					*/
 					//update meciuri_pierdute, meciuri_castigate
 					$update = mysqli_query($connection,"UPDATE cai SET meciuri_castigate = meciuri_castigate+1 WHERE id = '$new_cai[0]'");
 					if($update === FALSE) { 
