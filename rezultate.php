@@ -10,8 +10,16 @@
 <body>
 
 <?php
+	if(!(isset($_GET['date']))) {
+		$data_cautare = date("Y-m-d", time());
+		$location = "Location: ./rezultate.php?date=" . $data_cautare;
+		header($location);
+		unset($location);
+	}
+
 	require('pages/header.php');
 	require('php/rezultate_pariuri.php');
+
 
 	$location = "";
 	if(isset($_GET['date'])) {
