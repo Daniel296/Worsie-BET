@@ -11,7 +11,7 @@ function mesajEroare(id) {
             break;
 
         case "campuri necompletate":
-            return "Toate câmpurile trebuie completate";
+            return "Toate câmpurile trebuie completate.";
             break;
 
         case "campuri completate incorect":
@@ -30,7 +30,7 @@ function validare_input(flag, error) {
                 var regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                 var input = document.getElementById("current_email").value.toString();
                 if(!regex.test(input)) {
-                    print_email_err(mesajEroare("Email actual invalid"));
+                    print_email_err(mesajEroare("Email actual invalid."));
                     error = 2;
                 }
                 else {
@@ -38,9 +38,11 @@ function validare_input(flag, error) {
                         xmlhttp.onreadystatechange = function() {
                         if (this.readyState == 4 && this.status == 200) {
                             if(this.response === "1") {
-                                print_email_err(mesajEroare("Acesta nu este email'ul tau"));
+                                print_email_err(mesajEroare("Acesta nu este email'ul tău."));
                                 error = 2;
-                            }
+                            } 
+                            else if(this.response == "0" && error == 0)
+                                print_email_err(mesajEroare(""));
                         }
                     }
                     xmlhttp.open("POST", "./php/validate-data.php", true);
@@ -64,10 +66,12 @@ function validare_input(flag, error) {
                             xmlhttp.onreadystatechange = function() {
                             if (this.readyState == 4 && this.status == 200) {
                                 if(this.response === "1") {
-                                    print_email_err(mesajEroare("Acest email exista deja."));
+                                    print_email_err(mesajEroare("Acest email există deja."));
                                     error = 3;
                                 }
                             }
+                            else if(this.response === "0" && error == 0)
+                                print_email_err(mesajEroare(""));
                         }
                         
                     }
@@ -76,8 +80,9 @@ function validare_input(flag, error) {
                     xmlhttp.send("email=" + input);
                 }
                 else {
-                    print_email_err(mesajEroare("Email-urile trebuie sa fie diferite."));
+                    print_email_err(mesajEroare("Email-urile trebuie să fie diferite."));
                     error = 3;
+                    break;
                 }
                 break;
         
@@ -88,8 +93,10 @@ function validare_input(flag, error) {
                     if (this.readyState == 4 && this.status == 200) {
                         if(this.response === "1") {
                             print_pass_err(mesajEroare("Acesta nu este parola ta actuală."));
-                            error = 3;
+                            error = 4;
                         }
+                        else if(this.response === "0" && error == 0)
+                            print_pass_err(mesajEroare(""));
                     }
                 }
                 xmlhttp.open("POST", "./php/validate-data.php", true);
@@ -107,32 +114,33 @@ function validare_input(flag, error) {
                 }
                 else {
                     if(new_password.length < 8 ) {
-                        print_register_error1("Noua parolă trebuie să aibă cel pu&#355in 8 caractere!  ");
+                        print_pass_err(mesajEroare("Noua parolă trebuie să aibă cel pu&#355in 8 caractere!"));
                         error = 5;
                         break;
                     }
 
                     var regex = /[0-9]/;
                     if(!regex.test(new_password)) {
-                        print_register_error1("Noua parolă trebuie să con&#355ina cel pu&#355in o cifră (0-9)!");
+                        print_pass_err(mesajEroare("Noua parolă trebuie să con&#355ină cel pu&#355in o cifră (0-9)!"));
                         error = 5;
                         break;
                     }
 
                     regex = /[a-z]/;
                     if(!regex.test(new_password)) {
-                        print_register_error1("Noua parolă trebuie să con&#355ină cel pu&#355in o literă mică (a-z)!");
+                        print_pass_err(mesajEroare("Noua parolă trebuie să con&#355ină cel pu&#355in o literă mică (a-z)!"));
                         error = 5;
                         break;
                     }
 
                     regex = /[A-Z]/;
                     if(!regex.test(new_password)) {
-                        print_register_error1("Noua parolă trebuie să con&#355ină cel pu&#355in o literă mare (A-Z)!");
+                        print_pass_err(mesajEroare("Noua parolă trebuie să con&#355ină cel pu&#355in o literă mare (A-Z)!"));
                         error = 5;
                         break;
                     }
                 }
+                if(error == 0) print_date_err(mesajEroare(""));
                 break;
 
         case 6: // LASTNAME
@@ -140,9 +148,11 @@ function validare_input(flag, error) {
                 var regex = /^[A-Z][a-z]*(-|\s)[A-Z][a-z]*$/;
                 var regex1 = /^[A-Z][a-z]*$/;
                 if(!regex.test(input) && !regex1.test(input)) {
-                    print_date_err(mesajEroare("Numele trebui să contină doar litere si să inceapă cu literă mare!"));
+                    print_date_err(mesajEroare("Numele trebui să con&#355ină doar litere si să inceapă cu literă mare!"));
                     error = 6;
+                    break;
                 }
+                if(error == 0) print_date_err(mesajEroare(""));
                 break;
 
         case 7: // FIRSTNAME
@@ -150,9 +160,11 @@ function validare_input(flag, error) {
                 var regex = /^[A-Z][a-z]*(-|\s)[A-Z][a-z]*$/;
                 var regex1 = /^[A-Z][a-z]*$/;
                 if(!regex.test(input) && !regex1.test(input)) {
-                    print_date_err(mesajEroare("Prenumele ar trebui să contină doar litere si să inceapă cu literă mare!"));
+                    print_date_err(mesajEroare("Prenumele trebuie să con&#355ină doar litere si să inceapă cu literă mare!"));
                     error = 7;
+                    break;
                 }
+                if(error == 0) print_date_err(mesajEroare(""));
                 break;
 
         case 8: // COUNTY
@@ -164,7 +176,9 @@ function validare_input(flag, error) {
                 if(counties.indexOf(input.toLowerCase()) === -1) {
                     print_date_err(mesajEroare("A&#355i introdus un jude&#355 invalid!"));
                     error = 8;
+                    break;
                 }
+                if(error == 0) print_date_err(mesajEroare(""));
                 break;
 
         case 9: // CITY
@@ -174,7 +188,9 @@ function validare_input(flag, error) {
                 if(!regex.test(input) && !regex1.test(input)) {
                     print_date_err(mesajEroare("Oras invalid!"));
                     error = 9;
+                    break;
                 }
+                if(error == 0) print_date_err(mesajEroare(""));
                 break;
 
         case 10: // ADDRESS
@@ -193,7 +209,9 @@ function validare_input(flag, error) {
                 if(!regex.test(input) && !regex1.test(input)) {
                     print_date_err(mesajEroare("Tară invalidă!"));
                     error = 11;
+                    break;
                 }
+                if(error == 0) print_date_err(mesajEroare(""));
                 break;
 
         case 12: // PHONE
@@ -202,12 +220,18 @@ function validare_input(flag, error) {
                 if(!regex.test(input)) {
                     print_date_err(mesajEroare("Număr de telefon invalid!"));
                     error = 12;
+                    break;
                 }
+                if(error == 0) print_date_err(mesajEroare(""));
                 break;
         case 13: // CONFIRM_PASSWORD
-                var input = document.getElementById("new_password").value.toString();
-
-                
+                var new_password = document.getElementById("new_password").value.toString();
+                var confirm_password = document.getElementById("confirm_password").value.toString();
+                if(new_password != confirm_password) {
+                    print_pass_err(mesajEroare("Parolele nu se potrivesc."));
+                    break;
+                }
+                if(error == 0) print_pass_err(mesajEroare(""));
                 break;
     }
     return error;
@@ -215,24 +239,24 @@ function validare_input(flag, error) {
 
 
 function print_date_err(error_msg) {
-    document.getElementById("settings_err1").innerHTML = "* " + error_msg + "<br>";
+    document.getElementById("settings_err1").innerHTML = error_msg;
 }
 
 
 function print_pass_err(error_msg) {
-    document.getElementById("settings_err2").innerHTML = "* " + error_msg + "<br>";
+    document.getElementById("settings_err2").innerHTML = error_msg;
 }
 
 
 function print_email_err(error_msg) {
-    document.getElementById("settings_err3").innerHTML = "* " + error_msg + "<br>";
+    document.getElementById("settings_err3").innerHTML = error_msg;
 }
 
 function schimba_date() {
     var error = 0;
     var date = [6, 7, 8, 9, 10, 12];
     for(var i = 0; i < 6; i++) {
-        error = validare_input(date[i], error);
+        error += validare_input(date[i], error);
     }
 
     firstname = document.getElementById("firstname").value;
@@ -277,7 +301,7 @@ function schimba_parola() {
     var error = 0;
     var date = [4, 5, 16];
     for(var i = 0; i < 3; i++) {
-        error == validare_input(date[i]);
+        error += validare_input(date[i], error);
     }
 
     current_password = document.getElementById("current_password").value;
@@ -314,7 +338,7 @@ function schimba_email() {
     var error = 0;
     var x = 100;
     for(var i = 2; i < 4; i++) {
-        error = validare_input(i, error);
+        error += validare_input(i, error);
     }
 
     current_email = document.getElementById("current_email").value;
