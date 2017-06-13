@@ -2,9 +2,11 @@
 
 function validate_register_data(flag, error) {
     /* flag este un numar de la 1 la 13 identificat inputul pe care il primeste*/
-    //document.getElementById("reg-err1").innerHTML = "";
-    //document.getElementById("reg-err2").innerHTML = "";
-    //document.getElementById("reg-err-submit").innerHTML = "";
+    if(error === 0) {
+        document.getElementById("reg-err1").innerHTML = "";
+        document.getElementById("reg-err2").innerHTML = "";
+        document.getElementById("reg-err-submit").innerHTML = "";
+    }
 
     switch (flag) {
         case 1:
