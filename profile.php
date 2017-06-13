@@ -163,14 +163,14 @@ else {
 	    $_GET[decodeURIComponent(temp[0])] = decodeURIComponent(temp[1]);
 	}
 
+	var pagina = $_GET['page'];
+	if(pagina == "bilete") {
+		var page = $_GET['p'];
 
+		var paging_top = document.getElementById("#paging_link_top_" + page);
+		var paging_bot = document.getElementById("#paging_link_bot_" + page);
 
-	var page = $_GET['p'];
-	
-	var paging_top = document.querySelector("#paging_link_top_" + page);
-	var paging_bot = document.querySelector("#paging_link_bot_" + page);
-
-	paging_top.style.color = "#910018";
-	paging_bot.style.color = "#910018";
-
+		paging_top.style.color = "#910018";
+		paging_bot.style.color = "#910018";
+	}
 </script>
