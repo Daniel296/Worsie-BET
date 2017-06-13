@@ -269,10 +269,11 @@ function login_user() {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            if(this.response == "0")
-                print_login_error("Username sau parolă invalid(ă)!");
+            if(this.response == 1) {
+                window.location = window.location.pathname + window.location.search;
+            }
             else {
-                window.location = window.location.pathname + window.location.search;
+                print_login_error("Username sau parolă invalid(ă)!");
             }
         }
     };

@@ -32,6 +32,7 @@
             $_SESSION['id'] = $id_user;
             $_SESSION['username'] = $username;
 
+
             echo "1"; //trimitem raspunsul ca s-a reusit conectarea
 
             /* Facem update la campul "conectat" */
@@ -47,7 +48,7 @@
                 echo "0";
             }
         }
-		require('php/actualizare_bilete.php');
+		require('actualizare_bilete.php');
 
     }
 
