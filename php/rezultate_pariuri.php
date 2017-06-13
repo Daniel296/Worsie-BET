@@ -78,7 +78,7 @@ function printHeaderCursa($nume, $ora, $data) {
 					<span>Jocheu / Antrenor</span>
 				</div>
 				<div class="dim50">
-					<span>Varsta</span>
+					<span>Vârstă</span>
 				</div>
 				<div class="dim100">
 					<span>Victorii</span>

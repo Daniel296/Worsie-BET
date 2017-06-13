@@ -294,7 +294,7 @@
 				</div>
 				<div class="collumn1">
 					<span class="top"><?php echo $horses_details[$i][$j]['greutate'] ?></span>
-					<span class="bottom"><?php echo "Varsta - " . $horses_details[$i][$j]['varsta'] ?></span>
+					<span class="bottom"><?php echo "Vârstă - " . $horses_details[$i][$j]['varsta'] ?></span>
 				</div>
 				<div class="collumn2">
 					<button  id="<?php echo "button-" . $races[$i]['id_race']. "-" . $ids_horses[$i][$j]; ?>" onclick="add_race(
